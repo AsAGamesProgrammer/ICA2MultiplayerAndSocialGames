@@ -8,11 +8,13 @@
 
 #include "PlayerC.hpp"
 
+//Player constructor
 PlayerC::PlayerC()
 {
     createPlayer();
 }
 
+//Creates a rectangle shape to represent a player
 void PlayerC::createPlayer()
 {
     sf::RectangleShape player;
