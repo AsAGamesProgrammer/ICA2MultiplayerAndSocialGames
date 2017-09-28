@@ -37,25 +37,28 @@ void PlayerC::movePlayer()
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         playerShape.setPosition(playerShape.getPosition().x + currentSpeed, playerShape.getPosition().y);
+        playerShape.setRotation(180);
     }
     
     //Move left
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         playerShape.setPosition(playerShape.getPosition().x - currentSpeed, playerShape.getPosition().y);
+        playerShape.setRotation(180);
     }
      
      //Move down
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         playerShape.setPosition(playerShape.getPosition().x, playerShape.getPosition().y + currentSpeed);
-        playerShape.rotate(0.1f);
+        playerShape.setRotation(90);
     }
      
      //Move up
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         playerShape.setPosition(playerShape.getPosition().x, playerShape.getPosition().y - currentSpeed);
+        playerShape.setRotation(90);
     }
 }
 
