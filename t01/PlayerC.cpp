@@ -7,6 +7,7 @@
 //
 
 #include "PlayerC.hpp"
+#include <math.h>
 
 //Player constructor
 PlayerC::PlayerC()
@@ -21,7 +22,9 @@ void PlayerC::createPlayer()
     player.setFillColor(sf::Color::Green);  //green colour
     player.setOutlineColor(sf::Color::Black);
     player.setSize(sf::Vector2f(100,50));
-    player.setPosition(10, 10);
+    player.setPosition(100, 100);
+    
+    
     player.setOrigin(player.getSize().x/2, player.getSize().y/2);
     
     playerShape=player;
@@ -34,32 +37,39 @@ sf::RectangleShape PlayerC::getPlayer()
 
 void PlayerC::movePlayer()
 {
-    //Move right
+    //Move RIGHT
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        playerShape.setPosition(playerShape.getPosition().x + currentSpeed, playerShape.getPosition().y);
-        playerShape.setRotation(180);
+        //Movement
+        //playerShape.setPosition(playerShape.getPosition().x + currentSpeed, playerShape.getPosition().y);
+        
+        //Rotation
+        playerShape.rotate(rotationSpeed);
+        
     }
     
-    //Move left
+    //Move LEFT
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        playerShape.setPosition(playerShape.getPosition().x - currentSpeed, playerShape.getPosition().y);
-        playerShape.setRotation(180);
+        //Movement
+        //playerShape.setPosition(playerShape.getPosition().x - currentSpeed, playerShape.getPosition().y);
+        
+        //Rotation
+        playerShape.rotate(-rotationSpeed);
     }
      
-     //Move down
+     //Move DOWN
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        playerShape.setPosition(playerShape.getPosition().x, playerShape.getPosition().y + currentSpeed);
-        playerShape.setRotation(90);
+        playerShape.move(cos(playerShape.getRotation()*2), sin(playerShape.getRotation()*2));
+        //playerShape.setRotation(90);
     }
      
-     //Move up
+     //Move UP
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-        playerShape.setPosition(playerShape.getPosition().x, playerShape.getPosition().y - currentSpeed);
-        playerShape.setRotation(90);
+        playerShape.move(cos(playerShape.getRotation()*3.14159265/180)*3.f,sin(playerShape.getRotation()*3.14159265/180)*-3.f);
+        //playerShape.setRotation(90);
     }
 }
 

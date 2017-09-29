@@ -30,6 +30,7 @@ class PlayerC
     //Variables
     sf::RectangleShape playerShape;     //Shape of a player
     float currentSpeed =0.5f;           //Current speed
+    float rotationSpeed = 0.5f;         //Rotation responsivness
     
     //Functionality
     void createPlayer();                //Player creation function
