@@ -22,6 +22,7 @@ void PlayerC::createPlayer()
     player.setOutlineColor(sf::Color::Black);
     player.setSize(sf::Vector2f(100,50));
     player.setPosition(10, 10);
+    player.setOrigin(player.getSize().x/2, player.getSize().y/2);
     
     playerShape=player;
 };
