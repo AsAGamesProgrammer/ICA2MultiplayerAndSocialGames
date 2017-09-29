@@ -8,6 +8,7 @@
 
 #include "PlayerC.hpp"
 #include <math.h>
+#include <iostream>
 
 //Player constructor
 PlayerC::PlayerC()
@@ -22,10 +23,10 @@ void PlayerC::createPlayer()
     player.setFillColor(sf::Color::Green);  //green colour
     player.setOutlineColor(sf::Color::Black);
     player.setSize(sf::Vector2f(100,50));
-    player.setPosition(100, 100);
+    player.setPosition(300, 300);
     
     
-    player.setOrigin(player.getSize().x/2, player.getSize().y/2);
+    player.setOrigin(10, player.getSize().y/2);
     
     playerShape=player;
 };
@@ -46,6 +47,8 @@ void PlayerC::movePlayer()
         //Rotation
         playerShape.rotate(rotationSpeed);
         
+         std::cout<<playerShape.getPosition().x<<" "<<playerShape.getPosition().y<<" ";
+        
     }
     
     //Move LEFT
@@ -61,14 +64,20 @@ void PlayerC::movePlayer()
      //Move DOWN
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        playerShape.move(cos(playerShape.getRotation()*2), sin(playerShape.getRotation()*2));
+       // playerShape.move(currentSpeed * cos(playerShape.getRotation()*2), - currentSpeed * sin(playerShape.getRotation()*2));
+        
+        //playerShape.setPosition(cos(playerShape.getRotation()) + playerShape.getPosition().x, -sin(playerShape.getRotation() + playerShape.getPosition().y));
         //playerShape.setRotation(90);
     }
      
      //Move UP
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-        playerShape.move(cos(playerShape.getRotation()*3.14159265/180)*3.f,sin(playerShape.getRotation()*3.14159265/180)*-3.f);
+        playerShape.setPosition(
+                                currentSpeed * cos(playerShape.getRotation()) + playerShape.getPosition().x,
+                                -currentSpeed * sin(playerShape.getRotation()) + playerShape.getPosition().y);
+        
+        //playerShape.setPosition(playerShape.getRotation());
         //playerShape.setRotation(90);
     }
 }
