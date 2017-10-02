@@ -10,17 +10,22 @@
 #define UIManager_hpp
 
 #include <stdio.h>
+#include <iostream>
 #include <SFML/Graphics.hpp>
+#include <list>
 
 class UIManager
 {
 
 public:
     UIManager();
-    sf::Text writeInt(float writing);
+    sf::Text displaySpeed(float number);
+    std::list<sf::Text> gameLabels;
     
 private:
     sf::Font font1;
+    sf::Text writeFloat(float writing);
+    sf::Text writeString(std::string writing);
     
 };
 

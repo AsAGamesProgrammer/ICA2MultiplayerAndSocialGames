@@ -7,9 +7,9 @@
 //
 
 #include "UIManager.hpp"
-#include <iostream>
 #include <iomanip> // setprecision
 #include <sstream> // stringstream
+
 
 //------CONSTRUCTOR-------
 //Player constructor
@@ -26,7 +26,23 @@ UIManager::UIManager()
     font1 = fontA;
 }
 
-sf::Text UIManager::writeInt(float writing)
+//----INTERFACE----
+sf::Text UIManager::displaySpeed(float number)
+{
+    sf::Text speedLabel = writeString("Speed ");
+    speedLabel.move(10, 10);
+    
+    sf::Text speedText = writeFloat(number);
+    speedText.move(80, 10);
+    
+    gameLabels.push_back(speedLabel);
+    gameLabels.push_back(speedText);
+    
+    return speedText;
+}
+
+//----HELPING FUNCTIONS----
+sf::Text UIManager::writeFloat(float writing)
 {
     sf::Text text;
     
@@ -40,6 +56,25 @@ sf::Text UIManager::writeInt(float writing)
     // set the string to display
     text.setString(ss.str());
     
+    
+    // set the character size
+    text.setCharacterSize(24); // in pixels, not points!
+    
+    // set the color
+    text.setFillColor(sf::Color::White);
+    
+    return text;
+}
+
+sf::Text UIManager::writeString(std::string writing)
+{
+    sf::Text text;
+    
+    // select the font
+    text.setFont(font1);
+    
+    // set the string to display
+    text.setString(writing);
     
     // set the character size
     text.setCharacterSize(24); // in pixels, not points!

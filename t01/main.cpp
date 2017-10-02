@@ -30,9 +30,18 @@ int main()
         //Movement
         player.movePlayer();
         
+        //Update Interface
+        uiManager.displaySpeed(player.getSpeed());
+        
         window.clear();
         window.draw(player.getPlayer());
-        window.draw(uiManager.writeInt(player.getSpeed()));
+        
+        for(int i=0; i<uiManager.gameLabels.size(); i++)
+        {
+            window.draw(uiManager.gameLabels.front());
+            uiManager.gameLabels.pop_front();
+        }
+        
         window.display();
         
     }
