@@ -26,7 +26,7 @@ void PlayerC::createPlayer()
     player.setPosition(300, 300);
     
     
-    player.setOrigin(10, player.getSize().y/2);
+    player.setOrigin(player.getSize().x/2, player.getSize().y/2);
     
     playerShape=player;
 };
@@ -73,9 +73,10 @@ void PlayerC::movePlayer()
      //Move UP
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
+        float radians = playerShape.getRotation() * 2 * M_PI/360;
         playerShape.setPosition(
-                                currentSpeed * cos(playerShape.getRotation()) + playerShape.getPosition().x,
-                                -currentSpeed * sin(playerShape.getRotation()) + playerShape.getPosition().y);
+                                currentSpeed * cos(radians) + playerShape.getPosition().x,
+                                currentSpeed * sin(radians) + playerShape.getPosition().y);
         
         //playerShape.setPosition(playerShape.getRotation());
         //playerShape.setRotation(90);
