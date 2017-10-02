@@ -20,6 +20,7 @@ class PlayerC
 
     //Getters
     sf::Sprite getPlayer();     //Return the shape of a player
+    float getSpeed();
 
     //Functionality
     void movePlayer();                  //Movement
@@ -32,7 +33,10 @@ class PlayerC
     sf::Texture playerTexture;
     
     
-    float currentSpeed =1.f;           //Current speed
+    float currentSpeed =0.5f;           //Current speed
+    float acceleration = 0.005f;
+    float maxSpeed = 2.f;
+    
     float rotationSpeed = 0.5f;         //Rotation responsivness
     
     //Functionality

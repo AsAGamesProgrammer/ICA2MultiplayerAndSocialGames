@@ -10,5 +10,20 @@
 #define UIClass_hpp
 
 #include <stdio.h>
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+#include <SFML/Graphics.hpp>
+
+class UIClass
+{
+    public:
+    UIClass();
+
+};
+
+=======
+>>>>>>> master
+>>>>>>> Stashed changes
 
 #endif /* UIClass_hpp */

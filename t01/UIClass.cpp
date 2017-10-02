@@ -7,3 +7,21 @@
 //
 
 #include "UIClass.hpp"
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+#include <iostream>
+
+UIClass::UIClass()
+{
+    sf::Font fontA;
+    
+    if (!fontA.loadFromFile("joinks_.TTF"))
+    {
+        std::cout<<"Font could not be loaded";
+    };
+    
+};
+=======
+>>>>>>> master
+>>>>>>> Stashed changes

@@ -8,13 +8,15 @@
 
 #include <iostream>
 #include "PlayerC.hpp"
+#include "UIManager.hpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1000, 1000), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(1800, 1300), "P4076882 - Kristina Blinova - The Racing Game!");
     
     //Create a car
     PlayerC player;
+    UIManager uiManager;
     
     while (window.isOpen())
     {
@@ -28,9 +30,12 @@ int main()
         //Movement
         player.movePlayer();
         
+        //Test
+
         
         window.clear();
         window.draw(player.getPlayer());
+        window.draw(uiManager.writeInt(10));
         window.display();
         
     }

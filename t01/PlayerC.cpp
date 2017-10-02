@@ -24,6 +24,8 @@ void PlayerC::createPlayer()
 
     //Texture
     sf::Texture texture;
+    
+    //*********ASK ASK ASK ASK ASK************
     if (!texture.loadFromFile("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/carY.png"))
     {
         std::cout<<"texture not loaded";
@@ -44,6 +46,11 @@ sf::Sprite PlayerC::getPlayer()
 {
     return playerS;
 };
+
+float PlayerC::getSpeed()
+{
+    return currentSpeed;
+}
 
 
 //------MOVEMENT--------
@@ -72,8 +79,14 @@ void PlayerC::movePlayer()
         
         //Change positon
         playerS.setPosition(
-                                -currentSpeed * cos(radians) + playerS.getPosition().x,
-                                -currentSpeed * sin(radians) + playerS.getPosition().y);
+                                currentSpeed * cos(radians) + playerS.getPosition().x,
+                                currentSpeed * sin(radians) + playerS.getPosition().y);
+        
+        //Basic acceleration
+        if(currentSpeed>0)
+            currentSpeed=0;
+        if(currentSpeed>=-maxSpeed)
+            currentSpeed-=acceleration;
     }
      
      //Move UP
@@ -86,6 +99,12 @@ void PlayerC::movePlayer()
         playerS.setPosition(
                                 currentSpeed * cos(radians) + playerS.getPosition().x,
                                 currentSpeed * sin(radians) + playerS.getPosition().y);
+        
+        //Basic acceleration
+        if(currentSpeed<0)
+            currentSpeed=0;
+        if(currentSpeed<=maxSpeed)
+            currentSpeed+=acceleration;
         
     }
 }

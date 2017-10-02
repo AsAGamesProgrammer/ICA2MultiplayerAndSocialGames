@@ -10,5 +10,21 @@
 #define UIManager_hpp
 
 #include <stdio.h>
+<<<<<<< HEAD
+#include <SFML/Graphics.hpp>
+
+class UIManager
+{
+
+public:
+    UIManager();
+    sf::Text writeInt(int writing);
+    
+private:
+    sf::Font font1;
+    
+};
+=======
+>>>>>>> master
 
 #endif /* UIManager_hpp */
