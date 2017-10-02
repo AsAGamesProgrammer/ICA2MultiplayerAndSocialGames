@@ -30,12 +30,9 @@ int main()
         //Movement
         player.movePlayer();
         
-        //Test
-
-        
         window.clear();
         window.draw(player.getPlayer());
-        window.draw(uiManager.writeInt(10));
+        window.draw(uiManager.writeInt(player.getSpeed()));
         window.display();
         
     }

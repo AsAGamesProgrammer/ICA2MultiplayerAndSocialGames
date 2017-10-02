@@ -88,9 +88,8 @@ void PlayerC::movePlayer()
         if(currentSpeed>=-maxSpeed)
             currentSpeed-=acceleration;
     }
-     
-     //Move UP
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+         //MOVE UP
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         //Convert degrees to radians
         float radians = playerS.getRotation() * 2 * M_PI/360;
@@ -106,6 +105,10 @@ void PlayerC::movePlayer()
         if(currentSpeed<=maxSpeed)
             currentSpeed+=acceleration;
         
+    }
+    else //NO Movement
+    {
+        currentSpeed=0;
     }
 }
 

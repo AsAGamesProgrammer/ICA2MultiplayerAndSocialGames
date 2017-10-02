@@ -7,8 +7,9 @@
 //
 
 #include "UIManager.hpp"
-<<<<<<< HEAD
 #include <iostream>
+#include <iomanip> // setprecision
+#include <sstream> // stringstream
 
 //------CONSTRUCTOR-------
 //Player constructor
@@ -17,7 +18,7 @@ UIManager::UIManager()
     sf::Font fontA;
     
     //*********************
-    if (!fontA.loadFromFile("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/joinks_.TTF"))
+    if (!fontA.loadFromFile("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/simon.otf"))
     {
         std::cout<<"Font could not be loaded";
     };
@@ -25,15 +26,20 @@ UIManager::UIManager()
     font1 = fontA;
 }
 
-sf::Text UIManager::writeInt(int writing)
+sf::Text UIManager::writeInt(float writing)
 {
     sf::Text text;
     
     // select the font
     text.setFont(font1);
     
+    //Convert float to string
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(1) << writing;
+    
     // set the string to display
-    text.setString("Hello world");
+    text.setString(ss.str());
+    
     
     // set the character size
     text.setCharacterSize(24); // in pixels, not points!
@@ -43,5 +49,4 @@ sf::Text UIManager::writeInt(int writing)
     
     return text;
 }
-=======
->>>>>>> master
+
