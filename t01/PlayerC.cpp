@@ -10,6 +10,8 @@
 #include <math.h>
 #include <iostream>
 
+
+//------CONSTRUCTOR-------
 //Player constructor
 PlayerC::PlayerC()
 {
@@ -31,32 +33,27 @@ void PlayerC::createPlayer()
     playerShape=player;
 };
 
+//------GETTERS--------
 sf::RectangleShape PlayerC::getPlayer()
 {
     return playerShape;
 };
 
+
+//------MOVEMENT--------
 void PlayerC::movePlayer()
 {
     //Move RIGHT
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        //Movement
-        //playerShape.setPosition(playerShape.getPosition().x + currentSpeed, playerShape.getPosition().y);
-        
         //Rotation
         playerShape.rotate(rotationSpeed);
-        
-         std::cout<<playerShape.getPosition().x<<" "<<playerShape.getPosition().y<<" ";
         
     }
     
     //Move LEFT
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        //Movement
-        //playerShape.setPosition(playerShape.getPosition().x - currentSpeed, playerShape.getPosition().y);
-        
         //Rotation
         playerShape.rotate(-rotationSpeed);
     }
@@ -64,22 +61,26 @@ void PlayerC::movePlayer()
      //Move DOWN
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-       // playerShape.move(currentSpeed * cos(playerShape.getRotation()*2), - currentSpeed * sin(playerShape.getRotation()*2));
+        //Convert degrees to radians
+        float radians = playerShape.getRotation() * 2 * M_PI/360;
         
-        //playerShape.setPosition(cos(playerShape.getRotation()) + playerShape.getPosition().x, -sin(playerShape.getRotation() + playerShape.getPosition().y));
-        //playerShape.setRotation(90);
+        //Change positon
+        playerShape.setPosition(
+                                -currentSpeed * cos(radians) + playerShape.getPosition().x,
+                                -currentSpeed * sin(radians) + playerShape.getPosition().y);
     }
      
      //Move UP
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
+        //Convert degrees to radians
         float radians = playerShape.getRotation() * 2 * M_PI/360;
+        
+        //Change psition
         playerShape.setPosition(
                                 currentSpeed * cos(radians) + playerShape.getPosition().x,
                                 currentSpeed * sin(radians) + playerShape.getPosition().y);
         
-        //playerShape.setPosition(playerShape.getRotation());
-        //playerShape.setRotation(90);
     }
 }
 
