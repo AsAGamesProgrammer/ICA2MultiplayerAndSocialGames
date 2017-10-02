@@ -6,7 +6,7 @@
 //  Copyright © 2016 Cordry, Julien. All rights reserved.
 //
 
-
+#include <iostream>
 #include "PlayerC.hpp"
 
 int main()
@@ -27,6 +27,7 @@ int main()
         
         //Movement
         player.movePlayer();
+        
         
         window.clear();
         window.draw(player.getPlayer());

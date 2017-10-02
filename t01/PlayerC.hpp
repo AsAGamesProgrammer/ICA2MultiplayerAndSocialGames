@@ -19,7 +19,7 @@ class PlayerC
     PlayerC();                          //Constructor
 
     //Getters
-    sf::RectangleShape getPlayer();     //Return the shape of a player
+    sf::Sprite getPlayer();     //Return the shape of a player
 
     //Functionality
     void movePlayer();                  //Movement
@@ -28,7 +28,10 @@ class PlayerC
     private:
 
     //Variables
-    sf::RectangleShape playerShape;     //Shape of a player
+    sf::Sprite playerS;     //Shape of a player
+    sf::Texture playerTexture;
+    
+    
     float currentSpeed =1.f;           //Current speed
     float rotationSpeed = 0.5f;         //Rotation responsivness
     

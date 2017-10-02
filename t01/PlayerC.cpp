@@ -21,22 +21,28 @@ PlayerC::PlayerC()
 //Creates a rectangle shape to represent a player
 void PlayerC::createPlayer()
 {
-    sf::RectangleShape player;
-    player.setFillColor(sf::Color::Green);  //green colour
-    player.setOutlineColor(sf::Color::Black);
-    player.setSize(sf::Vector2f(100,50));
-    player.setPosition(300, 300);
+
+    //Texture
+    sf::Texture texture;
+    if (!texture.loadFromFile("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/carY.png"))
+    {
+        std::cout<<"texture not loaded";
+    }
+    playerTexture=texture;
     
     
-    player.setOrigin(player.getSize().x/2, player.getSize().y/2);
+    sf::Sprite playerSprite;
+    playerSprite.setTexture(playerTexture);
+    playerSprite.setOrigin(playerTexture.getSize().x/2, playerTexture.getSize().y/2);
+    playerSprite.setPosition(300, 300);
     
-    playerShape=player;
+    playerS=playerSprite;
 };
 
 //------GETTERS--------
-sf::RectangleShape PlayerC::getPlayer()
+sf::Sprite PlayerC::getPlayer()
 {
-    return playerShape;
+    return playerS;
 };
 
 
@@ -47,7 +53,7 @@ void PlayerC::movePlayer()
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         //Rotation
-        playerShape.rotate(rotationSpeed);
+        playerS.rotate(rotationSpeed);
         
     }
     
@@ -55,31 +61,31 @@ void PlayerC::movePlayer()
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         //Rotation
-        playerShape.rotate(-rotationSpeed);
+        playerS.rotate(-rotationSpeed);
     }
      
      //Move DOWN
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         //Convert degrees to radians
-        float radians = playerShape.getRotation() * 2 * M_PI/360;
+        float radians = playerS.getRotation() * 2 * M_PI/360;
         
         //Change positon
-        playerShape.setPosition(
-                                -currentSpeed * cos(radians) + playerShape.getPosition().x,
-                                -currentSpeed * sin(radians) + playerShape.getPosition().y);
+        playerS.setPosition(
+                                -currentSpeed * cos(radians) + playerS.getPosition().x,
+                                -currentSpeed * sin(radians) + playerS.getPosition().y);
     }
      
      //Move UP
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         //Convert degrees to radians
-        float radians = playerShape.getRotation() * 2 * M_PI/360;
+        float radians = playerS.getRotation() * 2 * M_PI/360;
         
         //Change psition
-        playerShape.setPosition(
-                                currentSpeed * cos(radians) + playerShape.getPosition().x,
-                                currentSpeed * sin(radians) + playerShape.getPosition().y);
+        playerS.setPosition(
+                                currentSpeed * cos(radians) + playerS.getPosition().x,
+                                currentSpeed * sin(radians) + playerS.getPosition().y);
         
     }
 }
