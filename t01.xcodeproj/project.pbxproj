@@ -60,12 +60,9 @@
 		86DDA3241F823DDC00BBAE92 /* libsfml-window.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.4.dylib"; path = "../../lib/libsfml-window.2.4.dylib"; sourceTree = "<group>"; };
 		86DDA3251F823DDC00BBAE92 /* libsfml-window.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.dylib"; path = "../../lib/libsfml-window.dylib"; sourceTree = "<group>"; };
 		86DDA3381F82499C00BBAE92 /* carY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carY.png; path = ../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/carY.png; sourceTree = BUILT_PRODUCTS_DIR; };
-<<<<<<< Updated upstream
-=======
 		86DDA33C1F8251BB00BBAE92 /* joinks_.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = joinks_.TTF; path = ../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/joinks_.TTF; sourceTree = BUILT_PRODUCTS_DIR; };
 		86DDA33D1F82538000BBAE92 /* UIManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIManager.cpp; sourceTree = "<group>"; };
 		86DDA33E1F82538000BBAE92 /* UIManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UIManager.hpp; sourceTree = "<group>"; };
->>>>>>> Stashed changes
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +94,7 @@
 		0B1D0A371D9EAAAA00319891 = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< Updated upstream
-=======
 				86DDA33C1F8251BB00BBAE92 /* joinks_.TTF */,
->>>>>>> Stashed changes
 				86DDA3381F82499C00BBAE92 /* carY.png */,
 				86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */,
 				86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */,
