@@ -32,7 +32,6 @@ class mapCreator
     void loadTexture(std::string name, int idx);
     void loadTextures();
     void loadTile(float startX, float startY, int tileId);
-    void loadStrip(float x, float y, float tHeight);
 
 };
 

@@ -8,6 +8,7 @@
 
 #include "mapCreator.hpp"
 #include <iostream>
+#include <fstream>
 
 //----INTERFACE---
 
@@ -24,11 +25,31 @@ void mapCreator::loadTiles()
     float curX = 0;
     float curY = 0;
     
-    for (int i=0; i<tilesHeight; i++)
+    
+    //Load map
+    std::string line;
+    //******ASK******
+    std::ifstream myfile ("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/map.txt");
+    
+    if (myfile.is_open())
     {
-        loadStrip(curX, curY, tilesWidth);
-        curY += textureH;
-        curX=0;
+
+        
+        for (int i=0; i<tilesHeight; i++)
+        {
+            std::string line;
+            std::getline (myfile,line);
+            std::cout<<line;
+  
+            for(int j=0; j<tilesWidth; j++)
+            {
+                loadTile(curX, curY, 0);
+                curX +=textureW;
+            }
+            curY += textureH;
+            curX=0;
+        }
+        myfile.close();
     }
     
    
@@ -76,13 +97,3 @@ void mapCreator::loadTile(float startX, float startY, int tileId)
     tileNumber++;
  
 };
-
-//load strip
-void mapCreator::loadStrip(float x, float y, float tWidth)
-{
-    for(int j=0; j<tWidth; j++)
-    {
-        loadTile(x, y, 0);
-        x +=textureW;
-    }
-}
