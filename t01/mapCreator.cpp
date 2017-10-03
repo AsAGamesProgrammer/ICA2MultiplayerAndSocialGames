@@ -14,6 +14,7 @@
 void mapCreator::loadTiles()
 {
 
+    //Load the texture
     loadTexture();
     
     
@@ -21,10 +22,10 @@ void mapCreator::loadTiles()
     float curX = 0;
     float curY = 0;
     
-    for(int i=0; i<3; i++)
+    for(int i=0; i<tilesWidth; i++)
     {
         loadTile(curX, curY);
-        curX +=100;
+        curX +=tileTexture.getSize().x;
     }
 
 }
@@ -47,27 +48,12 @@ void mapCreator::loadTexture()
 //Create a single tile sprite
 void mapCreator::loadTile(float startX, float startY)
 {
-    sf::Sprite tileSpr;
-    tileSpr.setTexture(tileTexture);
-    tileSpr.setOrigin(tileTexture.getSize().x/2, tileTexture.getSize().y/2);
-    
-    tileSpr.setPosition(startX, startX);
+    sf::Sprite tileSpr;                         //create a sprite
+    tileSpr.setTexture(tileTexture);            //set texture
+    tileSpr.setPosition(startX, startY);        //set position
     
     
     tiles[tileNumber]=tileSpr;
     tileNumber++;
-    
-    //test
-    /*sf::Sprite tileSpr2;
-    tileSpr2.setTexture(tileTexture);
-    tileSpr2.setOrigin(tileTexture.getSize().x/2, tileTexture.getSize().y/2);
-    
-    tileSpr2.setPosition(startX, startX);
-    
-    //tileSprite=tileSpr;
-    
-    
-    tiles[tileNumber]=&tileSprite2;
-    tileNumber++; */
-    
+ 
 };
