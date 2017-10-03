@@ -9,14 +9,20 @@
 #include <iostream>
 #include "PlayerC.hpp"
 #include "UIManager.hpp"
+#include "mapCreator.hpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1800, 1300), "P4076882 - Kristina Blinova - The Racing Game!");
+    sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height),
+                            "P4076882 - Kristina Blinova - The Racing Game!");
     
     //Create a car
     PlayerC player;
     UIManager uiManager;
+    mapCreator mapManager;
+    
+    //Load map
+    mapManager.loadTile();
     
     while (window.isOpen())
     {
@@ -32,15 +38,27 @@ int main()
         
         //Update Interface
         uiManager.displaySpeed(player.getSpeed());
-        
+    
         window.clear();
+        
+        //----DRAW-----
+        //Track
+        for(int i=0; i<1; i++)
+         {
+            sf::Sprite sprite = *mapManager.tiles[i];
+            window.draw(sprite);
+         }
+        
+        //Player
         window.draw(player.getPlayer());
         
+        //UI
         for(int i=0; i<uiManager.gameLabels.size(); i++)
         {
             window.draw(uiManager.gameLabels.front());
             uiManager.gameLabels.pop_front();
         }
+        
         
         window.display();
         
