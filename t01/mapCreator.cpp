@@ -19,14 +19,18 @@ void mapCreator::loadTiles()
     
     
     float tilesWidth = sf::VideoMode::getDesktopMode().width / tileTexture.getSize().x;
+    float tilesHeight = sf::VideoMode::getDesktopMode().height / tileTexture.getSize().y;
     float curX = 0;
     float curY = 0;
     
-    for(int i=0; i<tilesWidth; i++)
+    for (int i=0; i<tilesWidth; i++)
     {
-        loadTile(curX, curY);
+        loadStrip(curX, curY, tilesHeight);
         curX +=tileTexture.getSize().x;
+        curY=0;
     }
+    
+   
 
 }
 
@@ -57,3 +61,13 @@ void mapCreator::loadTile(float startX, float startY)
     tileNumber++;
  
 };
+
+//load strip
+void mapCreator::loadStrip(float x, float y, float tHeight)
+{
+    for(int j=0; j<tHeight; j++)
+    {
+        loadTile(x, y);
+        y +=tileTexture.getSize().y;
+    }
+}

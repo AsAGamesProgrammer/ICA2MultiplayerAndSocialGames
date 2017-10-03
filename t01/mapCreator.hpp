@@ -19,7 +19,7 @@ class mapCreator
     public:
     void loadTiles();
     
-    sf::Sprite tiles [50];
+    sf::Sprite tiles [250];
     int tileNumber=0;
     
     
@@ -29,6 +29,7 @@ class mapCreator
     
     void loadTexture();
     void loadTile(float startX, float startY);
+    void loadStrip(float x, float y, float tHeight);
 
 };
 
