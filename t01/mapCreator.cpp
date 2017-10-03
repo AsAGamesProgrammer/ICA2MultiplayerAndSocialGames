@@ -9,11 +9,30 @@
 #include "mapCreator.hpp"
 #include <iostream>
 
+//----INTERFACE---
 
-//Creates a rectangle shape to represent a player
-void mapCreator::loadTile()
+void mapCreator::loadTiles()
 {
+
+    loadTexture();
     
+    
+    float tilesWidth = sf::VideoMode::getDesktopMode().width / tileTexture.getSize().x;
+    float curX = 0;
+    float curY = 0;
+    
+    for(int i=0; i<3; i++)
+    {
+        loadTile(curX, curY);
+        curX +=100;
+    }
+
+}
+
+//----CODE BEHIND---
+//Load a texture
+void mapCreator::loadTexture()
+{
     //Texture
     sf::Texture texture;
     
@@ -23,14 +42,32 @@ void mapCreator::loadTile()
         std::cout<<"texture not loaded";
     }
     tileTexture=texture;
-    
-    
+}
+
+//Create a single tile sprite
+void mapCreator::loadTile(float startX, float startY)
+{
     sf::Sprite tileSpr;
     tileSpr.setTexture(tileTexture);
     tileSpr.setOrigin(tileTexture.getSize().x/2, tileTexture.getSize().y/2);
-    tileSpr.setPosition(500, 500);
     
-    tileSprite=tileSpr;
+    tileSpr.setPosition(startX, startX);
     
-    tiles[0]=&tileSprite;
+    
+    tiles[tileNumber]=tileSpr;
+    tileNumber++;
+    
+    //test
+    /*sf::Sprite tileSpr2;
+    tileSpr2.setTexture(tileTexture);
+    tileSpr2.setOrigin(tileTexture.getSize().x/2, tileTexture.getSize().y/2);
+    
+    tileSpr2.setPosition(startX, startX);
+    
+    //tileSprite=tileSpr;
+    
+    
+    tiles[tileNumber]=&tileSprite2;
+    tileNumber++; */
+    
 };

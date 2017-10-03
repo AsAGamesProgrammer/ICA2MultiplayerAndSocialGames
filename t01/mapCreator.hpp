@@ -17,17 +17,18 @@ class mapCreator
 {
     //-----PUBLIC-----
     public:
-    void loadTile();
+    void loadTiles();
     
-    sf::Sprite* tiles [20];
-    sf::Sprite tileSprite;
-    
+    sf::Sprite tiles [50];
+    int tileNumber=0;
     
     
     //-----PRIVATE-----
     private:
     sf::Texture tileTexture;
-    //sf::Sprite tileSprite;
+    
+    void loadTexture();
+    void loadTile(float startX, float startY);
 
 };
 

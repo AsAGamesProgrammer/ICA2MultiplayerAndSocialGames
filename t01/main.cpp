@@ -22,7 +22,7 @@ int main()
     mapCreator mapManager;
     
     //Load map
-    mapManager.loadTile();
+    mapManager.loadTiles();
     
     while (window.isOpen())
     {
@@ -43,10 +43,9 @@ int main()
         
         //----DRAW-----
         //Track
-        for(int i=0; i<1; i++)
+        for(int i=0; i<mapManager.tileNumber; i++)
          {
-            sf::Sprite sprite = *mapManager.tiles[i];
-            window.draw(sprite);
+            window.draw(mapManager.tiles[i]);
          }
         
         //Player
