@@ -25,10 +25,13 @@ class mapCreator
     
     //-----PRIVATE-----
     private:
-    sf::Texture tileTexture;
+    sf::Texture tileTexture[2];
+    float textureW;
+    float textureH;
     
-    void loadTexture();
-    void loadTile(float startX, float startY);
+    void loadTexture(std::string name, int idx);
+    void loadTextures();
+    void loadTile(float startX, float startY, int tileId);
     void loadStrip(float x, float y, float tHeight);
 
 };

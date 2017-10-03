@@ -15,19 +15,20 @@ void mapCreator::loadTiles()
 {
 
     //Load the texture
-    loadTexture();
+    loadTextures();
+    textureW =tileTexture[0].getSize().x;
+    textureH = tileTexture[0].getSize().y;
     
-    
-    float tilesWidth = sf::VideoMode::getDesktopMode().width / tileTexture.getSize().x;
-    float tilesHeight = sf::VideoMode::getDesktopMode().height / tileTexture.getSize().y;
+    float tilesWidth = sf::VideoMode::getDesktopMode().width / textureW;
+    float tilesHeight = sf::VideoMode::getDesktopMode().height / textureH;
     float curX = 0;
     float curY = 0;
     
-    for (int i=0; i<tilesWidth; i++)
+    for (int i=0; i<tilesHeight; i++)
     {
-        loadStrip(curX, curY, tilesHeight);
-        curX +=tileTexture.getSize().x;
-        curY=0;
+        loadStrip(curX, curY, tilesWidth);
+        curY += textureH;
+        curX=0;
     }
     
    
@@ -36,24 +37,38 @@ void mapCreator::loadTiles()
 
 //----CODE BEHIND---
 //Load a texture
-void mapCreator::loadTexture()
+void mapCreator::loadTexture(std::string name, int idx)
 {
     //Texture
     sf::Texture texture;
     
-    //*********ASK ASK ASK ASK ASK************
-    if (!texture.loadFromFile("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/road_dirt01.png"))
+
+    if (!texture.loadFromFile(name))
     {
         std::cout<<"texture not loaded";
     }
-    tileTexture=texture;
+    
+    tileTexture[idx]=texture;
+}
+
+void mapCreator::loadTextures()
+{
+    int idx=0;
+    //*********ASK ASK ASK ASK ASK************
+    loadTexture("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/road_dirt39.png", idx);
+    
+    idx++;
+    loadTexture("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/road_dirt03.png", idx);
+    
+    
+    
 }
 
 //Create a single tile sprite
-void mapCreator::loadTile(float startX, float startY)
+void mapCreator::loadTile(float startX, float startY, int tileId)
 {
     sf::Sprite tileSpr;                         //create a sprite
-    tileSpr.setTexture(tileTexture);            //set texture
+    tileSpr.setTexture(tileTexture[tileId]);            //set texture
     tileSpr.setPosition(startX, startY);        //set position
     
     
@@ -63,11 +78,11 @@ void mapCreator::loadTile(float startX, float startY)
 };
 
 //load strip
-void mapCreator::loadStrip(float x, float y, float tHeight)
+void mapCreator::loadStrip(float x, float y, float tWidth)
 {
-    for(int j=0; j<tHeight; j++)
+    for(int j=0; j<tWidth; j++)
     {
-        loadTile(x, y);
-        y +=tileTexture.getSize().y;
+        loadTile(x, y, 0);
+        x +=textureW;
     }
 }

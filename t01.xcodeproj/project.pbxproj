@@ -67,6 +67,8 @@
 		86DDA3421F83CC9200BBAE92 /* mapCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mapCreator.cpp; sourceTree = "<group>"; };
 		86DDA3431F83CC9200BBAE92 /* mapCreator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mapCreator.hpp; sourceTree = "<group>"; };
 		86DDA3451F83CEF800BBAE92 /* road_dirt01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = road_dirt01.png; sourceTree = "<group>"; };
+		86DDA3461F83E40300BBAE92 /* road_dirt03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = road_dirt03.png; sourceTree = "<group>"; };
+		86DDA3471F83E40300BBAE92 /* road_dirt39.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = road_dirt39.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,8 @@
 		0B1D0A371D9EAAAA00319891 = {
 			isa = PBXGroup;
 			children = (
+				86DDA3461F83E40300BBAE92 /* road_dirt03.png */,
+				86DDA3471F83E40300BBAE92 /* road_dirt39.png */,
 				86DDA3451F83CEF800BBAE92 /* road_dirt01.png */,
 				86DDA3411F825D8300BBAE92 /* simon.otf */,
 				86DDA3381F82499C00BBAE92 /* carY.png */,
