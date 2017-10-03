@@ -39,12 +39,17 @@ void mapCreator::loadTiles()
         {
             std::string line;
             std::getline (myfile,line);
-            std::cout<<line;
   
+            int flag =0;
             for(int j=0; j<tilesWidth; j++)
             {
-                loadTile(curX, curY, 0);
+                char lineId = line[flag];
+                int iLineId = int(lineId)-48; //char to int conversion
+                std::cout<<lineId;
+                
+                loadTile(curX, curY, iLineId);
                 curX +=textureW;
+                flag+=2;
             }
             curY += textureH;
             curX=0;
@@ -76,7 +81,7 @@ void mapCreator::loadTextures()
 {
     int idx=0;
     //*********ASK ASK ASK ASK ASK************
-    loadTexture("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/road_dirt39.png", idx);
+    loadTexture("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/road_dirt05.png", idx);
     
     idx++;
     loadTexture("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/road_dirt03.png", idx);

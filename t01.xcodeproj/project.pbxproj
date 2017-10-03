@@ -70,6 +70,7 @@
 		86DDA3461F83E40300BBAE92 /* road_dirt03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = road_dirt03.png; sourceTree = "<group>"; };
 		86DDA3471F83E40300BBAE92 /* road_dirt39.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = road_dirt39.png; sourceTree = "<group>"; };
 		86DDA3481F83E8D000BBAE92 /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = map.txt; path = ../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/map.txt; sourceTree = BUILT_PRODUCTS_DIR; };
+		86DDA3491F83EFD900BBAE92 /* road_dirt05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = road_dirt05.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +102,7 @@
 		0B1D0A371D9EAAAA00319891 = {
 			isa = PBXGroup;
 			children = (
+				86DDA3491F83EFD900BBAE92 /* road_dirt05.png */,
 				86DDA3481F83E8D000BBAE92 /* map.txt */,
 				86DDA3461F83E40300BBAE92 /* road_dirt03.png */,
 				86DDA3471F83E40300BBAE92 /* road_dirt39.png */,
