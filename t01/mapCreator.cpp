@@ -45,7 +45,6 @@ void mapCreator::loadTiles()
             {
                 char lineId = line[flag];
                 int iLineId = int(lineId)-48; //char to int conversion
-                std::cout<<lineId;
                 
                 loadTile(curX, curY, iLineId);
                 curX +=textureW;
@@ -81,10 +80,23 @@ void mapCreator::loadTextures()
 {
     int idx=0;
     //*********ASK ASK ASK ASK ASK************
-    loadTexture("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/road_dirt05.png", idx);
+    loadTexture("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/land_grass01.png", idx);
     
-    idx++;
-    loadTexture("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/road_dirt03.png", idx);
+    for(int i=1; i<10; i++)
+    {
+        std::string path ="../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/land_grass0" + std::to_string(i) +".png";
+        loadTexture(path, i);
+    
+    }
+    
+    for(int i=10; i<14; i++)
+    {
+        std::string path ="../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/land_grass" + std::to_string(i) +".png";
+        loadTexture(path, i);
+    }
+    
+    
+    
     
     
     

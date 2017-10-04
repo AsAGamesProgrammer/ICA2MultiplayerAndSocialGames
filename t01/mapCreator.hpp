@@ -25,7 +25,7 @@ class mapCreator
     
     //-----PRIVATE-----
     private:
-    sf::Texture tileTexture[2];
+    sf::Texture tileTexture[14];
     float textureW;
     float textureH;
     
