@@ -43,6 +43,9 @@ class PlayerC
     void createPlayer();                //Player creation function
 };
 
+//TODO:
+//Outside of the screen
+
 #endif /* PlayerC_hpp */
 
 

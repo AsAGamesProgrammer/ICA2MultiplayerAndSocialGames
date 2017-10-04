@@ -99,6 +99,17 @@ void PlayerC::movePlayer()
                                 currentSpeed * cos(radians) + playerS.getPosition().x,
                                 currentSpeed * sin(radians) + playerS.getPosition().y);
         
+        
+        //TEST outside screen
+        //10 is texture offset
+        if(playerS.getPosition().x - playerTexture.getSize().y  + 10 <0 ||
+           playerS.getPosition().y - playerTexture.getSize().y + 10 <0)
+        {
+            playerS.setPosition(
+                                playerS.getPosition().x - currentSpeed * cos(radians),
+                                playerS.getPosition().y - currentSpeed * sin(radians));
+        }
+        
         //Basic acceleration
         if(currentSpeed<0)
             currentSpeed=0;
