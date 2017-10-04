@@ -35,7 +35,7 @@ class PlayerC
     
     float currentSpeed =0.5f;           //Current speed
     float acceleration = 0.005f;
-    float maxSpeed = 2.f;
+    float maxSpeed = 1.4f;
     
     float rotationSpeed = 0.5f;         //Rotation responsivness
     

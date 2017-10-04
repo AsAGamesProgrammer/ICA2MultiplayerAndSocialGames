@@ -43,8 +43,34 @@ void mapCreator::loadTiles()
             int flag =0;
             for(int j=0; j<tilesWidth; j++)
             {
-                char lineId = line[flag];
-                int iLineId = int(lineId)-48; //char to int conversion
+                int iLineId=0;
+                char lineId = line[flag];       //get a character that represents a tile
+                if(lineId>='0' && lineId<='9')  //check if it is an integer
+                {
+                    iLineId = int(lineId)-48;   //char to int conversion
+                }
+                else
+                {
+                    switch(lineId)
+                    {
+                            case 'A':
+                            iLineId = 10;
+                            break;
+                            
+                            case 'B':
+                            iLineId=11;
+                            break;
+                            
+                            case 'C':
+                            iLineId=12;
+                            break;
+                            
+                            case 'D':
+                            iLineId=13;
+                            break;
+                    };
+
+                }
                 
                 loadTile(curX, curY, iLineId);
                 curX +=textureW;
@@ -82,17 +108,17 @@ void mapCreator::loadTextures()
     //*********ASK ASK ASK ASK ASK************
     loadTexture("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/land_grass01.png", idx);
     
-    for(int i=1; i<10; i++)
+    for(int i=2; i<10; i++)
     {
         std::string path ="../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/land_grass0" + std::to_string(i) +".png";
-        loadTexture(path, i);
+        loadTexture(path, i-1);
     
     }
     
-    for(int i=10; i<14; i++)
+    for(int i=10; i<15; i++)
     {
         std::string path ="../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/land_grass" + std::to_string(i) +".png";
-        loadTexture(path, i);
+        loadTexture(path, i-1);
     }
     
     
