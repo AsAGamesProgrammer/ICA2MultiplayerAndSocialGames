@@ -82,6 +82,14 @@ void PlayerC::movePlayer()
                                 currentSpeed * cos(radians) + playerS.getPosition().x,
                                 currentSpeed * sin(radians) + playerS.getPosition().y);
         
+        //TEST outside screen
+        if(!isWithinScreen())
+        {
+            playerS.setPosition(
+                                playerS.getPosition().x - currentSpeed * cos(radians),
+                                playerS.getPosition().y - currentSpeed * sin(radians)); //Move back
+        }
+        
         //Basic acceleration
         if(currentSpeed>0)
             currentSpeed=0;
@@ -101,7 +109,7 @@ void PlayerC::movePlayer()
                                 currentSpeed * sin(radians) + playerS.getPosition().y);
         
         
-        //TEST outside screen
+        //Checks for screen boundaries
         if(!isWithinScreen())
         {
             playerS.setPosition(
@@ -127,9 +135,6 @@ void PlayerC::movePlayer()
 bool PlayerC::isWithinScreen()
 {
     int textureOffset=10;     //10 is texture offset
-
-
-    std::cout<<"Player at "<<playerS.getPosition().y <<" and boundary at "<<sf::VideoMode::getDesktopMode().height;
     
     if(playerS.getPosition().x - playerTexture.getSize().y  + textureOffset <0 || //check for left boundary
        playerS.getPosition().y - playerTexture.getSize().y + textureOffset <0 || //check for top boundary
