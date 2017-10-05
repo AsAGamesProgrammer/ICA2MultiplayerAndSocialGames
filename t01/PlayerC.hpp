@@ -41,6 +41,9 @@ class PlayerC
     
     //Functionality
     void createPlayer();                //Player creation function
+    
+    //Check boundaries
+    bool isWithinScreen();
 };
 
 //TODO:
