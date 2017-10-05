@@ -158,6 +158,7 @@ bool PlayerC::isWithinRoad()
     
     bool onTheLeft = false;
     bool onTheRight = false;
+    bool onTheTop=false;
     
     //LEFT
     if(playerS.getPosition().x + playerTexture.getSize().y - textureOffset < 256)
@@ -167,8 +168,14 @@ bool PlayerC::isWithinRoad()
     if(playerS.getPosition().x + playerTexture.getSize().y - textureOffset > 2432)
         onTheRight=true;
     
-    //TOP
-    if(playerS.getPosition().y - playerTexture.getSize().y + textureOffset >260 && !onTheLeft && !onTheRight)
+    //TOP && BOT
+    if(playerS.getPosition().y - playerTexture.getSize().y + textureOffset >260
+       && playerS.getPosition().y - playerTexture.getSize().y + textureOffset < 1000)
+        onTheTop=true;
+    
+    
+    //DECISION
+    if(onTheTop && !onTheLeft && !onTheRight)
     {
         return false;
     }
