@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
 
+#include "Bullet.hpp"
+
 class PlayerC
 {
     //-----PUBLIC-----
@@ -20,6 +22,8 @@ class PlayerC
 
     //Getters
     sf::Sprite getPlayer();     //Return the shape of a player
+    sf::Sprite getBullet() {return bullet.getSprite();};
+    
     float getSpeed();
 
     //Functionality
@@ -45,6 +49,8 @@ class PlayerC
     //Check boundaries
     bool isWithinScreen();
     bool isWithinRoad();
+    
+    Bullet bullet;
 };
 
 //TODO:

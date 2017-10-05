@@ -18,7 +18,7 @@ UIManager::UIManager()
     sf::Font fontA;
     
     //*********************
-    if (!fontA.loadFromFile("../../../../../../../../ICA2/simon.otf"))
+    if (!fontA.loadFromFile("simon.otf"))
     {
         std::cout<<"Font could not be loaded";
     };

@@ -24,10 +24,8 @@ void PlayerC::createPlayer()
 
     //Texture
     sf::Texture texture;
-    
-    //*********ASK ASK ASK ASK ASK************
-//    if (!texture.loadFromFile("../../../../../../../../ICA2/carY.png"))
-        if (!texture.loadFromFile("carY.png"))
+
+    if (!texture.loadFromFile("carY.png"))
     {
         std::cout<<"texture not loaded";
     }
@@ -84,7 +82,7 @@ void PlayerC::movePlayer()
                                 currentSpeed * sin(radians) + playerS.getPosition().y);
         
         //TEST outside screen
-        if(!isWithinScreen() )
+        if(!isWithinScreen() || !isWithinRoad())
         {
             playerS.setPosition(
                                 playerS.getPosition().x - currentSpeed * cos(radians),

@@ -51,6 +51,9 @@ int main()
         //Player
         window.draw(player.getPlayer());
         
+        //Bullet
+        window.draw(player.getBullet());
+        
         //UI
         for(int i=0; i<uiManager.gameLabels.size(); i++)
         {
