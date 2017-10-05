@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B1D0A441D9EAAAA00319891 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D0A431D9EAAAA00319891 /* main.cpp */; };
 		865681A71F7D438400CA4B6E /* PlayerC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681A51F7D438400CA4B6E /* PlayerC.cpp */; };
+		865681DB1F8663FF00CA4B6E /* mapCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681DA1F8663FF00CA4B6E /* mapCreator.cpp */; };
 		86DDA3261F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */; };
 		86DDA3271F823DDC00BBAE92 /* libsfml-audio.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */; };
 		86DDA3281F823DDC00BBAE92 /* libsfml-audio.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DDA3191F823DDC00BBAE92 /* libsfml-audio.dylib */; };
@@ -25,7 +26,6 @@
 		86DDA3331F823DDC00BBAE92 /* libsfml-window.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DDA3241F823DDC00BBAE92 /* libsfml-window.2.4.dylib */; };
 		86DDA3341F823DDC00BBAE92 /* libsfml-window.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DDA3251F823DDC00BBAE92 /* libsfml-window.dylib */; };
 		86DDA33F1F82538000BBAE92 /* UIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86DDA33D1F82538000BBAE92 /* UIManager.cpp */; };
-		86DDA3441F83CC9200BBAE92 /* mapCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86DDA3421F83CC9200BBAE92 /* mapCreator.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +45,24 @@
 		0B1D0A431D9EAAAA00319891 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		865681A51F7D438400CA4B6E /* PlayerC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerC.cpp; sourceTree = "<group>"; };
 		865681A61F7D438400CA4B6E /* PlayerC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerC.hpp; sourceTree = "<group>"; };
+		865681DA1F8663FF00CA4B6E /* mapCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mapCreator.cpp; sourceTree = "<group>"; };
+		865681DC1F86646200CA4B6E /* land_grass01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = land_grass01.png; path = ../../../../../../../../ICA2/land_grass01.png; sourceTree = BUILT_PRODUCTS_DIR; };
+		865681DD1F86646200CA4B6E /* land_grass02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass02.png; sourceTree = "<group>"; };
+		865681DE1F86646200CA4B6E /* land_grass03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass03.png; sourceTree = "<group>"; };
+		865681DF1F86646200CA4B6E /* land_grass04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass04.png; sourceTree = "<group>"; };
+		865681E01F86646200CA4B6E /* land_grass05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass05.png; sourceTree = "<group>"; };
+		865681E11F86646200CA4B6E /* land_grass06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass06.png; sourceTree = "<group>"; };
+		865681E21F86646200CA4B6E /* land_grass07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass07.png; sourceTree = "<group>"; };
+		865681E31F86646200CA4B6E /* land_grass08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass08.png; sourceTree = "<group>"; };
+		865681E41F86646200CA4B6E /* land_grass09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass09.png; sourceTree = "<group>"; };
+		865681E51F86646200CA4B6E /* land_grass10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass10.png; sourceTree = "<group>"; };
+		865681E61F86646200CA4B6E /* land_grass11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass11.png; sourceTree = "<group>"; };
+		865681E71F86646200CA4B6E /* land_grass12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass12.png; sourceTree = "<group>"; };
+		865681E81F86646200CA4B6E /* land_grass13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass13.png; sourceTree = "<group>"; };
+		865681E91F86646200CA4B6E /* land_grass14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass14.png; sourceTree = "<group>"; };
+		865681EA1F86646B00CA4B6E /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = map.txt; path = ../../../../../../../../ICA2/map.txt; sourceTree = BUILT_PRODUCTS_DIR; };
+		865681EB1F86647C00CA4B6E /* carY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carY.png; path = ../../../../../../../../ICA2/carY.png; sourceTree = BUILT_PRODUCTS_DIR; };
+		865681EC1F86650B00CA4B6E /* simon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = simon.otf; path = ../../../../../../../../ICA2/simon.otf; sourceTree = BUILT_PRODUCTS_DIR; };
 		86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.2.dylib"; path = "../../lib/libsfml-audio.2.4.2.dylib"; sourceTree = "<group>"; };
 		86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.dylib"; path = "../../lib/libsfml-audio.2.4.dylib"; sourceTree = "<group>"; };
 		86DDA3191F823DDC00BBAE92 /* libsfml-audio.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.dylib"; path = "../../lib/libsfml-audio.dylib"; sourceTree = "<group>"; };
@@ -60,27 +78,9 @@
 		86DDA3231F823DDC00BBAE92 /* libsfml-window.2.4.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.4.2.dylib"; path = "../../lib/libsfml-window.2.4.2.dylib"; sourceTree = "<group>"; };
 		86DDA3241F823DDC00BBAE92 /* libsfml-window.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.2.4.dylib"; path = "../../lib/libsfml-window.2.4.dylib"; sourceTree = "<group>"; };
 		86DDA3251F823DDC00BBAE92 /* libsfml-window.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-window.dylib"; path = "../../lib/libsfml-window.dylib"; sourceTree = "<group>"; };
-		86DDA3381F82499C00BBAE92 /* carY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carY.png; path = ../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/carY.png; sourceTree = BUILT_PRODUCTS_DIR; };
 		86DDA33D1F82538000BBAE92 /* UIManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIManager.cpp; sourceTree = "<group>"; };
 		86DDA33E1F82538000BBAE92 /* UIManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UIManager.hpp; sourceTree = "<group>"; };
-		86DDA3411F825D8300BBAE92 /* simon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simon.otf; sourceTree = "<group>"; };
-		86DDA3421F83CC9200BBAE92 /* mapCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mapCreator.cpp; path = ../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/t01/mapCreator.cpp; sourceTree = BUILT_PRODUCTS_DIR; };
 		86DDA3431F83CC9200BBAE92 /* mapCreator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mapCreator.hpp; sourceTree = "<group>"; };
-		86DDA3481F83E8D000BBAE92 /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = map.txt; path = ../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/map.txt; sourceTree = BUILT_PRODUCTS_DIR; };
-		86DDA34B1F84F4F800BBAE92 /* land_grass01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = land_grass01.png; path = ../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/land_grass01.png; sourceTree = BUILT_PRODUCTS_DIR; };
-		86DDA34C1F84F4F800BBAE92 /* land_grass02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass02.png; sourceTree = "<group>"; };
-		86DDA34D1F84F4F800BBAE92 /* land_grass03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass03.png; sourceTree = "<group>"; };
-		86DDA34E1F84F4F800BBAE92 /* land_grass04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass04.png; sourceTree = "<group>"; };
-		86DDA34F1F84F4F800BBAE92 /* land_grass05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass05.png; sourceTree = "<group>"; };
-		86DDA3501F84F4F800BBAE92 /* land_grass06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass06.png; sourceTree = "<group>"; };
-		86DDA3511F84F4F800BBAE92 /* land_grass07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass07.png; sourceTree = "<group>"; };
-		86DDA3521F84F4F800BBAE92 /* land_grass08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass08.png; sourceTree = "<group>"; };
-		86DDA3531F84F4F800BBAE92 /* land_grass09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass09.png; sourceTree = "<group>"; };
-		86DDA3541F84F4F800BBAE92 /* land_grass10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass10.png; sourceTree = "<group>"; };
-		86DDA3551F84F4F800BBAE92 /* land_grass11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass11.png; sourceTree = "<group>"; };
-		86DDA3561F84F4F800BBAE92 /* land_grass12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass12.png; sourceTree = "<group>"; };
-		86DDA3571F84F4F800BBAE92 /* land_grass13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass13.png; sourceTree = "<group>"; };
-		86DDA3581F84F4F800BBAE92 /* land_grass14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass14.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,9 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				86DDA34A1F84F4DF00BBAE92 /* Sprites */,
-				86DDA3481F83E8D000BBAE92 /* map.txt */,
-				86DDA3411F825D8300BBAE92 /* simon.otf */,
-				86DDA3381F82499C00BBAE92 /* carY.png */,
 				86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */,
 				86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */,
 				86DDA3191F823DDC00BBAE92 /* libsfml-audio.dylib */,
@@ -147,12 +144,12 @@
 		0B1D0A421D9EAAAA00319891 /* t01 */ = {
 			isa = PBXGroup;
 			children = (
+				865681DA1F8663FF00CA4B6E /* mapCreator.cpp */,
 				0B1D0A431D9EAAAA00319891 /* main.cpp */,
 				865681A51F7D438400CA4B6E /* PlayerC.cpp */,
 				865681A61F7D438400CA4B6E /* PlayerC.hpp */,
 				86DDA33D1F82538000BBAE92 /* UIManager.cpp */,
 				86DDA33E1F82538000BBAE92 /* UIManager.hpp */,
-				86DDA3421F83CC9200BBAE92 /* mapCreator.cpp */,
 				86DDA3431F83CC9200BBAE92 /* mapCreator.hpp */,
 			);
 			path = t01;
@@ -161,20 +158,23 @@
 		86DDA34A1F84F4DF00BBAE92 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
-				86DDA34B1F84F4F800BBAE92 /* land_grass01.png */,
-				86DDA34C1F84F4F800BBAE92 /* land_grass02.png */,
-				86DDA34D1F84F4F800BBAE92 /* land_grass03.png */,
-				86DDA34E1F84F4F800BBAE92 /* land_grass04.png */,
-				86DDA34F1F84F4F800BBAE92 /* land_grass05.png */,
-				86DDA3501F84F4F800BBAE92 /* land_grass06.png */,
-				86DDA3511F84F4F800BBAE92 /* land_grass07.png */,
-				86DDA3521F84F4F800BBAE92 /* land_grass08.png */,
-				86DDA3531F84F4F800BBAE92 /* land_grass09.png */,
-				86DDA3541F84F4F800BBAE92 /* land_grass10.png */,
-				86DDA3551F84F4F800BBAE92 /* land_grass11.png */,
-				86DDA3561F84F4F800BBAE92 /* land_grass12.png */,
-				86DDA3571F84F4F800BBAE92 /* land_grass13.png */,
-				86DDA3581F84F4F800BBAE92 /* land_grass14.png */,
+				865681EC1F86650B00CA4B6E /* simon.otf */,
+				865681EB1F86647C00CA4B6E /* carY.png */,
+				865681EA1F86646B00CA4B6E /* map.txt */,
+				865681DC1F86646200CA4B6E /* land_grass01.png */,
+				865681DD1F86646200CA4B6E /* land_grass02.png */,
+				865681DE1F86646200CA4B6E /* land_grass03.png */,
+				865681DF1F86646200CA4B6E /* land_grass04.png */,
+				865681E01F86646200CA4B6E /* land_grass05.png */,
+				865681E11F86646200CA4B6E /* land_grass06.png */,
+				865681E21F86646200CA4B6E /* land_grass07.png */,
+				865681E31F86646200CA4B6E /* land_grass08.png */,
+				865681E41F86646200CA4B6E /* land_grass09.png */,
+				865681E51F86646200CA4B6E /* land_grass10.png */,
+				865681E61F86646200CA4B6E /* land_grass11.png */,
+				865681E71F86646200CA4B6E /* land_grass12.png */,
+				865681E81F86646200CA4B6E /* land_grass13.png */,
+				865681E91F86646200CA4B6E /* land_grass14.png */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -236,7 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86DDA33F1F82538000BBAE92 /* UIManager.cpp in Sources */,
-				86DDA3441F83CC9200BBAE92 /* mapCreator.cpp in Sources */,
+				865681DB1F8663FF00CA4B6E /* mapCreator.cpp in Sources */,
 				865681A71F7D438400CA4B6E /* PlayerC.cpp in Sources */,
 				0B1D0A441D9EAAAA00319891 /* main.cpp in Sources */,
 			);

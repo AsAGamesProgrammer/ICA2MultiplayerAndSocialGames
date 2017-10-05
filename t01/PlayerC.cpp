@@ -26,7 +26,7 @@ void PlayerC::createPlayer()
     sf::Texture texture;
     
     //*********ASK ASK ASK ASK ASK************
-    if (!texture.loadFromFile("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/carY.png"))
+    if (!texture.loadFromFile("../../../../../../../../ICA2/carY.png"))
     {
         std::cout<<"texture not loaded";
     }
@@ -88,6 +88,7 @@ void PlayerC::movePlayer()
         if(currentSpeed>=-maxSpeed)
             currentSpeed-=acceleration;
     }
+    
          //MOVE UP
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
@@ -122,4 +123,6 @@ void PlayerC::movePlayer()
         currentSpeed=0;
     }
 }
+
+
 

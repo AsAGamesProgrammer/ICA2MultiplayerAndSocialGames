@@ -18,7 +18,7 @@ UIManager::UIManager()
     sf::Font fontA;
     
     //*********************
-    if (!fontA.loadFromFile("../../../../../../../../Desktop/ICA2MultiplayerAndSocialGames/simon.otf"))
+    if (!fontA.loadFromFile("../../../../../../../../ICA2/simon.otf"))
     {
         std::cout<<"Font could not be loaded";
     };
