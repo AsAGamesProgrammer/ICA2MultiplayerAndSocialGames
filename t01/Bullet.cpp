@@ -11,6 +11,7 @@
 #include <iostream>
 
 
+//Add position?
 Bullet::Bullet()
 {
     //Texture
@@ -32,6 +33,7 @@ Bullet::Bullet()
     bulletS=bulletSprite;
 }
 
+//Move this to the loop?
 void Bullet::moveBullet(float angle)
 {
     //Convert degrees to radians

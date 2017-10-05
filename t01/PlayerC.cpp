@@ -55,6 +55,7 @@ float PlayerC::getSpeed()
 //------MOVEMENT--------
 void PlayerC::movePlayer()
 {
+    
     //Move RIGHT
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
