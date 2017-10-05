@@ -44,6 +44,7 @@ class PlayerC
     
     //Check boundaries
     bool isWithinScreen();
+    bool isWithinRoad();
 };
 
 //TODO:

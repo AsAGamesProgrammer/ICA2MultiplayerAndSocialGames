@@ -26,7 +26,8 @@ void PlayerC::createPlayer()
     sf::Texture texture;
     
     //*********ASK ASK ASK ASK ASK************
-    if (!texture.loadFromFile("../../../../../../../../ICA2/carY.png"))
+//    if (!texture.loadFromFile("../../../../../../../../ICA2/carY.png"))
+        if (!texture.loadFromFile("carY.png"))
     {
         std::cout<<"texture not loaded";
     }
@@ -36,7 +37,7 @@ void PlayerC::createPlayer()
     sf::Sprite playerSprite;
     playerSprite.setTexture(playerTexture);
     playerSprite.setOrigin(playerTexture.getSize().x/2, playerTexture.getSize().y/2);
-    playerSprite.setPosition(300, 300);
+    playerSprite.setPosition(300, 270);
     
     playerS=playerSprite;
 };
@@ -83,7 +84,7 @@ void PlayerC::movePlayer()
                                 currentSpeed * sin(radians) + playerS.getPosition().y);
         
         //TEST outside screen
-        if(!isWithinScreen())
+        if(!isWithinScreen() )
         {
             playerS.setPosition(
                                 playerS.getPosition().x - currentSpeed * cos(radians),
@@ -110,7 +111,7 @@ void PlayerC::movePlayer()
         
         
         //Checks for screen boundaries
-        if(!isWithinScreen())
+        if(!isWithinScreen() || !isWithinRoad())
         {
             playerS.setPosition(
                                 playerS.getPosition().x - currentSpeed * cos(radians),
@@ -146,6 +147,34 @@ bool PlayerC::isWithinScreen()
     }
 
     return true;
+}
+
+//Checks if the player sprite postion is valid
+//Checks the top area
+bool PlayerC::isWithinRoad()
+{
+
+    int textureOffset=10;     //10 is texture offset
+    
+    bool onTheLeft = false;
+    bool onTheRight = false;
+    
+    //LEFT
+    if(playerS.getPosition().x + playerTexture.getSize().y - textureOffset < 256)
+        onTheLeft=true;
+    
+    //RIGHT
+    if(playerS.getPosition().x + playerTexture.getSize().y - textureOffset > 2432)
+        onTheRight=true;
+    
+    //TOP
+    if(playerS.getPosition().y - playerTexture.getSize().y + textureOffset >260 && !onTheLeft && !onTheRight)
+    {
+        return false;
+    }
+    
+    return true;
+
 }
 
 

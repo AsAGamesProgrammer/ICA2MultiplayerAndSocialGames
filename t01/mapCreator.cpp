@@ -29,7 +29,7 @@ void mapCreator::loadTiles()
     //Load map
     std::string line;
     //******ASK******
-    std::ifstream myfile ("../../../../../../../../ICA2/map.txt");
+    std::ifstream myfile ("map.txt");
     
     if (myfile.is_open())
     {
@@ -106,18 +106,18 @@ void mapCreator::loadTextures()
 {
     int idx=0;
     //*********ASK ASK ASK ASK ASK************
-    loadTexture("../../../../../../../../ICA2/land_grass01.png", idx);
+    loadTexture("land_grass01.png", idx);
     
     for(int i=2; i<10; i++)
     {
-        std::string path ="../../../../../../../../ICA2/land_grass0" + std::to_string(i) +".png";
+        std::string path ="land_grass0" + std::to_string(i) +".png";
         loadTexture(path, i-1);
     
     }
     
     for(int i=10; i<15; i++)
     {
-        std::string path ="../../../../../../../../ICA2/land_grass" + std::to_string(i) +".png";
+        std::string path ="land_grass" + std::to_string(i) +".png";
         loadTexture(path, i-1);
     }
     

@@ -61,7 +61,7 @@
 		865681E81F86646200CA4B6E /* land_grass13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass13.png; sourceTree = "<group>"; };
 		865681E91F86646200CA4B6E /* land_grass14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass14.png; sourceTree = "<group>"; };
 		865681EA1F86646B00CA4B6E /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = map.txt; path = ../../../../../../../../ICA2/map.txt; sourceTree = BUILT_PRODUCTS_DIR; };
-		865681EB1F86647C00CA4B6E /* carY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carY.png; path = ../../../../../../../../ICA2/carY.png; sourceTree = BUILT_PRODUCTS_DIR; };
+		865681EB1F86647C00CA4B6E /* carY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carY.png; sourceTree = SOURCE_ROOT; };
 		865681EC1F86650B00CA4B6E /* simon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = simon.otf; path = ../../../../../../../../ICA2/simon.otf; sourceTree = BUILT_PRODUCTS_DIR; };
 		86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.2.dylib"; path = "../../lib/libsfml-audio.2.4.2.dylib"; sourceTree = "<group>"; };
 		86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.dylib"; path = "../../lib/libsfml-audio.2.4.dylib"; sourceTree = "<group>"; };
