@@ -143,7 +143,7 @@ void PlayerC::movePlayer()
 
 void PlayerC::shoot()
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !bullet.isEnabled)
     {
         bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y, playerS.getRotation());
     }

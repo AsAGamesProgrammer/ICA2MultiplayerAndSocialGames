@@ -65,6 +65,7 @@ void Bullet::moveBullet()
         
     {
         bulletS.setPosition(-50, -50);
+        isEnabled=false;
     }
 
 }
