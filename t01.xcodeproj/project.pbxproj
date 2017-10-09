@@ -44,10 +44,12 @@
 /* Begin PBXFileReference section */
 		0B1D0A401D9EAAAA00319891 /* t01 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = t01; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B1D0A431D9EAAAA00319891 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		862B1AE61F8B9876001378B9 /* land_grass01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass01.png; sourceTree = "<group>"; };
+		862B1AE71F8B9876001378B9 /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.txt; sourceTree = "<group>"; };
+		862B1AE81F8B9876001378B9 /* simon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simon.otf; sourceTree = "<group>"; };
 		865681A51F7D438400CA4B6E /* PlayerC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerC.cpp; sourceTree = "<group>"; };
 		865681A61F7D438400CA4B6E /* PlayerC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerC.hpp; sourceTree = "<group>"; };
 		865681DA1F8663FF00CA4B6E /* mapCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mapCreator.cpp; sourceTree = "<group>"; };
-		865681DC1F86646200CA4B6E /* land_grass01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = land_grass01.png; path = ../../../../../../../../ICA2/land_grass01.png; sourceTree = BUILT_PRODUCTS_DIR; };
 		865681DD1F86646200CA4B6E /* land_grass02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass02.png; sourceTree = "<group>"; };
 		865681DE1F86646200CA4B6E /* land_grass03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass03.png; sourceTree = "<group>"; };
 		865681DF1F86646200CA4B6E /* land_grass04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass04.png; sourceTree = "<group>"; };
@@ -61,9 +63,7 @@
 		865681E71F86646200CA4B6E /* land_grass12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass12.png; sourceTree = "<group>"; };
 		865681E81F86646200CA4B6E /* land_grass13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass13.png; sourceTree = "<group>"; };
 		865681E91F86646200CA4B6E /* land_grass14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass14.png; sourceTree = "<group>"; };
-		865681EA1F86646B00CA4B6E /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = map.txt; path = ../../../../../../../../ICA2/map.txt; sourceTree = BUILT_PRODUCTS_DIR; };
 		865681EB1F86647C00CA4B6E /* carY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carY.png; sourceTree = SOURCE_ROOT; };
-		865681EC1F86650B00CA4B6E /* simon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = simon.otf; path = ../../../../../../../../ICA2/simon.otf; sourceTree = BUILT_PRODUCTS_DIR; };
 		865681ED1F86845A00CA4B6E /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
 		865681EE1F86845A00CA4B6E /* Bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bullet.hpp; sourceTree = "<group>"; };
 		865681F01F8687FB00CA4B6E /* bullet.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bullet.svg; sourceTree = "<group>"; };
@@ -165,12 +165,12 @@
 		86DDA34A1F84F4DF00BBAE92 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				862B1AE61F8B9876001378B9 /* land_grass01.png */,
+				862B1AE71F8B9876001378B9 /* map.txt */,
+				862B1AE81F8B9876001378B9 /* simon.otf */,
 				865681F11F8689E400CA4B6E /* bulY.png */,
 				865681F01F8687FB00CA4B6E /* bullet.svg */,
-				865681EC1F86650B00CA4B6E /* simon.otf */,
 				865681EB1F86647C00CA4B6E /* carY.png */,
-				865681EA1F86646B00CA4B6E /* map.txt */,
-				865681DC1F86646200CA4B6E /* land_grass01.png */,
 				865681DD1F86646200CA4B6E /* land_grass02.png */,
 				865681DE1F86646200CA4B6E /* land_grass03.png */,
 				865681DF1F86646200CA4B6E /* land_grass04.png */,
