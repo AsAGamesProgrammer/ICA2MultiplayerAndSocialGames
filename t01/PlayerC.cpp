@@ -53,6 +53,15 @@ float PlayerC::getSpeed()
 
 
 //------MOVEMENT--------
+void PlayerC::moveRelated()
+{
+    movePlayer();
+    
+    if(bullet.isEnabled)
+        bullet.moveBullet(playerS.getRotation());
+}
+
+
 void PlayerC::movePlayer()
 {
     
@@ -128,8 +137,17 @@ void PlayerC::movePlayer()
     {
         currentSpeed=0;
     }
+    
+    shoot();
 }
 
+void PlayerC::shoot()
+{
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+        bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y);
+    }
+}
 
 //Checks if the player sprite postion is valid
 bool PlayerC::isWithinScreen()

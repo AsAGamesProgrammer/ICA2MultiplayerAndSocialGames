@@ -19,9 +19,12 @@ public:
     void moveBullet(float angle);
     Bullet();
     sf::Sprite getSprite() {return bulletS;}
+    bool isEnabled = false;
+    
+    void instantiateBullet(float x, float y);
     
 private:
-    float speed;
+    float speed = 3;
     sf::Sprite bulletS;
     sf::Texture bulletTexture;
 };

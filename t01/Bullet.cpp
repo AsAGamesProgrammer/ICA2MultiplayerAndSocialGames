@@ -28,9 +28,15 @@ Bullet::Bullet()
     sf::Sprite bulletSprite;
     bulletSprite.setTexture(bulletTexture);
     bulletSprite.setOrigin(bulletTexture.getSize().x/2, bulletTexture.getSize().y/2);
-    bulletSprite.setPosition(300, 270);
-    
     bulletS=bulletSprite;
+}
+
+void Bullet::instantiateBullet(float x, float y)
+{
+
+    isEnabled=true;
+    bulletS.setPosition(x, y);
+
 }
 
 //Move this to the loop?

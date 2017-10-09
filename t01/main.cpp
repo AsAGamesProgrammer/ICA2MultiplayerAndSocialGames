@@ -34,7 +34,7 @@ int main()
         }
         
         //Movement
-        player.movePlayer();
+        player.moveRelated();
         
         //Update Interface
         uiManager.displaySpeed(player.getSpeed());

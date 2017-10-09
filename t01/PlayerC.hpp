@@ -24,10 +24,13 @@ class PlayerC
     sf::Sprite getPlayer();     //Return the shape of a player
     sf::Sprite getBullet() {return bullet.getSprite();};
     
+    //Temp
+    Bullet bullet;
+    
     float getSpeed();
 
     //Functionality
-    void movePlayer();                  //Movement
+    void moveRelated();                  //Movement
     
     //-----PRIVATE-----
     private:
@@ -45,16 +48,15 @@ class PlayerC
     
     //Functionality
     void createPlayer();                //Player creation function
+    void movePlayer();                  //Movement
     
     //Check boundaries
     bool isWithinScreen();
     bool isWithinRoad();
     
-    Bullet bullet;
+    void shoot();
 };
 
-//TODO:
-//Outside of the screen
 
 #endif /* PlayerC_hpp */
 
