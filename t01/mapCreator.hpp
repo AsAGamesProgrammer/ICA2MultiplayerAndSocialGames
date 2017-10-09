@@ -37,10 +37,10 @@ class mapCreator
     
     void loadTextures();
     void loadTile(float startX, float startY, int tileId);
-    void loadElements();
+    //void loadElements();
     
-    float startPosx = 500;
-    float startPosY = 175;
+    //float startPosx = 500;
+    //float startPosY = 175;
     
     Utilities utilityManager;
 

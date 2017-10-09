@@ -10,6 +10,7 @@
 #include "PlayerC.hpp"
 #include "UIManager.hpp"
 #include "mapCreator.hpp"
+#include "Checkpoint.hpp"
 
 int main()
 {
@@ -20,6 +21,7 @@ int main()
     PlayerC player;
     UIManager uiManager;
     mapCreator mapManager;
+    Checkpoint chpManager;
     
     //Load map
     mapManager.loadTiles();
@@ -64,6 +66,7 @@ int main()
             uiManager.gameLabels.pop_front();
         }
         
+        window.draw(chpManager.getSprite());
         
         window.display();
         

@@ -59,6 +59,9 @@ class PlayerC
     Bullet bullet;
     
     Utilities utilityManager;
+    
+    //Collision check
+    void checkPointCollided();
 };
 
 

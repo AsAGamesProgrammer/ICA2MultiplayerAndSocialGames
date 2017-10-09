@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B1D0A441D9EAAAA00319891 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D0A431D9EAAAA00319891 /* main.cpp */; };
 		862B1AF01F8BC914001378B9 /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 862B1AEE1F8BC914001378B9 /* Utilities.cpp */; };
+		862B1AF31F8BD3E3001378B9 /* Checkpoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 862B1AF11F8BD3E3001378B9 /* Checkpoint.cpp */; };
 		865681A71F7D438400CA4B6E /* PlayerC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681A51F7D438400CA4B6E /* PlayerC.cpp */; };
 		865681DB1F8663FF00CA4B6E /* mapCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681DA1F8663FF00CA4B6E /* mapCreator.cpp */; };
 		865681EF1F86845A00CA4B6E /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681ED1F86845A00CA4B6E /* Bullet.cpp */; };
@@ -54,6 +55,8 @@
 		862B1AED1F8BADB8001378B9 /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bar.png; path = ../../ICA2/bar.png; sourceTree = "<group>"; };
 		862B1AEE1F8BC914001378B9 /* Utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utilities.cpp; sourceTree = "<group>"; };
 		862B1AEF1F8BC914001378B9 /* Utilities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utilities.hpp; sourceTree = "<group>"; };
+		862B1AF11F8BD3E3001378B9 /* Checkpoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Checkpoint.cpp; sourceTree = "<group>"; };
+		862B1AF21F8BD3E3001378B9 /* Checkpoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Checkpoint.hpp; sourceTree = "<group>"; };
 		865681A51F7D438400CA4B6E /* PlayerC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerC.cpp; sourceTree = "<group>"; };
 		865681A61F7D438400CA4B6E /* PlayerC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerC.hpp; sourceTree = "<group>"; };
 		865681DA1F8663FF00CA4B6E /* mapCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mapCreator.cpp; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 				865681EE1F86845A00CA4B6E /* Bullet.hpp */,
 				862B1AEE1F8BC914001378B9 /* Utilities.cpp */,
 				862B1AEF1F8BC914001378B9 /* Utilities.hpp */,
+				862B1AF11F8BD3E3001378B9 /* Checkpoint.cpp */,
+				862B1AF21F8BD3E3001378B9 /* Checkpoint.hpp */,
 			);
 			path = t01;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				865681EF1F86845A00CA4B6E /* Bullet.cpp in Sources */,
 				86DDA33F1F82538000BBAE92 /* UIManager.cpp in Sources */,
 				862B1AF01F8BC914001378B9 /* Utilities.cpp in Sources */,
+				862B1AF31F8BD3E3001378B9 /* Checkpoint.cpp in Sources */,
 				865681DB1F8663FF00CA4B6E /* mapCreator.cpp in Sources */,
 				865681A71F7D438400CA4B6E /* PlayerC.cpp in Sources */,
 				0B1D0A441D9EAAAA00319891 /* main.cpp in Sources */,

@@ -79,7 +79,7 @@ void mapCreator::loadTiles()
         myfile.close();
     }
     
-    loadElements();
+    //loadElements();
 
 }
 
@@ -115,7 +115,7 @@ void mapCreator::loadTile(float startX, float startY, int tileId)
  
 };
 
-void mapCreator::loadElements()
+/*void mapCreator::loadElements()
 {
     elementTexture = utilityManager.loadTexture("bar.png");
     
@@ -125,4 +125,4 @@ void mapCreator::loadElements()
     startSprite.setPosition(startPosx, startPosY);        //set position
     
     start = startSprite;
-};
+}; */
