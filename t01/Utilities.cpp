@@ -8,6 +8,7 @@
 
 #include "Utilities.hpp"
 #include <iostream>
+#include <math.h>
 
 //LOAD TETXTURE
 sf::Texture Utilities::loadTexture(std::string name)
@@ -24,3 +25,9 @@ sf::Texture Utilities::loadTexture(std::string name)
 
 }
 
+float Utilities::degreesToRads(float degrees)
+{
+
+    return degrees * 2 * M_PI/360;
+
+};

@@ -41,7 +41,7 @@ void Bullet::instantiateBullet(float x, float y, float angle)
 void Bullet::moveBullet()
 {
     //Convert degrees to radians
-    float radians = direction * 2 * M_PI/360;
+    float radians = utilityManager.degreesToRads(direction);
     
     //Change psition
     bulletS.setPosition(

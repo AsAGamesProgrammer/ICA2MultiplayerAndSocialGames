@@ -17,6 +17,8 @@ class Utilities
 
 public:
     sf::Texture loadTexture(std::string name);
+    
+    float degreesToRads(float degrees);
 
 private:
 

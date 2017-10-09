@@ -79,7 +79,7 @@ void PlayerC::movePlayer()
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         //Convert degrees to radians
-        float radians = playerS.getRotation() * 2 * M_PI/360;
+        float radians = utilityManager.degreesToRads(playerS.getRotation());
         
         //Change positon
         playerS.setPosition(
@@ -105,7 +105,7 @@ void PlayerC::movePlayer()
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         //Convert degrees to radians
-        float radians = playerS.getRotation() * 2 * M_PI/360;
+        float radians = utilityManager.degreesToRads(playerS.getRotation());
         
         //Change psition
         playerS.setPosition(
