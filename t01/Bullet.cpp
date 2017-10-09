@@ -17,7 +17,7 @@ Bullet::Bullet()
     //Texture
     sf::Texture texture;
     
-    if (!texture.loadFromFile("bulY.png"))
+    if (!texture.loadFromFile("bulR.png"))
     {
         std::cout<<"texture not loaded";
     }

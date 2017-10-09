@@ -47,6 +47,8 @@
 		862B1AE61F8B9876001378B9 /* land_grass01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass01.png; sourceTree = "<group>"; };
 		862B1AE71F8B9876001378B9 /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.txt; sourceTree = "<group>"; };
 		862B1AE81F8B9876001378B9 /* simon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simon.otf; sourceTree = "<group>"; };
+		862B1AE91F8B9E3C001378B9 /* carYS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carYS.png; path = ../../ICA2/carYS.png; sourceTree = "<group>"; };
+		862B1AEA1F8B9F16001378B9 /* bulR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulR.png; path = ../../ICA2/bulR.png; sourceTree = "<group>"; };
 		865681A51F7D438400CA4B6E /* PlayerC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerC.cpp; sourceTree = "<group>"; };
 		865681A61F7D438400CA4B6E /* PlayerC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerC.hpp; sourceTree = "<group>"; };
 		865681DA1F8663FF00CA4B6E /* mapCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mapCreator.cpp; sourceTree = "<group>"; };
@@ -66,7 +68,6 @@
 		865681EB1F86647C00CA4B6E /* carY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carY.png; sourceTree = SOURCE_ROOT; };
 		865681ED1F86845A00CA4B6E /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
 		865681EE1F86845A00CA4B6E /* Bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bullet.hpp; sourceTree = "<group>"; };
-		865681F01F8687FB00CA4B6E /* bullet.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = bullet.svg; sourceTree = "<group>"; };
 		865681F11F8689E400CA4B6E /* bulY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulY.png; sourceTree = "<group>"; };
 		86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.2.dylib"; path = "../../lib/libsfml-audio.2.4.2.dylib"; sourceTree = "<group>"; };
 		86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.dylib"; path = "../../lib/libsfml-audio.2.4.dylib"; sourceTree = "<group>"; };
@@ -165,11 +166,12 @@
 		86DDA34A1F84F4DF00BBAE92 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				862B1AEA1F8B9F16001378B9 /* bulR.png */,
+				862B1AE91F8B9E3C001378B9 /* carYS.png */,
 				862B1AE61F8B9876001378B9 /* land_grass01.png */,
 				862B1AE71F8B9876001378B9 /* map.txt */,
 				862B1AE81F8B9876001378B9 /* simon.otf */,
 				865681F11F8689E400CA4B6E /* bulY.png */,
-				865681F01F8687FB00CA4B6E /* bullet.svg */,
 				865681EB1F86647C00CA4B6E /* carY.png */,
 				865681DD1F86646200CA4B6E /* land_grass02.png */,
 				865681DE1F86646200CA4B6E /* land_grass03.png */,
