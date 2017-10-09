@@ -40,6 +40,14 @@ int main()
         
         //Update Interface
         uiManager.displaySpeed(player.getSpeed());
+        
+        
+        //COLLISION
+        
+        ///
+        
+        //COLLISION
+        
     
         //window.clear();
         
@@ -74,3 +82,4 @@ int main()
     
     return 0;
 }
+

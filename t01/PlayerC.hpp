@@ -60,8 +60,6 @@ class PlayerC
     
     Utilities utilityManager;
     
-    //Collision check
-    void checkPointCollided();
 };
 
 
