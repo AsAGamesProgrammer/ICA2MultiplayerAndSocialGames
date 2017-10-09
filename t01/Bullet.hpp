@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
 
+#include "Utilities.hpp"
+
 class Bullet
 {
 public:
@@ -29,6 +31,7 @@ private:
     sf::Texture bulletTexture;
     
     float direction;
+    Utilities utilityManager;
 };
 
 

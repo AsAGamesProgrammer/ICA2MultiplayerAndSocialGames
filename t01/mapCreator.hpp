@@ -13,6 +13,8 @@
 #include <SFML/Graphics.hpp>
 #include <list>
 
+#include "Utilities.hpp"
+
 class mapCreator
 {
     //-----PUBLIC-----
@@ -33,13 +35,14 @@ class mapCreator
     
     sf::Texture elementTexture;
     
-    void loadTexture(std::string name, int idx);
     void loadTextures();
     void loadTile(float startX, float startY, int tileId);
     void loadElements();
     
     float startPosx = 500;
     float startPosY = 175;
+    
+    Utilities utilityManager;
 
 };
 

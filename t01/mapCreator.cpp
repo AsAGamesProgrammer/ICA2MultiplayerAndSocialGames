@@ -28,7 +28,6 @@ void mapCreator::loadTiles()
     
     //Load map
     std::string line;
-    //******ASK******
     std::ifstream myfile ("map.txt");
     
     if (myfile.is_open())
@@ -85,38 +84,20 @@ void mapCreator::loadTiles()
 }
 
 //----CODE BEHIND---
-//Load a texture
-void mapCreator::loadTexture(std::string name, int idx)
-{
-    //Texture
-    sf::Texture texture;
-    
-
-    if (!texture.loadFromFile(name))
-    {
-        std::cout<<"texture not loaded";
-    }
-    
-    tileTexture[idx]=texture;
-}
 
 void mapCreator::loadTextures()
 {
-    int idx=0;
-
-    loadTexture("land_grass01.png", idx);
-    
-    for(int i=2; i<10; i++)
+    for(int i=1; i<10; i++)
     {
         std::string path ="land_grass0" + std::to_string(i) +".png";
-        loadTexture(path, i-1);
+        tileTexture[i-1]=utilityManager.loadTexture(path);
     
     }
     
     for(int i=10; i<15; i++)
     {
         std::string path ="land_grass" + std::to_string(i) +".png";
-        loadTexture(path, i-1);
+        tileTexture[i-1]=utilityManager.loadTexture(path);
     }
     
 }
@@ -136,16 +117,7 @@ void mapCreator::loadTile(float startX, float startY, int tileId)
 
 void mapCreator::loadElements()
 {
-    //Texture
-    sf::Texture texture;
-    
-    
-    if (!texture.loadFromFile("bar.png"))
-    {
-        std::cout<<"texture not loaded";
-    }
-    
-    elementTexture = texture;
+    elementTexture = utilityManager.loadTexture("bar.png");
     
     //Sprite
     sf::Sprite startSprite;                         //create a sprite

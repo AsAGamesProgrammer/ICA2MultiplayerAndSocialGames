@@ -13,6 +13,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Bullet.hpp"
+#include "Utilities.hpp"
 
 class PlayerC
 {
@@ -56,6 +57,8 @@ class PlayerC
     
     //Temp
     Bullet bullet;
+    
+    Utilities utilityManager;
 };
 
 

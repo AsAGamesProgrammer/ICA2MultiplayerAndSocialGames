@@ -14,16 +14,9 @@
 //Add position?
 Bullet::Bullet()
 {
-    //Texture
-    sf::Texture texture;
-    
-    if (!texture.loadFromFile("bulR.png"))
-    {
-        std::cout<<"texture not loaded";
-    }
-    
-    bulletTexture=texture;
-    
+
+    //Load bullet texture
+    bulletTexture=utilityManager.loadTexture("bulR.png");
     
     sf::Sprite bulletSprite;
     bulletSprite.setTexture(bulletTexture);

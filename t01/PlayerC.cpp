@@ -11,6 +11,8 @@
 #include <iostream>
 
 
+
+
 //------CONSTRUCTOR-------
 //Player constructor
 PlayerC::PlayerC()
@@ -22,14 +24,7 @@ PlayerC::PlayerC()
 void PlayerC::createPlayer()
 {
 
-    //Texture
-    sf::Texture texture;
-
-    if (!texture.loadFromFile("carYS.png"))
-    {
-        std::cout<<"texture not loaded";
-    }
-    playerTexture=texture;
+    playerTexture=utilityManager.loadTexture("carYS.png");
     
     
     sf::Sprite playerSprite;
