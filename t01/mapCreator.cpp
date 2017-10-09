@@ -33,8 +33,6 @@ void mapCreator::loadTiles()
     
     if (myfile.is_open())
     {
-
-        
         for (int i=0; i<tilesHeight; i++)
         {
             std::string line;
@@ -82,7 +80,7 @@ void mapCreator::loadTiles()
         myfile.close();
     }
     
-   
+    loadElements();
 
 }
 
@@ -105,7 +103,7 @@ void mapCreator::loadTexture(std::string name, int idx)
 void mapCreator::loadTextures()
 {
     int idx=0;
-    //*********ASK ASK ASK ASK ASK************
+
     loadTexture("land_grass01.png", idx);
     
     for(int i=2; i<10; i++)
@@ -121,11 +119,6 @@ void mapCreator::loadTextures()
         loadTexture(path, i-1);
     }
     
-    
-    
-    
-    
-    
 }
 
 //Create a single tile sprite
@@ -139,4 +132,25 @@ void mapCreator::loadTile(float startX, float startY, int tileId)
     tiles[tileNumber]=tileSpr;
     tileNumber++;
  
+};
+
+void mapCreator::loadElements()
+{
+    //Texture
+    sf::Texture texture;
+    
+    
+    if (!texture.loadFromFile("finish.png"))
+    {
+        std::cout<<"texture not loaded";
+    }
+    
+    elementTexture = texture;
+    
+    //Sprite
+    sf::Sprite startSprite;                         //create a sprite
+    startSprite.setTexture(elementTexture);            //set texture
+    startSprite.setPosition(startPosx, startPosY);        //set position
+    
+    start = startSprite;
 };

@@ -22,6 +22,8 @@ class mapCreator
     sf::Sprite tiles [250];
     int tileNumber=0;
     
+    sf::Sprite start;
+    
     
     //-----PRIVATE-----
     private:
@@ -29,9 +31,15 @@ class mapCreator
     float textureW;
     float textureH;
     
+    sf::Texture elementTexture;
+    
     void loadTexture(std::string name, int idx);
     void loadTextures();
     void loadTile(float startX, float startY, int tileId);
+    void loadElements();
+    
+    float startPosx = 500;
+    float startPosY = 160;
 
 };
 

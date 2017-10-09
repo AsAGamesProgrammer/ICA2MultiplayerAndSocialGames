@@ -49,6 +49,7 @@
 		862B1AE81F8B9876001378B9 /* simon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simon.otf; sourceTree = "<group>"; };
 		862B1AE91F8B9E3C001378B9 /* carYS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carYS.png; path = ../../ICA2/carYS.png; sourceTree = "<group>"; };
 		862B1AEA1F8B9F16001378B9 /* bulR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulR.png; path = ../../ICA2/bulR.png; sourceTree = "<group>"; };
+		862B1AEC1F8BA87D001378B9 /* finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = finish.png; path = ../../ICA2/finish.png; sourceTree = "<group>"; };
 		865681A51F7D438400CA4B6E /* PlayerC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerC.cpp; sourceTree = "<group>"; };
 		865681A61F7D438400CA4B6E /* PlayerC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerC.hpp; sourceTree = "<group>"; };
 		865681DA1F8663FF00CA4B6E /* mapCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mapCreator.cpp; sourceTree = "<group>"; };
@@ -166,6 +167,7 @@
 		86DDA34A1F84F4DF00BBAE92 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				862B1AEC1F8BA87D001378B9 /* finish.png */,
 				862B1AEA1F8B9F16001378B9 /* bulR.png */,
 				862B1AE91F8B9E3C001378B9 /* carYS.png */,
 				862B1AE61F8B9876001378B9 /* land_grass01.png */,

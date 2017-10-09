@@ -42,11 +42,14 @@ int main()
         //window.clear();
         
         //----DRAW-----
-        //Track
+        //Track tiles
         for(int i=0; i<mapManager.tileNumber; i++)
          {
             window.draw(mapManager.tiles[i]);
          }
+        
+        //Track elements
+        window.draw(mapManager.start);
         
         //Player
         window.draw(player.getPlayer());
