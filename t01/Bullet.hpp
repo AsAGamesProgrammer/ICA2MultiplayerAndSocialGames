@@ -16,17 +16,19 @@ class Bullet
 {
 public:
   
-    void moveBullet(float angle);
+    void moveBullet();
     Bullet();
     sf::Sprite getSprite() {return bulletS;}
     bool isEnabled = false;
     
-    void instantiateBullet(float x, float y);
+    void instantiateBullet(float x, float y, float angle);
     
 private:
-    float speed = 3;
+    float speed = 2;
     sf::Sprite bulletS;
     sf::Texture bulletTexture;
+    
+    float direction;
 };
 
 

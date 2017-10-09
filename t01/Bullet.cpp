@@ -28,22 +28,27 @@ Bullet::Bullet()
     sf::Sprite bulletSprite;
     bulletSprite.setTexture(bulletTexture);
     bulletSprite.setOrigin(bulletTexture.getSize().x/2, bulletTexture.getSize().y/2);
+    
+    bulletSprite.setPosition(-50, -50);
+    
     bulletS=bulletSprite;
+    
 }
 
-void Bullet::instantiateBullet(float x, float y)
+void Bullet::instantiateBullet(float x, float y, float angle)
 {
 
     isEnabled=true;
     bulletS.setPosition(x, y);
+    direction=angle;
 
 }
 
 //Move this to the loop?
-void Bullet::moveBullet(float angle)
+void Bullet::moveBullet()
 {
     //Convert degrees to radians
-    float radians = angle * 2 * M_PI/360;
+    float radians = direction * 2 * M_PI/360;
     
     //Change psition
     bulletS.setPosition(
@@ -53,11 +58,14 @@ void Bullet::moveBullet(float angle)
     
     //TODO
     //Checks for screen boundaries
-   // if(!isWithinScreen() || !isWithinRoad())
-   // {
-    //    playerS.setPosition(
-     //                       playerS.getPosition().x - currentSpeed * cos(radians),
-    //                        playerS.getPosition().y - currentSpeed * sin(radians)); //Move back
-   // }
+    if(bulletS.getPosition().x  <0 || //check for left boundary
+       bulletS.getPosition().y  <0 || //check for top boundary
+       bulletS.getPosition().x > sf::VideoMode::getDesktopMode().width ||
+       bulletS.getPosition().y > sf::VideoMode::getDesktopMode().height)
+        
+    {
+        bulletS.setPosition(-50, -50);
+    }
 
 }
+

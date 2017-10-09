@@ -39,7 +39,7 @@ int main()
         //Update Interface
         uiManager.displaySpeed(player.getSpeed());
     
-        window.clear();
+        //window.clear();
         
         //----DRAW-----
         //Track

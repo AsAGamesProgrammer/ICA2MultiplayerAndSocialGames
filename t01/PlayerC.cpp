@@ -25,7 +25,7 @@ void PlayerC::createPlayer()
     //Texture
     sf::Texture texture;
 
-    if (!texture.loadFromFile("carY.png"))
+    if (!texture.loadFromFile("carYS.png"))
     {
         std::cout<<"texture not loaded";
     }
@@ -58,7 +58,7 @@ void PlayerC::moveRelated()
     movePlayer();
     
     if(bullet.isEnabled)
-        bullet.moveBullet(playerS.getRotation());
+        bullet.moveBullet();
 }
 
 
@@ -145,7 +145,7 @@ void PlayerC::shoot()
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y);
+        bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y, playerS.getRotation());
     }
 }
 
@@ -182,12 +182,12 @@ bool PlayerC::isWithinRoad()
         onTheLeft=true;
     
     //RIGHT
-    if(playerS.getPosition().x + playerTexture.getSize().y - textureOffset > 2432)
+    if(playerS.getPosition().x + playerTexture.getSize().y - textureOffset > 2390)
         onTheRight=true;
     
     //TOP && BOT
-    if(playerS.getPosition().y - playerTexture.getSize().y + textureOffset >260
-       && playerS.getPosition().y - playerTexture.getSize().y + textureOffset < 1000)
+    if(playerS.getPosition().y - playerTexture.getSize().y + textureOffset >290
+       && playerS.getPosition().y - playerTexture.getSize().y + textureOffset < 1050)
         onTheTop=true;
     
     

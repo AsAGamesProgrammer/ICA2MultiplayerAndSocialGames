@@ -24,8 +24,6 @@ class PlayerC
     sf::Sprite getPlayer();     //Return the shape of a player
     sf::Sprite getBullet() {return bullet.getSprite();};
     
-    //Temp
-    Bullet bullet;
     
     float getSpeed();
 
@@ -42,7 +40,7 @@ class PlayerC
     
     float currentSpeed =0.5f;           //Current speed
     float acceleration = 0.005f;
-    float maxSpeed = 1.4f;
+    float maxSpeed = 0.8f;
     
     float rotationSpeed = 0.5f;         //Rotation responsivness
     
@@ -55,6 +53,9 @@ class PlayerC
     bool isWithinRoad();
     
     void shoot();
+    
+    //Temp
+    Bullet bullet;
 };
 
 
