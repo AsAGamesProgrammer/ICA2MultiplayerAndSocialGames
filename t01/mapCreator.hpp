@@ -39,7 +39,7 @@ class mapCreator
     void loadElements();
     
     float startPosx = 500;
-    float startPosY = 160;
+    float startPosY = 175;
 
 };
 

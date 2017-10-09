@@ -140,7 +140,7 @@ void mapCreator::loadElements()
     sf::Texture texture;
     
     
-    if (!texture.loadFromFile("finish.png"))
+    if (!texture.loadFromFile("bar.png"))
     {
         std::cout<<"texture not loaded";
     }
