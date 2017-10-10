@@ -31,7 +31,7 @@ private:
 
     //temp
     float startPosx = 500;
-    float startPosY = 175;
+    float startPosY = 255;
 };
 
 #endif /* Checkpoint_hpp */

@@ -25,6 +25,8 @@ void PlayerC::createPlayer()
 {
 
     playerTexture=utilityManager.loadTexture("carYS.png");
+    width = playerTexture.getSize().x;
+    height = playerTexture.getSize().y;
     
     
     sf::Sprite playerSprite;

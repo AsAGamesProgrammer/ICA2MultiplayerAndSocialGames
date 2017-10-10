@@ -26,6 +26,8 @@ class PlayerC
     sf::Sprite getBullet() {return bullet.getSprite();};
     
     
+    float width;
+    float height;
     float getSpeed();
 
     //Functionality

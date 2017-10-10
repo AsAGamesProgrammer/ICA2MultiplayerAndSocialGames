@@ -44,8 +44,9 @@ void GameLoop::Update()
     //Movement
     player.moveRelated();
     
-
-
+    //Collision with a checkpoint
+    checkPointPassed();
+    
 }
 
 void GameLoop::Render()
@@ -62,6 +63,9 @@ void GameLoop::Render()
         window.draw(mapManager.tiles[i]);
     }
     
+    //CheckPoint
+    window.draw(chpManager.getSprite());
+    
     //Player
     window.draw(player.getPlayer());
     
@@ -75,8 +79,25 @@ void GameLoop::Render()
         uiManager.gameLabels.pop_front();
     }
     
-    window.draw(chpManager.getSprite());
+
     
     window.display();
+
+}
+
+bool GameLoop::checkPointPassed()
+{
+    if(player.getPlayer().getPosition().x + player.width/2 >chpManager.getSprite().getPosition().x - chpManager.sizeW/2 &&
+       player.getPlayer().getPosition().x - player.width/2 <=chpManager.getSprite().getPosition().x + chpManager.sizeW/2 )
+       //player.getPlayer().getPosition().y + player.height/2 > chpManager.getSprite().getPosition().y - chpManager.sizeH/2)
+        
+    {
+        std::cout<<"Collision"<<std::endl;
+        return true;
+    }
+    
+    std::cout<<"No Collided"<<std::endl;
+    
+    return false;
 
 }

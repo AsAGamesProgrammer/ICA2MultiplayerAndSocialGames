@@ -16,6 +16,7 @@ Checkpoint::Checkpoint()
     sf::Sprite chSprite;                         //create a sprite
     chSprite.setTexture(checkPTexture);            //set texture
     chSprite.setPosition(startPosx, startPosY);        //set position
+    chSprite.setOrigin(checkPTexture.getSize().x/2, checkPTexture.getSize().y/2);
     
     checkPSprite = chSprite;
     

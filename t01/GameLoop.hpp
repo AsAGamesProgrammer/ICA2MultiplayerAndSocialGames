@@ -25,8 +25,7 @@ class GameLoop
 
 public:
     void StartGame();
-    void Update();
-    void Render();
+
     
     
 private:
@@ -34,6 +33,12 @@ private:
     UIManager uiManager;
     mapCreator mapManager;
     Checkpoint chpManager;
+    
+    void Update();
+    void Render();
+    
+    //Collision
+    bool checkPointPassed();
     
 };
 
