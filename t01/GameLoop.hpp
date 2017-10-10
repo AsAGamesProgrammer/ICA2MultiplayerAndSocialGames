@@ -38,7 +38,7 @@ private:
     void Render();
     
     //Collision
-    bool checkPointPassed();
+    void checkPointPassed(int index);
     
 };
 

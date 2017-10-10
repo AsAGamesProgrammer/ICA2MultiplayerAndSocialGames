@@ -18,7 +18,10 @@ class Checkpoint
 
 public:
     Checkpoint();
-    sf::Sprite getSprite() {return checkPSprite;}
+    //sf::Sprite getSprite() {return checkPSprite;}
+    
+    int const cpNumber = 4;
+    sf::Sprite checkPSprites[4];
     
     float sizeW;
     float sizeH;
@@ -27,11 +30,8 @@ private:
     Utilities utilityManager;
     
     sf::Texture checkPTexture;
-    sf::Sprite checkPSprite;
-
-    //temp
-    float startPosx = 500;
-    float startPosY = 255;
+    
+    void createCheckPointSprite(int index, int posX, int posY);
 };
 
 #endif /* Checkpoint_hpp */

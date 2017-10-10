@@ -44,18 +44,24 @@ void GameLoop::Update()
     //Movement
     player.moveRelated();
     
-    //Collision with a checkpoint
-    checkPointPassed();
+    
+    //Check all the checkpoints
+    for (int i=0; i<chpManager.cpNumber; i++)
+    {
+        //Collision with a checkpoint
+        checkPointPassed(i);
+    }
     
 }
 
 void GameLoop::Render()
 {
-
+    //Can be skipped because background is rerendered anyways
+    //window.clear();
+    
     //Update Interface
     uiManager.displaySpeed(player.getSpeed());
     
-    //window.clear();
     
     //Track tiles
     for(int i=0; i<mapManager.tileNumber; i++)
@@ -64,7 +70,8 @@ void GameLoop::Render()
     }
     
     //CheckPoint
-    window.draw(chpManager.getSprite());
+    for (int i=0; i<chpManager.cpNumber; i++)
+        window.draw(chpManager.checkPSprites[i]);
     
     //Player
     window.draw(player.getPlayer());
@@ -85,20 +92,19 @@ void GameLoop::Render()
 
 }
 
-bool GameLoop::checkPointPassed()
+void GameLoop::checkPointPassed(int index)
 {
-    if(player.getPlayer().getPosition().x + player.width/2 >chpManager.getSprite().getPosition().x - chpManager.sizeW/2 && //left
-       player.getPlayer().getPosition().x - player.width/2 <=chpManager.getSprite().getPosition().x + chpManager.sizeW/2 &&  //right
-       player.getPlayer().getPosition().y + player.height/2 > chpManager.getSprite().getPosition().y - chpManager.sizeH/2 && //top
-       player.getPlayer().getPosition().y - player.height/2 <= chpManager.getSprite().getPosition().y + chpManager.sizeH/2) //bot
+    if(player.getPlayer().getPosition().x + player.width/2 >chpManager.checkPSprites[index].getPosition().x - chpManager.sizeW/2 && //left
+       player.getPlayer().getPosition().x - player.width/2 <=chpManager.checkPSprites[index].getPosition().x + chpManager.sizeW/2 &&  //right
+       player.getPlayer().getPosition().y + player.height/2 > chpManager.checkPSprites[index].getPosition().y - chpManager.sizeH/2 && //top
+       player.getPlayer().getPosition().y - player.height/2 <= chpManager.checkPSprites[index].getPosition().y + chpManager.sizeH/2) //bot
         
     {
-        std::cout<<"Collision"<<std::endl;
-        return true;
+        //Handle collision
+        return;
     }
     
-    std::cout<<"No Collided"<<std::endl;
-    
-    return false;
+    //No collision
+    return;
 
 }
