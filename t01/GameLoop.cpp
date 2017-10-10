@@ -87,9 +87,10 @@ void GameLoop::Render()
 
 bool GameLoop::checkPointPassed()
 {
-    if(player.getPlayer().getPosition().x + player.width/2 >chpManager.getSprite().getPosition().x - chpManager.sizeW/2 &&
-       player.getPlayer().getPosition().x - player.width/2 <=chpManager.getSprite().getPosition().x + chpManager.sizeW/2 )
-       //player.getPlayer().getPosition().y + player.height/2 > chpManager.getSprite().getPosition().y - chpManager.sizeH/2)
+    if(player.getPlayer().getPosition().x + player.width/2 >chpManager.getSprite().getPosition().x - chpManager.sizeW/2 && //left
+       player.getPlayer().getPosition().x - player.width/2 <=chpManager.getSprite().getPosition().x + chpManager.sizeW/2 &&  //right
+       player.getPlayer().getPosition().y + player.height/2 > chpManager.getSprite().getPosition().y - chpManager.sizeH/2 && //top
+       player.getPlayer().getPosition().y - player.height/2 <= chpManager.getSprite().getPosition().y + chpManager.sizeH/2) //bot
         
     {
         std::cout<<"Collision"<<std::endl;
