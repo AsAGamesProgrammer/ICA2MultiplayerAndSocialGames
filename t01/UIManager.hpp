@@ -28,6 +28,8 @@ public:
     
     std::string checkedPoints[4] = {"Do it!", "Do it!", "Do it!", "Do it!"};
     
+    sf::Text lobbieText;
+    
 private:
     sf::Font font1;
     sf::Text writeFloat(float writing);

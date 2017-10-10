@@ -13,6 +13,32 @@ sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf:
                         "P4076882 - Kristina Blinova - The Racing Game!");
 
 
+//TODO create a lobbie class?
+void GameLoop::OpenLobbie()
+{
+    window.clear();
+    
+    //GAME LOOP
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        
+        window.draw(uiManager.lobbieText);
+        
+        window.display();
+        
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+            return;
+        
+    }
+}
+
+
 void GameLoop::StartGame()
 {
     

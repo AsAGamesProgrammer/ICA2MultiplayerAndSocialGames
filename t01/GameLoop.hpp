@@ -25,7 +25,7 @@ class GameLoop
 
 public:
     void StartGame();
-
+    void OpenLobbie();
     
     
 private:

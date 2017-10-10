@@ -12,7 +12,13 @@
 int main()
 {
     
+    //Create a game loop class
     GameLoop gameLoop;
+    
+    //Create a starting menu / lobbie
+    gameLoop.OpenLobbie();
+    
+    //Start game
     gameLoop.StartGame();
     
     return 0;

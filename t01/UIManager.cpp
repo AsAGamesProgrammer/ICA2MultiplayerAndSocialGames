@@ -10,6 +10,12 @@
 #include <iomanip> // setprecision
 #include <sstream> // stringstream
 
+//TODO:
+/*
+ Optimise by making another pool of UI elements which are cnstant
+ Have it as an array
+ 
+ */
 
 //------CONSTRUCTOR-------
 //Player constructor
@@ -24,6 +30,10 @@ UIManager::UIManager()
     };
     
     font1 = fontA;
+    
+    lobbieText = writeString("Press enter to begin");
+    lobbieText.setCharacterSize(60);
+    lobbieText.move(1000, 500);
 }
 
 //----INTERFACE----
@@ -40,7 +50,7 @@ void UIManager::displaySpeed(float number)
 
 }
 
-
+//Information of wether check points were checked
 void UIManager::displayCheckPoints()
 {
 
@@ -75,7 +85,6 @@ void UIManager::displayCheckPoints()
     //Push all the UI elements in a pool
     gameLabels.push_back(chckPointA);
     gameLabels.push_back(isCheckedA);
-    
     gameLabels.push_back(chckPointB);
     gameLabels.push_back(isCheckedB);
     gameLabels.push_back(chckPointC);
