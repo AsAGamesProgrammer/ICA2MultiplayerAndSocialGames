@@ -40,6 +40,7 @@ private:
     //Collision
     void checkPointPassed(int index);
     
+    
 };
 
 #endif /* GameLoop_hpp */

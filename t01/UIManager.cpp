@@ -27,7 +27,7 @@ UIManager::UIManager()
 }
 
 //----INTERFACE----
-sf::Text UIManager::displaySpeed(float number)
+void UIManager::displaySpeed(float number)
 {
     sf::Text speedLabel = writeString("Speed ");
     speedLabel.move(10, 10);
@@ -37,8 +37,52 @@ sf::Text UIManager::displaySpeed(float number)
     
     gameLabels.push_back(speedLabel);
     gameLabels.push_back(speedText);
+
+}
+
+
+void UIManager::displayCheckPoints()
+{
+
+    //Point A
+    sf::Text chckPointA = writeString("Check point A: ");
+    chckPointA.move(500, 500);
     
-    return speedText;
+    sf::Text isCheckedA = writeString(checkedPoints[0]);
+    isCheckedA.move(700, 500);
+    
+    //Point B
+    sf::Text chckPointB = writeString("Check point B: ");
+    chckPointB.move(500, 600);
+    
+    sf::Text isCheckedB = writeString(checkedPoints[1]);
+    isCheckedB.move(700, 600);
+    
+    //Point C
+    sf::Text chckPointC = writeString("Check point C: ");
+    chckPointC.move(500, 700);
+    
+    sf::Text isCheckedC = writeString(checkedPoints[2]);
+    isCheckedC.move(700, 700);
+    
+    //Point D
+    sf::Text chckPointD = writeString("Check point D: ");
+    chckPointD.move(500, 800);
+    
+    sf::Text isCheckedD = writeString(checkedPoints[3]);
+    isCheckedD.move(700, 800);
+    
+    //Push all the UI elements in a pool
+    gameLabels.push_back(chckPointA);
+    gameLabels.push_back(isCheckedA);
+    
+    gameLabels.push_back(chckPointB);
+    gameLabels.push_back(isCheckedB);
+    gameLabels.push_back(chckPointC);
+    gameLabels.push_back(isCheckedC);
+    gameLabels.push_back(chckPointD);
+    gameLabels.push_back(isCheckedD);
+
 }
 
 //----HELPING FUNCTIONS----

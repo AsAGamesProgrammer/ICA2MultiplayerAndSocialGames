@@ -19,13 +19,20 @@ class UIManager
 
 public:
     UIManager();
-    sf::Text displaySpeed(float number);
+    void displaySpeed(float number);
+    
+    void displayCheckPoints();
+    
+    //List of UI elements to render
     std::list<sf::Text> gameLabels;
+    
+    std::string checkedPoints[4] = {"Do it!", "Do it!", "Do it!", "Do it!"};
     
 private:
     sf::Font font1;
     sf::Text writeFloat(float writing);
     sf::Text writeString(std::string writing);
+    
     
 };
 

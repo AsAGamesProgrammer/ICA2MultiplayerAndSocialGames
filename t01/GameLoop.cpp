@@ -61,6 +61,7 @@ void GameLoop::Render()
     
     //Update Interface
     uiManager.displaySpeed(player.getSpeed());
+    uiManager.displayCheckPoints();
     
     
     //Track tiles
@@ -101,6 +102,9 @@ void GameLoop::checkPointPassed(int index)
         
     {
         //Handle collision
+        chpManager.checkedPoints[index]=true;
+        uiManager.checkedPoints[index]="Checked!";
+        
         return;
     }
     

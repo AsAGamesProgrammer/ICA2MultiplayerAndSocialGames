@@ -26,12 +26,15 @@ public:
     float sizeW;
     float sizeH;
     
+    bool checkedPoints[4];
+    
 private:
     Utilities utilityManager;
     
     sf::Texture checkPTexture;
     
     void createCheckPointSprite(int index, int posX, int posY);
+    
 };
 
 #endif /* Checkpoint_hpp */
