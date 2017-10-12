@@ -37,6 +37,12 @@ void PlayerC::createPlayer()
     playerS=playerSprite;
 };
 
+//------SETTERS--------
+void PlayerC::setStartingPos(float posX, float posY)
+{
+    playerS.setPosition(posX, posY);
+}
+
 //------GETTERS--------
 sf::Sprite PlayerC::getPlayer()
 {

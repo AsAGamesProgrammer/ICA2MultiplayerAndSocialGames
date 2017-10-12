@@ -45,6 +45,9 @@ void GameLoop::StartGame()
     //PRE-PROCESSING
     mapManager.loadTiles();
     
+    //TEMP
+    otherPlayer.setStartingPos(500, 200);
+    
     //GAME LOOP
     while (window.isOpen())
     {
@@ -69,6 +72,7 @@ void GameLoop::Update()
 {
     //Movement
     player.moveRelated();
+    otherPlayer.moveRelated();
     
     
     //Check all the checkpoints
@@ -102,16 +106,23 @@ void GameLoop::Render()
     
     //Player
     window.draw(player.getPlayer());
+    window.draw(otherPlayer.getPlayer());
     
     //Bullet
     window.draw(player.getBullet());
+    window.draw(otherPlayer.getBullet());
     
-    //UI
+    //UI - changing labels
     for(int i=0; i<uiManager.gameLabels.size(); i++)
     {
         window.draw(uiManager.gameLabels.front());
         uiManager.gameLabels.pop_front();
     }
+    
+    //UI - constant labels
+    for(int i=0; i<uiManager.numberOfConstText; i++)
+        window.draw(uiManager.constantText[i]);
+
     
 
     

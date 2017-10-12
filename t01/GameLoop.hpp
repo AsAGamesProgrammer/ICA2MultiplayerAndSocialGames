@@ -30,6 +30,8 @@ public:
     
 private:
     PlayerC player;
+    PlayerC otherPlayer;
+    
     UIManager uiManager;
     mapCreator mapManager;
     Checkpoint chpManager;

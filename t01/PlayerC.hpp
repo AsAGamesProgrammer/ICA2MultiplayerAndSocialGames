@@ -25,6 +25,8 @@ class PlayerC
     sf::Sprite getPlayer();     //Return the shape of a player
     sf::Sprite getBullet() {return bullet.getSprite();};
     
+    //Setter
+    void setStartingPos(float posX, float posY);
     
     float width;
     float height;

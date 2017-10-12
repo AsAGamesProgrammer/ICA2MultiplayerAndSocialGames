@@ -26,6 +26,9 @@ public:
     //List of UI elements to render
     std::list<sf::Text> gameLabels;
     
+    sf::Text constantText [20];
+    int numberOfConstText = 20;
+    
     std::string checkedPoints[4] = {"Do it!", "Do it!", "Do it!", "Do it!"};
     
     sf::Text lobbieText;
@@ -35,6 +38,7 @@ private:
     sf::Text writeFloat(float writing);
     sf::Text writeString(std::string writing);
     
+    void loadConstText();
     
 };
 
