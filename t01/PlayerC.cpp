@@ -95,7 +95,12 @@ void PlayerC::movePlayer()
                                 currentSpeed * sin(radians) + playerS.getPosition().y);
         
         //TEST outside screen
-        if(!isWithinScreen() || !isWithinRoad())
+        if(!!PlayerBase::isWithinScreen(playerTexture.getSize().y,
+                                        playerS.getPosition().x,
+                                        playerS.getPosition().y) ||
+           !PlayerBase::isWithinRoad(playerTexture.getSize().y,
+                                     playerS.getPosition().x,
+                                     playerS.getPosition().y))
         {
             playerS.setPosition(
                                 playerS.getPosition().x - currentSpeed * cos(radians),
@@ -122,7 +127,12 @@ void PlayerC::movePlayer()
         
         
         //Checks for screen boundaries
-        if(!isWithinScreen() || !isWithinRoad())
+        if(!PlayerBase::isWithinScreen(playerTexture.getSize().y,
+                                       playerS.getPosition().x,
+                                       playerS.getPosition().y) ||
+           !PlayerBase::isWithinRoad(playerTexture.getSize().y,
+                                      playerS.getPosition().x,
+                                      playerS.getPosition().y))
         {
             playerS.setPosition(
                                 playerS.getPosition().x - currentSpeed * cos(radians),
@@ -150,58 +160,6 @@ void PlayerC::shoot()
     {
         bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y, playerS.getRotation());
     }
-}
-
-//Checks if the player sprite postion is valid
-bool PlayerC::isWithinScreen()
-{
-    int textureOffset=10;     //10 is texture offset
-    
-    if(playerS.getPosition().x - playerTexture.getSize().y  + textureOffset <0 || //check for left boundary
-       playerS.getPosition().y - playerTexture.getSize().y + textureOffset <0 || //check for top boundary
-       playerS.getPosition().x + playerTexture.getSize().y - textureOffset > sf::VideoMode::getDesktopMode().width ||
-       playerS.getPosition().y + playerTexture.getSize().y + textureOffset + 100> sf::VideoMode::getDesktopMode().height)
-    
-    {
-        return false;
-    }
-
-    return true;
-}
-
-//Checks if the player sprite postion is valid
-//Checks the top area
-bool PlayerC::isWithinRoad()
-{
-
-    int textureOffset=10;     //10 is texture offset
-    
-    bool onTheLeft = false;
-    bool onTheRight = false;
-    bool onTheTop=false;
-    
-    //LEFT
-    if(playerS.getPosition().x + playerTexture.getSize().y - textureOffset < 256)
-        onTheLeft=true;
-    
-    //RIGHT
-    if(playerS.getPosition().x + playerTexture.getSize().y - textureOffset > 2390)
-        onTheRight=true;
-    
-    //TOP && BOT
-    if(playerS.getPosition().y - playerTexture.getSize().y + textureOffset >290
-       && playerS.getPosition().y - playerTexture.getSize().y + textureOffset < 1050)
-        onTheTop=true;
-    
-    
-    //DECISION
-    if(onTheTop && !onTheLeft && !onTheRight)
-    {
-        return false;
-    }
-    
-    return true;
-
 }
 
 

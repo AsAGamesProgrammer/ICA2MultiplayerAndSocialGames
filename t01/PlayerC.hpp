@@ -14,8 +14,9 @@
 
 #include "Bullet.hpp"
 #include "Utilities.hpp"
+#include "PlayerBase.hpp"
 
-class PlayerC
+class PlayerC : PlayerBase
 {
     //-----PUBLIC-----
     public:
@@ -52,10 +53,6 @@ class PlayerC
     //Functionality
     void createPlayer();                //Player creation function
     void movePlayer();                  //Movement
-    
-    //Check boundaries
-    bool isWithinScreen();
-    bool isWithinRoad();
     
     void shoot();
     

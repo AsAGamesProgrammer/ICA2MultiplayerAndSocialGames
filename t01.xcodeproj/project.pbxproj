@@ -14,6 +14,7 @@
 		865681A71F7D438400CA4B6E /* PlayerC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681A51F7D438400CA4B6E /* PlayerC.cpp */; };
 		865681DB1F8663FF00CA4B6E /* mapCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681DA1F8663FF00CA4B6E /* mapCreator.cpp */; };
 		865681EF1F86845A00CA4B6E /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681ED1F86845A00CA4B6E /* Bullet.cpp */; };
+		86CF4F791F8FB631009A299E /* PlayerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86CF4F771F8FB631009A299E /* PlayerBase.cpp */; };
 		86DDA3261F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */; };
 		86DDA3271F823DDC00BBAE92 /* libsfml-audio.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */; };
 		86DDA3281F823DDC00BBAE92 /* libsfml-audio.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DDA3191F823DDC00BBAE92 /* libsfml-audio.dylib */; };
@@ -83,6 +84,8 @@
 		86CF4F731F8FACDC009A299E /* carYS3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carYS3.png; sourceTree = "<group>"; };
 		86CF4F741F8FAD5A009A299E /* bulletR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulletR.png; sourceTree = "<group>"; };
 		86CF4F761F8FAE15009A299E /* cp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp.png; sourceTree = "<group>"; };
+		86CF4F771F8FB631009A299E /* PlayerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerBase.cpp; sourceTree = "<group>"; };
+		86CF4F781F8FB631009A299E /* PlayerBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerBase.hpp; sourceTree = "<group>"; };
 		86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.2.dylib"; path = "../../lib/libsfml-audio.2.4.2.dylib"; sourceTree = "<group>"; };
 		86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.dylib"; path = "../../lib/libsfml-audio.2.4.dylib"; sourceTree = "<group>"; };
 		86DDA3191F823DDC00BBAE92 /* libsfml-audio.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.dylib"; path = "../../lib/libsfml-audio.dylib"; sourceTree = "<group>"; };
@@ -164,10 +167,9 @@
 		0B1D0A421D9EAAAA00319891 /* t01 */ = {
 			isa = PBXGroup;
 			children = (
+				86CF4F7A1F8FB698009A299E /* Player */,
 				865681DA1F8663FF00CA4B6E /* mapCreator.cpp */,
 				0B1D0A431D9EAAAA00319891 /* main.cpp */,
-				865681A51F7D438400CA4B6E /* PlayerC.cpp */,
-				865681A61F7D438400CA4B6E /* PlayerC.hpp */,
 				86DDA33D1F82538000BBAE92 /* UIManager.cpp */,
 				86DDA33E1F82538000BBAE92 /* UIManager.hpp */,
 				86DDA3431F83CC9200BBAE92 /* mapCreator.hpp */,
@@ -181,6 +183,17 @@
 				862B1AF51F8CE45A001378B9 /* GameLoop.hpp */,
 			);
 			path = t01;
+			sourceTree = "<group>";
+		};
+		86CF4F7A1F8FB698009A299E /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				86CF4F781F8FB631009A299E /* PlayerBase.hpp */,
+				86CF4F771F8FB631009A299E /* PlayerBase.cpp */,
+				865681A61F7D438400CA4B6E /* PlayerC.hpp */,
+				865681A51F7D438400CA4B6E /* PlayerC.cpp */,
+			);
+			name = Player;
 			sourceTree = "<group>";
 		};
 		86DDA34A1F84F4DF00BBAE92 /* Sprites */ = {
@@ -279,6 +292,7 @@
 				865681DB1F8663FF00CA4B6E /* mapCreator.cpp in Sources */,
 				865681A71F7D438400CA4B6E /* PlayerC.cpp in Sources */,
 				0B1D0A441D9EAAAA00319891 /* main.cpp in Sources */,
+				86CF4F791F8FB631009A299E /* PlayerBase.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
