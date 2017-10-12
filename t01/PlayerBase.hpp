@@ -25,13 +25,23 @@ protected:
     //Checks if the car is on track
     bool isOnTrack(int textureY, int posX, int posY);
     
+    //Variables
+    float currentSpeed =0.5f;           //Current speed
+    float acceleration = 0.005f;
+    float maxSpeed = 1.0f;
+    float rotationSpeed = 0.5f;         //Rotation responsivness
+    
+    //Bullet
+    Bullet bullet;
+    
+    //Utilitis manager
+    Utilities utilityManager;
+    
 private:
     //Check boundaries
     bool isWithinScreen(int textureY, int posX, int posY);
     bool isWithinRoad(int textureY, int posX, int posY);
     
-    //Temp
-    Bullet bullet;
 };
 
 #endif /* PlayerBase_hpp */

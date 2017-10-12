@@ -42,13 +42,6 @@ private:
     sf::Sprite playerS;     //Shape of a player
     sf::Texture playerTexture;
     
-    
-    float currentSpeed =0.5f;           //Current speed
-    float acceleration = 0.005f;
-    float maxSpeed = 0.8f;
-    
-    float rotationSpeed = 0.5f;         //Rotation responsivness
-    
     //Functionality
     
     void movePlayer();                  //Movement
@@ -57,11 +50,6 @@ private:
     
     void moveInADirection();
     
-    //Temp
-    Bullet bullet;
-    
-    Utilities utilityManager;
-
 };
 
 #endif /* PlayerCoop_hpp */
