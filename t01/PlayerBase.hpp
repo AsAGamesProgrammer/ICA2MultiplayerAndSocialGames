@@ -29,6 +29,9 @@ private:
     //Check boundaries
     bool isWithinScreen(int textureY, int posX, int posY);
     bool isWithinRoad(int textureY, int posX, int posY);
+    
+    //Temp
+    Bullet bullet;
 };
 
 #endif /* PlayerBase_hpp */

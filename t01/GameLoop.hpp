@@ -19,6 +19,7 @@
 #include "mapCreator.hpp"
 #include "Checkpoint.hpp"
 #include "GameLoop.hpp"
+#include "PlayerCoop.hpp"
 
 class GameLoop
 {
@@ -30,7 +31,7 @@ public:
     
 private:
     PlayerC player;
-    PlayerC otherPlayer;
+    PlayerCoop otherPlayer;
     
     UIManager uiManager;
     mapCreator mapManager;

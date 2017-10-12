@@ -15,6 +15,7 @@
 		865681DB1F8663FF00CA4B6E /* mapCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681DA1F8663FF00CA4B6E /* mapCreator.cpp */; };
 		865681EF1F86845A00CA4B6E /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681ED1F86845A00CA4B6E /* Bullet.cpp */; };
 		86CF4F791F8FB631009A299E /* PlayerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86CF4F771F8FB631009A299E /* PlayerBase.cpp */; };
+		86CF4F7E1F8FC0F7009A299E /* PlayerCoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86CF4F7C1F8FC0F7009A299E /* PlayerCoop.cpp */; };
 		86DDA3261F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */; };
 		86DDA3271F823DDC00BBAE92 /* libsfml-audio.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */; };
 		86DDA3281F823DDC00BBAE92 /* libsfml-audio.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DDA3191F823DDC00BBAE92 /* libsfml-audio.dylib */; };
@@ -87,6 +88,8 @@
 		86CF4F771F8FB631009A299E /* PlayerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerBase.cpp; sourceTree = "<group>"; };
 		86CF4F781F8FB631009A299E /* PlayerBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerBase.hpp; sourceTree = "<group>"; };
 		86CF4F7B1F8FBD03009A299E /* carBS5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carBS5.png; sourceTree = "<group>"; };
+		86CF4F7C1F8FC0F7009A299E /* PlayerCoop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerCoop.cpp; sourceTree = "<group>"; };
+		86CF4F7D1F8FC0F7009A299E /* PlayerCoop.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerCoop.hpp; sourceTree = "<group>"; };
 		86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.2.dylib"; path = "../../lib/libsfml-audio.2.4.2.dylib"; sourceTree = "<group>"; };
 		86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.dylib"; path = "../../lib/libsfml-audio.2.4.dylib"; sourceTree = "<group>"; };
 		86DDA3191F823DDC00BBAE92 /* libsfml-audio.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.dylib"; path = "../../lib/libsfml-audio.dylib"; sourceTree = "<group>"; };
@@ -193,6 +196,8 @@
 				86CF4F771F8FB631009A299E /* PlayerBase.cpp */,
 				865681A61F7D438400CA4B6E /* PlayerC.hpp */,
 				865681A51F7D438400CA4B6E /* PlayerC.cpp */,
+				86CF4F7C1F8FC0F7009A299E /* PlayerCoop.cpp */,
+				86CF4F7D1F8FC0F7009A299E /* PlayerCoop.hpp */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				865681EF1F86845A00CA4B6E /* Bullet.cpp in Sources */,
 				862B1AF61F8CE45A001378B9 /* GameLoop.cpp in Sources */,
 				86DDA33F1F82538000BBAE92 /* UIManager.cpp in Sources */,
+				86CF4F7E1F8FC0F7009A299E /* PlayerCoop.cpp in Sources */,
 				862B1AF01F8BC914001378B9 /* Utilities.cpp in Sources */,
 				862B1AF31F8BD3E3001378B9 /* Checkpoint.cpp in Sources */,
 				865681DB1F8663FF00CA4B6E /* mapCreator.cpp in Sources */,
