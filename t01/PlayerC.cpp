@@ -76,25 +76,21 @@ void PlayerC::movePlayer()
      //Move DOWN
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
+        //Move in a direction defied by sprite rotation
         moveInADirection();
         
-        //Basic acceleration
-        if(currentSpeed>0)
-            currentSpeed=0;
-        if(currentSpeed>=-maxSpeed)
-            currentSpeed-=acceleration;
+        //Slow down if possible
+        PlayerBase::slowDown();
     }
     
          //MOVE UP
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
+        //Move in a direction defied by sprite rotation
         moveInADirection();
         
-        //Basic acceleration
-        if(currentSpeed<0)
-            currentSpeed=0;
-        if(currentSpeed<=maxSpeed)
-            currentSpeed+=acceleration;
+        //Accelerate if possible
+        PlayerBase::accelerate();
         
     }
     else //NO Movement

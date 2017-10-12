@@ -22,10 +22,13 @@ public:
     
 protected:
     
+    //FUNCTIONALITY
     //Checks if the car is on track
     bool isOnTrack(int textureY, int posX, int posY);
+    void accelerate();
+    void slowDown();
     
-    //Variables
+    //VARIABLES
     float currentSpeed =0.5f;           //Current speed
     float acceleration = 0.005f;
     float maxSpeed = 1.0f;
@@ -36,6 +39,7 @@ protected:
     
     //Utilitis manager
     Utilities utilityManager;
+
     
 private:
     //Check boundaries

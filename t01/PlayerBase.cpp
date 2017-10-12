@@ -19,6 +19,25 @@ bool PlayerBase::isOnTrack(int texture, int posX, int posY)
     
 }
 
+void PlayerBase::accelerate()
+{
+    //Basic acceleration
+    if(currentSpeed<0)
+        currentSpeed=0;
+    if(currentSpeed<=maxSpeed)
+        currentSpeed+=acceleration;
+}
+
+void PlayerBase::slowDown()
+{
+    //Basic acceleration
+    if(currentSpeed>0)
+        currentSpeed=0;
+    if(currentSpeed>=-maxSpeed)
+        currentSpeed-=acceleration;
+    
+}
+
 //----PRIVATE----
 
 //Checks if the player sprite postion is valid
@@ -32,6 +51,7 @@ bool PlayerBase::isWithinScreen(int textureY, int posX, int posY)
        posY + textureY + textureOffset + 100> sf::VideoMode::getDesktopMode().height)
         
     {
+        currentSpeed=0.05;
         return false;
     }
     
@@ -66,6 +86,7 @@ bool PlayerBase::isWithinRoad(int textureY, int posX, int posY)
     //DECISION
     if(onTheTop && !onTheLeft && !onTheRight)
     {
+        currentSpeed=0.05;
         return false;
     }
     
