@@ -11,7 +11,7 @@
 Checkpoint::Checkpoint()
 {
     //Assign texture
-    checkPTexture = utilityManager.loadTexture("bar.png");
+    checkPTexture = utilityManager.loadTexture("cp.png");
     
     //Measure size
     sizeW = checkPTexture.getSize().x;

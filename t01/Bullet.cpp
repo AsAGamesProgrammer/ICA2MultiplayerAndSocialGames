@@ -16,7 +16,7 @@ Bullet::Bullet()
 {
 
     //Load bullet texture
-    bulletTexture=utilityManager.loadTexture("bulR.png");
+    bulletTexture=utilityManager.loadTexture("bulletR.png");
     
     sf::Sprite bulletSprite;
     bulletSprite.setTexture(bulletTexture);

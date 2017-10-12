@@ -24,7 +24,7 @@ PlayerC::PlayerC()
 void PlayerC::createPlayer()
 {
 
-    playerTexture=utilityManager.loadTexture("carYS.png");
+    playerTexture=utilityManager.loadTexture("carYS3.png");
     width = playerTexture.getSize().x;
     height = playerTexture.getSize().y;
     

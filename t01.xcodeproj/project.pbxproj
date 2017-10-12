@@ -80,6 +80,9 @@
 		865681ED1F86845A00CA4B6E /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
 		865681EE1F86845A00CA4B6E /* Bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bullet.hpp; sourceTree = "<group>"; };
 		865681F11F8689E400CA4B6E /* bulY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulY.png; sourceTree = "<group>"; };
+		86CF4F731F8FACDC009A299E /* carYS3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carYS3.png; sourceTree = "<group>"; };
+		86CF4F741F8FAD5A009A299E /* bulletR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulletR.png; sourceTree = "<group>"; };
+		86CF4F761F8FAE15009A299E /* cp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp.png; sourceTree = "<group>"; };
 		86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.2.dylib"; path = "../../lib/libsfml-audio.2.4.2.dylib"; sourceTree = "<group>"; };
 		86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.dylib"; path = "../../lib/libsfml-audio.2.4.dylib"; sourceTree = "<group>"; };
 		86DDA3191F823DDC00BBAE92 /* libsfml-audio.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.dylib"; path = "../../lib/libsfml-audio.dylib"; sourceTree = "<group>"; };
@@ -183,6 +186,9 @@
 		86DDA34A1F84F4DF00BBAE92 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				86CF4F761F8FAE15009A299E /* cp.png */,
+				86CF4F741F8FAD5A009A299E /* bulletR.png */,
+				86CF4F731F8FACDC009A299E /* carYS3.png */,
 				862B1AED1F8BADB8001378B9 /* bar.png */,
 				862B1AEC1F8BA87D001378B9 /* finish.png */,
 				862B1AEA1F8B9F16001378B9 /* bulR.png */,
