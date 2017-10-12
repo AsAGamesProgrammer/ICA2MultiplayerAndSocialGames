@@ -21,12 +21,14 @@ class PlayerBase
 public:
     
 protected:
+    
+    //Checks if the car is on track
+    bool isOnTrack(int textureY, int posX, int posY);
+    
+private:
     //Check boundaries
     bool isWithinScreen(int textureY, int posX, int posY);
     bool isWithinRoad(int textureY, int posX, int posY);
-    
-    //Sprite
-    //sf::Sprite playerS;     //Shape of a player
 };
 
 #endif /* PlayerBase_hpp */

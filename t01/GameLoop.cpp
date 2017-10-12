@@ -44,6 +44,9 @@ void GameLoop::StartGame()
     
     //PRE-PROCESSING
     mapManager.loadTiles();
+    player.createPlayer("carYS3.png");      //Player 1
+    otherPlayer.createPlayer("carBS5.png"); //Player 2
+    
     
     //TEMP
     otherPlayer.setStartingPos(500, 200);

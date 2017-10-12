@@ -8,6 +8,19 @@
 
 #include "PlayerBase.hpp"
 
+
+//---PROTECTED---
+bool PlayerBase::isOnTrack(int texture, int posX, int posY)
+{
+    if(!isWithinScreen(texture, posX, posY) || !isWithinRoad(texture, posX, posY))
+        return false;
+    
+    return true;
+    
+}
+
+//----PRIVATE----
+
 //Checks if the player sprite postion is valid
 bool PlayerBase::isWithinScreen(int textureY, int posX, int posY)
 {

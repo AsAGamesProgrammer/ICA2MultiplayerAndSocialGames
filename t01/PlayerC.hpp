@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
 
+#include <iostream>
+
 #include "Bullet.hpp"
 #include "Utilities.hpp"
 #include "PlayerBase.hpp"
@@ -20,8 +22,6 @@ class PlayerC : PlayerBase
 {
     //-----PUBLIC-----
     public:
-    PlayerC();                          //Constructor
-
     //Getters
     sf::Sprite getPlayer();     //Return the shape of a player
     sf::Sprite getBullet() {return bullet.getSprite();};
@@ -35,6 +35,8 @@ class PlayerC : PlayerBase
 
     //Functionality
     void moveRelated();                  //Movement
+    
+    void createPlayer(std::string textureStr);                //Player creation function
     
     //-----PRIVATE-----
     private:
@@ -51,7 +53,7 @@ class PlayerC : PlayerBase
     float rotationSpeed = 0.5f;         //Rotation responsivness
     
     //Functionality
-    void createPlayer();                //Player creation function
+
     void movePlayer();                  //Movement
     
     void shoot();

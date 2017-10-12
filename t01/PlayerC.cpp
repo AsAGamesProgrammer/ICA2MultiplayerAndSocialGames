@@ -8,23 +8,18 @@
 
 #include "PlayerC.hpp"
 #include <math.h>
-#include <iostream>
 
 
 
 
-//------CONSTRUCTOR-------
-//Player constructor
-PlayerC::PlayerC()
-{
-    createPlayer();
-}
+
+//------CREATION-------
 
 //Creates a rectangle shape to represent a player
-void PlayerC::createPlayer()
+void PlayerC::createPlayer(std::string textureStr)
 {
 
-    playerTexture=utilityManager.loadTexture("carYS3.png");
+    playerTexture=utilityManager.loadTexture(textureStr);
     width = playerTexture.getSize().x;
     height = playerTexture.getSize().y;
     
@@ -94,13 +89,10 @@ void PlayerC::movePlayer()
                                 currentSpeed * cos(radians) + playerS.getPosition().x,
                                 currentSpeed * sin(radians) + playerS.getPosition().y);
         
-        //TEST outside screen
-        if(!!PlayerBase::isWithinScreen(playerTexture.getSize().y,
+        //Check if the player is on screen
+        if(!PlayerBase::isOnTrack(playerTexture.getSize().y,
                                         playerS.getPosition().x,
-                                        playerS.getPosition().y) ||
-           !PlayerBase::isWithinRoad(playerTexture.getSize().y,
-                                     playerS.getPosition().x,
-                                     playerS.getPosition().y))
+                                        playerS.getPosition().y))
         {
             playerS.setPosition(
                                 playerS.getPosition().x - currentSpeed * cos(radians),
@@ -127,12 +119,9 @@ void PlayerC::movePlayer()
         
         
         //Checks for screen boundaries
-        if(!PlayerBase::isWithinScreen(playerTexture.getSize().y,
-                                       playerS.getPosition().x,
-                                       playerS.getPosition().y) ||
-           !PlayerBase::isWithinRoad(playerTexture.getSize().y,
-                                      playerS.getPosition().x,
-                                      playerS.getPosition().y))
+        if(!PlayerBase::isOnTrack(playerTexture.getSize().y,
+                                  playerS.getPosition().x,
+                                  playerS.getPosition().y))
         {
             playerS.setPosition(
                                 playerS.getPosition().x - currentSpeed * cos(radians),
@@ -161,6 +150,7 @@ void PlayerC::shoot()
         bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y, playerS.getRotation());
     }
 }
+
 
 
 
