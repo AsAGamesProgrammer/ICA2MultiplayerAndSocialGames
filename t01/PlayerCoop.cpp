@@ -131,6 +131,7 @@ void PlayerCoop::shoot()
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !bullet.isEnabled)
     {
         bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y, playerS.getRotation());
+        checkBulletCollision=true;
     }
 }
 

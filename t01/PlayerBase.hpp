@@ -36,6 +36,7 @@ protected:
     
     //Bullet
     Bullet bullet;
+    bool checkBulletCollision=false;
     
     //Utilitis manager
     Utilities utilityManager;

@@ -85,6 +85,9 @@ void GameLoop::Update()
         checkPointPassed(i);
     }
     
+    //Bullets
+    checkBulletCollision();
+    
 }
 
 void GameLoop::Render()
@@ -132,6 +135,31 @@ void GameLoop::Render()
     window.display();
 
 }
+
+//TOFO: bullet collision
+void GameLoop::checkBulletCollision()
+{
+    if(otherPlayer.getCheckBulletColision())
+    {
+        if(player.getPlayer().getPosition().x + player.width/2 >otherPlayer.getBullet().getPosition().x - 28 && //left
+           player.getPlayer().getPosition().x - player.width/2 <=otherPlayer.getBullet().getPosition().x + 28 &&  //right
+           player.getPlayer().getPosition().y + player.height/2 > otherPlayer.getBullet().getPosition().y - 28 && //top
+           player.getPlayer().getPosition().y - player.height/2 <= otherPlayer.getBullet().getPosition().y + 28) //bot
+            
+        {
+            std::cout<<"Hit"<<std::endl;
+            otherPlayer.setCheckBulletColision(false);
+            
+            return;
+        }
+    }
+    
+    //No collision
+    return;
+
+}
+
+//TODO: do this for each player
 
 void GameLoop::checkPointPassed(int index)
 {

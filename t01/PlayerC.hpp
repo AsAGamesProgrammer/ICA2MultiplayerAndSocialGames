@@ -26,8 +26,11 @@ class PlayerC : PlayerBase
     sf::Sprite getPlayer();     //Return the shape of a player
     sf::Sprite getBullet() {return bullet.getSprite();};
     
+    bool getCheckBulletColision(){return checkBulletCollision;}
+    
     //Setter
     void setStartingPos(float posX, float posY);
+    void setCheckBulletColision(bool toCheck){checkBulletCollision = toCheck;}
     
     float width;
     float height;

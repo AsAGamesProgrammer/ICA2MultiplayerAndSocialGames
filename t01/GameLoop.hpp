@@ -42,6 +42,7 @@ private:
     
     //Collision
     void checkPointPassed(int index);
+    void checkBulletCollision();
     
     
 };

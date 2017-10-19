@@ -129,7 +129,11 @@ void PlayerC::shoot()
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !bullet.isEnabled)
     {
+        //Instantiate a bullet
         bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y, playerS.getRotation());
+        
+        //Check for collision
+        checkBulletCollision=true;
     }
 }
 
