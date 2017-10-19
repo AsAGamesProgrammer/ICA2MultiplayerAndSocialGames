@@ -137,6 +137,11 @@ void PlayerC::shoot()
     }
 }
 
+void PlayerC::onTakingHit()
+{
+    PlayerBase::onHit();
+}
+
 
 
 

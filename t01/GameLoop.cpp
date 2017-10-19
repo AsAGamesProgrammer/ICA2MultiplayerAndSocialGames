@@ -136,7 +136,7 @@ void GameLoop::Render()
 
 }
 
-//TOFO: bullet collision
+//TODO: bullet collision for otherPlayer
 void GameLoop::checkBulletCollision()
 {
     if(otherPlayer.getCheckBulletColision())
@@ -148,6 +148,7 @@ void GameLoop::checkBulletCollision()
             
         {
             std::cout<<"Hit"<<std::endl;
+            player.onTakingHit();
             otherPlayer.setCheckBulletColision(false);
             
             return;

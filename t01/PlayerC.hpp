@@ -41,6 +41,8 @@ class PlayerC : PlayerBase
     
     void createPlayer(std::string textureStr);                //Player creation function
     
+    void onTakingHit();
+    
     //-----PRIVATE-----
     private:
 

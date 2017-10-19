@@ -82,7 +82,7 @@
 		865681ED1F86845A00CA4B6E /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
 		865681EE1F86845A00CA4B6E /* Bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bullet.hpp; sourceTree = "<group>"; };
 		865681F11F8689E400CA4B6E /* bulY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulY.png; sourceTree = "<group>"; };
-		86CF4F731F8FACDC009A299E /* carYS3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carYS3.png; sourceTree = "<group>"; };
+		86CF4F731F8FACDC009A299E /* carYS3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carYS3.png; path = /Users/p4076882/ICA2/carYS3.png; sourceTree = "<absolute>"; };
 		86CF4F741F8FAD5A009A299E /* bulletR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulletR.png; sourceTree = "<group>"; };
 		86CF4F761F8FAE15009A299E /* cp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp.png; sourceTree = "<group>"; };
 		86CF4F771F8FB631009A299E /* PlayerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerBase.cpp; sourceTree = "<group>"; };

@@ -41,6 +41,8 @@ protected:
     //Utilitis manager
     Utilities utilityManager;
 
+    //Hit
+    void onHit();
     
 private:
     //Check boundaries

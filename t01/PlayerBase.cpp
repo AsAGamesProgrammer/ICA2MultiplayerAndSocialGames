@@ -93,3 +93,9 @@ bool PlayerBase::isWithinRoad(int textureY, int posX, int posY)
     return true;
     
 }
+
+//Reduces speed on hit
+void PlayerBase::onHit()
+{
+    currentSpeed=0;
+}
