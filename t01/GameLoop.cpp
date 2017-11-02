@@ -28,7 +28,7 @@ void GameLoop::OpenLobbie()
                 window.close();
         }
         
-        window.draw(uiManager.lobbieText);
+        window.draw(lobby.lobbieText);
         
         window.display();
         

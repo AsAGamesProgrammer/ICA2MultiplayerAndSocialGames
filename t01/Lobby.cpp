@@ -7,3 +7,10 @@
 //
 
 #include "Lobby.hpp"
+
+Lobby::Lobby()
+{
+    lobbieText = uiUtilities.writeString("Press enter to begin");
+    lobbieText.setCharacterSize(60);
+    lobbieText.move(1000, 500);
+}

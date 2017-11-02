@@ -10,5 +10,18 @@
 #define UIUtilities_hpp
 
 #include <stdio.h>
+#include <iostream>
+#include <SFML/Graphics.hpp>
+#include <list>
+
+class UIUtilities
+{
+public:
+    UIUtilities();
+    sf::Text writeFloat(float writing);
+    sf::Text writeString(std::string writing);
+    
+    sf::Font font1;
+};
 
 #endif /* UIUtilities_hpp */

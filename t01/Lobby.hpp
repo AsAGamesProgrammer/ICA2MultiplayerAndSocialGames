@@ -10,5 +10,19 @@
 #define Lobby_hpp
 
 #include <stdio.h>
+#include <SFML/Graphics.hpp>
+#include "UIUtilities.hpp"
+
+class Lobby
+{
+    
+public:
+    sf::Text lobbieText;
+    Lobby();
+    
+private:
+    UIUtilities uiUtilities;
+    
+};
 
 #endif /* Lobby_hpp */

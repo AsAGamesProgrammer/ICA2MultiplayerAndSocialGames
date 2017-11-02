@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include <list>
+#include "UIUtilities.hpp"
 
 class UIManager
 {
@@ -34,11 +34,12 @@ public:
     sf::Text lobbieText;
     
 private:
-    sf::Font font1;
-    sf::Text writeFloat(float writing);
-    sf::Text writeString(std::string writing);
+    //sf::Font font1;
+    //sf::Text writeFloat(float writing);
+    //sf::Text writeString(std::string writing);
     
     void loadConstText();
+    UIUtilities uiUtilities;
     
 };
 

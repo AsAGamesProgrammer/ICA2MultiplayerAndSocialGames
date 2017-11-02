@@ -20,6 +20,7 @@
 #include "Checkpoint.hpp"
 #include "GameLoop.hpp"
 #include "PlayerCoop.hpp"
+#include "Lobby.hpp"
 
 class GameLoop
 {
@@ -44,6 +45,8 @@ private:
     void checkPointPassed(int index);
     void checkBulletCollision();
     
+    //Lobby
+    Lobby lobby;
     
 };
 

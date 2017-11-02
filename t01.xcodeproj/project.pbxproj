@@ -11,6 +11,8 @@
 		862B1AF01F8BC914001378B9 /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 862B1AEE1F8BC914001378B9 /* Utilities.cpp */; };
 		862B1AF31F8BD3E3001378B9 /* Checkpoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 862B1AF11F8BD3E3001378B9 /* Checkpoint.cpp */; };
 		862B1AF61F8CE45A001378B9 /* GameLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 862B1AF41F8CE45A001378B9 /* GameLoop.cpp */; };
+		8640E96F1FAB783700DFCDA4 /* Lobby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8640E96D1FAB783700DFCDA4 /* Lobby.cpp */; };
+		8640E9721FAB793500DFCDA4 /* UIUtilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8640E9701FAB793500DFCDA4 /* UIUtilities.cpp */; };
 		865681A71F7D438400CA4B6E /* PlayerC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681A51F7D438400CA4B6E /* PlayerC.cpp */; };
 		865681DB1F8663FF00CA4B6E /* mapCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681DA1F8663FF00CA4B6E /* mapCreator.cpp */; };
 		865681EF1F86845A00CA4B6E /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865681ED1F86845A00CA4B6E /* Bullet.cpp */; };
@@ -62,6 +64,10 @@
 		862B1AF21F8BD3E3001378B9 /* Checkpoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Checkpoint.hpp; sourceTree = "<group>"; };
 		862B1AF41F8CE45A001378B9 /* GameLoop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameLoop.cpp; sourceTree = "<group>"; };
 		862B1AF51F8CE45A001378B9 /* GameLoop.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameLoop.hpp; sourceTree = "<group>"; };
+		8640E96D1FAB783700DFCDA4 /* Lobby.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lobby.cpp; sourceTree = "<group>"; };
+		8640E96E1FAB783700DFCDA4 /* Lobby.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Lobby.hpp; sourceTree = "<group>"; };
+		8640E9701FAB793500DFCDA4 /* UIUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIUtilities.cpp; sourceTree = "<group>"; };
+		8640E9711FAB793500DFCDA4 /* UIUtilities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UIUtilities.hpp; sourceTree = "<group>"; };
 		865681A51F7D438400CA4B6E /* PlayerC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerC.cpp; sourceTree = "<group>"; };
 		865681A61F7D438400CA4B6E /* PlayerC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerC.hpp; sourceTree = "<group>"; };
 		865681DA1F8663FF00CA4B6E /* mapCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mapCreator.cpp; sourceTree = "<group>"; };
@@ -171,11 +177,10 @@
 		0B1D0A421D9EAAAA00319891 /* t01 */ = {
 			isa = PBXGroup;
 			children = (
+				8640E9731FAB794500DFCDA4 /* UI */,
 				86CF4F7A1F8FB698009A299E /* Player */,
 				865681DA1F8663FF00CA4B6E /* mapCreator.cpp */,
 				0B1D0A431D9EAAAA00319891 /* main.cpp */,
-				86DDA33D1F82538000BBAE92 /* UIManager.cpp */,
-				86DDA33E1F82538000BBAE92 /* UIManager.hpp */,
 				86DDA3431F83CC9200BBAE92 /* mapCreator.hpp */,
 				865681ED1F86845A00CA4B6E /* Bullet.cpp */,
 				865681EE1F86845A00CA4B6E /* Bullet.hpp */,
@@ -185,8 +190,21 @@
 				862B1AF21F8BD3E3001378B9 /* Checkpoint.hpp */,
 				862B1AF41F8CE45A001378B9 /* GameLoop.cpp */,
 				862B1AF51F8CE45A001378B9 /* GameLoop.hpp */,
+				8640E96D1FAB783700DFCDA4 /* Lobby.cpp */,
+				8640E96E1FAB783700DFCDA4 /* Lobby.hpp */,
 			);
 			path = t01;
+			sourceTree = "<group>";
+		};
+		8640E9731FAB794500DFCDA4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				8640E9711FAB793500DFCDA4 /* UIUtilities.hpp */,
+				8640E9701FAB793500DFCDA4 /* UIUtilities.cpp */,
+				86DDA33E1F82538000BBAE92 /* UIManager.hpp */,
+				86DDA33D1F82538000BBAE92 /* UIManager.cpp */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		86CF4F7A1F8FB698009A299E /* Player */ = {
@@ -293,6 +311,7 @@
 			files = (
 				865681EF1F86845A00CA4B6E /* Bullet.cpp in Sources */,
 				862B1AF61F8CE45A001378B9 /* GameLoop.cpp in Sources */,
+				8640E9721FAB793500DFCDA4 /* UIUtilities.cpp in Sources */,
 				86DDA33F1F82538000BBAE92 /* UIManager.cpp in Sources */,
 				86CF4F7E1F8FC0F7009A299E /* PlayerCoop.cpp in Sources */,
 				862B1AF01F8BC914001378B9 /* Utilities.cpp in Sources */,
@@ -301,6 +320,7 @@
 				865681A71F7D438400CA4B6E /* PlayerC.cpp in Sources */,
 				0B1D0A441D9EAAAA00319891 /* main.cpp in Sources */,
 				86CF4F791F8FB631009A299E /* PlayerBase.cpp in Sources */,
+				8640E96F1FAB783700DFCDA4 /* Lobby.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
