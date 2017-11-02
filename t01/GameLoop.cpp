@@ -28,9 +28,19 @@ void GameLoop::OpenLobbie()
                 window.close();
         }
         
+        //Lobby
         window.draw(lobby.lobbieText);
+        window.draw(lobby.button);
+        window.draw(lobby.button2);
+        window.draw(lobby.btn1Label);
+        window.draw(lobby.btn2Label);
         
         window.display();
+        
+        //if pressed up - choose option 1
+        //if pressed 2 - choose option 2
+        //if return - return
+        //make funtion return int, not void
         
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
             return;

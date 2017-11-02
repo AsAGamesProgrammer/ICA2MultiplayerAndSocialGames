@@ -18,6 +18,13 @@ class Lobby
     
 public:
     sf::Text lobbieText;
+    
+    sf::RectangleShape button;
+    sf::RectangleShape button2;
+    
+    sf::Text btn1Label;
+    sf::Text btn2Label;
+    
     Lobby();
     
 private:
