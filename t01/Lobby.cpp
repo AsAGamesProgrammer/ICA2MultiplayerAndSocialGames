@@ -29,11 +29,19 @@ Lobby::Lobby()
     button2 = rectangle2;
     
     btn1Label = uiUtilities.writeString("Training");
-    btn1Label.move(1020, 400);
+    btn1Label.move(1150, 410);
     btn1Label.setFillColor(sf::Color::Black);
+    btn1Label.setCharacterSize(60);
     
     btn2Label = uiUtilities.writeString("Local coop");
-    btn2Label.move(1020, 600);
+    btn2Label.move(1130, 610);
     btn2Label.setFillColor(sf::Color::Black);
+    btn2Label.setCharacterSize(60);
+    
+}
+
+void Lobby::setActiveButton(int n)
+{
+    currentActiveBtn = n;
     
 }

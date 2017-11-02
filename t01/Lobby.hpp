@@ -27,8 +27,11 @@ public:
     
     Lobby();
     
+    int currentActiveBtn;
+    
 private:
     UIUtilities uiUtilities;
+    void setActiveButton(int n);
     
 };
 
