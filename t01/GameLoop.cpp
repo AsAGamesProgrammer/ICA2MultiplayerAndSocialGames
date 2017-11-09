@@ -44,6 +44,16 @@ void GameLoop::OpenLobbie()
         //if return - return
         //make funtion return int, not void
         
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            lobby.selectNextBtn();
+        }
+        
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
+            lobby.selectPrevBtn();
+        }
+        
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
             return;
         

@@ -18,24 +18,32 @@ class Lobby
 {
     
 public:
-    sf::Text lobbieText;
-    
-    //ButtonC btn1;
-    //ButtonC btn2;
-    
-    ButtonC btnArray[2];
-    int numberOfBtns = 2;
-    
+    //Constructor
     Lobby();
     
-    int currentActiveBtn;
+    //Lobbie text
+    sf::Text lobbieText;
+    
+    //Array and number of buttons
+    ButtonC btnArray[3];
+    int numberOfBtns = 3;
+    
+    void selectNextBtn();
+    void selectPrevBtn();
+    
+
     
 private:
     UIUtilities uiUtilities;
-    void setActiveButton(int n);
+
+    int currentActiveBtn = 0;
+    void deselectCurBtn();
     
     //Creates a btn and adds it to the array
     void createBtn(int posX, int posY, int lblPosX, int lblPosY, std::string title, int idx);
+    
+    //Function to set active btn and highlight it
+    void setActiveButton(int n);
     
 };
 

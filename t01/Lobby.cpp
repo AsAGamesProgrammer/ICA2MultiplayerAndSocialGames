@@ -17,7 +17,10 @@ Lobby::Lobby()
     //Creating buttons
     createBtn(1020, 400, 1150, 410, "Training", 0);
     createBtn(1020, 600, 1130, 610, "Local coop", 1);
+    createBtn(1020, 800, 1130, 810, "Multiplayer", 2);
     
+    //Set active
+    setActiveButton(currentActiveBtn);
         
 }
 
@@ -41,10 +44,39 @@ void Lobby::createBtn(int posX, int posY, int lblPosX, int lblPosY, std::string 
     btnArray[idx] = newBtn;
 }
 
+void Lobby::selectNextBtn()
+{
+    btnArray[currentActiveBtn].shape.setFillColor(sf::Color::White);
+    
+    if(currentActiveBtn+1<numberOfBtns)
+        currentActiveBtn++;
+    else
+        currentActiveBtn=0;
+    
+    btnArray[currentActiveBtn].shape.setFillColor(sf::Color::Blue);
+}
+
+void Lobby::selectPrevBtn()
+{
+    if(currentActiveBtn-1>=0)
+        currentActiveBtn--;
+    else
+        currentActiveBtn=numberOfBtns-1;
+    
+    setActiveButton(currentActiveBtn);
+}
+
 void Lobby::setActiveButton(int n)
 {
+    deselectCurBtn();
     currentActiveBtn = n;
+    btnArray[n].shape.setFillColor(sf::Color::Blue);
     
+}
+
+void Lobby::deselectCurBtn()
+{
+    btnArray[currentActiveBtn].shape.setFillColor(sf::Color::White);
 }
 
 
