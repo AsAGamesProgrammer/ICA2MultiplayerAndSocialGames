@@ -19,6 +19,8 @@
 #include "mapCreator.hpp"
 #include "Checkpoint.hpp"
 #include "GameLoop.hpp"
+#include "PlayerCoop.hpp"
+#include "Lobby.hpp"
 
 class GameLoop
 {
@@ -30,6 +32,8 @@ public:
     
 private:
     PlayerC player;
+    PlayerCoop otherPlayer;
+    
     UIManager uiManager;
     mapCreator mapManager;
     Checkpoint chpManager;
@@ -39,7 +43,10 @@ private:
     
     //Collision
     void checkPointPassed(int index);
+    void checkBulletCollision();
     
+    //Lobby
+    Lobby lobby;
     
 };
 

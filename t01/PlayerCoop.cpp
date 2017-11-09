@@ -1,20 +1,21 @@
 //
-//  PlayerC.cpp
+//  PlayerCoop.cpp
 //  t01
 //
-//  Created by BLINOVA, KRISTINA on 28/09/2017.
+//  Created by BLINOVA, KRISTINA on 12/10/2017.
 //  Copyright © 2017 Cordry, Julien. All rights reserved.
 //
 
-#include "PlayerC.hpp"
+#include "PlayerCoop.hpp"
+
 #include <math.h>
 
 //------CREATION-------
 
 //Creates a rectangle shape to represent a player
-void PlayerC::createPlayer(std::string textureStr)
+void PlayerCoop::createPlayer(std::string textureStr)
 {
-
+    
     playerTexture=utilityManager.loadTexture(textureStr);
     width = playerTexture.getSize().x;
     height = playerTexture.getSize().y;
@@ -29,25 +30,25 @@ void PlayerC::createPlayer(std::string textureStr)
 };
 
 //------SETTERS--------
-void PlayerC::setStartingPos(float posX, float posY)
+void PlayerCoop::setStartingPos(float posX, float posY)
 {
     playerS.setPosition(posX, posY);
 }
 
 //------GETTERS--------
-sf::Sprite PlayerC::getPlayer()
+sf::Sprite PlayerCoop::getPlayer()
 {
     return playerS;
 };
 
-float PlayerC::getSpeed()
+float PlayerCoop::getSpeed()
 {
     return currentSpeed;
 }
 
 
 //------MOVEMENT--------
-void PlayerC::moveRelated()
+void PlayerCoop::moveRelated()
 {
     movePlayer();
     
@@ -56,25 +57,25 @@ void PlayerC::moveRelated()
 }
 
 
-void PlayerC::movePlayer()
+void PlayerCoop::movePlayer()
 {
     
     //Move RIGHT
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         //Rotation
         playerS.rotate(rotationSpeed);
     }
     
     //Move LEFT
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         //Rotation
         playerS.rotate(-rotationSpeed);
     }
-     
-     //Move DOWN
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    
+    //Move DOWN
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
     {
         //Move in a direction defied by sprite rotation
         moveInADirection();
@@ -83,8 +84,8 @@ void PlayerC::movePlayer()
         PlayerBase::slowDown();
     }
     
-         //MOVE UP
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    //MOVE UP
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         //Move in a direction defied by sprite rotation
         moveInADirection();
@@ -101,7 +102,7 @@ void PlayerC::movePlayer()
     shoot();
 }
 
-void PlayerC::moveInADirection()
+void PlayerCoop::moveInADirection()
 {
     //Convert degrees to radians
     float radians = utilityManager.degreesToRads(playerS.getRotation());
@@ -122,24 +123,16 @@ void PlayerC::moveInADirection()
                             playerS.getPosition().y - currentSpeed * sin(radians)); //Move back
     }
     
-
+    
 }
 
-void PlayerC::shoot()
+void PlayerCoop::shoot()
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !bullet.isEnabled)
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !bullet.isEnabled)
     {
-        //Instantiate a bullet
         bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y, playerS.getRotation());
-        
-        //Check for collision
         checkBulletCollision=true;
     }
-}
-
-void PlayerC::onTakingHit()
-{
-    PlayerBase::onHit();
 }
 
 

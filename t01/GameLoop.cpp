@@ -28,9 +28,19 @@ void GameLoop::OpenLobbie()
                 window.close();
         }
         
-        window.draw(uiManager.lobbieText);
+        //Lobby
+        window.draw(lobby.lobbieText);
+        window.draw(lobby.button);
+        window.draw(lobby.button2);
+        window.draw(lobby.btn1Label);
+        window.draw(lobby.btn2Label);
         
         window.display();
+        
+        //if pressed up - choose option 1
+        //if pressed 2 - choose option 2
+        //if return - return
+        //make funtion return int, not void
         
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
             return;
@@ -44,6 +54,12 @@ void GameLoop::StartGame()
     
     //PRE-PROCESSING
     mapManager.loadTiles();
+    player.createPlayer("carYS3.png");      //Player 1
+    otherPlayer.createPlayer("carBS5.png"); //Player 2
+    
+    
+    //TEMP
+    otherPlayer.setStartingPos(500, 200);
     
     //GAME LOOP
     while (window.isOpen())
@@ -69,6 +85,7 @@ void GameLoop::Update()
 {
     //Movement
     player.moveRelated();
+    otherPlayer.moveRelated();
     
     
     //Check all the checkpoints
@@ -77,6 +94,9 @@ void GameLoop::Update()
         //Collision with a checkpoint
         checkPointPassed(i);
     }
+    
+    //Bullets
+    checkBulletCollision();
     
 }
 
@@ -102,22 +122,55 @@ void GameLoop::Render()
     
     //Player
     window.draw(player.getPlayer());
+    window.draw(otherPlayer.getPlayer());
     
     //Bullet
     window.draw(player.getBullet());
+    window.draw(otherPlayer.getBullet());
     
-    //UI
+    //UI - changing labels
     for(int i=0; i<uiManager.gameLabels.size(); i++)
     {
         window.draw(uiManager.gameLabels.front());
         uiManager.gameLabels.pop_front();
     }
     
+    //UI - constant labels
+    for(int i=0; i<uiManager.numberOfConstText; i++)
+        window.draw(uiManager.constantText[i]);
+
+    
 
     
     window.display();
 
 }
+
+//TODO: bullet collision for otherPlayer
+void GameLoop::checkBulletCollision()
+{
+    if(otherPlayer.getCheckBulletColision())
+    {
+        if(player.getPlayer().getPosition().x + player.width/2 >otherPlayer.getBullet().getPosition().x - 28 && //left
+           player.getPlayer().getPosition().x - player.width/2 <=otherPlayer.getBullet().getPosition().x + 28 &&  //right
+           player.getPlayer().getPosition().y + player.height/2 > otherPlayer.getBullet().getPosition().y - 28 && //top
+           player.getPlayer().getPosition().y - player.height/2 <= otherPlayer.getBullet().getPosition().y + 28) //bot
+            
+        {
+            std::cout<<"Hit"<<std::endl;
+            player.onTakingHit();
+            otherPlayer.setCheckBulletColision(false);
+            
+            return;
+        }
+    }
+    
+    //No collision
+    return;
+
+}
+
+//TODO: do this for each player
 
 void GameLoop::checkPointPassed(int index)
 {
