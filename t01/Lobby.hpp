@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
 #include "UIUtilities.hpp"
+#include "ButtonC.hpp"
 
 class Lobby
 {
@@ -19,11 +20,11 @@ class Lobby
 public:
     sf::Text lobbieText;
     
-    sf::RectangleShape button;
-    sf::RectangleShape button2;
+    //ButtonC btn1;
+    //ButtonC btn2;
     
-    sf::Text btn1Label;
-    sf::Text btn2Label;
+    ButtonC btnArray[2];
+    int numberOfBtns = 2;
     
     Lobby();
     
@@ -32,6 +33,9 @@ public:
 private:
     UIUtilities uiUtilities;
     void setActiveButton(int n);
+    
+    //Creates a btn and adds it to the array
+    void createBtn(int posX, int posY, int lblPosX, int lblPosY, std::string title, int idx);
     
 };
 

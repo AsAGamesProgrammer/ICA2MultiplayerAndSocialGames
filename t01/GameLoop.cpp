@@ -30,10 +30,12 @@ void GameLoop::OpenLobbie()
         
         //Lobby
         window.draw(lobby.lobbieText);
-        window.draw(lobby.button);
-        window.draw(lobby.button2);
-        window.draw(lobby.btn1Label);
-        window.draw(lobby.btn2Label);
+        
+        for (int i=0; i<lobby.numberOfBtns; i++)
+        {
+            window.draw(lobby.btnArray[i].shape);
+            window.draw(lobby.btnArray[i].label);
+        }
         
         window.display();
         

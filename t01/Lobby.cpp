@@ -14,30 +14,31 @@ Lobby::Lobby()
     lobbieText.setCharacterSize(60);
     lobbieText.move(1000, 300);
     
-    //Button
-    sf::RectangleShape rectangle;
-    rectangle.setSize(sf::Vector2f(500, 100));
-    rectangle.setPosition(1020, 400);
+    //Creating buttons
+    createBtn(1020, 400, 1150, 410, "Training", 0);
+    createBtn(1020, 600, 1130, 610, "Local coop", 1);
     
-    button = rectangle;
+        
+}
+
+
+//Creates a button
+void Lobby::createBtn(int posX, int posY, int lblPosX, int lblPosY, std::string title, int idx)
+{
+    ButtonC newBtn;
     
-    //Button 2
-    sf::RectangleShape rectangle2;
-    rectangle2.setSize(sf::Vector2f(500, 100));
-    rectangle2.setPosition(1020, 600);
+    //Shape
+    newBtn.shape.setSize(sf::Vector2f(500, 100));
+    newBtn.shape.setPosition(posX, posY);
     
-    button2 = rectangle2;
+    //Label
+    newBtn.label = uiUtilities.writeString(title);
+    newBtn.label.move(lblPosX, lblPosY);
+    newBtn.label.setFillColor(sf::Color::Black);
+    newBtn.label.setCharacterSize(60);
     
-    btn1Label = uiUtilities.writeString("Training");
-    btn1Label.move(1150, 410);
-    btn1Label.setFillColor(sf::Color::Black);
-    btn1Label.setCharacterSize(60);
-    
-    btn2Label = uiUtilities.writeString("Local coop");
-    btn2Label.move(1130, 610);
-    btn2Label.setFillColor(sf::Color::Black);
-    btn2Label.setCharacterSize(60);
-    
+    //Array
+    btnArray[idx] = newBtn;
 }
 
 void Lobby::setActiveButton(int n)
@@ -45,3 +46,5 @@ void Lobby::setActiveButton(int n)
     currentActiveBtn = n;
     
 }
+
+
