@@ -80,27 +80,30 @@ namespace GameServer
 			//If there is data to read
 			if (readBytes > -1)
 			{
-				state.stringB.Append(Encoding.ASCII.GetString(state.buffer, 0, state.bufferSize));
-				content = state.stringB.ToString();
-				Console.WriteLine("Server received: {0}", content); 
+				//state.stringB.Append(Encoding.ASCII.GetString(state.buffer, 0, state.bufferSize));
+				content = Encoding.ASCII.GetString(state.buffer, 0, state.bufferSize);
+
+				Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes); 
 
 				//Reached the end of line
                 if(content.IndexOf("\n") > -1)
 				{
 					//NEW
-					state.stringB.Clear();
-					Send(handle, content);
+					//state.stringB.Clear(); //clear the last msg
+                    Send(handle, content);
+					state.buffer = new byte[1024];
 
 				}
 
+				handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallback), state);
 			}
 
-			handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallback), state);
 		}
 
 		public static void Send(Socket socket, String msg)
 		{
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
+
 			socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallback), socket);
 		}
 
