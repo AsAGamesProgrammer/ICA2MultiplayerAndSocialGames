@@ -70,7 +70,6 @@ namespace GameServer
 
 		public static void ReadCallback(IAsyncResult ar)
 		{
-
 			//Start with an empty msg
 			string content = string.Empty;
 
@@ -85,13 +84,18 @@ namespace GameServer
 				content = state.stringB.ToString();
 				Console.WriteLine("Server received: {0}", content); 
 
+				//Reached the end of line
                 if(content.IndexOf("\n") > -1)
 				{
+					//NEW
+					state.stringB.Clear();
 					Send(handle, content);
-					content = string.Empty;
+
 				}
-				handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallback), state);
+
 			}
+
+			handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallback), state);
 		}
 
 		public static void Send(Socket socket, String msg)
