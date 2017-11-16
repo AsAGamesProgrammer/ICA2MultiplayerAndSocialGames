@@ -1,14 +1,18 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6881D81FA004B8896BE467D1878D00021AD192E1",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6881D81FA004B8896BE467D1878D00021AD192E1+++64BD45F",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "6881D81FA004B8896BE467D1878D00021AD192E1" : 9223372036854775807
+    "6881D81FA004B8896BE467D1878D00021AD192E1+++73EA07A" : 9223372036854775807,
+    "6881D81FA004B8896BE467D1878D00021AD192E1+++64BD45F" : 9223372036854775807,
+    "6881D81FA004B8896BE467D1878D00021AD192E1+++5C3D0FE" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EA44D13E-E21C-4406-AD5A-37D67EB51D48",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "6881D81FA004B8896BE467D1878D00021AD192E1" : "..\/ICA2"
+    "6881D81FA004B8896BE467D1878D00021AD192E1+++73EA07A" : "..\/ICA2",
+    "6881D81FA004B8896BE467D1878D00021AD192E1+++64BD45F" : "ICA2MultiplayerAndSocialGames\/",
+    "6881D81FA004B8896BE467D1878D00021AD192E1+++5C3D0FE" : "..\/ICA2"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "t01",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -17,12 +21,17 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/AsAGamesProgrammer\/ICA2MultiplayerAndSocialGames.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6881D81FA004B8896BE467D1878D00021AD192E1"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6881D81FA004B8896BE467D1878D00021AD192E1+++5C3D0FE"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/AsAGamesProgrammer\/ICA2MultiplayerAndSocialGames.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6881D81FA004B8896BE467D1878D00021AD192E1"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6881D81FA004B8896BE467D1878D00021AD192E1+++64BD45F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/AsAGamesProgrammer\/ICA2MultiplayerAndSocialGames.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6881D81FA004B8896BE467D1878D00021AD192E1+++73EA07A"
     }
   ]
 }
