@@ -68,6 +68,8 @@ namespace GameServer
 			handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallback), state);
 		}
 
+
+		//Reading data
 		public static void ReadCallback(IAsyncResult ar)
 		{
 			//Start with an empty msg
@@ -92,7 +94,6 @@ namespace GameServer
 					//state.stringB.Clear(); //clear the last msg
                     Send(handle, content);
 					state.buffer = new byte[1024];
-
 				}
 
 				handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallback), state);
@@ -100,6 +101,7 @@ namespace GameServer
 
 		}
 
+		//Sending data
 		public static void Send(Socket socket, String msg)
 		{
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
@@ -107,6 +109,8 @@ namespace GameServer
 			socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallback), socket);
 		}
 
+
+		//Preparing to send data
 		public static void SendCallback(IAsyncResult ar)
 		{
 			Socket handle = (Socket)ar.AsyncState;
