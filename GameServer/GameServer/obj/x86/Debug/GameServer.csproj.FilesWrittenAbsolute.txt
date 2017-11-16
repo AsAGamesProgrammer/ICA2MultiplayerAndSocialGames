@@ -1,0 +1,5 @@
+/Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/GameServer/GameServer/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/GameServer/GameServer/bin/Debug/GameServer.pdb
+/Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/GameServer/GameServer/bin/Debug/GameServer.exe
+/Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/GameServer/GameServer/obj/x86/Debug/GameServer.exe
+/Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/GameServer/GameServer/obj/x86/Debug/GameServer.pdb
