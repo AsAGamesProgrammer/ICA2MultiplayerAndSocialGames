@@ -55,6 +55,7 @@ private:
     //Sockets
     sf::TcpSocket socketTCP;
     sf::UdpSocket socketUDP;
+    void sendUDPUpdata();
     
 };
 

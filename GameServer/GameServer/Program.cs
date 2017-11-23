@@ -7,6 +7,8 @@ using System.Net;
 namespace GameServer
 {
 
+	//TODO: UDP server
+
 	/// <summary>
 	/// Additional class which holds state information
 	/// </summary>
@@ -44,6 +46,7 @@ namespace GameServer
 
 			//Create socket
 			Socket listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
 			listener.Bind(ipEndPoint);
 			listener.Listen(100);
 
@@ -79,26 +82,31 @@ namespace GameServer
 			Socket handle = state.workSocket;
 			int readBytes = handle.EndReceive(ar);
 
+			Console.WriteLine(readBytes);
+
 			//If there is data to read
-			if (readBytes > -1)
+			if (readBytes > 0)
 			{
 				//state.stringB.Append(Encoding.ASCII.GetString(state.buffer, 0, state.bufferSize));
 				content = Encoding.ASCII.GetString(state.buffer, 0, state.bufferSize);
 
 				//Dont output empty messages
-				if(readBytes>2)
-					Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes); 
+				Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes);
 
 				//Reached the end of line
-                if(content.IndexOf("\n") > -1)
+				if (content.IndexOf("\n") > -1)
 				{
 					//NEW
 					//state.stringB.Clear(); //clear the last msg
-                    Send(handle, content);
+					Send(handle, content);
 					state.buffer = new byte[1024];
 				}
 
 				handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallback), state);
+			}
+			else if (readBytes == 0)
+			{
+				Console.WriteLine("Socket closed");
 			}
 
 		}

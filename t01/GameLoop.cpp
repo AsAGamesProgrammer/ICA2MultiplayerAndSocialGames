@@ -7,6 +7,7 @@
 //
 
 #include "GameLoop.hpp"
+#include <stdio.h>
 
 //GLOBAL VARIABLES
 sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height),
@@ -102,23 +103,23 @@ void GameLoop::OpenLobbie()
         
         //NETWORKING
         //Send TCP
-        char data[100]="Welcome to the Racing Forever\n";
-        if (socketTCP.send(data, 100) != sf::Socket::Done)
-        {
-            std::cout<<"Failed to send a msg (TCP)"<<std::endl;
-        }
-        
-        std::cout << "Send worked" << std::endl;
-        
-        //Receive TCP
-        char dataRec[100];
-        std::size_t received;
-
-        if (socketTCP.receive(dataRec, 100, received) != sf::Socket::Done)
-        {
-            std::cout<<"Could not rceive a msg"<<std::endl;
-        }
-        std::cout << "Received " << received << " bytes" << std::endl;
+//        char data[100]="Welcome to the Racing Forever\n";
+//        if (socketTCP.send(data, 100) != sf::Socket::Done)
+//        {
+//            std::cout<<"Failed to send a msg (TCP)"<<std::endl;
+//        }
+//        
+//        std::cout << "Send worked" << std::endl;
+//        
+//        //Receive TCP
+//        char dataRec[100];
+//        std::size_t received;
+//
+//        if (socketTCP.receive(dataRec, 100, received) != sf::Socket::Done)
+//        {
+//            std::cout<<"Could not rceive a msg"<<std::endl;
+//        }
+//        std::cout << "Received " << received << " bytes" << std::endl;
         
     }
 }
@@ -173,6 +174,9 @@ void GameLoop::Update()
     //Bullets
     checkBulletCollision();
     
+    //Networking
+    sendUDPUpdata();
+    
 }
 
 void GameLoop::Render()
@@ -214,12 +218,29 @@ void GameLoop::Render()
     for(int i=0; i<uiManager.numberOfConstText; i++)
         window.draw(uiManager.constantText[i]);
 
-    
-
-    
     window.display();
-
 }
+
+//TEMP
+void GameLoop::sendUDPUpdata()
+{
+    std::string myString = "Client said " + std::to_string(player.getSpeed()) + "\n";
+    char data[100];
+    strcpy(data, myString.c_str());
+    
+    printf("sending: %s\n", data);
+    printf("sending: %s\n", myString.c_str());
+    
+    sf::IpAddress recipient = "152.105.5.139";
+    unsigned short port = 7576;
+    if (socketUDP.send(data, 100, recipient, port) != sf::Socket::Done)
+    {
+        std::cout<<"Failed to send a msg (UDP)"<<std::endl;
+    }
+    else
+        std::cout<<"Sent correctly"<<std::endl;
+}
+
 
 //TODO: bullet collision for otherPlayer
 void GameLoop::checkBulletCollision()
