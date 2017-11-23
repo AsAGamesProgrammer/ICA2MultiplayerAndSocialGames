@@ -8,9 +8,12 @@
 
 
 #include "GameLoop.hpp"
+#include <SFML/Network.hpp>
 
 int main()
 {
+    //--------------------------------------
+    //GAME LOGIC
     
     //Create a game loop class
     GameLoop gameLoop;

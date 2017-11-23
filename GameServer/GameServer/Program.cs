@@ -85,7 +85,9 @@ namespace GameServer
 				//state.stringB.Append(Encoding.ASCII.GetString(state.buffer, 0, state.bufferSize));
 				content = Encoding.ASCII.GetString(state.buffer, 0, state.bufferSize);
 
-				Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes); 
+				//Dont output empty messages
+				if(readBytes>2)
+					Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes); 
 
 				//Reached the end of line
                 if(content.IndexOf("\n") > -1)

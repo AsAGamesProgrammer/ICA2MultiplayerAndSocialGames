@@ -13,10 +13,49 @@ sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf:
                         "P4076882 - Kristina Blinova - The Racing Game!");
 
 
-//TODO create a lobbie class?
+GameLoop::GameLoop()
+{
+    //--------------------------------------
+    //CONNECTIONS
+    
+    //TCP
+    //Create a socket
+    sf::Socket::Status status = socketTCP.connect("152.105.5.139", 7576);
+    socketTCP.setBlocking(false);
+    
+    //Bind
+    if (status != sf::Socket::Done)
+    {
+        std::cout<<"Failed to connect TCP"<<std::endl;
+    }
+    else
+        std::cout<<"TCP Connected"<<std::endl;
+    
+    //UDP
+    
+    //Bind
+    if (socketUDP.bind(7576) != sf::Socket::Done)
+    {
+        std::cout<<"Failed to connect UDP"<<std::endl;
+    }
+    else
+        std::cout<<"UDP Connected"<<std::endl;
+    
+}
+
 void GameLoop::OpenLobbie()
 {
     window.clear();
+    
+    //TEST SEND TCTP
+    char data[100]="Welcome to the Racing Forever";
+    
+    if (socketTCP.send(data, 100) != sf::Socket::Done)
+    {
+        std::cout<<"Failed to send a msg"<<std::endl;
+    }
+    
+    
     
     //GAME LOOP
     while (window.isOpen())

@@ -22,10 +22,14 @@
 #include "PlayerCoop.hpp"
 #include "Lobby.hpp"
 
+//Networking
+#include <SFML/Network.hpp>
+
 class GameLoop
 {
 
 public:
+    GameLoop();
     void StartGame();
     void OpenLobbie();
     
@@ -47,6 +51,10 @@ private:
     
     //Lobby
     Lobby lobby;
+    
+    //Sockets
+    sf::TcpSocket socketTCP;
+    sf::UdpSocket socketUDP;
     
 };
 
