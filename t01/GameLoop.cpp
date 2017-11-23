@@ -21,7 +21,7 @@ GameLoop::GameLoop()
     //TCP
     //Create a socket
     sf::Socket::Status status = socketTCP.connect("152.105.5.139", 7576);
-    socketTCP.setBlocking(false);
+//    socketTCP.setBlocking(false);
     
     //Bind
     if (status != sf::Socket::Done)
@@ -47,15 +47,17 @@ void GameLoop::OpenLobbie()
 {
     window.clear();
     
-    //TEST SEND TCTP
-    char data[100]="Welcome to the Racing Forever";
+    //TEST RECEIVE MSG TCP
+
     
-    if (socketTCP.send(data, 100) != sf::Socket::Done)
-    {
-        std::cout<<"Failed to send a msg"<<std::endl;
-    }
+    //Send UDP
     
-    
+//    sf::IpAddress recipient = "152.105.5.139";
+//    unsigned short port = 7576;
+//    if (socketUDP.send(data, 100, recipient, port) != sf::Socket::Done)
+//    {
+//        std::cout<<"Failed to send a msg (UDP)"<<std::endl;
+//    }
     
     //GAME LOOP
     while (window.isOpen())
@@ -95,6 +97,28 @@ void GameLoop::OpenLobbie()
         
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
             return;
+        
+        
+        
+        //NETWORKING
+        //Send TCP
+        char data[100]="Welcome to the Racing Forever\n";
+        if (socketTCP.send(data, 100) != sf::Socket::Done)
+        {
+            std::cout<<"Failed to send a msg (TCP)"<<std::endl;
+        }
+        
+        std::cout << "Send worked" << std::endl;
+        
+        //Receive TCP
+        char dataRec[100];
+        std::size_t received;
+
+        if (socketTCP.receive(dataRec, 100, received) != sf::Socket::Done)
+        {
+            std::cout<<"Could not rceive a msg"<<std::endl;
+        }
+        std::cout << "Received " << received << " bytes" << std::endl;
         
     }
 }
