@@ -21,8 +21,7 @@ GameLoop::GameLoop()
     
     //TCP
     //Create a socket
-    sf::Socket::Status status = socketTCP.connect("152.105.5.139", 7576);
-//    socketTCP.setBlocking(false);
+    sf::Socket::Status status = socketTCP.connect("152.105.5.139", 7578);
     
     //Bind
     if (status != sf::Socket::Done)
@@ -42,23 +41,60 @@ GameLoop::GameLoop()
     else
         std::cout<<"UDP Connected"<<std::endl;
     
+    //SEND UDP DATA
+    sendUDPUpdata();
+    
+    //SEND TCP DATA
+    sendTCPData();
+    
+    
 }
+
+//----------------------------------------
+//              NETWORKING
+//----------------------------------------
+
+//Send TCP
+void GameLoop::sendTCPData()
+{
+    char data[100]="Welcome to the Racing Forever\n";
+    if (socketTCP.send(data, 100) != sf::Socket::Done)
+    {
+        std::cout<<"Failed to send a msg (TCP)"<<std::endl;
+    }
+    else
+    {
+        std::cout<<"TCP send worked";
+    }
+}
+
+//Send UDP
+void GameLoop::sendUDPUpdata()
+{
+    std::string myString = "Client said Hello \n";
+    char data[100];
+    strcpy(data, myString.c_str());
+    
+    printf("sending: %s\n", data);
+    printf("sending: %s\n", myString.c_str());
+    
+    sf::IpAddress recipient = "152.105.5.139";
+    unsigned short port = 7576;
+    if (socketUDP.send(data, 100, recipient, port) != sf::Socket::Done)
+    {
+        std::cout<<"Failed to send a msg (UDP)"<<std::endl;
+    }
+    else
+        std::cout<<"UDP send worked"<<std::endl;
+}
+
+//----------------------------------------
+//              LOBBY
+//----------------------------------------
 
 void GameLoop::OpenLobbie()
 {
     window.clear();
-    
-    //TEST RECEIVE MSG TCP
-
-    
-    //Send UDP
-    
-//    sf::IpAddress recipient = "152.105.5.139";
-//    unsigned short port = 7576;
-//    if (socketUDP.send(data, 100, recipient, port) != sf::Socket::Done)
-//    {
-//        std::cout<<"Failed to send a msg (UDP)"<<std::endl;
-//    }
     
     //GAME LOOP
     while (window.isOpen())
@@ -175,7 +211,7 @@ void GameLoop::Update()
     checkBulletCollision();
     
     //Networking
-    sendUDPUpdata();
+    //sendUDPUpdata();
     
 }
 
@@ -221,25 +257,6 @@ void GameLoop::Render()
     window.display();
 }
 
-//TEMP
-void GameLoop::sendUDPUpdata()
-{
-    std::string myString = "Client said " + std::to_string(player.getSpeed()) + "\n";
-    char data[100];
-    strcpy(data, myString.c_str());
-    
-    printf("sending: %s\n", data);
-    printf("sending: %s\n", myString.c_str());
-    
-    sf::IpAddress recipient = "152.105.5.139";
-    unsigned short port = 7576;
-    if (socketUDP.send(data, 100, recipient, port) != sf::Socket::Done)
-    {
-        std::cout<<"Failed to send a msg (UDP)"<<std::endl;
-    }
-    else
-        std::cout<<"Sent correctly"<<std::endl;
-}
 
 
 //TODO: bullet collision for otherPlayer
