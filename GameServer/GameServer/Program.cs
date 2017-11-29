@@ -70,6 +70,10 @@ namespace GameServer
 			listenerTCP.Bind(ipEndPoint);
 			listenerTCP.Listen(100);
 
+			//Create socket UDP
+			//****** BIND???
+			Socket listenerUDP = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+			listenerUDP.Bind(new IPEndPoint(IPAddress.Any, 7579));
 
 			//Listen to UDP
             ReceiveMessagesUDP();
@@ -77,11 +81,11 @@ namespace GameServer
 			//Waiting for connections
 			while (true)
 			{
-				//allDone.Reset();
-				//listenerTCP.BeginAccept(new AsyncCallback(AcceptCallbackTCP), listenerTCP);
-				//allDone.WaitOne();
+				//listenerUDP.BeginAccept(new AsyncCallback(ReceiveMessagesUDP), listenerUDP);
 
-				//Listen to UDP
+				allDone.Reset();
+				listenerTCP.BeginAccept(new AsyncCallback(AcceptCallbackTCP), listenerTCP);
+				allDone.WaitOne();
 
 			}
 		}
@@ -183,9 +187,13 @@ namespace GameServer
 		}
 
 		public static void ReceiveMessagesUDP()
+
 		{
+			//******************************
+			//How to receive many messages???
 			// Receive a message and write it to the console.
 			IPEndPoint ePoint = new IPEndPoint(IPAddress.Any, 7576);
+			//*******************************
 			UdpClient uClient = new UdpClient(ePoint);
 			UdpState stateUdp = new UdpState();
 			stateUdp.endPoint = ePoint;
@@ -194,16 +202,16 @@ namespace GameServer
 			uClient.BeginReceive(new AsyncCallback(ReceiveCallbackUDP), stateUdp);
 			// Do some work while we wait for a message.
 
-			while (!messageReceived)
-			{
-				// Do something
+			//while (!messageReceived)
+			//{
+			//	// Do something
 
-			}
+			//}
 
-			if (messageReceived)
-			{ 
-				Console.WriteLine("Something as received (UDP)");
-			}
+			//if (messageReceived)
+			//{ 
+			//	Console.WriteLine("Something as received (UDP)");
+			//}
 		}
 	}
 }
