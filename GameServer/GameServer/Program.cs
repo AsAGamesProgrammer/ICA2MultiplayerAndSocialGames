@@ -213,8 +213,6 @@ namespace GameServer
 			stateUdp.workingSocket = udpSocket;
 
 			Console.WriteLine("Listening for messages udp");
-			Console.WriteLine("UDP socket: {0}", udpSocket.LocalEndPoint);
-			Console.WriteLine("UDP client: {0}", stateUdp.endPoint);
 
 			//EndPoint ep = new EndPoint();
 			udpSocket.BeginReceiveFrom(stateUdp.buffer, 0, stateUdp.bufferSize, 0, ref ePoint, new AsyncCallback(ReceiveCallbackUDP), stateUdp);
