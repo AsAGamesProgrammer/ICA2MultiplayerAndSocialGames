@@ -34,12 +34,12 @@ GameLoop::GameLoop()
     //UDP
     
     //Bind
-    if (socketUDP.bind(7576) != sf::Socket::Done)
-    {
-        std::cout<<"Failed to connect UDP"<<std::endl;
-    }
-    else
-        std::cout<<"UDP Connected"<<std::endl;
+//    if (socketUDP.bind(7578) != sf::Socket::Done)
+//    {
+//        std::cout<<"Failed to connect UDP"<<std::endl;
+//    }
+//    else
+//        std::cout<<"UDP Connected"<<std::endl;
     
     //SEND UDP DATA
     sendUDPUpdata();

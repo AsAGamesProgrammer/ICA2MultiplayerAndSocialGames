@@ -34,7 +34,9 @@ namespace GameServer
 	class UdpState
 	{
 		public IPEndPoint endPoint;
-		public UdpClient udpClient;
+public UdpClient udpClient;
+public int bufferSize = 1024;
+		public byte[] buffer = new byte[1024];
 	}
 
 	/// <summary>
@@ -62,7 +64,7 @@ namespace GameServer
 			//Get host information
 			IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
 			IPAddress ipAddress = ipHost.AddressList[0];
-			IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, 7578);
+			IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Any, 7578);
 
 			//CREATE SOCKET TCP
 			Socket listenerTCP = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -73,14 +75,14 @@ namespace GameServer
 			//CREATE SOCKET UDP
 			//****** BIND???
 			Socket listenerUDP = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-			listenerUDP.Bind(new IPEndPoint(IPAddress.Any, 7579));
+			listenerUDP.Bind(new IPEndPoint(IPAddress.Any, 7576));
 
+			ReceiveMessagesUDP(listenerUDP);
 			//Waiting for connections
 			while (true)
 			{
 				//listenerUDP.BeginAccept(new AsyncCallback(ReceiveMessagesUDP), listenerUDP);
 				//Liten to UDP
-				ReceiveMessagesUDP();
 
 				allDone.Reset();
 				listenerTCP.BeginAccept(new AsyncCallback(AcceptCallbackTCP), listenerTCP);
@@ -174,18 +176,19 @@ namespace GameServer
 
 		public static void ReceiveCallbackUDP(IAsyncResult ar)
 		{
+			Console.WriteLine("Receiving...");
 			UdpClient uClient = (UdpClient)((UdpState)(ar.AsyncState)).udpClient;
 
 			IPEndPoint ePoint = (IPEndPoint)((UdpState)(ar.AsyncState)).endPoint;
 			Byte[] receiveBytes = uClient.EndReceive(ar, ref ePoint);
 			string receiveString = Encoding.ASCII.GetString(receiveBytes);
-			Console.WriteLine("Received: {0}", receiveString);
+			Console.WriteLine("UDP received: {0}", receiveString);
 
 			// The message then needs to be handleed
 			messageReceived = true;
 		}
 
-		public static void ReceiveMessagesUDP()
+		public static void ReceiveMessagesUDP(Socket udpSocket)
 
 		{
 			//******************************
@@ -197,8 +200,11 @@ namespace GameServer
 			UdpState stateUdp = new UdpState();
 			stateUdp.endPoint = ePoint;
 			stateUdp.udpClient = uClient;
-			Console.WriteLine("listening for messages");
-			uClient.BeginReceive(new AsyncCallback(ReceiveCallbackUDP), stateUdp);
+			Console.WriteLine("Listening for messages udp");
+			udpSocket.BeginReceive(stateUdp.buffer, 0,stateUdp.bufferSize,0,
+                    new AsyncCallback(ReceiveCallbackUDP), stateUdp);
+			//udpSocket.BeginReceive(new AsyncCallback(ReceiveCallbackUDP), stateUdp);
+			//uClient.BeginReceive(new AsyncCallback(ReceiveCallbackUDP), stateUdp);
 			// Do some work while we wait for a message.
 
 			//while (!messageReceived)
