@@ -33,9 +33,10 @@ namespace GameServer
 	//UDP
 	class UdpState
 	{
+		public Socket workingSocket;
 		public IPEndPoint endPoint;
-public UdpClient udpClient;
-public int bufferSize = 1024;
+		public UdpClient udpClient;
+		public int bufferSize = 1024;
 		public byte[] buffer = new byte[1024];
 	}
 
@@ -176,33 +177,44 @@ public int bufferSize = 1024;
 
 		public static void ReceiveCallbackUDP(IAsyncResult ar)
 		{
-			Console.WriteLine("Receiving...");
+			Console.WriteLine("Receiving UDP...");
+			UdpState stateUdp = ((UdpState)(ar.AsyncState));
 			UdpClient uClient = (UdpClient)((UdpState)(ar.AsyncState)).udpClient;
+			EndPoint ePoint = (EndPoint)((UdpState)(ar.AsyncState)).endPoint;
 
-			IPEndPoint ePoint = (IPEndPoint)((UdpState)(ar.AsyncState)).endPoint;
-			Byte[] receiveBytes = uClient.EndReceive(ar, ref ePoint);
-			string receiveString = Encoding.ASCII.GetString(receiveBytes);
+			//Byte[] receiveBytes = uClient.EndReceive(ar, ref ePoint);
+			Socket sock = (Socket)((UdpState)(ar.AsyncState)).workingSocket;
+			 int receiveBytes = sock.EndReceiveFrom(ar, ref ePoint);
+
+			string receiveString = Encoding.ASCII.GetString(((UdpState)ar.AsyncState).buffer);
 			Console.WriteLine("UDP received: {0}", receiveString);
 
 			// The message then needs to be handleed
-			messageReceived = true;
+			//messageReceived = true;
+			sock.BeginReceiveFrom(stateUdp.buffer, 0, stateUdp.bufferSize, 0, ref ePoint, new AsyncCallback(ReceiveCallbackUDP), stateUdp);
+
 		}
 
 		public static void ReceiveMessagesUDP(Socket udpSocket)
 
 		{
-			//******************************
-			//How to receive many messages???
-			// Receive a message and write it to the console.
-			IPEndPoint ePoint = new IPEndPoint(IPAddress.Any, 0);
-			//*******************************
-			UdpClient uClient = new UdpClient(ePoint);
+			EndPoint ePoint = new IPEndPoint(IPAddress.Any, 0);
+			UdpClient uClient = new UdpClient((IPEndPoint)ePoint);
 			UdpState stateUdp = new UdpState();
-			stateUdp.endPoint = ePoint;
+			//stateUdp.endPoint = ePoint;
+			//test
+			stateUdp.endPoint = (IPEndPoint) ePoint;
 			stateUdp.udpClient = uClient;
+			stateUdp.workingSocket = udpSocket;
+
 			Console.WriteLine("Listening for messages udp");
-			udpSocket.BeginReceive(stateUdp.buffer, 0,stateUdp.bufferSize,0,
-                    new AsyncCallback(ReceiveCallbackUDP), stateUdp);
+			Console.WriteLine("UDP socket: {0}", udpSocket.LocalEndPoint);
+			Console.WriteLine("UDP client: {0}", stateUdp.endPoint);
+
+			//EndPoint ep = new EndPoint();
+			udpSocket.BeginReceiveFrom(stateUdp.buffer, 0, stateUdp.bufferSize, 0, ref ePoint, new AsyncCallback(ReceiveCallbackUDP), stateUdp);
+
+
 			//udpSocket.BeginReceive(new AsyncCallback(ReceiveCallbackUDP), stateUdp);
 			//uClient.BeginReceive(new AsyncCallback(ReceiveCallbackUDP), stateUdp);
 			// Do some work while we wait for a message.

@@ -44,12 +44,18 @@ GameLoop::GameLoop()
     //SEND UDP DATA
     sendUDPUpdata();
     sendUDPUpdata();
+    sendUDPUpdata();
+    
    // sendUDPUpdata();
     
     //SEND TCP DATA
-    sendTCPData();
-    sendTCPData();
-    sendTCPData();
+    //sendTCPData();
+    //sendTCPData();
+   // sendTCPData();
+    
+    //sendUDPUpdata();
+    //sendUDPUpdata();
+    //sendUDPUpdata();
     
 }
 
