@@ -5,6 +5,16 @@
 //  Created by BLINOVA, KRISTINA on 10/10/2017.
 //  Copyright © 2017 Cordry, Julien. All rights reserved.
 //
+//
+//-------------------------------------------------------
+//TODO:
+// Threads
+// Send a custom msg
+// Make a class for msgs
+// Store log in on the server
+//
+//
+
 
 #include "GameLoop.hpp"
 #include <stdio.h>
@@ -31,15 +41,6 @@ GameLoop::GameLoop()
     else
         std::cout<<"TCP Connected"<<std::endl;
     
-    //UDP
-    
-    //Bind
-//    if (socketUDP.bind(7578) != sf::Socket::Done)
-//    {
-//        std::cout<<"Failed to connect UDP"<<std::endl;
-//    }
-//    else
-//        std::cout<<"UDP Connected"<<std::endl;
     
     //SEND TCP DATA
     sendTCPData("test");
@@ -90,6 +91,8 @@ void GameLoop::receiveTCP()
 //Send UDP
 void GameLoop::sendUDPUpdata(std::string msg)
 {
+    
+    
     //std::string myString = "Client said Hello \n";
     char data[100] = "Client said Hello \n";
     //strcpy(data, myString.c_str());
@@ -115,7 +118,7 @@ void GameLoop::receiveUDP()
     unsigned short port;
     if (socketUDP.receive(data, 100, received, sender, port) != sf::Socket::Done)
     {
-        // error...
+        std::cout<<"Failed to receive UDP"<<std::endl;
     }
     std::cout << "Received "<<data<< " which is " << received << " bytes from " << sender << " on port " << port << std::endl;
 }
