@@ -64,24 +64,23 @@ namespace GameServer
 			IPAddress ipAddress = ipHost.AddressList[0];
 			IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, 7578);
 
-			//Create socket TCP
+			//CREATE SOCKET TCP
 			Socket listenerTCP = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
 			listenerTCP.Bind(ipEndPoint);
 			listenerTCP.Listen(100);
 
-			//Create socket UDP
+			//CREATE SOCKET UDP
 			//****** BIND???
 			Socket listenerUDP = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 			listenerUDP.Bind(new IPEndPoint(IPAddress.Any, 7579));
-
-			//Listen to UDP
-            ReceiveMessagesUDP();
 
 			//Waiting for connections
 			while (true)
 			{
 				//listenerUDP.BeginAccept(new AsyncCallback(ReceiveMessagesUDP), listenerUDP);
+				//Liten to UDP
+				ReceiveMessagesUDP();
 
 				allDone.Reset();
 				listenerTCP.BeginAccept(new AsyncCallback(AcceptCallbackTCP), listenerTCP);
@@ -192,7 +191,7 @@ namespace GameServer
 			//******************************
 			//How to receive many messages???
 			// Receive a message and write it to the console.
-			IPEndPoint ePoint = new IPEndPoint(IPAddress.Any, 7576);
+			IPEndPoint ePoint = new IPEndPoint(IPAddress.Any, 0);
 			//*******************************
 			UdpClient uClient = new UdpClient(ePoint);
 			UdpState stateUdp = new UdpState();

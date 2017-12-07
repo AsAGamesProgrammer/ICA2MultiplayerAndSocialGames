@@ -44,9 +44,11 @@ GameLoop::GameLoop()
     //SEND UDP DATA
     sendUDPUpdata();
     sendUDPUpdata();
-    sendUDPUpdata();
+   // sendUDPUpdata();
     
     //SEND TCP DATA
+    sendTCPData();
+    sendTCPData();
     sendTCPData();
     
 }
@@ -76,10 +78,10 @@ void GameLoop::sendUDPUpdata()
     char data[100];
     strcpy(data, myString.c_str());
     
-    printf("sending: %s\n", data);
-    printf("sending: %s\n", myString.c_str());
+    printf("Sending UDP: %s\n", data);
+    //printf("Sending: %s\n", myString.c_str());
     
-    sf::IpAddress recipient = "152.105.5.139";
+    sf::IpAddress recipient = "255.255.255.255";
     unsigned short port = 7576;
     if (socketUDP.send(data, 100, recipient, port) != sf::Socket::Done)
     {
