@@ -46,17 +46,12 @@ GameLoop::GameLoop()
     sendUDPUpdata();
     sendUDPUpdata();
     
-   // sendUDPUpdata();
     
     //SEND TCP DATA
-    //sendTCPData();
-    //sendTCPData();
+    sendTCPData();
+    sendTCPData();
    // sendTCPData();
-    
-    //sendUDPUpdata();
-    //sendUDPUpdata();
-    //sendUDPUpdata();
-    
+
 }
 
 //----------------------------------------
@@ -80,9 +75,9 @@ void GameLoop::sendTCPData()
 //Send UDP
 void GameLoop::sendUDPUpdata()
 {
-    std::string myString = "Client said Hello \n";
-    char data[100];
-    strcpy(data, myString.c_str());
+    //std::string myString = "Client said Hello \n";
+    char data[100] = "Client said Hello \n";
+    //strcpy(data, myString.c_str());
     
     printf("Sending UDP: %s\n", data);
     //printf("Sending: %s\n", myString.c_str());

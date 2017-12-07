@@ -177,14 +177,19 @@ namespace GameServer
 
 		public static void ReceiveCallbackUDP(IAsyncResult ar)
 		{
+			//Start receiving
 			Console.WriteLine("Receiving UDP...");
-			UdpState stateUdp = ((UdpState)(ar.AsyncState));
-			UdpClient uClient = (UdpClient)((UdpState)(ar.AsyncState)).udpClient;
-			EndPoint ePoint = (EndPoint)((UdpState)(ar.AsyncState)).endPoint;
 
-			//Byte[] receiveBytes = uClient.EndReceive(ar, ref ePoint);
-			Socket sock = (Socket)((UdpState)(ar.AsyncState)).workingSocket;
-			 int receiveBytes = sock.EndReceiveFrom(ar, ref ePoint);
+			//Get a state from the AR
+			UdpState stateUdp = ((UdpState)(ar.AsyncState));
+
+			//Get main parametres
+			UdpClient uClient = stateUdp.udpClient;
+			EndPoint ePoint = stateUdp.endPoint;
+			Socket sock = stateUdp.workingSocket;
+
+			//Read data into a buffer
+			int receiveBytes = sock.EndReceiveFrom(ar, ref ePoint);
 
 			string receiveString = Encoding.ASCII.GetString(((UdpState)ar.AsyncState).buffer);
 			Console.WriteLine("UDP received: {0}", receiveString);
