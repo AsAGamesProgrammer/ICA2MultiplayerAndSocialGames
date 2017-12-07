@@ -153,6 +153,7 @@ namespace GameServer
 		public static void SendTCP(Socket socket, String msg)
 		{
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
+			Console.WriteLine("Server sending: {0},", msg);
 
 			socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), socket);
 		}

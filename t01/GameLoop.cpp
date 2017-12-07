@@ -41,17 +41,13 @@ GameLoop::GameLoop()
 //    else
 //        std::cout<<"UDP Connected"<<std::endl;
     
-    //SEND UDP DATA
-    sendUDPUpdata();
-    sendUDPUpdata();
-    sendUDPUpdata();
-    
-    
     //SEND TCP DATA
-    sendTCPData();
-    sendTCPData();
-   // sendTCPData();
-
+    sendTCPData("test");
+    receiveTCP();
+    
+    //SEND UDP DATA
+    sendUDPUpdata("test");
+    receiveUDP();
 }
 
 //----------------------------------------
@@ -59,21 +55,40 @@ GameLoop::GameLoop()
 //----------------------------------------
 
 //Send TCP
-void GameLoop::sendTCPData()
+void GameLoop::sendTCPData(std::string msg)
 {
-    char data[100]="Welcome to the Racing Forever\n";
+    char data[255]="Welcome to the Racing Forever\n";
+    
+    
     if (socketTCP.send(data, 100) != sf::Socket::Done)
     {
         std::cout<<"Failed to send a msg (TCP)"<<std::endl;
     }
-    else
+
+    //send worked
+    
+
+}
+
+void GameLoop::receiveTCP()
+{
+    //ISSUE!!!
+    //------NEW NEW NEW---------
+    //This should be in a thread
+    //Receives data once
+    
+    char inData[100] = "None";
+    std::size_t received;
+    // TCP socket:
+    if (socketTCP.receive(inData, 100, received) != sf::Socket::Done)
     {
-        std::cout<<"TCP send worked";
+        std::cout << "Failed to receive (TCP)"<< std::endl;
     }
+    std::cout << "Received " << inData <<" with "<<received<<" bytes" << std::endl;
 }
 
 //Send UDP
-void GameLoop::sendUDPUpdata()
+void GameLoop::sendUDPUpdata(std::string msg)
 {
     //std::string myString = "Client said Hello \n";
     char data[100] = "Client said Hello \n";
@@ -91,6 +106,20 @@ void GameLoop::sendUDPUpdata()
     else
         std::cout<<"UDP send worked"<<std::endl;
 }
+
+void GameLoop::receiveUDP()
+{
+    char data[100];
+    std::size_t received;
+    sf::IpAddress sender;
+    unsigned short port;
+    if (socketUDP.receive(data, 100, received, sender, port) != sf::Socket::Done)
+    {
+        // error...
+    }
+    std::cout << "Received "<<data<< " which is " << received << " bytes from " << sender << " on port " << port << std::endl;
+}
+
 
 //----------------------------------------
 //              LOBBY
@@ -139,28 +168,9 @@ void GameLoop::OpenLobbie()
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
             return;
         
-        
-        
-        //NETWORKING
-        //Send TCP
-//        char data[100]="Welcome to the Racing Forever\n";
-//        if (socketTCP.send(data, 100) != sf::Socket::Done)
-//        {
-//            std::cout<<"Failed to send a msg (TCP)"<<std::endl;
-//        }
-//        
-//        std::cout << "Send worked" << std::endl;
-//        
-//        //Receive TCP
-//        char dataRec[100];
-//        std::size_t received;
-//
-//        if (socketTCP.receive(dataRec, 100, received) != sf::Socket::Done)
-//        {
-//            std::cout<<"Could not rceive a msg"<<std::endl;
-//        }
-//        std::cout << "Received " << received << " bytes" << std::endl;
-        
+        //Networking test
+        sendUDPUpdata("test");
+        receiveUDP();
     }
 }
 
@@ -213,9 +223,6 @@ void GameLoop::Update()
     
     //Bullets
     checkBulletCollision();
-    
-    //Networking
-    //sendUDPUpdata();
     
 }
 

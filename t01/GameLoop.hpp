@@ -52,11 +52,18 @@ private:
     //Lobby
     Lobby lobby;
     
+    //-----------------------
+    //      NETWORKING
+    //-----------------------
     //Sockets
     sf::TcpSocket socketTCP;
     sf::UdpSocket socketUDP;
-    void sendUDPUpdata();
-    void sendTCPData();
+    
+    //Send
+    void sendUDPUpdata(std::string msg);
+    void sendTCPData(std::string msg);
+    void receiveTCP();
+    void receiveUDP();
     
 };
 
