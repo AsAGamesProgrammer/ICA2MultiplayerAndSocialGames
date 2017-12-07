@@ -175,6 +175,9 @@ namespace GameServer
 		public static bool messageReceived = false;
 
 
+		//				RECEIVE
+		//---------------------------------------
+
 		public static void ReceiveCallbackUDP(IAsyncResult ar)
 		{
 			//Start receiving
@@ -185,14 +188,29 @@ namespace GameServer
 
 			//Get main parametres
 			UdpClient uClient = stateUdp.udpClient;
-			EndPoint ePoint = stateUdp.endPoint;
 			Socket sock = stateUdp.workingSocket;
+
+
+			//Issue?
+			EndPoint ePoint = stateUdp.endPoint;
+			//EndPoint ePoint = sock.RemoteEndPoint;
 
 			//Read data into a buffer
 			int receiveBytes = sock.EndReceiveFrom(ar, ref ePoint);
 
+			stateUdp.endPoint = (IPEndPoint) ePoint;
+
 			string receiveString = Encoding.ASCII.GetString(((UdpState)ar.AsyncState).buffer);
 			Console.WriteLine("UDP received: {0}", receiveString);
+
+			//----------------TEST-----------------
+			//SEND BACK
+			if (receiveString.IndexOf("\n") > -1)
+				{
+					SendUDP(sock, receiveString, stateUdp);
+					stateUdp.buffer = new byte[1024];
+				}
+			//----------------TEST-----------------
 
 			// The message then needs to be handleed
 			//messageReceived = true;
@@ -216,22 +234,30 @@ namespace GameServer
 
 			//EndPoint ep = new EndPoint();
 			udpSocket.BeginReceiveFrom(stateUdp.buffer, 0, stateUdp.bufferSize, 0, ref ePoint, new AsyncCallback(ReceiveCallbackUDP), stateUdp);
-
-
-			//udpSocket.BeginReceive(new AsyncCallback(ReceiveCallbackUDP), stateUdp);
-			//uClient.BeginReceive(new AsyncCallback(ReceiveCallbackUDP), stateUdp);
-			// Do some work while we wait for a message.
-
-			//while (!messageReceived)
-			//{
-			//	// Do something
-
-			//}
-
-			//if (messageReceived)
-			//{ 
-			//	Console.WriteLine("Something as received (UDP)");
-			//}
 		}
+
+		//				  SEND
+		//---------------------------------------
+
+		public static void SendCallbackUDP(IAsyncResult ar)
+		{ 
+			//Get a state from the AR
+			UdpState stateUdp = ((UdpState)(ar.AsyncState));
+
+			//Get main parametres
+			//UdpClient uClient = stateUdp.udpClient;
+			//EndPoint ePoint = stateUdp.endPoint;
+			Socket sock = stateUdp.workingSocket;
+			Console.WriteLine(stateUdp.endPoint.Address);
+			int byteSent = sock.EndSendTo(ar);
+		}
+
+		//Sending data
+		public static void SendUDP(Socket socket, String msg, UdpState stateUdp)
+		{
+			byte[] byteData = Encoding.ASCII.GetBytes(msg);
+			socket.BeginSendTo(byteData, 0, byteData.Length, 0, stateUdp.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
+		}
+
 	}
 }
