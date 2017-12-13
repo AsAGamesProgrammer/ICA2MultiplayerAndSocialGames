@@ -58,10 +58,14 @@ GameLoop::GameLoop()
 //Send TCP
 void GameLoop::sendTCPData(std::string msg)
 {
-    char data[255]="Welcome to the Racing Forever\n";
+    std::string combinedString = msg + "\n";
+    //char data[255]="Welcome to the Racing Forever\n";
+    char* data = new char[combinedString.length()];
+    strcpy(data, combinedString.c_str());
+    data[sizeof(data) - 1] = 0;
+    int leng = combinedString.length();
     
-    
-    if (socketTCP.send(data, 100) != sf::Socket::Done)
+    if (socketTCP.send(data, leng) != sf::Socket::Done)
     {
         std::cout<<"Failed to send a msg (TCP)"<<std::endl;
     }
@@ -172,8 +176,8 @@ void GameLoop::OpenLobbie()
             return;
         
         //Networking test
-        sendUDPUpdata("test");
-        receiveUDP();
+        //sendUDPUpdata("test");
+        //receiveUDP();
     }
 }
 

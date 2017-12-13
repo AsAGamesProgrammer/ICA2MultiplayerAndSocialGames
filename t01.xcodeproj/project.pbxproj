@@ -8,6 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		0B1D0A441D9EAAAA00319891 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D0A431D9EAAAA00319891 /* main.cpp */; };
+		8623DB831FE1604900101CA5 /* carBS5.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 86CF4F7B1F8FBD03009A299E /* carBS5.png */; };
+		8623DB841FE1604900101CA5 /* cp.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 86CF4F761F8FAE15009A299E /* cp.png */; };
+		8623DB851FE1604900101CA5 /* bulletR.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 86CF4F741F8FAD5A009A299E /* bulletR.png */; };
+		8623DB861FE1604900101CA5 /* carYS3.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 86CF4F731F8FACDC009A299E /* carYS3.png */; };
+		8623DB871FE1604900101CA5 /* bar.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 862B1AED1F8BADB8001378B9 /* bar.png */; };
+		8623DB881FE1604900101CA5 /* finish.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 862B1AEC1F8BA87D001378B9 /* finish.png */; };
+		8623DB891FE1604900101CA5 /* bulR.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 862B1AEA1F8B9F16001378B9 /* bulR.png */; };
+		8623DB8A1FE1604900101CA5 /* carYS.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 862B1AE91F8B9E3C001378B9 /* carYS.png */; };
+		8623DB8B1FE1604900101CA5 /* land_grass01.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 862B1AE61F8B9876001378B9 /* land_grass01.png */; };
+		8623DB8C1FE1604900101CA5 /* map.txt in Copy Files */ = {isa = PBXBuildFile; fileRef = 862B1AE71F8B9876001378B9 /* map.txt */; };
+		8623DB8D1FE1604900101CA5 /* simon.otf in Copy Files */ = {isa = PBXBuildFile; fileRef = 862B1AE81F8B9876001378B9 /* simon.otf */; };
+		8623DB8E1FE1604900101CA5 /* bulY.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681F11F8689E400CA4B6E /* bulY.png */; };
+		8623DB8F1FE1604900101CA5 /* carY.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681EB1F86647C00CA4B6E /* carY.png */; };
+		8623DB901FE1604900101CA5 /* land_grass02.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681DD1F86646200CA4B6E /* land_grass02.png */; };
+		8623DB911FE1604900101CA5 /* land_grass03.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681DE1F86646200CA4B6E /* land_grass03.png */; };
+		8623DB921FE1604900101CA5 /* land_grass04.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681DF1F86646200CA4B6E /* land_grass04.png */; };
+		8623DB931FE1604900101CA5 /* land_grass05.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681E01F86646200CA4B6E /* land_grass05.png */; };
+		8623DB941FE1604900101CA5 /* land_grass06.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681E11F86646200CA4B6E /* land_grass06.png */; };
+		8623DB951FE1604900101CA5 /* land_grass07.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681E21F86646200CA4B6E /* land_grass07.png */; };
+		8623DB961FE1604900101CA5 /* land_grass08.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681E31F86646200CA4B6E /* land_grass08.png */; };
+		8623DB971FE1604900101CA5 /* land_grass09.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681E41F86646200CA4B6E /* land_grass09.png */; };
+		8623DB981FE1604900101CA5 /* land_grass10.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681E51F86646200CA4B6E /* land_grass10.png */; };
+		8623DB991FE1604900101CA5 /* land_grass11.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681E61F86646200CA4B6E /* land_grass11.png */; };
+		8623DB9A1FE1604900101CA5 /* land_grass12.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681E71F86646200CA4B6E /* land_grass12.png */; };
+		8623DB9B1FE1604900101CA5 /* land_grass13.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681E81F86646200CA4B6E /* land_grass13.png */; };
+		8623DB9C1FE1604900101CA5 /* land_grass14.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 865681E91F86646200CA4B6E /* land_grass14.png */; };
 		862B1AF01F8BC914001378B9 /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 862B1AEE1F8BC914001378B9 /* Utilities.cpp */; };
 		862B1AF31F8BD3E3001378B9 /* Checkpoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 862B1AF11F8BD3E3001378B9 /* Checkpoint.cpp */; };
 		862B1AF61F8CE45A001378B9 /* GameLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 862B1AF41F8CE45A001378B9 /* GameLoop.cpp */; };
@@ -38,13 +64,40 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0B1D0A3E1D9EAAAA00319891 /* CopyFiles */ = {
+		0B1D0A3E1D9EAAAA00319891 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 8;
+			dstPath = Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames;
+			dstSubfolderSpec = 7;
 			files = (
+				8623DB831FE1604900101CA5 /* carBS5.png in Copy Files */,
+				8623DB841FE1604900101CA5 /* cp.png in Copy Files */,
+				8623DB851FE1604900101CA5 /* bulletR.png in Copy Files */,
+				8623DB861FE1604900101CA5 /* carYS3.png in Copy Files */,
+				8623DB871FE1604900101CA5 /* bar.png in Copy Files */,
+				8623DB881FE1604900101CA5 /* finish.png in Copy Files */,
+				8623DB891FE1604900101CA5 /* bulR.png in Copy Files */,
+				8623DB8A1FE1604900101CA5 /* carYS.png in Copy Files */,
+				8623DB8B1FE1604900101CA5 /* land_grass01.png in Copy Files */,
+				8623DB8C1FE1604900101CA5 /* map.txt in Copy Files */,
+				8623DB8D1FE1604900101CA5 /* simon.otf in Copy Files */,
+				8623DB8E1FE1604900101CA5 /* bulY.png in Copy Files */,
+				8623DB8F1FE1604900101CA5 /* carY.png in Copy Files */,
+				8623DB901FE1604900101CA5 /* land_grass02.png in Copy Files */,
+				8623DB911FE1604900101CA5 /* land_grass03.png in Copy Files */,
+				8623DB921FE1604900101CA5 /* land_grass04.png in Copy Files */,
+				8623DB931FE1604900101CA5 /* land_grass05.png in Copy Files */,
+				8623DB941FE1604900101CA5 /* land_grass06.png in Copy Files */,
+				8623DB951FE1604900101CA5 /* land_grass07.png in Copy Files */,
+				8623DB961FE1604900101CA5 /* land_grass08.png in Copy Files */,
+				8623DB971FE1604900101CA5 /* land_grass09.png in Copy Files */,
+				8623DB981FE1604900101CA5 /* land_grass10.png in Copy Files */,
+				8623DB991FE1604900101CA5 /* land_grass11.png in Copy Files */,
+				8623DB9A1FE1604900101CA5 /* land_grass12.png in Copy Files */,
+				8623DB9B1FE1604900101CA5 /* land_grass13.png in Copy Files */,
+				8623DB9C1FE1604900101CA5 /* land_grass14.png in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -52,6 +105,7 @@
 /* Begin PBXFileReference section */
 		0B1D0A401D9EAAAA00319891 /* t01 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = t01; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B1D0A431D9EAAAA00319891 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		8623DB9D1FE1657B00101CA5 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = t01/Resources; sourceTree = "<group>"; };
 		862B1AE61F8B9876001378B9 /* land_grass01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass01.png; sourceTree = "<group>"; };
 		862B1AE71F8B9876001378B9 /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.txt; sourceTree = "<group>"; };
 		862B1AE81F8B9876001378B9 /* simon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simon.otf; sourceTree = "<group>"; };
@@ -69,7 +123,7 @@
 		862BA9E61FB4B43300D3D4AE /* ButtonC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ButtonC.hpp; sourceTree = "<group>"; };
 		8640E96D1FAB783700DFCDA4 /* Lobby.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Lobby.cpp; sourceTree = "<group>"; };
 		8640E96E1FAB783700DFCDA4 /* Lobby.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Lobby.hpp; sourceTree = "<group>"; };
-		8640E9701FAB793500DFCDA4 /* UIUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIUtilities.cpp; sourceTree = "<group>"; };
+		8640E9701FAB793500DFCDA4 /* UIUtilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UIUtilities.cpp; path = t01/UIUtilities.cpp; sourceTree = SOURCE_ROOT; };
 		8640E9711FAB793500DFCDA4 /* UIUtilities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UIUtilities.hpp; sourceTree = "<group>"; };
 		865681A51F7D438400CA4B6E /* PlayerC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerC.cpp; sourceTree = "<group>"; };
 		865681A61F7D438400CA4B6E /* PlayerC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerC.hpp; sourceTree = "<group>"; };
@@ -148,6 +202,7 @@
 		0B1D0A371D9EAAAA00319891 = {
 			isa = PBXGroup;
 			children = (
+				8623DB9D1FE1657B00101CA5 /* Resources */,
 				86DDA34A1F84F4DF00BBAE92 /* Sprites */,
 				86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */,
 				86DDA3181F823DDC00BBAE92 /* libsfml-audio.2.4.dylib */,
@@ -267,7 +322,7 @@
 			buildPhases = (
 				0B1D0A3C1D9EAAAA00319891 /* Sources */,
 				0B1D0A3D1D9EAAAA00319891 /* Frameworks */,
-				0B1D0A3E1D9EAAAA00319891 /* CopyFiles */,
+				0B1D0A3E1D9EAAAA00319891 /* Copy Files */,
 			);
 			buildRules = (
 			);
