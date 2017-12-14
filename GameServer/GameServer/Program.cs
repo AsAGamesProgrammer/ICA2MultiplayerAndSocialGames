@@ -64,6 +64,9 @@ namespace GameServer
 		//--------------------------------------
 		//				USERS
 		//--------------------------------------
+		static int UDP_PORT = 7576;
+		static int UDP_BROADCASTPORT = 7000;
+		static int TCP_PORT = 7578;
 
 		//client clientA;
 		//client clientB;
@@ -87,7 +90,7 @@ namespace GameServer
 			//Get host information
 			IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
 			IPAddress ipAddress = ipHost.AddressList[0];
-			IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Any, 7578);
+			IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Any, TCP_PORT);
 
 			//CREATE SOCKET TCP
 			Socket listenerTCP = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -98,7 +101,7 @@ namespace GameServer
 			//CREATE SOCKET UDP
 			//****** BIND???
 			Socket listenerUDP = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-			listenerUDP.Bind(new IPEndPoint(IPAddress.Any, 7576));
+			listenerUDP.Bind(new IPEndPoint(IPAddress.Any, UDP_PORT));
 
 			ReceiveMessagesUDP(listenerUDP);
 			//Waiting for connections
@@ -247,13 +250,10 @@ namespace GameServer
 			EndPoint ePoint = new IPEndPoint(IPAddress.Any, 0);
 			UdpClient uClient = new UdpClient((IPEndPoint)ePoint);
 			UdpState stateUdp = new UdpState();
-			//stateUdp.endPoint = ePoint;
-			//test
+
 			stateUdp.endPoint = (IPEndPoint) ePoint;
 			stateUdp.udpClient = uClient;
 
-			//Try
-			stateUdp.udpClient.EnableBroadcast = true;
 
 			stateUdp.workingSocket = udpSocket;
 
@@ -271,9 +271,6 @@ namespace GameServer
 			//Get a state from the AR
 			UdpState stateUdp = ((UdpState)(ar.AsyncState));
 
-			//Get main parametres
-			//UdpClient uClient = stateUdp.udpClient;
-			//EndPoint ePoint = stateUdp.endPoint;
 			Socket sock = stateUdp.workingSocket;
 			Console.WriteLine(stateUdp.endPoint.Address);
 			int byteSent = sock.EndSendTo(ar);
@@ -284,6 +281,18 @@ namespace GameServer
 		{
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
 			socket.BeginSendTo(byteData, 0, byteData.Length, 0, stateUdp.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
+
+			//TEST
+			SendUDpBroadcast(msg);
+		}
+
+		//TEST
+		public static void SendUDpBroadcast(String msg)
+		{ 
+			UdpClient client = new UdpClient();
+			IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, 15000);
+			byte[] bytes = Encoding.ASCII.GetBytes(msg);
+			client.Send(bytes, bytes.Length, ip);
 		}
 
 	}
