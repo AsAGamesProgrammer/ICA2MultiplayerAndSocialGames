@@ -225,6 +225,11 @@ namespace GameServer
 		//UDP
 		public static bool messageReceived = false;
 
+		//Register
+		public static void RegisterUdp()
+		{
+			Console.WriteLine("UDP registration is coming");
+		}
 
 		//				RECEIVE
 		//---------------------------------------
@@ -259,6 +264,13 @@ namespace GameServer
 			if (receiveString.IndexOf("\n") > -1)
 				{
 					SendUDP(sock, receiveString, stateUdp);
+
+					string sub = receiveString.Substring(0, 3);
+					
+					//Registartion check
+					if(sub == "REG")
+						RegisterUdp();
+
 					stateUdp.buffer = new byte[1024];
 				}
 			//----------------TEST-----------------
@@ -270,7 +282,6 @@ namespace GameServer
 		}
 
 		public static void ReceiveMessagesUDP(Socket udpSocket)
-
 		{
 			EndPoint ePoint = new IPEndPoint(IPAddress.Any, 0);
 			UdpClient uClient = new UdpClient((IPEndPoint)ePoint);

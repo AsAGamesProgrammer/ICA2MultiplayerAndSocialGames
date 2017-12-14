@@ -105,15 +105,22 @@ void GameLoop::sendUDPUpdata(std::string msg)
 
 void GameLoop::receiveUDP()
 {
-    char data[100];
-    std::size_t received;
-    sf::IpAddress sender;
-    unsigned short port;
-    if (socketUDP.receive(data, 100, received, sender, port) != sf::Socket::Done)
+    while(true)
     {
-        std::cout<<"Failed to receive UDP"<<std::endl;
+        char data[100];
+        std::size_t received;
+        sf::IpAddress sender;
+        unsigned short port;
+        if (socketUDP.receive(data, 100, received, sender, port) != sf::Socket::Done)
+        {
+            std::cout<<"Failed to receive UDP"<<std::endl;
+        }
+        
+        //Print only if received text
+        char firstLit = data[0];
+        if(firstLit != '\0')
+        std::cout << "Received "<<data<< " which is " << received << " bytes from " << sender << " on port " << port << std::endl;
     }
-    std::cout << "Received "<<data<< " which is " << received << " bytes from " << sender << " on port " << port << std::endl;
 }
 
 
@@ -127,9 +134,11 @@ void GameLoop::OpenLobbie()
     
     //THREADS
     //Listens to TCP
-    std::thread t1(&GameLoop::receiveTCP, this);
+    std::thread tcpRecThread (&GameLoop::receiveTCP, this);
+    std::thread udpRecThread (&GameLoop::receiveUDP, this);
     
     sendTCPData("TCP Register");
+    sendUDPUpdata("REG hello");
     
     //GAME LOOP
     while (window.isOpen())
@@ -166,6 +175,7 @@ void GameLoop::OpenLobbie()
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
             lobby.selectPrevBtn();
+            sendUDPUpdata("Prev pressed");
         }
         
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
@@ -176,7 +186,8 @@ void GameLoop::OpenLobbie()
         //receiveUDP();
     }
     
-    t1.join();
+    tcpRecThread.join();
+    udpRecThread.join();
 }
 
 
