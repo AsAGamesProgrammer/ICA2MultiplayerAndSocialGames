@@ -15,7 +15,10 @@ namespace GameServer
 	//
 
 	/// <summary>
-	/// Additional class which holds state information
+	/// TODO: Add TCP and UDP clients in the same dictionary
+	/// 	  Have multicast and unicast as two different options
+	/// 	  Receive different types of msgs and react to them
+	/// 	  
 	/// </summary>
 
 	//--------------------------------------
@@ -61,6 +64,16 @@ namespace GameServer
 		//To reconsider
 		public int id;
 	}
+
+	/*
+		PRODUCER-CONSUMER
+		Queues separate for udp and tcp
+		OR
+		One shared
+		
+		Main loop is consumer, receives are producers. Read data in one place, dequeue in another
+		
+	*/
 
 	/// <summary>
 	/// Main body of the server
@@ -128,14 +141,16 @@ namespace GameServer
 			}
 		}
 
-		//--------------------------------------
-		//				TCP
-		//--------------------------------------
+		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		//																						TCP
+		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		//TCP
 		public static ManualResetEvent allDone = new ManualResetEvent(false);
 
-		//Register
+		//---------------------------------------
+		//				REGISTER
+		//---------------------------------------
 		public static void RegisterClient(Socket sock)
 		{
 			client clientA = new client();
@@ -164,6 +179,9 @@ namespace GameServer
 		}
 
 
+		//---------------------------------------
+		//				RECEIVE
+		//---------------------------------------
 		//Reading data
 		public static void ReadCallbackTCP(IAsyncResult ar)
 		{
@@ -201,6 +219,9 @@ namespace GameServer
 
 		}
 
+		//---------------------------------------
+		//				   SEND
+		//---------------------------------------
 		//Sending data
 		public static void SendTCP(Socket socket, String msg)
 		{
@@ -226,13 +247,17 @@ namespace GameServer
 			//handle.Close();
 		}
 
-		//--------------------------------------
-		//				UDP
-		//--------------------------------------
+
+		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		//																						UDP
+		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		//UDP
 		public static bool messageReceived = false;
 
+		//---------------------------------------
+		//				REGISTER
+		//---------------------------------------
 		//Register
 		public static void RegisterUdp(IPEndPoint endP, Socket sock, String name)
 		{
@@ -245,6 +270,7 @@ namespace GameServer
 			Console.WriteLine("UDP registration is coming");
 		}
 
+		//---------------------------------------
 		//				RECEIVE
 		//---------------------------------------
 
@@ -273,7 +299,7 @@ namespace GameServer
 			string receiveString = Encoding.ASCII.GetString(((UdpState)ar.AsyncState).buffer);
 			Console.WriteLine("UDP received: {0}", receiveString);
 
-			//----------------TEST-----------------
+			//----------------RECEIVED-----------------
 			//SEND BACK
 			if (receiveString.IndexOf("\n") > -1)
 				{
@@ -290,7 +316,7 @@ namespace GameServer
 
 					stateUdp.buffer = new byte[1024];
 				}
-			//----------------TEST-----------------
+			//----------------RECEIVED-----------------
 
 			// The message then needs to be handleed
 			//messageReceived = true;
@@ -316,7 +342,8 @@ namespace GameServer
 			udpSocket.BeginReceiveFrom(stateUdp.buffer, 0, stateUdp.bufferSize, 0, ref ePoint, new AsyncCallback(ReceiveCallbackUDP), stateUdp);
 		}
 
-		//				  SEND
+		//---------------------------------------
+		//				   SEND
 		//---------------------------------------
 
 		public static void SendCallbackUDP(IAsyncResult ar)
@@ -354,7 +381,7 @@ namespace GameServer
 			}
 
 			//Functional
-			socket.BeginSendTo(byteData, 0, byteData.Length, 0, stateUdp.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
+			//socket.BeginSendTo(byteData, 0, byteData.Length, 0, stateUdp.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
 		}
 
 		//TEST
