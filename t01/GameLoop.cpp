@@ -43,11 +43,11 @@ GameLoop::GameLoop()
     
     
     //SEND TCP DATA
-    sendTCPData("test");
+    sendTCPData("test TCP lalala");
     receiveTCP();
     
     //SEND UDP DATA
-    sendUDPUpdata("test");
+    sendUDPUpdata("testing broadcast P");
     receiveUDP();
 }
 
@@ -59,13 +59,11 @@ GameLoop::GameLoop()
 void GameLoop::sendTCPData(std::string msg)
 {
     std::string combinedString = msg + "\n";
-    //char data[255]="Welcome to the Racing Forever\n";
-    char* data = new char[combinedString.length()];
+    char data[255];
     strcpy(data, combinedString.c_str());
-    data[sizeof(data) - 1] = 0;
-    int leng = combinedString.length();
+    printf("Sending TCP: %s\n", data);
     
-    if (socketTCP.send(data, leng) != sf::Socket::Done)
+    if (socketTCP.send(data, combinedString.length()) != sf::Socket::Done)
     {
         std::cout<<"Failed to send a msg (TCP)"<<std::endl;
     }
@@ -95,23 +93,18 @@ void GameLoop::receiveTCP()
 //Send UDP
 void GameLoop::sendUDPUpdata(std::string msg)
 {
-    
-    
-    //std::string myString = "Client said Hello \n";
-    char data[100] = "Client said Hello \n";
-    //strcpy(data, myString.c_str());
-    
+    std::string combinedString = msg + "\n";
+    char data[255];
+    strcpy(data, combinedString.c_str());
+
     printf("Sending UDP: %s\n", data);
-    //printf("Sending: %s\n", myString.c_str());
     
     sf::IpAddress recipient = "255.255.255.255";
     unsigned short port = 7576;
-    if (socketUDP.send(data, 100, recipient, port) != sf::Socket::Done)
+    if (socketUDP.send(data, combinedString.length(), recipient, port) != sf::Socket::Done)
     {
         std::cout<<"Failed to send a msg (UDP)"<<std::endl;
     }
-    else
-        std::cout<<"UDP send worked"<<std::endl;
 }
 
 void GameLoop::receiveUDP()
