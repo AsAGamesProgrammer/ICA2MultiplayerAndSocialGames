@@ -48,10 +48,17 @@ namespace GameServer
 		}
 	}
 
-	//TEST Client
+	//Client class
 	class client
 	{
+		//Tcp
 		public Socket tcpSock;
+
+		//Udp
+		public IPEndPoint endPoint;
+		public Socket udpSocket;
+
+		//To reconsider
 		public int id;
 	}
 
@@ -68,6 +75,7 @@ namespace GameServer
 		static int TCP_PORT = 7578;
 
 		static List<client> myClients = new List<client>();
+		static Dictionary<string, client> clientDictionary = new Dictionary<string, client>();
 
 
 		//--------------------------------------
@@ -226,8 +234,14 @@ namespace GameServer
 		public static bool messageReceived = false;
 
 		//Register
-		public static void RegisterUdp()
+		public static void RegisterUdp(IPEndPoint endP, Socket sock, String name)
 		{
+			client newUdpClient = new client();
+			newUdpClient.udpSocket = sock;
+			newUdpClient.endPoint = endP;
+
+			clientDictionary.Add(name, newUdpClient);
+
 			Console.WriteLine("UDP registration is coming");
 		}
 
@@ -266,10 +280,13 @@ namespace GameServer
 					SendUDP(sock, receiveString, stateUdp);
 
 					string sub = receiveString.Substring(0, 3);
-					
-					//Registartion check
-					if(sub == "REG")
-						RegisterUdp();
+
+				//Registartion check
+				if (sub == "REG")
+				{
+					string charName = receiveString.Substring(0, receiveString.Length-1);
+					RegisterUdp(stateUdp.endPoint, sock, charName);
+				}
 
 					stateUdp.buffer = new byte[1024];
 				}
@@ -312,14 +329,14 @@ namespace GameServer
 			int byteSent = sock.EndSendTo(ar);
 
 
-			//-----------BROADCAST-----------
-			//TEST2
-			IPEndPoint ip = new IPEndPoint(IPAddress.Parse("255.255.255.255"), UDP_PORT);
-			//IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, UDP_PORT);
-			byte[] bytes = Encoding.ASCII.GetBytes("Woof");
-			sock.EnableBroadcast = true;
-			sock.SendTo(bytes, ip);
-			//----------------------------------
+			////-----------BROADCAST-----------
+			////TEST2
+			//IPEndPoint ip = new IPEndPoint(IPAddress.Parse("255.255.255.255"), UDP_PORT);
+			////IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, UDP_PORT);
+			//byte[] bytes = Encoding.ASCII.GetBytes("Woof");
+			//sock.EnableBroadcast = true;
+			//sock.SendTo(bytes, ip);
+			////----------------------------------
 		
 		}
 
@@ -327,12 +344,17 @@ namespace GameServer
 		public static void SendUDP(Socket socket, String msg, UdpState stateUdp)
 		{
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
+
+			//Test
+			foreach (client entry in clientDictionary.Values)
+			{
+				stateUdp.workingSocket = entry.udpSocket;
+				stateUdp.endPoint = entry.endPoint;
+				entry.udpSocket.BeginSendTo(byteData, 0, byteData.Length, 0, entry.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
+			}
+
+			//Functional
 			socket.BeginSendTo(byteData, 0, byteData.Length, 0, stateUdp.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
-
-			//socket.BeginSendTo(byteData, 0, byteData.Length, 0, ip, new AsyncCallback(SendCallbackUDP), stateUdp);
-
-			//TEST
-			//SendUDpBroadcast(msg);
 		}
 
 		//TEST
