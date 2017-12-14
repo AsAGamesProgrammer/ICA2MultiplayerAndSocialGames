@@ -18,6 +18,7 @@
 
 #include "GameLoop.hpp"
 #include <stdio.h>
+#include <thread>
 
 //GLOBAL VARIABLES
 sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height),
@@ -26,9 +27,13 @@ sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf:
 
 GameLoop::GameLoop()
 {
+    
+    //THREADS
+    std::thread t1;
+    
     //--------------------------------------
     //CONNECTIONS
-    
+
     //TCP
     //Create a socket
     sf::Socket::Status status = socketTCP.connect("152.105.5.139", 7578);
@@ -42,13 +47,25 @@ GameLoop::GameLoop()
         std::cout<<"TCP Connected"<<std::endl;
     
     
+    //UDP TEST
+//    if (socketUDP.bind(7576) != sf::Socket::Done)
+//    {
+//        // error...
+//    }
+    
     //SEND TCP DATA
     sendTCPData("test TCP lalala");
-    receiveTCP();
+    //receiveTCP();
+    //receiveTCP();
     
     //SEND UDP DATA
     sendUDPUpdata("testing broadcast P");
-    receiveUDP();
+    //receiveUDP();
+    sendUDPUpdata("Second UDP send");
+    //receiveUDP();
+    
+    t1.join();
+    
 }
 
 //----------------------------------------

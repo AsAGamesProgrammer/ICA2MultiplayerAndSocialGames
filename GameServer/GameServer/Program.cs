@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Text;
 using System.Net;
-
+using System.Collections.Generic;
 
 namespace GameServer
 {
@@ -49,12 +49,11 @@ namespace GameServer
 	}
 
 	//TEST Client
-	//class client
-	//{
-	//	UdpState udpState;
-	//	StateObject tcpState;
-	//	int id;
-	//}
+	class client
+	{
+		public Socket tcpSock;
+		public int id;
+	}
 
 	/// <summary>
 	/// Main body of the server
@@ -65,11 +64,11 @@ namespace GameServer
 		//				USERS
 		//--------------------------------------
 		static int UDP_PORT = 7576;
-		static int UDP_BROADCASTPORT = 7000;
+		//static int UDP_BROADCASTPORT = 15000;
 		static int TCP_PORT = 7578;
 
-		//client clientA;
-		//client clientB;
+		static List<client> myClients = new List<client>();
+
 
 		//--------------------------------------
 		//			LISTENING LOOP
@@ -103,6 +102,10 @@ namespace GameServer
 			Socket listenerUDP = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 			listenerUDP.Bind(new IPEndPoint(IPAddress.Any, UDP_PORT));
 
+			//UDP Broadcast
+			//Socket listenerUDPBroadcast = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+			//listenerUDPBroadcast.Bind(new IPEndPoint(IPAddress.Parse("255.255.255.255"), UDP_BROADCASTPORT));
+
 			ReceiveMessagesUDP(listenerUDP);
 			//Waiting for connections
 			while (true)
@@ -124,6 +127,18 @@ namespace GameServer
 		//TCP
 		public static ManualResetEvent allDone = new ManualResetEvent(false);
 
+		//Register
+		public static void RegisterClient(Socket sock)
+		{
+			client clientA = new client();
+			clientA.id = 0;
+			clientA.tcpSock = sock;
+
+			myClients.Add(clientA);
+
+			Console.WriteLine(myClients.Count);
+		}
+
 		//Accept function
 		public static void AcceptCallbackTCP(IAsyncResult ar)
 		{
@@ -133,6 +148,10 @@ namespace GameServer
 
 			StateObject state = new StateObject();
 			state.workSocket = handle;
+
+			//Registartion
+			RegisterClient(handle);
+
 			handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
 		}
 
@@ -180,7 +199,13 @@ namespace GameServer
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
 			Console.WriteLine("Server sending: {0},", msg);
 
-			socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), socket);
+			foreach (client user in myClients)
+			{
+				//Standard 
+				//socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), socket);
+
+				user.tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), user.tcpSock);
+			}
 		}
 
 
@@ -268,12 +293,23 @@ namespace GameServer
 
 		public static void SendCallbackUDP(IAsyncResult ar)
 		{ 
+
 			//Get a state from the AR
 			UdpState stateUdp = ((UdpState)(ar.AsyncState));
-
 			Socket sock = stateUdp.workingSocket;
 			Console.WriteLine(stateUdp.endPoint.Address);
 			int byteSent = sock.EndSendTo(ar);
+
+
+			//-----------BROADCAST-----------
+			//TEST2
+			IPEndPoint ip = new IPEndPoint(IPAddress.Parse("255.255.255.255"), UDP_PORT);
+			//IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, UDP_PORT);
+			byte[] bytes = Encoding.ASCII.GetBytes("Woof");
+			sock.EnableBroadcast = true;
+			sock.SendTo(bytes, ip);
+			//----------------------------------
+		
 		}
 
 		//Sending data
@@ -282,8 +318,10 @@ namespace GameServer
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
 			socket.BeginSendTo(byteData, 0, byteData.Length, 0, stateUdp.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
 
+			//socket.BeginSendTo(byteData, 0, byteData.Length, 0, ip, new AsyncCallback(SendCallbackUDP), stateUdp);
+
 			//TEST
-			SendUDpBroadcast(msg);
+			//SendUDpBroadcast(msg);
 		}
 
 		//TEST
