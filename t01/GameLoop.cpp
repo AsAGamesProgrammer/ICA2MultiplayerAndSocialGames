@@ -137,7 +137,7 @@ void GameLoop::OpenLobbie()
     std::thread tcpRecThread (&GameLoop::receiveTCP, this);
     std::thread udpRecThread (&GameLoop::receiveUDP, this);
     
-    sendTCPData("TCP Register");
+    sendTCPData("REG Kristina");
     sendUDPUpdata("REG Kristina");
     
     //GAME LOOP

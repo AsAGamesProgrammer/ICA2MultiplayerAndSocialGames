@@ -72,6 +72,13 @@ namespace GameServer
 		One shared
 		
 		Main loop is consumer, receives are producers. Read data in one place, dequeue in another
+		Extra points for broadcasting and detecting  a server
+		Database 
+		Security: xor -> AES key -> TLS/SSL
+		Alias key is simple
+
+		Game logic on server: win/lose etc
+		
 		
 	*/
 
@@ -151,15 +158,28 @@ namespace GameServer
 		//---------------------------------------
 		//				REGISTER
 		//---------------------------------------
-		public static void RegisterClient(Socket sock)
+		//TODO: send a client a confirmation that registration is complete
+		// In the client wait until a confirmation is received before starting on anyting new
+		public static void RegisterClient(Socket sock, String name)
 		{
-			client clientA = new client();
-			clientA.id = 0;
-			clientA.tcpSock = sock;
 
-			myClients.Add(clientA);
+			Console.WriteLine("TCP registartion started");
+			if (clientDictionary.ContainsKey(name))
+			{
+				client existingInfo = clientDictionary[name];
+				existingInfo.tcpSock = sock;
 
-			Console.WriteLine(myClients.Count);
+				clientDictionary[name] = existingInfo;
+			}
+			else
+			{
+				client newClient = new client();
+				newClient.tcpSock = sock;
+
+				clientDictionary.Add(name, newClient);
+			}
+
+			Console.WriteLine("Client is registered with TCP");
 		}
 
 		//Accept function
@@ -171,9 +191,6 @@ namespace GameServer
 
 			StateObject state = new StateObject();
 			state.workSocket = handle;
-
-			//Registartion
-			RegisterClient(handle);
 
 			handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
 		}
@@ -203,12 +220,26 @@ namespace GameServer
 				//Dont output empty messages
 				Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes);
 
+				//----------------RECEIVED-----------------
 				//Reached the end of line
 				if (content.IndexOf("\n") > -1)
 				{
 					SendTCP(handle, content);
+
+					string sub = content.Substring(0, 3);
+
+						//Registartion check
+						if (sub == "REG")
+						{
+							string charName = content.Substring(0, content.Length - 1);
+                            RegisterClient(handle, charName);
+						}
+								//Registartion
+
+
 					state.buffer = new byte[1024];
 				}
+				//----------------RECEIVED-----------------
 
 				handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
 			}
@@ -228,12 +259,12 @@ namespace GameServer
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
 			Console.WriteLine("Server sending: {0},", msg);
 
-			foreach (client user in myClients)
+			foreach (client entry in clientDictionary.Values)
 			{
 				//Standard 
 				//socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), socket);
 
-				user.tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), user.tcpSock);
+				entry.tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), entry.tcpSock);
 			}
 		}
 
@@ -261,13 +292,26 @@ namespace GameServer
 		//Register
 		public static void RegisterUdp(IPEndPoint endP, Socket sock, String name)
 		{
-			client newUdpClient = new client();
-			newUdpClient.udpSocket = sock;
-			newUdpClient.endPoint = endP;
+			Console.WriteLine("UDP registration started");
+			if (clientDictionary.ContainsKey(name))
+			{
 
-			clientDictionary.Add(name, newUdpClient);
+				client existingInfo = clientDictionary[name];
+				existingInfo.udpSocket = sock;
+				existingInfo.endPoint = endP;
 
-			Console.WriteLine("UDP registration is coming");
+				clientDictionary[name] = existingInfo;
+			}
+			else
+			{
+				client newClient = new client();
+				newClient.udpSocket = sock;
+				newClient.endPoint = endP;
+
+				clientDictionary.Add(name, newClient);
+			}
+
+			Console.WriteLine("UDP registration is complete");
 		}
 
 		//---------------------------------------
