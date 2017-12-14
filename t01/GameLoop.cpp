@@ -28,9 +28,6 @@ sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf:
 GameLoop::GameLoop()
 {
     
-    //THREADS
-    std::thread t1;
-    
     //--------------------------------------
     //CONNECTIONS
 
@@ -47,24 +44,22 @@ GameLoop::GameLoop()
         std::cout<<"TCP Connected"<<std::endl;
     
     
-    //UDP TEST
-//    if (socketUDP.bind(7576) != sf::Socket::Done)
-//    {
-//        // error...
-//    }
+    //THREADS
+    //std::thread t1(&GameLoop::receiveTCP, this);
+    
     
     //SEND TCP DATA
-    sendTCPData("test TCP lalala");
+    //sendTCPData("test TCP lalala");
     //receiveTCP();
     //receiveTCP();
     
     //SEND UDP DATA
-    sendUDPUpdata("testing broadcast P");
+    //sendUDPUpdata("testing broadcast P");
     //receiveUDP();
-    sendUDPUpdata("Second UDP send");
+    //sendUDPUpdata("Second UDP send");
     //receiveUDP();
     
-    t1.join();
+   // t1.join();
     
 }
 
@@ -92,19 +87,23 @@ void GameLoop::sendTCPData(std::string msg)
 
 void GameLoop::receiveTCP()
 {
-    //ISSUE!!!
-    //------NEW NEW NEW---------
-    //This should be in a thread
-    //Receives data once
-    
-    char inData[100] = "None";
-    std::size_t received;
-    // TCP socket:
-    if (socketTCP.receive(inData, 100, received) != sf::Socket::Done)
+    while(true)
     {
-        std::cout << "Failed to receive (TCP)"<< std::endl;
+    
+        char inData[100] = "None";
+        std::size_t received;
+        // TCP socket:
+        if (socketTCP.receive(inData, 100, received) != sf::Socket::Done)
+        {
+            std::cout << "Failed to receive (TCP)"<< std::endl;
+        }
+
+        
+        //Print only if received text
+        char firstLit = inData[0];
+        if(firstLit != '\0')
+            std::cout << "Received " << inData <<" with "<<received<<" bytes" << std::endl;
     }
-    std::cout << "Received " << inData <<" with "<<received<<" bytes" << std::endl;
 }
 
 //Send UDP
@@ -146,6 +145,12 @@ void GameLoop::OpenLobbie()
 {
     window.clear();
     
+    //THREADS
+    //Listens to TCP
+    std::thread t1(&GameLoop::receiveTCP, this);
+    
+    sendTCPData("TCP Register");
+    
     //GAME LOOP
     while (window.isOpen())
     {
@@ -175,6 +180,7 @@ void GameLoop::OpenLobbie()
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
             lobby.selectNextBtn();
+            sendTCPData("Next pressed");
         }
         
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
@@ -189,6 +195,8 @@ void GameLoop::OpenLobbie()
         //sendUDPUpdata("test");
         //receiveUDP();
     }
+    
+    t1.join();
 }
 
 
