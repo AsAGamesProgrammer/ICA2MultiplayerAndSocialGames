@@ -43,24 +43,6 @@ GameLoop::GameLoop()
     else
         std::cout<<"TCP Connected"<<std::endl;
     
-    
-    //THREADS
-    //std::thread t1(&GameLoop::receiveTCP, this);
-    
-    
-    //SEND TCP DATA
-    //sendTCPData("test TCP lalala");
-    //receiveTCP();
-    //receiveTCP();
-    
-    //SEND UDP DATA
-    //sendUDPUpdata("testing broadcast P");
-    //receiveUDP();
-    //sendUDPUpdata("Second UDP send");
-    //receiveUDP();
-    
-   // t1.join();
-    
 }
 
 //----------------------------------------
@@ -89,7 +71,6 @@ void GameLoop::receiveTCP()
 {
     while(true)
     {
-    
         char inData[100] = "None";
         std::size_t received;
         // TCP socket:
@@ -97,8 +78,7 @@ void GameLoop::receiveTCP()
         {
             std::cout << "Failed to receive (TCP)"<< std::endl;
         }
-
-        
+ 
         //Print only if received text
         char firstLit = inData[0];
         if(firstLit != '\0')
