@@ -179,6 +179,7 @@ namespace GameServer
 				clientDictionary.Add(name, newClient);
 			}
 
+			SendTCP(sock, "TCP registartion complete");
 			Console.WriteLine("Client is registered with TCP");
 		}
 
@@ -347,8 +348,6 @@ namespace GameServer
 			//SEND BACK
 			if (receiveString.IndexOf("\n") > -1)
 				{
-					SendUDP(sock, receiveString, stateUdp);
-
 					string sub = receiveString.Substring(0, 3);
 
 				//Registartion check
@@ -358,6 +357,8 @@ namespace GameServer
 					RegisterUdp(stateUdp.endPoint, sock, charName);
 				}
 
+				//ECHO
+                    SendUDP(sock, receiveString, stateUdp);
 					stateUdp.buffer = new byte[1024];
 				}
 			//----------------RECEIVED-----------------

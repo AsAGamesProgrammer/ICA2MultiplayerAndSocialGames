@@ -86,6 +86,22 @@ void GameLoop::receiveTCP()
     }
 }
 
+void GameLoop::receiveTCPOnce()
+{
+    char inData[100] = "None";
+    std::size_t received;
+    // TCP socket:
+    if (socketTCP.receive(inData, 100, received) != sf::Socket::Done)
+    {
+        std::cout << "Failed to receive (TCP)"<< std::endl;
+    }
+    
+    //Print only if received text
+    char firstLit = inData[0];
+    if(firstLit != '\0')
+        std::cout << "Received " << inData <<" with "<<received<<" bytes" << std::endl;
+}
+
 //Send UDP
 void GameLoop::sendUDPUpdata(std::string msg)
 {
@@ -123,6 +139,24 @@ void GameLoop::receiveUDP()
     }
 }
 
+void GameLoop::receiveUDPOnce()
+{
+    char data[100];
+    std::size_t received;
+    sf::IpAddress sender;
+    unsigned short port;
+    if (socketUDP.receive(data, 100, received, sender, port) != sf::Socket::Done)
+    {
+        std::cout<<"Failed to receive UDP"<<std::endl;
+    }
+    
+    //Print only if received text
+    char firstLit = data[0];
+    if(firstLit != '\0')
+        std::cout << "Received "<<data<< " which is " << received << " bytes from " << sender << " on port " << port << std::endl;
+    
+}
+
 
 //----------------------------------------
 //              LOBBY
@@ -132,13 +166,15 @@ void GameLoop::OpenLobbie()
 {
     window.clear();
     
+    sendTCPData("REG Kristina");
+    receiveTCPOnce();
+    sendUDPUpdata("REG Kristina");
+    //receiveUDPOnce();
+    
     //THREADS
     //Listens to TCP
     std::thread tcpRecThread (&GameLoop::receiveTCP, this);
     std::thread udpRecThread (&GameLoop::receiveUDP, this);
-    
-    sendTCPData("REG Kristina");
-    sendUDPUpdata("REG Kristina");
     
     //GAME LOOP
     while (window.isOpen())

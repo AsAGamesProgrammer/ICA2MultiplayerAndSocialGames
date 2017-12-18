@@ -64,6 +64,8 @@ private:
     void sendTCPData(std::string msg);
     void receiveTCP();
     void receiveUDP();
+    void receiveTCPOnce();
+    void receiveUDPOnce();
     
 };
 
