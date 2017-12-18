@@ -31,6 +31,10 @@ int main()
     //Start game
     gameLoop.StartGame();
     
+    
+    tcpRecThread.join();
+    udpRecThread.join();
+    
     return 0;
 }
 
