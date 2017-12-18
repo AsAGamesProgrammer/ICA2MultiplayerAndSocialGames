@@ -56,98 +56,75 @@ namespace GameServer
 		//--------------------------------------
 		//				USERS
 		//--------------------------------------
+
+		//Port numbers
 		static int UDP_PORT = 7576;
-		//static int UDP_BROADCASTPORT = 15000;
 		static int TCP_PORT = 7578;
 
-		static List<Client> myClients = new List<Client>();
-		static Dictionary<string, Client> clientDictionary = new Dictionary<string, Client>();
+		//Data structures
+		static Dictionary<string, Client> clientDictionary = new Dictionary<string, Client>();	//Dictionary of clients containng a name and connection information
 
-		static PatternQueue producerConsumer;
+		//Multithreading pattern manager
+		static PatternQueue producerConsumer;													//A queue for the prducer/consumer pattern
+
 		//--------------------------------------
 		//			LISTENING LOOP
 		//--------------------------------------
 
-		//Starting point of the server
+		//MAIN
 		public static void Main(string[] args)
 		{
+			//Test message
 			Console.WriteLine("Hello, I am server!");
 
-			//TEST
+			//Initializig a queue of messages which will be past to the producer/consumer manager
 			Queue<MessageBase> msgQueue = new Queue<MessageBase>();
-
 			producerConsumer = new PatternQueue(msgQueue, new Object());
-			//Task p = Task.Factory.StartNew(() => pc.produce("lala"));
-			//Task c = Task.Factory.StartNew(() => pc.consume());
-			//Task.WaitAll(p, c);
 
-			//Console.readKey();
-			//TEST
-
+			//Entry point to the networking part
 			StartListening();
 		}
 
-		//Starts the server
+		//NETWORKING ENTRY POINT
 		public static void StartListening()
 		{
-			byte[] bytes = new byte[1024];
 
-			//Get host information
+			//HOST INFORMATION
 			IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
 			IPAddress ipAddress = ipHost.AddressList[0];
 			IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Any, TCP_PORT);
 
 			//CREATE SOCKET TCP
 			Socket listenerTCP = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
 			listenerTCP.Bind(ipEndPoint);
 			listenerTCP.Listen(100);
 
 			//CREATE SOCKET UDP
-			//****** BIND???
 			Socket listenerUDP = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 			listenerUDP.Bind(new IPEndPoint(IPAddress.Any, UDP_PORT));
 
-			//UDP Broadcast
-			//Socket listenerUDPBroadcast = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-			//listenerUDPBroadcast.Bind(new IPEndPoint(IPAddress.Parse("255.255.255.255"), UDP_BROADCASTPORT));
 
+			//LOOP for lisening to the UDP messages
 			ReceiveMessagesUDP(listenerUDP);
 
-			//Tcp producer
-			//var th = new Thread(() => TCPProduce(listenerTCP));
-			//th.Start();
-
+			//Thread for TCP consumer
 			var th = new Thread(interpretTCP);
 			th.Start();
-			//producerConsumer.consume();
 
-			//Waiting for connections
+			//Loop for TCP producer
 			while (true)
 			{
-				//listenerUDP.BeginAccept(new AsyncCallback(ReceiveMessagesUDP), listenerUDP);
-				//Liten to UDP
-
 				allDone.Reset();
 				listenerTCP.BeginAccept(new AsyncCallback(AcceptCallbackTCP), listenerTCP);
-				//th.Start();
-
-				//Consume TCP
-
-
 				allDone.WaitOne();
 
 			}
 		}
 
-		public static void TCPProduce(Socket listenerTCP)
-		{
-			listenerTCP.BeginAccept(new AsyncCallback(AcceptCallbackTCP), listenerTCP);
-		}
 
-		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		//																						TCP
-		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		///---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		///																						TCP
+		///---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		//TCP
 		public static ManualResetEvent allDone = new ManualResetEvent(false);
@@ -258,27 +235,6 @@ namespace GameServer
 
 			while (true)
 			{
-				////----------------RECEIVED-----------------
-				////Reached the end of line
-				//if (content.IndexOf("\n") > -1)
-				//{
-				//                SendTCP(handle, content);
-
-				//	string sub = content.Substring(0, 3);
-
-				//		//Registartion check
-				//		if (sub == "REG")
-				//		{
-				//			string charName = content.Substring(0, content.Length - 1);
-
-				//			RegisterClient(handle, charName);
-				//		}
-				//				//Registartion
-
-				//}
-				//----------------RECEIVED-----------------
-
-
 				MessageBase newMsg = producerConsumer.consume();
 
 				if (newMsg !=null)
@@ -462,16 +418,6 @@ namespace GameServer
 			Console.WriteLine(stateUdp.endPoint.Address);
 			int byteSent = sock.EndSendTo(ar);
 
-
-			////-----------BROADCAST-----------
-			////TEST2
-			//IPEndPoint ip = new IPEndPoint(IPAddress.Parse("255.255.255.255"), UDP_PORT);
-			////IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, UDP_PORT);
-			//byte[] bytes = Encoding.ASCII.GetBytes("Woof");
-			//sock.EnableBroadcast = true;
-			//sock.SendTo(bytes, ip);
-			////----------------------------------
-
 		}
 
 		//Sending data
@@ -487,17 +433,6 @@ namespace GameServer
 				entry.udpSocket.BeginSendTo(byteData, 0, byteData.Length, 0, entry.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
 			}
 
-			//Functional
-			//socket.BeginSendTo(byteData, 0, byteData.Length, 0, stateUdp.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
-		}
-
-		//TEST
-		public static void SendUDpBroadcast(String msg)
-		{
-			UdpClient client = new UdpClient();
-			IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, 15000);
-			byte[] bytes = Encoding.ASCII.GetBytes(msg);
-			client.Send(bytes, bytes.Length, ip);
 		}
 
 	}
