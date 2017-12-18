@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace GameServer
 {
 
-	//TODO: UDP server
+	//TODO: MEssage system which will support test messages ana tcp registration
 
 	// TCP: 7578
 	// UDP: 7576
@@ -74,14 +74,14 @@ namespace GameServer
 			Console.WriteLine("Hello, I am server!");
 
 			//TEST
-			Queue<string> msgQueue = new Queue<string>();
+			Queue<MessageBase> msgQueue = new Queue<MessageBase>();
 
 			producerConsumer = new PatternQueue(msgQueue, new Object());
 			//Task p = Task.Factory.StartNew(() => pc.produce("lala"));
 			//Task c = Task.Factory.StartNew(() => pc.consume());
 			//Task.WaitAll(p, c);
 
-       		//Console.readKey();
+			//Console.readKey();
 			//TEST
 
 			StartListening();
@@ -226,19 +226,22 @@ namespace GameServer
 				Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes);
 				state.buffer = new byte[1024];
 
-                //interpretTCP(state, readBytes, content);
+				//interpretTCP(state, readBytes, content);
 
 				//Produce content and handle?
-				producerConsumer.produce(content);
+				MessageBase msg = new MessageBase();
+				msg.sock = state.workSocket;
+				msg.body = content;
+				producerConsumer.produce(msg);
 				//Read TCP and make sense of it
 
 				//Temp register
-				RegisterClient(state.workSocket, "Test");
+				//RegisterClient(state.workSocket, "Test");
 
 				handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
 
 
-								//TEST PRODUCE
+				//TEST PRODUCE
 				//producerConsumer.produce(content);
 
 			}
@@ -275,16 +278,22 @@ namespace GameServer
 				//}
 				//----------------RECEIVED-----------------
 
-				StringBuilder content = new StringBuilder();
-				producerConsumer.consume(content);
 
-				//if (content != "NONE")
-				//{
+				MessageBase newMsg = producerConsumer.consume();
 
-				if (content.ToString() != "")
+				if (newMsg !=null)
 				{
-					Console.WriteLine("Server consumed content of " + content);
-					SendTCP(content.ToString());
+					string sub = newMsg.body.Substring(0, 3);
+
+					if (sub == "REG")
+					{
+						string charName = (newMsg.body.Substring(0, newMsg.body.Length - 1));
+
+						RegisterClient(newMsg.sock, charName);
+					}
+
+					Console.WriteLine("Server consumed content of " + newMsg.body);
+					SendTCP(newMsg.body);
 				}
 			}
 
@@ -293,19 +302,19 @@ namespace GameServer
 		//---------------------------------------
 		//				   SEND
 		//---------------------------------------
-//public static void SendTCPTo(Socket sock, String msg)
-//{
-//	byte[] byteData = Encoding.ASCII.GetBytes(msg);
-//	Console.WriteLine("Server sending: {0},", msg);
+		//public static void SendTCPTo(Socket sock, String msg)
+		//{
+		//	byte[] byteData = Encoding.ASCII.GetBytes(msg);
+		//	Console.WriteLine("Server sending: {0},", msg);
 
-//	foreach (Client entry in clientDictionary.Values)
-//	{
-//		//Standard 
-//		//socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), socket);
+		//	foreach (Client entry in clientDictionary.Values)
+		//	{
+		//		//Standard 
+		//		//socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), socket);
 
-//		entry.tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), entry.tcpSock);
-//	}
-//		}
+		//		entry.tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), entry.tcpSock);
+		//	}
+		//		}
 
 		//Sending data to all
 		public static void SendTCP(String msg)
@@ -392,7 +401,7 @@ namespace GameServer
 			//Read data into a buffer
 			int receiveBytes = sock.EndReceiveFrom(ar, ref ePoint);
 
-			stateUdp.endPoint = (IPEndPoint) ePoint;
+			stateUdp.endPoint = (IPEndPoint)ePoint;
 
 			string receiveString = Encoding.ASCII.GetString(((UdpState)ar.AsyncState).buffer);
 			Console.WriteLine("UDP received: {0}", receiveString);
@@ -400,20 +409,20 @@ namespace GameServer
 			//----------------RECEIVED-----------------
 			//SEND BACK
 			if (receiveString.IndexOf("\n") > -1)
-				{
-					string sub = receiveString.Substring(0, 3);
+			{
+				string sub = receiveString.Substring(0, 3);
 
 				//Registartion check
 				if (sub == "REG")
 				{
-					string charName = receiveString.Substring(0, receiveString.Length-1);
+					string charName = receiveString.Substring(0, receiveString.Length - 1);
 					RegisterUdp(stateUdp.endPoint, sock, charName);
 				}
 
 				//ECHO
-                    SendUDP(sock, receiveString, stateUdp);
-					stateUdp.buffer = new byte[1024];
-				}
+				SendUDP(sock, receiveString, stateUdp);
+				stateUdp.buffer = new byte[1024];
+			}
 			//----------------RECEIVED-----------------
 
 			// The message then needs to be handleed
@@ -428,7 +437,7 @@ namespace GameServer
 			UdpClient uClient = new UdpClient((IPEndPoint)ePoint);
 			UdpState stateUdp = new UdpState();
 
-			stateUdp.endPoint = (IPEndPoint) ePoint;
+			stateUdp.endPoint = (IPEndPoint)ePoint;
 			stateUdp.udpClient = uClient;
 
 
@@ -445,7 +454,7 @@ namespace GameServer
 		//---------------------------------------
 
 		public static void SendCallbackUDP(IAsyncResult ar)
-		{ 
+		{
 
 			//Get a state from the AR
 			UdpState stateUdp = ((UdpState)(ar.AsyncState));
@@ -462,7 +471,7 @@ namespace GameServer
 			//sock.EnableBroadcast = true;
 			//sock.SendTo(bytes, ip);
 			////----------------------------------
-		
+
 		}
 
 		//Sending data
@@ -484,7 +493,7 @@ namespace GameServer
 
 		//TEST
 		public static void SendUDpBroadcast(String msg)
-		{ 
+		{
 			UdpClient client = new UdpClient();
 			IPEndPoint ip = new IPEndPoint(IPAddress.Broadcast, 15000);
 			byte[] bytes = Encoding.ASCII.GetBytes(msg);

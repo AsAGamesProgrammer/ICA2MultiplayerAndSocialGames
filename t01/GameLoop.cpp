@@ -58,7 +58,7 @@ GameLoop::GameLoop()
     
     sendTCPData("REG " + userName);
     
-    //receiveTCPOnce();
+    receiveTCPOnce();
     //sendUDPUpdata("REG " + userName);
 }
 

@@ -55,16 +55,16 @@ namespace GameServer
 		//	}
 		//} 	
 
-		Queue<string> _MyQueue;
+		Queue<MessageBase> _MyQueue;
 		private Object _lockObject;
 
-		public PatternQueue(Queue<string> MyQueue, Object lockObject)
+		public PatternQueue(Queue<MessageBase> MyQueue, Object lockObject)
 		{
 			this._MyQueue = MyQueue;
 			_lockObject = lockObject;
 		}
 
-		public void produce(string message)
+		public void produce(MessageBase message)
 		{
 			//int msgId = 0;
 			Console.WriteLine("PRODUCER " + message);
@@ -89,7 +89,7 @@ namespace GameServer
 			}
 		}
 
-		public void consume(StringBuilder fetchedData)
+		public MessageBase consume()
 		{
 			//while (true)
 			//{
@@ -103,19 +103,21 @@ namespace GameServer
 						{
 							//continue;
 							//}
-							string msg = _MyQueue.Dequeue();
-							Console.WriteLine ("CONSUMER: {0}", msg);
+
+							var msg = _MyQueue.Dequeue();
+							//Console.WriteLine ("CONSUMER: {0}", msg);
 
 							//Fetch 
-							fetchedData.Append(msg);
+							//fetchedData.Append(msg);
 
 							Monitor.Pulse(_lockObject);
 
 
-
+					return msg;
 						//}
 					}
 				}
+			return null;
 			//}
 
 			} 
