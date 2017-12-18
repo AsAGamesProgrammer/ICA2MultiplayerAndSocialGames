@@ -15,55 +15,11 @@ namespace GameServer
 	//
 
 	/// <summary>
-	/// TODO: Add TCP and UDP clients in the same dictionary
+	/// TODO: 
 	/// 	  Have multicast and unicast as two different options
 	/// 	  Receive different types of msgs and react to them
 	/// 	  
 	/// </summary>
-
-	//--------------------------------------
-	//				STATE OBJECT
-	//--------------------------------------
-
-	//TCP
-	class StateObject
-	{
-		public Socket workSocket;
-		public int bufferSize = 1024;
-		public byte[] buffer = new byte[1024];
-		public StringBuilder stringB = new StringBuilder();
-	};
-
-	//UDP
-	class UdpState
-	{
-		public Socket workingSocket;
-		public IPEndPoint endPoint;
-		public UdpClient udpClient;
-		public int bufferSize = 1024;
-		public byte[] buffer = new byte[1024];
-
-		//Constructor
-		public UdpState()
-		{
-			udpClient = new UdpClient();
-			udpClient.EnableBroadcast = true;
-		}
-	}
-
-	//Client class
-	class client
-	{
-		//Tcp
-		public Socket tcpSock;
-
-		//Udp
-		public IPEndPoint endPoint;
-		public Socket udpSocket;
-
-		//To reconsider
-		public int id;
-	}
 
 	/*
 		PRODUCER-CONSUMER
@@ -94,8 +50,8 @@ namespace GameServer
 		//static int UDP_BROADCASTPORT = 15000;
 		static int TCP_PORT = 7578;
 
-		static List<client> myClients = new List<client>();
-		static Dictionary<string, client> clientDictionary = new Dictionary<string, client>();
+		static List<Client> myClients = new List<Client>();
+		static Dictionary<string, Client> clientDictionary = new Dictionary<string, Client>();
 
 
 		//--------------------------------------
@@ -166,14 +122,14 @@ namespace GameServer
 			Console.WriteLine("TCP registartion started");
 			if (clientDictionary.ContainsKey(name))
 			{
-				client existingInfo = clientDictionary[name];
+				Client existingInfo = clientDictionary[name];
 				existingInfo.tcpSock = sock;
 
 				clientDictionary[name] = existingInfo;
 			}
 			else
 			{
-				client newClient = new client();
+				Client newClient = new Client();
 				newClient.tcpSock = sock;
 
 				clientDictionary.Add(name, newClient);
@@ -260,7 +216,7 @@ namespace GameServer
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
 			Console.WriteLine("Server sending: {0},", msg);
 
-			foreach (client entry in clientDictionary.Values)
+			foreach (Client entry in clientDictionary.Values)
 			{
 				//Standard 
 				//socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), socket);
@@ -297,7 +253,7 @@ namespace GameServer
 			if (clientDictionary.ContainsKey(name))
 			{
 
-				client existingInfo = clientDictionary[name];
+				Client existingInfo = clientDictionary[name];
 				existingInfo.udpSocket = sock;
 				existingInfo.endPoint = endP;
 
@@ -305,7 +261,7 @@ namespace GameServer
 			}
 			else
 			{
-				client newClient = new client();
+				Client newClient = new Client();
 				newClient.udpSocket = sock;
 				newClient.endPoint = endP;
 
@@ -418,7 +374,7 @@ namespace GameServer
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
 
 			//Test
-			foreach (client entry in clientDictionary.Values)
+			foreach (Client entry in clientDictionary.Values)
 			{
 				stateUdp.workingSocket = entry.udpSocket;
 				stateUdp.endPoint = entry.endPoint;

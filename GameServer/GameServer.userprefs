@@ -1,7 +1,10 @@
 ﻿<Properties StartupConfiguration="{674FD8F9-F991-47AB-B0F4-DF0CD59EC235}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="GameServer/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GameServer/Client.cs">
     <Files>
-      <File FileName="GameServer/Program.cs" Line="309" Column="31" />
+      <File FileName="GameServer/Program.cs" Line="28" Column="1" />
+      <File FileName="GameServer/StateObject.cs" Line="14" Column="28" />
+      <File FileName="GameServer/UDPState.cs" Line="3" Column="18" />
+      <File FileName="GameServer/Client.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
