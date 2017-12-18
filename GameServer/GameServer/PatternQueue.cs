@@ -55,32 +55,35 @@ namespace GameServer
 		//	}
 		//} 	
 
-		Queue<message> _MyQueue;
+		Queue<string> _MyQueue;
 		private Object _lockObject;
 
-		public PatternQueue(Queue<message> MyQueue, Object lockObject)
+		public PatternQueue(Queue<string> MyQueue, Object lockObject)
 		{
 			this._MyQueue = MyQueue;
 			_lockObject = lockObject;
 		}
 
-		public void produce()
+		public void produce(string message)
 		{
-			int msgId = 0;
+			//int msgId = 0;
 
 			lock (_lockObject)
 			{
-				while (msgId < 10)
-				{
-					Thread.Sleep(500);
+				//while (msgId < 10)
+				//{
+					//Thread.Sleep(500);
 					Monitor.Wait(_lockObject);
-					msgId++;
-					message msg = new message
-					{ Id = msgId, body = "Message " + msgId, sendDate = DateTime.Now };
-					Console.WriteLine("Sending message : {0}", msg.body);
-					_MyQueue.Enqueue(msg);
+					//msgId++;
+					//message msg = new message
+					//{ Id = msgId, body = "Message " + msgId, sendDate = DateTime.Now };
+					//Console.WriteLine("Sending message : {0}", msg.body);
+
+					_MyQueue.Enqueue(message);
 					Monitor.Pulse(_lockObject);
-				}
+				//}
+
+
 			}
 		}
 
@@ -89,17 +92,18 @@ namespace GameServer
 			lock (_lockObject)
 			{
 				Monitor.Pulse(_lockObject);
-				while (Monitor.Wait(_lockObject, 1000))
+				//while (Monitor.Wait(_lockObject, 1000))
+				//{
+				if (_MyQueue.Count > 0)
 				{
-					if (_MyQueue.Count == 0)
-					{
-						continue;
-					}
-					message msg = _MyQueue.Dequeue();
+					//continue;
+					//}
+					string msg = _MyQueue.Dequeue();
 					Console.WriteLine
-					(" Message : {0} received at :  {1}", msg.body, msg.sendDate);
+						   (" Message received: {0}", msg);
 					Monitor.Pulse(_lockObject);
 				}
+				//}
 			} 
 		}  
 	}

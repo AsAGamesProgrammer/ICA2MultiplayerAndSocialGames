@@ -41,12 +41,12 @@ namespace GameServer
 	*/
 
 	//TEST
-	public class message
-	{
-		public int Id;
-		public string body;
-		public DateTime sendDate;
-	}
+	//public class message
+	//{
+	//	public int Id;
+	//	public string body;
+	//	public DateTime sendDate;
+	//}
 
 	/// <summary>
 	/// Main body of the server
@@ -74,10 +74,10 @@ namespace GameServer
 			Console.WriteLine("Hello, I am server!");
 
 			//TEST
-			Queue<message> msgQueue = new Queue<message>();
+			Queue<string> msgQueue = new Queue<string>();
 
 			PatternQueue pc = new PatternQueue(msgQueue, new Object());
-			Task p = Task.Factory.StartNew(() => pc.produce());
+			Task p = Task.Factory.StartNew(() => pc.produce("lala"));
 			Task c = Task.Factory.StartNew(() => pc.consume());
 			Task.WaitAll(p, c);
 
@@ -172,6 +172,7 @@ namespace GameServer
 			state.workSocket = handle;
 
 			handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
+
 		}
 
 
