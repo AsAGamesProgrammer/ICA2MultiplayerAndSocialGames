@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{674FD8F9-F991-47AB-B0F4-DF0CD59EC235}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="GameServer/Program.cs">
     <Files>
-      <File FileName="GameServer/PatternQueue.cs" Line="80" Column="59" NotebookId="1" />
+      <File FileName="GameServer/PatternQueue.cs" Line="62" Column="4" NotebookId="1" />
       <File FileName="GameServer/StateObject.cs" Line="14" Column="28" NotebookId="1" />
       <File FileName="GameServer/UDPState.cs" Line="2" Column="1" NotebookId="1" />
       <File FileName="GameServer/Client.cs" Line="16" Column="3" NotebookId="1" />
@@ -9,7 +9,7 @@
     <FloatingWindows>
       <FloatingWindow WindowId="1" X="0" Y="23" Width="2560" Height="1315">
         <Files>
-          <File FileName="GameServer/Program.cs" Line="75" Column="4" />
+          <File FileName="GameServer/Program.cs" Line="131" Column="79" />
         </Files>
       </FloatingWindow>
     </FloatingWindows>

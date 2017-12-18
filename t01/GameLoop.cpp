@@ -57,6 +57,12 @@ GameLoop::GameLoop()
     std::cin>>userName;
     
     sendTCPData("REG " + userName);
+    
+    //TEST
+    sendTCPData("1");
+    sendTCPData("2");
+    sendTCPData("3");
+    
     receiveTCPOnce();
     sendUDPUpdata("REG " + userName);
 }
@@ -183,16 +189,6 @@ void GameLoop::receiveUDPOnce()
 void GameLoop::OpenLobbie()
 {
     window.clear();
-    
-//    std::cout<<"Hi driver! What is your name? "<<std::endl;
-//
-//    std::string userName;
-//    std::cin>>userName;
-//
-//    sendTCPData("REG " + userName);
-//    receiveTCPOnce();
-//    sendUDPUpdata("REG " + userName);
-    //receiveUDPOnce();
     
     //THREADS
     //Listens to TCP

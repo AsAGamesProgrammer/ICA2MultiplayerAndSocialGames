@@ -67,6 +67,7 @@ namespace GameServer
 		public void produce(string message)
 		{
 			//int msgId = 0;
+			Console.WriteLine("PRODUCER " + message);
 
 			lock (_lockObject)
 			{
@@ -77,7 +78,8 @@ namespace GameServer
 					//msgId++;
 					//message msg = new message
 					//{ Id = msgId, body = "Message " + msgId, sendDate = DateTime.Now };
-					//Console.WriteLine("Sending message : {0}", msg.body);
+					
+					
 
 					_MyQueue.Enqueue(message);
 					Monitor.Pulse(_lockObject);
@@ -89,22 +91,31 @@ namespace GameServer
 
 		public void consume()
 		{
-			lock (_lockObject)
+			while (true)
 			{
-				Monitor.Pulse(_lockObject);
-				//while (Monitor.Wait(_lockObject, 1000))
-				//{
-				if (_MyQueue.Count > 0)
+				string msgg = "none";
+
+				lock (_lockObject)
 				{
-					//continue;
-					//}
-					string msg = _MyQueue.Dequeue();
-					Console.WriteLine
-						   (" Message received: {0}", msg);
 					Monitor.Pulse(_lockObject);
+					while (Monitor.Wait(_lockObject, 100))
+					{
+						if (_MyQueue.Count > 0)
+						{
+							//continue;
+							//}
+							string msg = _MyQueue.Dequeue();
+							Console.WriteLine
+								   ("CONSUMER: {0}", msg);
+							Monitor.Pulse(_lockObject);
+
+
+							msgg = msg;
+						}
+					}
 				}
-				//}
+			}
+
 			} 
-		}  
 	}
 }

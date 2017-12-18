@@ -63,7 +63,7 @@ namespace GameServer
 		static List<Client> myClients = new List<Client>();
 		static Dictionary<string, Client> clientDictionary = new Dictionary<string, Client>();
 
-
+		static PatternQueue producerConsumer;
 		//--------------------------------------
 		//			LISTENING LOOP
 		//--------------------------------------
@@ -76,10 +76,10 @@ namespace GameServer
 			//TEST
 			Queue<string> msgQueue = new Queue<string>();
 
-			PatternQueue pc = new PatternQueue(msgQueue, new Object());
-			Task p = Task.Factory.StartNew(() => pc.produce("lala"));
-			Task c = Task.Factory.StartNew(() => pc.consume());
-			Task.WaitAll(p, c);
+			producerConsumer = new PatternQueue(msgQueue, new Object());
+			//Task p = Task.Factory.StartNew(() => pc.produce("lala"));
+			//Task c = Task.Factory.StartNew(() => pc.consume());
+			//Task.WaitAll(p, c);
 
        		//Console.readKey();
 			//TEST
@@ -113,6 +113,15 @@ namespace GameServer
 			//listenerUDPBroadcast.Bind(new IPEndPoint(IPAddress.Parse("255.255.255.255"), UDP_BROADCASTPORT));
 
 			ReceiveMessagesUDP(listenerUDP);
+
+			//Tcp producer
+			//var th = new Thread(() => TCPProduce(listenerTCP));
+			//th.Start();
+
+			var th = new Thread(interpretTCP);
+			th.Start();
+			//producerConsumer.consume();
+
 			//Waiting for connections
 			while (true)
 			{
@@ -121,9 +130,19 @@ namespace GameServer
 
 				allDone.Reset();
 				listenerTCP.BeginAccept(new AsyncCallback(AcceptCallbackTCP), listenerTCP);
+				//th.Start();
+
+				//Consume TCP
+
+
 				allDone.WaitOne();
 
 			}
+		}
+
+		public static void TCPProduce(Socket listenerTCP)
+		{
+			listenerTCP.BeginAccept(new AsyncCallback(AcceptCallbackTCP), listenerTCP);
 		}
 
 		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -171,10 +190,12 @@ namespace GameServer
 			StateObject state = new StateObject();
 			state.workSocket = handle;
 
+
+			//var tcpReceive = new Thread(ReadCallbackTCP);
+
 			handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
 
 		}
-
 
 		//---------------------------------------
 		//				RECEIVE
@@ -185,6 +206,7 @@ namespace GameServer
 			//Start with an empty msg
 			string content = string.Empty;
 
+
 			StateObject state = (StateObject)ar.AsyncState;
 			Socket handle = state.workSocket;
 			int readBytes = handle.EndReceive(ar);
@@ -194,40 +216,64 @@ namespace GameServer
 			//If there is data to read
 			if (readBytes > 0)
 			{
+
 				//state.stringB.Append(Encoding.ASCII.GetString(state.buffer, 0, state.bufferSize));
 				content = Encoding.ASCII.GetString(state.buffer, 0, state.bufferSize);
-
-				//Dont output empty messages
 				Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes);
+				state.buffer = new byte[1024];
 
-				//----------------RECEIVED-----------------
-				//Reached the end of line
-				if (content.IndexOf("\n") > -1)
-				{
-					SendTCP(handle, content);
+                //interpretTCP(state, readBytes, content);
 
-					string sub = content.Substring(0, 3);
-
-						//Registartion check
-						if (sub == "REG")
-						{
-							string charName = content.Substring(0, content.Length - 1);
-                            RegisterClient(handle, charName);
-						}
-								//Registartion
-
-
-					state.buffer = new byte[1024];
-				}
-				//----------------RECEIVED-----------------
+				//TEST PRODUCE
+				producerConsumer.produce(content);
+				//Read TCP and make sense of it
 
 				handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
+
+								//TEST PRODUCE
+				//producerConsumer.produce(content);
+
 			}
 			else if (readBytes == 0)
 			{
 				Console.WriteLine("Socket closed");
 			}
 
+		}
+
+
+		public static void interpretTCP()
+		{
+			//Socket handle = state.workSocket;
+
+			////Dont output empty messages
+			//Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes);
+
+			////----------------RECEIVED-----------------
+			////Reached the end of line
+			//if (content.IndexOf("\n") > -1)
+			//{
+			//                SendTCP(handle, content);
+
+			//	string sub = content.Substring(0, 3);
+
+			//		//Registartion check
+			//		if (sub == "REG")
+			//		{
+			//			string charName = content.Substring(0, content.Length - 1);
+
+			//			RegisterClient(handle, charName);
+			//		}
+			//				//Registartion
+
+
+			//	state.buffer = new byte[1024];
+			//}
+			//----------------RECEIVED-----------------
+
+				producerConsumer.consume();
+
+				//handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
 		}
 
 		//---------------------------------------
