@@ -5,6 +5,8 @@ using System.Text;
 using System.Net;
 using System.Collections.Generic;
 
+using System.Threading.Tasks;
+
 namespace GameServer
 {
 
@@ -38,6 +40,14 @@ namespace GameServer
 		
 	*/
 
+	//TEST
+	public class message
+	{
+		public int Id;
+		public string body;
+		public DateTime sendDate;
+	}
+
 	/// <summary>
 	/// Main body of the server
 	/// </summary>
@@ -61,7 +71,19 @@ namespace GameServer
 		//Starting point of the server
 		public static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			Console.WriteLine("Hello, I am server!");
+
+			//TEST
+			Queue<message> msgQueue = new Queue<message>();
+
+			PatternQueue pc = new PatternQueue(msgQueue, new Object());
+			Task p = Task.Factory.StartNew(() => pc.produce());
+			Task c = Task.Factory.StartNew(() => pc.consume());
+			Task.WaitAll(p, c);
+
+       		//Console.readKey();
+			//TEST
+
 			StartListening();
 		}
 
