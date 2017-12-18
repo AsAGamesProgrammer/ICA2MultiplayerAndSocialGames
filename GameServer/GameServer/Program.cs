@@ -164,9 +164,12 @@ namespace GameServer
 			if (clientDictionary.ContainsKey(name))
 			{
 				Client existingInfo = clientDictionary[name];
-				existingInfo.tcpSock = sock;
+				if (existingInfo.tcpSock != sock)
+				{
+					existingInfo.tcpSock = sock;
 
-				clientDictionary[name] = existingInfo;
+					clientDictionary[name] = existingInfo;
+				}
 			}
 			else
 			{
@@ -176,8 +179,9 @@ namespace GameServer
 				clientDictionary.Add(name, newClient);
 			}
 
-			SendTCP(sock, "TCP registartion complete");
-			Console.WriteLine("Client is registered with TCP");
+			//Change this to sendTo
+			//SendTCP("TCP registartion complete");
+			//Console.WriteLine("Client is registered with TCP");
 		}
 
 		//Accept function
@@ -228,7 +232,11 @@ namespace GameServer
 				producerConsumer.produce(content);
 				//Read TCP and make sense of it
 
+				//Temp register
+				RegisterClient(state.workSocket, "Test");
+
 				handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
+
 
 								//TEST PRODUCE
 				//producerConsumer.produce(content);
@@ -244,34 +252,67 @@ namespace GameServer
 
 		public static void interpretTCP()
 		{
-			//Socket handle = state.workSocket;
 
-			////Dont output empty messages
-			//Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes);
+			while (true)
+			{
+				//Socket handle = state.workSocket;
 
-			////----------------RECEIVED-----------------
-			////Reached the end of line
-			//if (content.IndexOf("\n") > -1)
-			//{
-			//                SendTCP(handle, content);
+				////Dont output empty messages
+				//Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes);
 
-			//	string sub = content.Substring(0, 3);
+				////----------------RECEIVED-----------------
+				////Reached the end of line
+				//if (content.IndexOf("\n") > -1)
+				//{
+				//                SendTCP(handle, content);
 
-			//		//Registartion check
-			//		if (sub == "REG")
-			//		{
-			//			string charName = content.Substring(0, content.Length - 1);
+				//	string sub = content.Substring(0, 3);
 
-			//			RegisterClient(handle, charName);
-			//		}
-			//				//Registartion
+				//		//Registartion check
+				//		if (sub == "REG")
+				//		{
+				//			string charName = content.Substring(0, content.Length - 1);
+
+				//			RegisterClient(handle, charName);
+				//		}
+				//				//Registartion
 
 
-			//	state.buffer = new byte[1024];
+				//	state.buffer = new byte[1024];
+				//}
+				//----------------RECEIVED-----------------
+
+				StringBuilder content = new StringBuilder();
+				producerConsumer.consume(content);
+
+				//if (content != "NONE")
+				//{
+
+				if (content.ToString() != "")
+				{
+					Console.WriteLine("Server consumed content of " + content);
+					SendTCP(content.ToString());
+				}
+			}
+
+			//	if (content.IndexOf("\n") > -1)
+			//	{
+   //             	SendTCP(content);
+
+			//		string sub = content.Substring(0, 3);
+
+			//		////Registartion check
+			//		//if (sub == "REG")
+			//		//{
+			//		//	string charName = content.Substring(0, content.Length - 1);
+
+			//		//	RegisterClient(handle, charName);
+			//		//}
+			//	//Registartion
+
+
 			//}
-			//----------------RECEIVED-----------------
-
-				producerConsumer.consume();
+			//}
 
 				//handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
 		}
@@ -279,8 +320,22 @@ namespace GameServer
 		//---------------------------------------
 		//				   SEND
 		//---------------------------------------
-		//Sending data
-		public static void SendTCP(Socket socket, String msg)
+//public static void SendTCPTo(Socket sock, String msg)
+//{
+//	byte[] byteData = Encoding.ASCII.GetBytes(msg);
+//	Console.WriteLine("Server sending: {0},", msg);
+
+//	foreach (Client entry in clientDictionary.Values)
+//	{
+//		//Standard 
+//		//socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), socket);
+
+//		entry.tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), entry.tcpSock);
+//	}
+//		}
+
+		//Sending data to all
+		public static void SendTCP(String msg)
 		{
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
 			Console.WriteLine("Server sending: {0},", msg);

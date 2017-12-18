@@ -89,32 +89,34 @@ namespace GameServer
 			}
 		}
 
-		public void consume()
+		public void consume(StringBuilder fetchedData)
 		{
-			while (true)
-			{
-				string msgg = "none";
+			//while (true)
+			//{
 
 				lock (_lockObject)
 				{
 					Monitor.Pulse(_lockObject);
-					while (Monitor.Wait(_lockObject, 100))
-					{
+					//while (Monitor.Wait(_lockObject, 100))
+					//{
 						if (_MyQueue.Count > 0)
 						{
 							//continue;
 							//}
 							string msg = _MyQueue.Dequeue();
-							Console.WriteLine
-								   ("CONSUMER: {0}", msg);
+							Console.WriteLine ("CONSUMER: {0}", msg);
+
+							//Fetch 
+							fetchedData.Append(msg);
+
 							Monitor.Pulse(_lockObject);
 
 
-							msgg = msg;
-						}
+
+						//}
 					}
 				}
-			}
+			//}
 
 			} 
 	}
