@@ -28,10 +28,11 @@ public:
     ButtonC btnArray[3];
     int numberOfBtns = 3;
     
-    void selectNextBtn();
-    void selectPrevBtn();
+    //void selectNextBtn();
+    //void selectPrevBtn();
     
-
+    //Function to set active btn and highlight it
+    void setActiveButton(int n);
     
 private:
     UIUtilities uiUtilities;
@@ -41,9 +42,6 @@ private:
     
     //Creates a btn and adds it to the array
     void createBtn(int posX, int posY, int lblPosX, int lblPosY, std::string title, int idx);
-    
-    //Function to set active btn and highlight it
-    void setActiveButton(int n);
     
 };
 

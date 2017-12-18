@@ -171,9 +171,14 @@ void GameLoop::OpenLobbie()
 {
     window.clear();
     
-    sendTCPData("REG Kristina");
+    std::cout<<"Hi driver! What is your name? "<<std::endl;
+    
+    std::string userName;
+    std::cin>>userName;
+    
+    sendTCPData("REG " + userName);
     receiveTCPOnce();
-    sendUDPUpdata("REG Kristina");
+    sendUDPUpdata("REG " + userName);
     //receiveUDPOnce();
     
     //THREADS
@@ -207,28 +212,37 @@ void GameLoop::OpenLobbie()
         //if return - return
         //make funtion return int, not void
         
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
         {
-            lobby.selectNextBtn();
-            sendTCPData("Next pressed");
+            lobby.setActiveButton(0);
+            sendTCPData("0 pressed");
         }
         
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
         {
-            lobby.selectPrevBtn();
-            sendUDPUpdata("Prev pressed");
+            lobby.setActiveButton(1);
+            sendUDPUpdata("1 pressed");
         }
         
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
+        {
+            lobby.setActiveButton(2);
+            sendUDPUpdata("2 pressed");
+        }
+           
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+        {
+            //tcpRecThread.join();
+            //udpRecThread.join();
+            
+            //std::terminate();
             return;
+        }
         
-        //Networking test
-        //sendUDPUpdata("test");
-        //receiveUDP();
     }
     
-    tcpRecThread.join();
-    udpRecThread.join();
+    //tcpRecThread.join();
+    //udpRecThread.join();
 }
 
 

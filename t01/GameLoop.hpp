@@ -67,6 +67,9 @@ private:
     void receiveTCPOnce();
     void receiveUDPOnce();
     
+    //Loop condition
+    bool runThreads=true;
+    
 };
 
 #endif /* GameLoop_hpp */

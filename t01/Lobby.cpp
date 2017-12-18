@@ -21,7 +21,6 @@ Lobby::Lobby()
     
     //Set active
     setActiveButton(currentActiveBtn);
-        
 }
 
 
@@ -42,28 +41,6 @@ void Lobby::createBtn(int posX, int posY, int lblPosX, int lblPosY, std::string 
     
     //Array
     btnArray[idx] = newBtn;
-}
-
-void Lobby::selectNextBtn()
-{
-    btnArray[currentActiveBtn].shape.setFillColor(sf::Color::White);
-    
-    if(currentActiveBtn+1<numberOfBtns)
-        currentActiveBtn++;
-    else
-        currentActiveBtn=0;
-    
-    btnArray[currentActiveBtn].shape.setFillColor(sf::Color::Blue);
-}
-
-void Lobby::selectPrevBtn()
-{
-    if(currentActiveBtn-1>=0)
-        currentActiveBtn--;
-    else
-        currentActiveBtn=numberOfBtns-1;
-    
-    setActiveButton(currentActiveBtn);
 }
 
 void Lobby::setActiveButton(int n)
