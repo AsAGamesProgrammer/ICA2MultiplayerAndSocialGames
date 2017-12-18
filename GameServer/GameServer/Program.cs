@@ -228,7 +228,7 @@ namespace GameServer
 
                 //interpretTCP(state, readBytes, content);
 
-				//TEST PRODUCE
+				//Produce content and handle?
 				producerConsumer.produce(content);
 				//Read TCP and make sense of it
 
@@ -255,11 +255,6 @@ namespace GameServer
 
 			while (true)
 			{
-				//Socket handle = state.workSocket;
-
-				////Dont output empty messages
-				//Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes);
-
 				////----------------RECEIVED-----------------
 				////Reached the end of line
 				//if (content.IndexOf("\n") > -1)
@@ -277,8 +272,6 @@ namespace GameServer
 				//		}
 				//				//Registartion
 
-
-				//	state.buffer = new byte[1024];
 				//}
 				//----------------RECEIVED-----------------
 
@@ -295,26 +288,6 @@ namespace GameServer
 				}
 			}
 
-			//	if (content.IndexOf("\n") > -1)
-			//	{
-   //             	SendTCP(content);
-
-			//		string sub = content.Substring(0, 3);
-
-			//		////Registartion check
-			//		//if (sub == "REG")
-			//		//{
-			//		//	string charName = content.Substring(0, content.Length - 1);
-
-			//		//	RegisterClient(handle, charName);
-			//		//}
-			//	//Registartion
-
-
-			//}
-			//}
-
-				//handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
 		}
 
 		//---------------------------------------
