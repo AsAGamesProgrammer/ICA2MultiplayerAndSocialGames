@@ -28,7 +28,7 @@ void mapCreator::loadTiles()
     
     //Load map
     std::string line;
-    std::ifstream myfile ("map.txt");
+    std::ifstream myfile ("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/map.txt");
     
     if (myfile.is_open())
     {
@@ -89,14 +89,14 @@ void mapCreator::loadTextures()
 {
     for(int i=1; i<10; i++)
     {
-        std::string path ="land_grass0" + std::to_string(i) +".png";
+        std::string path ="../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/land_grass0" + std::to_string(i) +".png";
         tileTexture[i-1]=utilityManager.loadTexture(path);
     
     }
     
     for(int i=10; i<15; i++)
     {
-        std::string path ="land_grass" + std::to_string(i) +".png";
+        std::string path ="../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/land_grass" + std::to_string(i) +".png";
         tileTexture[i-1]=utilityManager.loadTexture(path);
     }
     

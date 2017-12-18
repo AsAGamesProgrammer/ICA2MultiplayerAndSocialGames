@@ -15,7 +15,7 @@ UIUtilities::UIUtilities()
 {
     sf::Font fontA;
     
-    if (!fontA.loadFromFile("simon.otf"))
+    if (!fontA.loadFromFile("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/simon.otf"))
     {
         std::cout<<"Font could not be loaded";
     };

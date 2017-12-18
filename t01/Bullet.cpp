@@ -16,7 +16,7 @@ Bullet::Bullet()
 {
 
     //Load bullet texture
-    bulletTexture=utilityManager.loadTexture("bulletR.png");
+    bulletTexture=utilityManager.loadTexture("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/bulletR.png");
     
     sf::Sprite bulletSprite;
     bulletSprite.setTexture(bulletTexture);

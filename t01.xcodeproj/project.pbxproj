@@ -107,8 +107,8 @@
 		0B1D0A431D9EAAAA00319891 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8623DB9D1FE1657B00101CA5 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = t01/Resources; sourceTree = "<group>"; };
 		862B1AE61F8B9876001378B9 /* land_grass01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass01.png; sourceTree = "<group>"; };
-		862B1AE71F8B9876001378B9 /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map.txt; sourceTree = "<group>"; };
-		862B1AE81F8B9876001378B9 /* simon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = simon.otf; sourceTree = "<group>"; };
+		862B1AE71F8B9876001378B9 /* map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = map.txt; path = ../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/map.txt; sourceTree = DEVELOPER_DIR; };
+		862B1AE81F8B9876001378B9 /* simon.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = simon.otf; path = ../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/simon.otf; sourceTree = DEVELOPER_DIR; };
 		862B1AE91F8B9E3C001378B9 /* carYS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carYS.png; path = ../../ICA2/carYS.png; sourceTree = "<group>"; };
 		862B1AEA1F8B9F16001378B9 /* bulR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulR.png; path = ../../ICA2/bulR.png; sourceTree = "<group>"; };
 		862B1AEC1F8BA87D001378B9 /* finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = finish.png; path = ../../ICA2/finish.png; sourceTree = "<group>"; };
@@ -128,7 +128,7 @@
 		865681A51F7D438400CA4B6E /* PlayerC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerC.cpp; sourceTree = "<group>"; };
 		865681A61F7D438400CA4B6E /* PlayerC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerC.hpp; sourceTree = "<group>"; };
 		865681DA1F8663FF00CA4B6E /* mapCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mapCreator.cpp; sourceTree = "<group>"; };
-		865681DD1F86646200CA4B6E /* land_grass02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass02.png; sourceTree = "<group>"; };
+		865681DD1F86646200CA4B6E /* land_grass02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = land_grass02.png; path = ../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/land_grass02.png; sourceTree = DEVELOPER_DIR; };
 		865681DE1F86646200CA4B6E /* land_grass03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass03.png; sourceTree = "<group>"; };
 		865681DF1F86646200CA4B6E /* land_grass04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass04.png; sourceTree = "<group>"; };
 		865681E01F86646200CA4B6E /* land_grass05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = land_grass05.png; sourceTree = "<group>"; };
@@ -145,9 +145,9 @@
 		865681ED1F86845A00CA4B6E /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
 		865681EE1F86845A00CA4B6E /* Bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bullet.hpp; sourceTree = "<group>"; };
 		865681F11F8689E400CA4B6E /* bulY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulY.png; sourceTree = "<group>"; };
-		86CF4F731F8FACDC009A299E /* carYS3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carYS3.png; path = /Users/p4076882/ICA2/carYS3.png; sourceTree = "<absolute>"; };
-		86CF4F741F8FAD5A009A299E /* bulletR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulletR.png; sourceTree = "<group>"; };
-		86CF4F761F8FAE15009A299E /* cp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp.png; sourceTree = "<group>"; };
+		86CF4F731F8FACDC009A299E /* carYS3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carYS3.png; path = ../../../../Users/p4076882/ICA2/carYS3.png; sourceTree = DEVELOPER_DIR; };
+		86CF4F741F8FAD5A009A299E /* bulletR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulletR.png; path = ../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/bulletR.png; sourceTree = DEVELOPER_DIR; };
+		86CF4F761F8FAE15009A299E /* cp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cp.png; path = ../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/cp.png; sourceTree = DEVELOPER_DIR; };
 		86CF4F771F8FB631009A299E /* PlayerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerBase.cpp; sourceTree = "<group>"; };
 		86CF4F781F8FB631009A299E /* PlayerBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerBase.hpp; sourceTree = "<group>"; };
 		86CF4F7B1F8FBD03009A299E /* carBS5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carBS5.png; sourceTree = "<group>"; };

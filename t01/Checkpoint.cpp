@@ -11,7 +11,7 @@
 Checkpoint::Checkpoint()
 {
     //Assign texture
-    checkPTexture = utilityManager.loadTexture("cp.png");
+    checkPTexture = utilityManager.loadTexture("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/cp.png");
     
     //Measure size
     sizeW = checkPTexture.getSize().x;

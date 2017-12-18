@@ -13,7 +13,12 @@
 // Make a class for msgs
 // Store log in on the server
 //
-//
+//Register players name on a runtime by enter and click
+//Fix the lobbie
+//Producers/consumers
+//Make a message class and somewhat a game?
+//Database
+//Security
 
 
 #include "GameLoop.hpp"
@@ -232,8 +237,8 @@ void GameLoop::StartGame()
     
     //PRE-PROCESSING
     mapManager.loadTiles();
-    player.createPlayer("carYS3.png");      //Player 1
-    otherPlayer.createPlayer("carBS5.png"); //Player 2
+    player.createPlayer("../../../../Users/p4076882/ICA2/carYS3.png");      //Player 1
+    otherPlayer.createPlayer("../../../../Users/p4076882/ICA2/carBS5.png"); //Player 2
     
     
     //TEMP
