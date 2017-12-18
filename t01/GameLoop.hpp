@@ -33,6 +33,8 @@ public:
     void StartGame();
     void OpenLobbie();
     
+    void receiveTCP();
+    void receiveUDP();
     
 private:
     PlayerC player;
@@ -62,8 +64,7 @@ private:
     //Send
     void sendUDPUpdata(std::string msg);
     void sendTCPData(std::string msg);
-    void receiveTCP();
-    void receiveUDP();
+
     void receiveTCPOnce();
     void receiveUDPOnce();
     

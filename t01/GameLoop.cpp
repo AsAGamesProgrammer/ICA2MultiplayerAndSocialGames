@@ -24,6 +24,7 @@
 #include "GameLoop.hpp"
 #include <stdio.h>
 #include <thread>
+#include <chrono>
 
 //GLOBAL VARIABLES
 sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height),
@@ -48,6 +49,16 @@ GameLoop::GameLoop()
     else
         std::cout<<"TCP Connected"<<std::endl;
     
+    
+    //REGISTER
+    std::cout<<"Hi driver! What is your name? "<<std::endl;
+    
+    std::string userName;
+    std::cin>>userName;
+    
+    sendTCPData("REG " + userName);
+    receiveTCPOnce();
+    sendUDPUpdata("REG " + userName);
 }
 
 //----------------------------------------
@@ -74,6 +85,8 @@ void GameLoop::sendTCPData(std::string msg)
 
 void GameLoop::receiveTCP()
 {
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    
     while(true)
     {
         char inData[100] = "None";
@@ -171,20 +184,20 @@ void GameLoop::OpenLobbie()
 {
     window.clear();
     
-    std::cout<<"Hi driver! What is your name? "<<std::endl;
-    
-    std::string userName;
-    std::cin>>userName;
-    
-    sendTCPData("REG " + userName);
-    receiveTCPOnce();
-    sendUDPUpdata("REG " + userName);
+//    std::cout<<"Hi driver! What is your name? "<<std::endl;
+//
+//    std::string userName;
+//    std::cin>>userName;
+//
+//    sendTCPData("REG " + userName);
+//    receiveTCPOnce();
+//    sendUDPUpdata("REG " + userName);
     //receiveUDPOnce();
     
     //THREADS
     //Listens to TCP
-    std::thread tcpRecThread (&GameLoop::receiveTCP, this);
-    std::thread udpRecThread (&GameLoop::receiveUDP, this);
+    //std::thread tcpRecThread (&GameLoop::receiveTCP, this);
+    //std::thread udpRecThread (&GameLoop::receiveUDP, this);
     
     //GAME LOOP
     while (window.isOpen())
@@ -230,7 +243,7 @@ void GameLoop::OpenLobbie()
             sendUDPUpdata("2 pressed");
         }
            
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
             //tcpRecThread.join();
             //udpRecThread.join();

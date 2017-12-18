@@ -9,6 +9,8 @@
 
 #include "GameLoop.hpp"
 #include <SFML/Network.hpp>
+#include <thread>
+#include <chrono>
 
 int main()
 {
@@ -17,6 +19,11 @@ int main()
     
     //Create a game loop class
     GameLoop gameLoop;
+    
+    
+    
+    std::thread tcpRecThread (&GameLoop::receiveTCP, &gameLoop);
+    std::thread udpRecThread (&GameLoop::receiveUDP, &gameLoop);
     
     //Create a starting menu / lobbie
     gameLoop.OpenLobbie();
