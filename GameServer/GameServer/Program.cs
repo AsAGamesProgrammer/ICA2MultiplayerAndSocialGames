@@ -471,7 +471,9 @@ namespace GameServer
 				UdpState stateUdp = new UdpState();
 				stateUdp.workingSocket = entry.udpSocket;
 				stateUdp.endPoint = entry.endPoint;
-				entry.udpSocket.BeginSendTo(byteData, 0, byteData.Length, 0, entry.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
+
+				if(stateUdp !=null)
+					entry.udpSocket.BeginSendTo(byteData, 0, byteData.Length, 0, entry.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
 			}
 
 		}
