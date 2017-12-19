@@ -257,8 +257,8 @@ void GameLoop::StartGame()
     
     //PRE-PROCESSING
     mapManager.loadTiles();
-    player.createPlayer("../../../../Users/p4076882/ICA2/carYS3.png");      //Player 1
-    otherPlayer.createPlayer("../../../../Users/p4076882/ICA2/carBS5.png"); //Player 2
+    player.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames//carYS3.png");      //Player 1
+    otherPlayer.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png"); //Player 2
     
     
     //TEMP

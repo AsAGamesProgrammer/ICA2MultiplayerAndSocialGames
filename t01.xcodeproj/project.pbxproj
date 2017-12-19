@@ -11,7 +11,6 @@
 		8623DB831FE1604900101CA5 /* carBS5.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 86CF4F7B1F8FBD03009A299E /* carBS5.png */; };
 		8623DB841FE1604900101CA5 /* cp.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 86CF4F761F8FAE15009A299E /* cp.png */; };
 		8623DB851FE1604900101CA5 /* bulletR.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 86CF4F741F8FAD5A009A299E /* bulletR.png */; };
-		8623DB861FE1604900101CA5 /* carYS3.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 86CF4F731F8FACDC009A299E /* carYS3.png */; };
 		8623DB871FE1604900101CA5 /* bar.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 862B1AED1F8BADB8001378B9 /* bar.png */; };
 		8623DB881FE1604900101CA5 /* finish.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 862B1AEC1F8BA87D001378B9 /* finish.png */; };
 		8623DB891FE1604900101CA5 /* bulR.png in Copy Files */ = {isa = PBXBuildFile; fileRef = 862B1AEA1F8B9F16001378B9 /* bulR.png */; };
@@ -73,7 +72,6 @@
 				8623DB831FE1604900101CA5 /* carBS5.png in Copy Files */,
 				8623DB841FE1604900101CA5 /* cp.png in Copy Files */,
 				8623DB851FE1604900101CA5 /* bulletR.png in Copy Files */,
-				8623DB861FE1604900101CA5 /* carYS3.png in Copy Files */,
 				8623DB871FE1604900101CA5 /* bar.png in Copy Files */,
 				8623DB881FE1604900101CA5 /* finish.png in Copy Files */,
 				8623DB891FE1604900101CA5 /* bulR.png in Copy Files */,
@@ -145,12 +143,12 @@
 		865681ED1F86845A00CA4B6E /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
 		865681EE1F86845A00CA4B6E /* Bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bullet.hpp; sourceTree = "<group>"; };
 		865681F11F8689E400CA4B6E /* bulY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bulY.png; sourceTree = "<group>"; };
-		86CF4F731F8FACDC009A299E /* carYS3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carYS3.png; path = ../../../../Users/p4076882/ICA2/carYS3.png; sourceTree = DEVELOPER_DIR; };
+		86598A0B1FE936DD00A54CD7 /* carYS3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carYS3.png; sourceTree = "<group>"; };
 		86CF4F741F8FAD5A009A299E /* bulletR.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bulletR.png; path = ../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/bulletR.png; sourceTree = DEVELOPER_DIR; };
 		86CF4F761F8FAE15009A299E /* cp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cp.png; path = ../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/cp.png; sourceTree = DEVELOPER_DIR; };
 		86CF4F771F8FB631009A299E /* PlayerBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerBase.cpp; sourceTree = "<group>"; };
 		86CF4F781F8FB631009A299E /* PlayerBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerBase.hpp; sourceTree = "<group>"; };
-		86CF4F7B1F8FBD03009A299E /* carBS5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = carBS5.png; sourceTree = "<group>"; };
+		86CF4F7B1F8FBD03009A299E /* carBS5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = carBS5.png; path = ../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png; sourceTree = DEVELOPER_DIR; };
 		86CF4F7C1F8FC0F7009A299E /* PlayerCoop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerCoop.cpp; sourceTree = "<group>"; };
 		86CF4F7D1F8FC0F7009A299E /* PlayerCoop.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerCoop.hpp; sourceTree = "<group>"; };
 		86DDA3171F823DDC00BBAE92 /* libsfml-audio.2.4.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.4.2.dylib"; path = "../../lib/libsfml-audio.2.4.2.dylib"; sourceTree = "<group>"; };
@@ -286,7 +284,7 @@
 				86CF4F7B1F8FBD03009A299E /* carBS5.png */,
 				86CF4F761F8FAE15009A299E /* cp.png */,
 				86CF4F741F8FAD5A009A299E /* bulletR.png */,
-				86CF4F731F8FACDC009A299E /* carYS3.png */,
+				86598A0B1FE936DD00A54CD7 /* carYS3.png */,
 				862B1AED1F8BADB8001378B9 /* bar.png */,
 				862B1AEC1F8BA87D001378B9 /* finish.png */,
 				862B1AEA1F8B9F16001378B9 /* bulR.png */,
