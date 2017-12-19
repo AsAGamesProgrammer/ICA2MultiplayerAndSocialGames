@@ -8,14 +8,8 @@
 //
 //-------------------------------------------------------
 //TODO:
-// Threads
-// Send a custom msg
-// Make a class for msgs
-// Store log in on the server
-//
-//Register players name on a runtime by enter and click
-//Fix the lobbie
-//Producers/consumers
+
+//Make "Network player" class
 //Make a message class and somewhat a game?
 //Database
 //Security
