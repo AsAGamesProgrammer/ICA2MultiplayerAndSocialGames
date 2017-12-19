@@ -27,6 +27,7 @@ namespace GameServer
 		//PRODUCE
 		public void produce(MessageUDP message)
 		{
+			Console.WriteLine("PRODUCER UDP: " + message);
 			lock (_lockObject)
 			{
 				Monitor.Wait(_lockObject);

@@ -23,7 +23,7 @@ int main()
     
     
     std::thread tcpRecThread (&GameLoop::receiveTCP, &gameLoop);
-    //std::thread udpRecThread (&GameLoop::receiveUDP, &gameLoop);
+    std::thread udpRecThread (&GameLoop::receiveUDP, &gameLoop);
     
     //Create a starting menu / lobbie
     gameLoop.OpenLobbie();
@@ -33,7 +33,7 @@ int main()
     
     
     tcpRecThread.join();
-    //udpRecThread.join();
+    udpRecThread.join();
     
     return 0;
 }

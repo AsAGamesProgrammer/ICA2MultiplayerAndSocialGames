@@ -110,13 +110,18 @@ namespace GameServer
 			Socket listenerUDP = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 			listenerUDP.Bind(new IPEndPoint(IPAddress.Any, UDP_PORT));
 
-
-			//LOOP for lisening to the UDP messages
-			ReceiveMessagesUDP(listenerUDP);
-
+			//CONSUMERS
 			//Thread for TCP consumer
 			var th = new Thread(interpretTCP);
 			th.Start();
+
+			//Thread for UDP consumer
+			var thUdp = new Thread(interpretUDP);
+			thUdp.Start();
+
+			//PRODUCERS
+			//LOOP for lisening to the UDP messages
+			ReceiveMessagesUDP(listenerUDP);
 
 			//Loop for TCP producer
 			while (true)
@@ -217,11 +222,8 @@ namespace GameServer
 				msg.sock = state.workSocket;
 				msg.body = content;
 				producerConsumerTCP.produce(msg);
-				//Read TCP and make sense of it
 
-				//Temp register
-				//RegisterClient(state.workSocket, "Test");
-
+				//Loop
 				handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
 
 
@@ -369,23 +371,31 @@ namespace GameServer
 			string receiveString = Encoding.ASCII.GetString(((UdpState)ar.AsyncState).buffer);
 			Console.WriteLine("UDP received: {0}", receiveString);
 
+			//TEMP
+			//Produce content and handle?
+			MessageUDP msg = new MessageUDP();
+			msg.sock = sock;
+			msg.body = receiveString;
+			msg.endPoint = stateUdp.endPoint;
+			producerConsumerUDP.produce(msg);
+
 			//----------------RECEIVED-----------------
 			//SEND BACK
-			if (receiveString.IndexOf("\n") > -1)
-			{
-				string sub = receiveString.Substring(0, 3);
+			//if (receiveString.IndexOf("\n") > -1)
+			//{
+			//	string sub = receiveString.Substring(0, 3);
 
-				//Registartion check
-				if (sub == "REG")
-				{
-					string charName = receiveString.Substring(0, receiveString.Length - 1);
-					RegisterUdp(stateUdp.endPoint, sock, charName);
-				}
+			//	//Registartion check
+			//	if (sub == "REG")
+			//	{
+			//		string charName = receiveString.Substring(0, receiveString.Length - 1);
+			//		RegisterUdp(stateUdp.endPoint, sock, charName);
+			//	}
 
-				//ECHO
-				SendUDP(sock, receiveString, stateUdp);
-				stateUdp.buffer = new byte[1024];
-			}
+			//	//ECHO
+			//	SendUDP(sock, receiveString, stateUdp);
+			//	stateUdp.buffer = new byte[1024];
+			//}
 			//----------------RECEIVED-----------------
 
 			// The message then needs to be handleed
@@ -416,6 +426,29 @@ namespace GameServer
 		//				   SEND
 		//---------------------------------------
 
+		public static void interpretUDP()
+		{ 
+			while (true)
+			{
+				MessageUDP newMsg = producerConsumerUDP.consume();
+
+				if (newMsg !=null)
+				{
+					string sub = newMsg.body.Substring(0, 3);
+
+					if (sub == "REG")
+					{
+						string charName = (newMsg.body.Substring(0, newMsg.body.Length - 1));
+
+						RegisterUdp(newMsg.endPoint, newMsg.sock, charName);
+					}
+
+					Console.WriteLine("Server consumed UDP content of " + newMsg.body);
+					SendUDP(newMsg.body);
+				}
+			}
+		}
+
 		public static void SendCallbackUDP(IAsyncResult ar)
 		{
 
@@ -428,13 +461,14 @@ namespace GameServer
 		}
 
 		//Sending data
-		public static void SendUDP(Socket socket, String msg, UdpState stateUdp)
+		public static void SendUDP(String msg)
 		{
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
 
 			//Test
 			foreach (Client entry in clientDictionary.Values)
 			{
+				UdpState stateUdp = new UdpState();
 				stateUdp.workingSocket = entry.udpSocket;
 				stateUdp.endPoint = entry.endPoint;
 				entry.udpSocket.BeginSendTo(byteData, 0, byteData.Length, 0, entry.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);

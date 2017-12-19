@@ -61,7 +61,7 @@ GameLoop::GameLoop()
     receiveTCPOnce();
     
     //Register UDP
-    //sendUDPUpdata("REG " + userName);
+    sendUDPUpdata("REG " + userName);
 }
 
 //----------------------------------------
