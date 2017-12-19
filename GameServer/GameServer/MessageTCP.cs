@@ -3,7 +3,7 @@ using System.Net.Sockets;
 
 namespace GameServer
 {
-	public class MessageBase
+	public class MessageTCP
 	{
 		public string body;
 		public Socket sock;

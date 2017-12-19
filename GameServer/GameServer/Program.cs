@@ -65,7 +65,8 @@ namespace GameServer
 		static Dictionary<string, Client> clientDictionary = new Dictionary<string, Client>();	//Dictionary of clients containng a name and connection information
 
 		//Multithreading pattern manager
-		static PatternQueue producerConsumer;													//A queue for the prducer/consumer pattern
+		static PatternQueue producerConsumerTCP;													//A queue for the prducer/consumer pattern
+		static UDPQueue producerConsumerUDP;
 
 		//--------------------------------------
 		//			LISTENING LOOP
@@ -78,8 +79,14 @@ namespace GameServer
 			Console.WriteLine("Hello, I am server!");
 
 			//Initializig a queue of messages which will be past to the producer/consumer manager
-			Queue<MessageBase> msgQueue = new Queue<MessageBase>();
-			producerConsumer = new PatternQueue(msgQueue, new Object());
+			//TCP
+			Queue<MessageTCP> msgQueue = new Queue<MessageTCP>();
+			producerConsumerTCP = new PatternQueue(msgQueue, new Object());
+
+			//UDP
+			Queue<MessageUDP> msgQueueUDP = new Queue<MessageUDP>();
+			producerConsumerUDP = new UDPQueue(msgQueueUDP, new Object());
+
 
 			//Entry point to the networking part
 			StartListening();
@@ -206,10 +213,10 @@ namespace GameServer
 				//interpretTCP(state, readBytes, content);
 
 				//Produce content and handle?
-				MessageBase msg = new MessageBase();
+				MessageTCP msg = new MessageTCP();
 				msg.sock = state.workSocket;
 				msg.body = content;
-				producerConsumer.produce(msg);
+				producerConsumerTCP.produce(msg);
 				//Read TCP and make sense of it
 
 				//Temp register
@@ -235,7 +242,7 @@ namespace GameServer
 
 			while (true)
 			{
-				MessageBase newMsg = producerConsumer.consume();
+				MessageTCP newMsg = producerConsumerTCP.consume();
 
 				if (newMsg !=null)
 				{

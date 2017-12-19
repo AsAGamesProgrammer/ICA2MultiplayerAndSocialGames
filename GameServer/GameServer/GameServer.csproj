@@ -37,7 +37,9 @@
     <Compile Include="Client.cs" />
     <Compile Include="PatternQueue.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="MessageBase.cs" />
+    <Compile Include="MessageTCP.cs" />
+    <Compile Include="MessageUDP.cs" />
+    <Compile Include="UDPQueue.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

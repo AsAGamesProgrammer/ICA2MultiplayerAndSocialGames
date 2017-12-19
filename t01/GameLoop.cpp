@@ -56,9 +56,11 @@ GameLoop::GameLoop()
     std::string userName;
     std::cin>>userName;
     
+    //Register TCP
     sendTCPData("REG " + userName);
-    
     receiveTCPOnce();
+    
+    //Register UDP
     //sendUDPUpdata("REG " + userName);
 }
 

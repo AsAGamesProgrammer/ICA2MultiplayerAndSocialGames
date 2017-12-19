@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using System.Threading;
 
+/*
+	TODO
+	Insteas of using Message UDP class as a return type, it should be a template. 
+	
+*/
+
+
 namespace GameServer
 {
-	public class PatternQueue
+	public class UDPQueue
 	{
-		Queue<MessageTCP> _MyQueue;
+		Queue<MessageUDP> _MyQueue;
 		private Object _lockObject;
 
 		//CONSTRUCTOR
-		public PatternQueue(Queue<MessageTCP> MyQueue, Object lockObject)
+		public UDPQueue(Queue<MessageUDP> MyQueue, Object lockObject)
 		{
 			this._MyQueue = MyQueue;
 			_lockObject = lockObject;
@@ -18,7 +25,7 @@ namespace GameServer
 
 
 		//PRODUCE
-		public void produce(MessageTCP message)
+		public void produce(MessageUDP message)
 		{
 			lock (_lockObject)
 			{
@@ -29,7 +36,7 @@ namespace GameServer
 		}
 
 		//CONSUME
-		public MessageTCP consume()
+		public MessageUDP consume()
 		{
 			lock (_lockObject)
 			{
@@ -44,8 +51,7 @@ namespace GameServer
 				}
 			}
 
-			return null;
+			return null;		
 		} 
-
 	}
 }
