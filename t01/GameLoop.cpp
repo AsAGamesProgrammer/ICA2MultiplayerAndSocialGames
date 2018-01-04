@@ -346,12 +346,12 @@ void GameLoop::addNewPlayer(std::string name, int id)
     {
         networkPlayer.createPlayer(textureAd);
         std::cout<<"("<<id<<")"<<"NEW PLAYER "<< name <<" ADDED"<<std::endl;
-        networkPlayer.setStartingPos(500, 180 + id*30);
+        networkPlayer.setStartingPos(500, 180 + id*50);
     }
     else
     {
         player.createPlayer(textureAd);
-        player.setStartingPos(500, 180 + id*30);
+        player.setStartingPos(500, 180 + id*50);
     }
 }
 
