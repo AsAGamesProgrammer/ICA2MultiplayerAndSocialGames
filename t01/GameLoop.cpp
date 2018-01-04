@@ -314,7 +314,13 @@ void GameLoop::StartNetworkGame()
         
         //Player
         window.draw(player.getPlayer());
-        window.draw(networkPlayer.getPlayer());
+        
+        //Draw all the opponents
+        for (int i=0; i<4; i++)
+        {
+            window.draw(networkPlayers[i].getPlayer());
+        }
+
         
         window.display();
     }
@@ -340,9 +346,9 @@ void GameLoop::addNewPlayer(std::string name, int id)
 
     if(name !=myName)
     {
-        networkPlayer.createPlayer(textureAd);
+        networkPlayers[id].createPlayer(textureAd);
         std::cout<<"("<<id<<")"<<"NEW PLAYER "<< name <<" ADDED"<<std::endl;
-        networkPlayer.setStartingPos(500, 180 + id*50);
+        networkPlayers[id].setStartingPos(500, 180 + id*50);
     }
     else
     {

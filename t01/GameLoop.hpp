@@ -46,7 +46,7 @@ private:
     PlayerC player;
     PlayerCoop otherPlayer;
     
-    PlayerNetwork networkPlayer;
+    PlayerNetwork networkPlayers[4];
     
     UIManager uiManager;
     mapCreator mapManager;

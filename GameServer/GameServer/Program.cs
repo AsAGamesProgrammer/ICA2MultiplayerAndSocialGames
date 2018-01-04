@@ -192,11 +192,15 @@ namespace GameServer
 			//Increase id as the new player joined
 			highestID++;
 
-			//Update everyone that this player is registered
-            SendTCPToRegistered("JOI " + highestID.ToString() + name);
-
 			//Update player's status
 			clientDictionary[name].raceId = highestID;
+
+			//Update everyone that this player is registered
+			foreach (string entry in clientDictionary.Keys)
+			{
+				if(clientDictionary[entry].raceId !=-1)
+					SendTCPToRegistered("JOI " + clientDictionary[entry].raceId.ToString() + entry);
+			}
 		}
 
 		//---------------------------------------
