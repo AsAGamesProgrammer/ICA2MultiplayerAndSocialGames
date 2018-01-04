@@ -17,6 +17,7 @@
 class PlayerNetwork:PlayerBase
 {
 public:
+    sf::Sprite getPlayer();     //Return the shape of a player
     void createPlayer(std::string textureStr);                //Player creation function
     
 private:

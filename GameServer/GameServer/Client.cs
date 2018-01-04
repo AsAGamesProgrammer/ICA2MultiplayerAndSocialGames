@@ -14,5 +14,7 @@ namespace GameServer
 		public IPEndPoint endPoint;
 		public Socket udpSocket;
 
+		//Race id
+		public int raceId = -1;
 	}
 }

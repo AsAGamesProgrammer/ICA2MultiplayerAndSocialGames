@@ -25,3 +25,8 @@ void PlayerNetwork::createPlayer(std::string textureStr)
     
     playerS=playerSprite;
 };
+
+sf::Sprite PlayerNetwork::getPlayer()
+{
+    return playerS;
+}

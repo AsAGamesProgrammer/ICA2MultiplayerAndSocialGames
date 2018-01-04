@@ -39,7 +39,7 @@ public:
     void receiveTCP();
     void receiveUDP();
     
-    void addNewPlayer(std::string name);
+    void addNewPlayer(std::string name, int id);
     
 private:
     std::string myName;

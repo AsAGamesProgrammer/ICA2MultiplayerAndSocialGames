@@ -131,7 +131,9 @@ void GameLoop::receiveTCP()
             //RECEIVED: JOI
             if(code == "JOI")
             {
-                addNewPlayer(sub.substr(4, sub.length()));
+                std::string raceId = sub.substr(4,5);
+                int raceIdInt = atoi(raceId.c_str());
+                addNewPlayer(sub.substr(5, sub.length()), raceIdInt);
             }
         }
         
@@ -255,21 +257,21 @@ int GameLoop::OpenLobbie()
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
         {
             lobby.setActiveButton(0);
-            sendTCPData("0 pressed");
+            //sendTCPData("0 pressed");
             selectedMode=0;
         }
         
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
         {
             lobby.setActiveButton(1);
-            sendUDPUpdata("1 pressed");
+            //sendUDPUpdata("1 pressed");
             selectedMode=1;
         }
         
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
         {
             lobby.setActiveButton(2);
-            sendUDPUpdata("2 pressed");
+            //sendUDPUpdata("2 pressed");
             selectedMode=2;
         }
            
@@ -318,17 +320,18 @@ void GameLoop::StartNetworkGame()
         
         //Player
         window.draw(player.getPlayer());
+        window.draw(networkPlayer.getPlayer());
         
         window.display();
     }
 }
 
-void GameLoop::addNewPlayer(std::string name)
+void GameLoop::addNewPlayer(std::string name, int id)
 {
     if(name !=myName)
     {
         networkPlayer.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png");
-        std::cout<<"NEW PLAYER "<< name <<" ADDED"<<std::endl;
+        std::cout<<"("<<id<<")"<<"NEW PLAYER "<< name <<" ADDED"<<std::endl;
     }
 }
 

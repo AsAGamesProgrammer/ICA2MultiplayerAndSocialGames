@@ -59,6 +59,9 @@ namespace GameServer
 		static PatternQueue producerConsumerTCP;													//A queue for the prducer/consumer pattern
 		static UDPQueue producerConsumerUDP;
 
+		//Race information
+		static int highestID = -1;
+
 		//--------------------------------------
 		//			LISTENING LOOP
 		//--------------------------------------
@@ -239,17 +242,32 @@ namespace GameServer
 
 				if (newMsg !=null)
 				{
+					Console.WriteLine("Server consumed content of " + newMsg.body);
+
 					string sub = newMsg.body.Substring(0, 3);
 
+					//REGISTER to a server
 					if (sub == "REG")
 					{
-						string charName = (newMsg.body.Substring(0, newMsg.body.Length - 1));
-
+						string charName = (newMsg.body.Substring(4, newMsg.body.Length - 5));
 						RegisterClient(newMsg.sock, charName);
+                        SendTCP(newMsg.body);
 					}
 
-					Console.WriteLine("Server consumed content of " + newMsg.body);
-					SendTCP(newMsg.body);
+					//JOIN the race
+					if (sub == "JOI")
+					{
+						highestID++;
+						string charName = (newMsg.body.Substring(4, newMsg.body.Length - 5));
+
+						Console.WriteLine(charName);
+                        SendTCP("JOI " + highestID.ToString() + charName);
+						clientDictionary[charName].raceId = highestID;
+						//SendTCP("JOI " + highestID.ToString() + charName);
+					}
+
+					//Console.WriteLine("Server consumed content of " + newMsg.body);
+					//SendTCP(newMsg.body);
 				}
 			}
 
@@ -429,7 +447,7 @@ namespace GameServer
 
 					if (sub == "REG")
 					{
-						string charName = (newMsg.body.Substring(0, newMsg.body.Length - 1));
+						string charName = (newMsg.body.Substring(4, newMsg.body.Length - 5));
 
 						RegisterUdp(newMsg.endPoint, newMsg.sock, charName);
 					}
