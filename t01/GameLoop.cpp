@@ -115,10 +115,11 @@ void GameLoop::receiveTCP()
                 sub +=nextChar;
             }
             
-            std::string code = sub.substr(0, 2);
+            std::string code = sub.substr(0, 3);
             
+            std::cout<<code<<std::endl;
             //RECEIVED: JOI
-            if(sub == "JOI")
+            if(code == "JOI")
             {
                 std::cout<<"Adding player"<<std::endl;
                 addNewPlayer(sub.substr(4, sub.length()));
