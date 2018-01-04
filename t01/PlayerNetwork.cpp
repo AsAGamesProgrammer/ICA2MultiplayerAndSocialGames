@@ -30,3 +30,9 @@ sf::Sprite PlayerNetwork::getPlayer()
 {
     return playerS;
 }
+
+//------SETTERS--------
+void PlayerNetwork::setStartingPos(float posX, float posY)
+{
+    playerS.setPosition(posX, posY);
+}

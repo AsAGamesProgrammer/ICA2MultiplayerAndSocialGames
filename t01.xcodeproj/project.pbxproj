@@ -127,7 +127,7 @@
 		8646E0CA1FFE7A890051C560 /* PlayerNetwork.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerNetwork.cpp; sourceTree = "<group>"; };
 		8646E0CB1FFE7A890051C560 /* PlayerNetwork.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerNetwork.hpp; sourceTree = "<group>"; };
 		8646E0CD1FFE91430051C560 /* carPS5 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "carPS5 copy.png"; sourceTree = "<group>"; };
-		8646E0CE1FFE914B0051C560 /* carOS5 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "carOS5 copy.png"; sourceTree = "<group>"; };
+		8646E0CE1FFE914B0051C560 /* carOS5 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "carOS5 copy.png"; path = "../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carOS5 copy.png"; sourceTree = DEVELOPER_DIR; };
 		865681A51F7D438400CA4B6E /* PlayerC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerC.cpp; sourceTree = "<group>"; };
 		865681A61F7D438400CA4B6E /* PlayerC.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerC.hpp; sourceTree = "<group>"; };
 		865681DA1F8663FF00CA4B6E /* mapCreator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mapCreator.cpp; sourceTree = "<group>"; };

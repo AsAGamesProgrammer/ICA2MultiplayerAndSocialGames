@@ -299,8 +299,8 @@ void GameLoop::StartNetworkGame()
 {
     sendTCPData("JOI " + myName);
     mapManager.loadTiles();
-    player.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames//carYS3.png");      //Player 1
-    player.setStartingPos(500, 180);
+    //player.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames//carYS3.png");      //Player 1
+    //player.setStartingPos(500, 180);
     
     // Notify server
     // Create all registered player
@@ -328,10 +328,37 @@ void GameLoop::StartNetworkGame()
 
 void GameLoop::addNewPlayer(std::string name, int id)
 {
+    std::string textureAd;
+    
+    switch (id)
+    {
+        case 0:
+            textureAd = "../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carYS3.png";
+            break;
+            
+        case 1:
+            textureAd ="../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carPS5 copy.png";
+            
+        case 2:
+            textureAd ="../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png";
+            
+        case 3:
+            textureAd ="../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carOS5 copy.png";
+            
+        default:
+            break;
+    }
+    
     if(name !=myName)
     {
-        networkPlayer.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png");
+        networkPlayer.createPlayer(textureAd);
         std::cout<<"("<<id<<")"<<"NEW PLAYER "<< name <<" ADDED"<<std::endl;
+        networkPlayer.setStartingPos(500, 180 + id*15);
+    }
+    else
+    {
+        player.createPlayer(textureAd);
+        player.setStartingPos(500, 180 + id*15);
     }
 }
 
