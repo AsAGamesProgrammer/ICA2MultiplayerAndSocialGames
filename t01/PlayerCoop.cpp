@@ -27,6 +27,7 @@ void PlayerCoop::createPlayer(std::string textureStr)
     playerSprite.setPosition(300, 270);
     
     playerS=playerSprite;
+    isActive=true;
 };
 
 //------SETTERS--------
@@ -59,6 +60,8 @@ void PlayerCoop::moveRelated()
 
 void PlayerCoop::movePlayer()
 {
+    if(!isActive)
+        return;
     
     //Move RIGHT
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -104,6 +107,9 @@ void PlayerCoop::movePlayer()
 
 void PlayerCoop::moveInADirection()
 {
+    if(!isActive)
+        return;
+    
     //Convert degrees to radians
     float radians = utilityManager.degreesToRads(playerS.getRotation());
     
@@ -128,6 +134,9 @@ void PlayerCoop::moveInADirection()
 
 void PlayerCoop::shoot()
 {
+    if(!isActive)
+        return;
+    
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !bullet.isEnabled)
     {
         bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y, playerS.getRotation());

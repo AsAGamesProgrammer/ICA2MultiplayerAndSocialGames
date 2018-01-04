@@ -53,6 +53,8 @@ private:
     
     void moveInADirection();
     
+    bool isActive=false;
+    
 };
 
 #endif /* PlayerCoop_hpp */

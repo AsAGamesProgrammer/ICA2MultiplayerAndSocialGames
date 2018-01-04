@@ -14,6 +14,12 @@
 //Database
 //Security
 
+//-------------------------------------------------------
+//  NETWORKING CODES:
+//  REG: - register with a server
+//  JOI: - join a networking game
+//-------------------------------------------------------
+
 
 #include "GameLoop.hpp"
 #include <stdio.h>
@@ -49,6 +55,7 @@ GameLoop::GameLoop()
     
     std::string userName;
     std::cin>>userName;
+    myName=userName;
     
     //Register TCP
     sendTCPData("REG " + userName);
@@ -97,7 +104,26 @@ void GameLoop::receiveTCP()
         //Print only if received text
         char firstLit = inData[0];
         if(firstLit != '\0')
+        {
             std::cout << "Received " << inData <<" with "<<received<<" bytes" << std::endl;
+            
+            //Convert bytes to a string
+            std::string sub;
+            for (int i=0; i<100; i++)
+            {
+                char nextChar = inData[i];
+                sub +=nextChar;
+            }
+            
+            std::string code = sub.substr(0, 3);
+            
+            //RECEIVED: JOI
+            if(sub == "JOI")
+                addNewPlayer(sub.substr(4, code.length()));
+        }
+        
+        
+        //If received REG: add player
     }
 }
 
@@ -252,6 +278,48 @@ int GameLoop::OpenLobbie()
 }
 
 //----------------------------------------
+//              NETWROK MODE
+//----------------------------------------
+void GameLoop::StartNetworkGame()
+{
+    sendTCPData("JOI " + myName);
+    mapManager.loadTiles();
+    player.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames//carYS3.png");      //Player 1
+    player.setStartingPos(500, 180);
+    
+    // Notify server
+    // Create all registered player
+    // Draw all the players
+    
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        
+
+        GeneralRender();
+        
+        //Player
+        window.draw(player.getPlayer());
+        
+        window.display();
+    }
+}
+
+void GameLoop::addNewPlayer(std::string name)
+{
+    if(name !=myName)
+    {
+        networkPlayer.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png");
+        std::cout<<"NEW PLAYER ADDED"<<std::endl;
+    }
+}
+
+//----------------------------------------
 //              GAME MODES
 //----------------------------------------
 
@@ -317,15 +385,11 @@ void GameLoop::Update()
     
 }
 
-void GameLoop::Render()
+void GameLoop::GeneralRender()
 {
-    //Can be skipped because background is rerendered anyways
-    //window.clear();
-    
     //Update Interface
     uiManager.displaySpeed(player.getSpeed());
     uiManager.displayCheckPoints();
-    
     
     //Track tiles
     for(int i=0; i<mapManager.tileNumber; i++)
@@ -337,14 +401,6 @@ void GameLoop::Render()
     for (int i=0; i<chpManager.cpNumber; i++)
         window.draw(chpManager.checkPSprites[i]);
     
-    //Player
-    window.draw(player.getPlayer());
-    window.draw(otherPlayer.getPlayer());
-    
-    //Bullet
-    window.draw(player.getBullet());
-    window.draw(otherPlayer.getBullet());
-    
     //UI - changing labels
     for(int i=0; i<uiManager.gameLabels.size(); i++)
     {
@@ -355,7 +411,20 @@ void GameLoop::Render()
     //UI - constant labels
     for(int i=0; i<uiManager.numberOfConstText; i++)
         window.draw(uiManager.constantText[i]);
+}
 
+void GameLoop::Render()
+{
+    GeneralRender();
+    
+    //Player
+    window.draw(player.getPlayer());
+    window.draw(otherPlayer.getPlayer());
+    
+    //Bullet
+    window.draw(player.getBullet());
+    window.draw(otherPlayer.getBullet());
+    
     window.display();
 }
 

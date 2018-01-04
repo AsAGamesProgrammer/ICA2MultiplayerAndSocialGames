@@ -21,6 +21,7 @@
 #include "GameLoop.hpp"
 #include "PlayerCoop.hpp"
 #include "Lobby.hpp"
+#include "PlayerNetwork.hpp"
 
 //Networking
 #include <SFML/Network.hpp>
@@ -32,14 +33,20 @@ public:
     GameLoop();
     void StartGame();
     void StartCoopGame();
+    void StartNetworkGame();
     int OpenLobbie();
     
     void receiveTCP();
     void receiveUDP();
     
+    void addNewPlayer(std::string name);
+    
 private:
+    std::string myName;
     PlayerC player;
     PlayerCoop otherPlayer;
+    
+    PlayerNetwork networkPlayer;
     
     UIManager uiManager;
     mapCreator mapManager;
@@ -47,6 +54,7 @@ private:
     
     void Update();
     void Render();
+    void GeneralRender();
     
     //Collision
     void checkPointPassed(int index);

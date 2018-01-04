@@ -40,7 +40,7 @@ int main()
             
         case 2:
             //Start Networking game
-            gameLoop.StartGame();
+            gameLoop.StartNetworkGame();
             break;
             
         default:
