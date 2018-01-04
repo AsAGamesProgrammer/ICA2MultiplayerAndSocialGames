@@ -185,6 +185,21 @@ namespace GameServer
 		}
 
 		//---------------------------------------
+		//				JOIN REQUEST
+		//---------------------------------------
+		public static void Join(string name)
+		{ 
+			//Increase id as the new player joined
+			highestID++;
+
+			//Update everyone that this player is registered
+            SendTCPToRegistered("JOI " + highestID.ToString() + name);
+
+			//Update player's status
+			clientDictionary[name].raceId = highestID;
+		}
+
+		//---------------------------------------
 		//				RECEIVE
 		//---------------------------------------
 		//Reading data
@@ -257,12 +272,11 @@ namespace GameServer
 					//JOIN the race
 					if (sub == "JOI")
 					{
-						highestID++;
+						
 						string charName = (newMsg.body.Substring(4, newMsg.body.Length - 5));
+                        Join(charName);
 
-						Console.WriteLine(charName);
-                        SendTCP("JOI " + highestID.ToString() + charName);
-						clientDictionary[charName].raceId = highestID;
+
 						//SendTCP("JOI " + highestID.ToString() + charName);
 					}
 
@@ -302,6 +316,19 @@ namespace GameServer
 				//socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), socket);
 
 				entry.tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), entry.tcpSock);
+			}
+		}
+
+		//Sending data to registered
+		public static void SendTCPToRegistered(string msg)
+		{ 
+			byte[] byteData = Encoding.ASCII.GetBytes(msg);
+			Console.WriteLine("Server sending: {0},", msg);
+
+			foreach (Client entry in clientDictionary.Values)
+			{
+				if(entry.raceId !=-1)
+					entry.tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), entry.tcpSock);
 			}
 		}
 

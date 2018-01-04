@@ -300,10 +300,6 @@ void GameLoop::StartNetworkGame()
     sendTCPData("JOI " + myName);
     mapManager.loadTiles();
     
-    // Notify server
-    // Create all registered player
-    // Draw all the players
-    
     while (window.isOpen())
     {
         sf::Event event;
