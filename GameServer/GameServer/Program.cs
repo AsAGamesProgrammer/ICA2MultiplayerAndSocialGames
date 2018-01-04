@@ -10,8 +10,6 @@ using System.Threading.Tasks;
 namespace GameServer
 {
 
-	//TODO: MEssage system which will support test messages ana tcp registration
-
 	// TCP: 7578
 	// UDP: 7576
 	//
@@ -40,13 +38,6 @@ namespace GameServer
 		
 	*/
 
-	//TEST
-	//public class message
-	//{
-	//	public int Id;
-	//	public string body;
-	//	public DateTime sendDate;
-	//}
 
 	/// <summary>
 	/// Main body of the server

@@ -31,7 +31,8 @@ class GameLoop
 public:
     GameLoop();
     void StartGame();
-    void OpenLobbie();
+    void StartCoopGame();
+    int OpenLobbie();
     
     void receiveTCP();
     void receiveUDP();
@@ -53,6 +54,7 @@ private:
     
     //Lobby
     Lobby lobby;
+    
     
     //-----------------------
     //      NETWORKING

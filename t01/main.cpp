@@ -20,16 +20,33 @@ int main()
     //Create a game loop class
     GameLoop gameLoop;
     
-    
-    
     std::thread tcpRecThread (&GameLoop::receiveTCP, &gameLoop);
     std::thread udpRecThread (&GameLoop::receiveUDP, &gameLoop);
     
     //Create a starting menu / lobbie
-    gameLoop.OpenLobbie();
+    int mode = gameLoop.OpenLobbie();
     
-    //Start game
-    gameLoop.StartGame();
+    switch(mode)
+    {
+        case 0:
+            //Start training game
+            gameLoop.StartGame();
+            break;
+            
+        case 1:
+            //Start coopGame
+            gameLoop.StartCoopGame();
+            break;
+            
+        case 2:
+            //Start Networking game
+            gameLoop.StartGame();
+            break;
+            
+        default:
+            gameLoop.StartGame();
+            break;
+    }
     
     
     tcpRecThread.join();

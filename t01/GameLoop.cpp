@@ -177,9 +177,10 @@ void GameLoop::receiveUDPOnce()
 //              LOBBY
 //----------------------------------------
 
-void GameLoop::OpenLobbie()
+int GameLoop::OpenLobbie()
 {
     window.clear();
+    int selectedMode=0;
     
     //THREADS
     //Listens to TCP
@@ -216,18 +217,21 @@ void GameLoop::OpenLobbie()
         {
             lobby.setActiveButton(0);
             sendTCPData("0 pressed");
+            selectedMode=0;
         }
         
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
         {
             lobby.setActiveButton(1);
             sendUDPUpdata("1 pressed");
+            selectedMode=1;
         }
         
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
         {
             lobby.setActiveButton(2);
             sendUDPUpdata("2 pressed");
+            selectedMode=2;
         }
            
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -236,15 +240,31 @@ void GameLoop::OpenLobbie()
             //udpRecThread.join();
             
             //std::terminate();
-            return;
+            return selectedMode;
         }
         
     }
+    
+    return selectedMode;
     
     //tcpRecThread.join();
     //udpRecThread.join();
 }
 
+//----------------------------------------
+//              GAME MODES
+//----------------------------------------
+
+void GameLoop::StartCoopGame()
+{
+    //Prepare everything for the other player
+    otherPlayer.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png"); //Player 2
+    //TEMP
+    otherPlayer.setStartingPos(500, 200);
+    
+    
+    StartGame();
+}
 
 void GameLoop::StartGame()
 {
@@ -252,11 +272,11 @@ void GameLoop::StartGame()
     //PRE-PROCESSING
     mapManager.loadTiles();
     player.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames//carYS3.png");      //Player 1
-    otherPlayer.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png"); //Player 2
+    //otherPlayer.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png"); //Player 2
     
     
     //TEMP
-    otherPlayer.setStartingPos(500, 200);
+    //otherPlayer.setStartingPos(500, 200);
     
     //GAME LOOP
     while (window.isOpen())
