@@ -109,21 +109,29 @@ void GameLoop::receiveTCP()
             
             //Convert bytes to a string
             std::string sub;
-            for (int i=0; i<100; i++)
+            int i=0;
+            
+            while(i<100)
             {
                 char nextChar = inData[i];
-                sub +=nextChar;
+                
+                if(nextChar !='\n')
+                {
+                    sub +=nextChar;
+                    i++;
+                }
+                else
+                {
+                    i=110;
+                }
             }
             
             std::string code = sub.substr(0, 3);
             
-            std::cout<<code<<std::endl;
             //RECEIVED: JOI
             if(code == "JOI")
             {
-                std::cout<<"Adding player"<<std::endl;
                 addNewPlayer(sub.substr(4, sub.length()));
-                std::cout<<"Player added"<<std::endl;
             }
         }
         
@@ -317,11 +325,10 @@ void GameLoop::StartNetworkGame()
 
 void GameLoop::addNewPlayer(std::string name)
 {
-    std::cout<<"Function entered"<<std::endl;
     if(name !=myName)
     {
         networkPlayer.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png");
-        std::cout<<"NEW PLAYER ADDED"<<std::endl;
+        std::cout<<"NEW PLAYER "<< name <<" ADDED"<<std::endl;
     }
 }
 
