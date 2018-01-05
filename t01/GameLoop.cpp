@@ -16,9 +16,13 @@
 
 //-------------------------------------------------------
 //  NETWORKING CODES:
-//  REG: - register with a server
-//  JOI: - join a networking game
-//  STR: - start game
+//          TCP
+//  REG - register with a server
+//  JOI - join a networking game
+//  STR - start game
+//
+//          UDP
+//  POS - change position of a player
 //-------------------------------------------------------
 
 
@@ -202,7 +206,7 @@ void GameLoop::receiveTCPOnce()
 void GameLoop::sendUDPUpdata(std::string msg)
 {
     std::string combinedString = msg + "\n";
-    char data[255];
+    char data[1024];
     strcpy(data, combinedString.c_str());
 
     printf("Sending UDP: %s\n", data);
@@ -219,11 +223,11 @@ void GameLoop::receiveUDP()
 {
     while(true)
     {
-        char data[100];
+        char data[1024];
         std::size_t received;
         sf::IpAddress sender;
         unsigned short port;
-        if (socketUDP.receive(data, 100, received, sender, port) != sf::Socket::Done)
+        if (socketUDP.receive(data, 1024, received, sender, port) != sf::Socket::Done)
         {
             std::cout<<"Failed to receive UDP"<<std::endl;
         }
@@ -237,11 +241,11 @@ void GameLoop::receiveUDP()
 
 void GameLoop::receiveUDPOnce()
 {
-    char data[100];
+    char data[1024];
     std::size_t received;
     sf::IpAddress sender;
     unsigned short port;
-    if (socketUDP.receive(data, 100, received, sender, port) != sf::Socket::Done)
+    if (socketUDP.receive(data, 1024, received, sender, port) != sf::Socket::Done)
     {
         std::cout<<"Failed to receive UDP"<<std::endl;
     }
@@ -351,7 +355,16 @@ void GameLoop::StartNetworkGame()
         
         //Update the game if it officially started
         if(networkingGameOn)
+        {
             gameUpdate();
+            
+            //Add an if statement
+            int x = player.getPlayer().getPosition().x;
+            int y = player.getPlayer().getPosition().y;
+            
+            std::string movementInfo = "POS "+std::to_string(x) +" "+ std::to_string(y)+" "+myName;
+            sendUDPUpdata(movementInfo);
+        }
 
         //Draw other stuff
         GeneralRender();
