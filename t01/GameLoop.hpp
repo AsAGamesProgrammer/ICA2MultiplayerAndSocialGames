@@ -63,7 +63,7 @@ private:
     void interpretTCP(char bytes[1024]);
     
     //Update networking game
-    void gameUpdate();
+    bool gameUpdate();
     bool networkingGameOn=false;
     
     //Lobby

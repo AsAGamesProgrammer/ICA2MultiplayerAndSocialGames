@@ -47,17 +47,18 @@ float PlayerC::getSpeed()
 
 
 //------MOVEMENT--------
-void PlayerC::moveRelated()
+bool PlayerC::moveRelated()
 {
-    movePlayer();
-    
     if(bullet.isEnabled)
         bullet.moveBullet();
+    
+    return movePlayer();
 }
 
 
-void PlayerC::movePlayer()
+bool PlayerC::movePlayer()
 {
+    bool didMove=false;
     
     //Move RIGHT
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -81,6 +82,8 @@ void PlayerC::movePlayer()
         
         //Slow down if possible
         PlayerBase::slowDown();
+        
+        didMove=true;
     }
     
          //MOVE UP
@@ -92,6 +95,8 @@ void PlayerC::movePlayer()
         //Accelerate if possible
         PlayerBase::accelerate();
         
+        didMove=true;
+        
     }
     else //NO Movement
     {
@@ -99,6 +104,8 @@ void PlayerC::movePlayer()
     }
     
     shoot();
+    
+    return didMove;
 }
 
 void PlayerC::moveInADirection()

@@ -37,7 +37,7 @@ class PlayerC : PlayerBase
     float getSpeed();
 
     //Functionality
-    void moveRelated();                  //Movement
+    bool moveRelated();                  //Movement
     
     void createPlayer(std::string textureStr);                //Player creation function
     
@@ -52,7 +52,7 @@ class PlayerC : PlayerBase
         
     //Functionality
 
-    void movePlayer();                  //Movement
+    bool movePlayer();                  //Movement
     
     void shoot();
     
