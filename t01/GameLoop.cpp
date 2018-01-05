@@ -255,6 +255,7 @@ void GameLoop::interpretUDP(char bytes[1024])
 
         //Ints
         int racerId = atoi(racerIDString.c_str());
+        std::cout<<"Received position from id "<<racerId<<" where my ID is "<<myID<<std::endl;
         if(racerId!=myID)
         {
             bool posXFound=false;
@@ -511,8 +512,7 @@ void GameLoop::addNewPlayer(std::string name, int id)
         player.setStartingPos(500, 180 + id*50);
         myID = id;
     }
-    
-    std::cout<<myName + " but received " + name<<std::endl;
+
 }
 
 //----------------------------------------
