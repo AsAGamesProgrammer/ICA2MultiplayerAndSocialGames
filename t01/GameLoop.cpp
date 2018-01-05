@@ -61,8 +61,7 @@ GameLoop::GameLoop()
     sendTCPData("REG " + userName);
     receiveTCPOnce();
     
-    //Register UDP
-    sendUDPUpdata("REG " + userName);
+
 }
 
 //----------------------------------------
@@ -135,6 +134,8 @@ void GameLoop::receiveTCP()
                 int raceIdInt = atoi(raceId.c_str());
                 addNewPlayer(sub.substr(5, sub.length()), raceIdInt);
             }
+            
+
         }
         
         
@@ -155,7 +156,38 @@ void GameLoop::receiveTCPOnce()
     //Print only if received text
     char firstLit = inData[0];
     if(firstLit != '\0')
+    {
         std::cout << "Received " << inData <<" with "<<received<<" bytes" << std::endl;
+        
+        //Convert bytes to a string
+        std::string sub;
+        int i=0;
+        
+        while(i<100)
+        {
+            char nextChar = inData[i];
+            
+            if(nextChar !='\n')
+            {
+                sub +=nextChar;
+                i++;
+            }
+            else
+            {
+                i=110;
+            }
+        }
+        
+        std::string code = sub.substr(0, 3);
+        
+        //RECEIVED REG
+        if(code =="REG")
+        {
+            //Register UDP if TCP registration is complete
+            sendUDPUpdata("REG " + myName);
+        }
+        
+    }
 }
 
 //Send UDP
