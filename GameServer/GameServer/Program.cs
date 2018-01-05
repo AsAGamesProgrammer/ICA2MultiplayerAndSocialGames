@@ -519,7 +519,7 @@ namespace GameServer
 						string name = elements[3];
 						string newString = elements[0] + elements[1] + " " + elements[2] + " " + clientDictionary[name].raceId;
 
-						Console.WriteLine("ID of" + name + " is " + clientDictionary[name].raceId);
+						Console.WriteLine(newString);
                         SendUDP(newString);
 					}
 
@@ -555,6 +555,7 @@ namespace GameServer
 
 				if(stateUdp !=null)
 					entry.udpSocket.BeginSendTo(byteData, 0, byteData.Length, 0, entry.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
+
 			}
 
 		}

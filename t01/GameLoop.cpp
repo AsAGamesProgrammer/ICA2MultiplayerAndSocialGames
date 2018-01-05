@@ -9,7 +9,7 @@
 //-------------------------------------------------------
 //TODO:
 
-// Reinterpret ID and PosX and PosY
+// UDP adds received characters if the previous msg was longer than the current one
 
 //-------------------------------------------------------
 //  NETWORKING CODES:
