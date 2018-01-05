@@ -357,21 +357,21 @@ void GameLoop::StartNetworkGame()
                 window.close();
         }
         
-        Update();
+        //Update();
         //gameUpdate();
         
-//        //Update the game if it officially started
-//        if(networkingGameOn)
-//        {
-//            if(gameUpdate())
-//            {
-//                int x = player.getPlayer().getPosition().x;
-//                int y = player.getPlayer().getPosition().y;
-//
-//                std::string movementInfo = "POS "+std::to_string(x) +" "+ std::to_string(y)+" "+myName + " ";
-//                //sendUDPUpdata(movementInfo);
-//            }
-//        }
+        //Update the game if it officially started
+        if(networkingGameOn)
+        {
+            if(gameUpdate())
+            {
+                int x = player.getPlayer().getPosition().x;
+                int y = player.getPlayer().getPosition().y;
+
+                std::string movementInfo = "POS "+std::to_string(x) +" "+ std::to_string(y)+" "+myName + " ";
+                sendUDPUpdata(movementInfo);
+            }
+        }
 
         //Draw other stuff
         GeneralRender();
