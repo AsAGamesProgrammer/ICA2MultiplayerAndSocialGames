@@ -282,6 +282,7 @@ void GameLoop::interpretUDP(char bytes[1024])
             else
             {
                 racerIDString +=sub[i];
+                break;
             }
         }
         
