@@ -60,10 +60,14 @@ GameLoop::GameLoop()
     
     std::string userName;
     std::cin>>userName;
+    
+    bool flag=false;
+    int i=0;
+    
     myName=userName;
     
     //Register TCP
-    sendTCPData("REG " + userName);
+    sendTCPData("REG " + myName + " ");
     receiveTCPOnce();
     
 
@@ -196,7 +200,7 @@ void GameLoop::receiveTCPOnce()
         if(code =="REG")
         {
             //Register UDP if TCP registration is complete
-            sendUDPUpdata("REG " + myName);
+            sendUDPUpdata("REG " + myName + " ");
         }
         
     }
@@ -341,7 +345,7 @@ int GameLoop::OpenLobbie()
 //----------------------------------------
 void GameLoop::StartNetworkGame()
 {
-    sendTCPData("JOI " + myName);
+    sendTCPData("JOI " + myName + " ");
     mapManager.loadTiles();
     
     while (window.isOpen())
@@ -353,18 +357,21 @@ void GameLoop::StartNetworkGame()
                 window.close();
         }
         
-        //Update the game if it officially started
-        if(networkingGameOn)
-        {
-            if(gameUpdate())
-            {
-                int x = player.getPlayer().getPosition().x;
-                int y = player.getPlayer().getPosition().y;
-            
-                std::string movementInfo = "POS "+std::to_string(x) +" "+ std::to_string(y)+" "+myName;
-                sendUDPUpdata(movementInfo);
-            }
-        }
+        Update();
+        //gameUpdate();
+        
+//        //Update the game if it officially started
+//        if(networkingGameOn)
+//        {
+//            if(gameUpdate())
+//            {
+//                int x = player.getPlayer().getPosition().x;
+//                int y = player.getPlayer().getPosition().y;
+//
+//                std::string movementInfo = "POS "+std::to_string(x) +" "+ std::to_string(y)+" "+myName + " ";
+//                //sendUDPUpdata(movementInfo);
+//            }
+//        }
 
         //Draw other stuff
         GeneralRender();
@@ -405,8 +412,22 @@ void GameLoop::addNewPlayer(std::string name, int id)
     else if(id==3)
         textureAd ="../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carOS5 copy.png";
     
+    
+    bool nameIsMine=false;
+    
+    //If NAME is nt longer than MYNAME
+    if(name[myName.length()]=='\0')
+       {
+           nameIsMine=true;
+           
+           for(int i=0; i<myName.length(); i++)
+           {
+               if(myName[i] !=name[i])
+                   nameIsMine=false;
+           }
+       }
 
-    if(name !=myName)
+    if(!nameIsMine)
     {
         networkPlayers[id].createPlayer(textureAd);
         std::cout<<"("<<id<<")"<<"NEW PLAYER "<< name <<" ADDED"<<std::endl;
@@ -417,6 +438,8 @@ void GameLoop::addNewPlayer(std::string name, int id)
         player.createPlayer(textureAd);
         player.setStartingPos(500, 180 + id*50);
     }
+    
+    std::cout<<myName + " but received " + name<<std::endl;
 }
 
 //----------------------------------------

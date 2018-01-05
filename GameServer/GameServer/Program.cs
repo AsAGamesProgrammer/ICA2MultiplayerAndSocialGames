@@ -145,7 +145,7 @@ namespace GameServer
 
 			myStopwatch.Start();
 
-			for (int i = 0; i< 10000; i++)
+			for (int i = 0; i< 1000; i++)
         	{
             	Thread.Sleep(1);
         	}
@@ -301,7 +301,10 @@ namespace GameServer
 					//REGISTER to a server
 					if (sub == "REG")
 					{
-						string charName = (newMsg.body.Substring(4, newMsg.body.Length - 5));
+						//string charName = (newMsg.body.Substring(4, newMsg.body.Length - 5));
+
+						string[] elements = newMsg.body.Split(' ');
+						string charName = elements[1];
 						RegisterClient(newMsg.sock, charName);
                         SendTCP(newMsg.body);
 					}
@@ -310,7 +313,8 @@ namespace GameServer
 					if (sub == "JOI")
 					{
 						
-						string charName = (newMsg.body.Substring(4, newMsg.body.Length - 5));
+						string[] elements = newMsg.body.Split(' ');
+						string charName = elements[1];
                         Join(charName);
 
 
@@ -493,17 +497,33 @@ namespace GameServer
 
 				if (newMsg !=null)
 				{
+					Console.WriteLine("Server consumed UDP content of " + newMsg.body);
+
 					string sub = newMsg.body.Substring(0, 3);
 
 					if (sub == "REG")
 					{
-						string charName = (newMsg.body.Substring(4, newMsg.body.Length - 5));
+						//string charName = (newMsg.body.Substring(4, newMsg.body.Length - 5));
+
+						string[] elements = newMsg.body.Split(' ');
+						string charName = elements[1];
 
 						RegisterUdp(newMsg.endPoint, newMsg.sock, charName);
+                        SendUDP(newMsg.body);
 					}
 
-					Console.WriteLine("Server consumed UDP content of " + newMsg.body);
-					SendUDP(newMsg.body);
+					if (sub == "POS")
+					{
+						string[] elements = newMsg.body.Split(' ');
+
+						string name = elements[3];
+						string newString = elements[0] + elements[1] + elements[2] + clientDictionary[name].raceId;
+
+
+                        SendUDP(newString);
+					}
+
+					//SendUDP(newMsg.body);
 				}
 			}
 		}
