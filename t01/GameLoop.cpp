@@ -92,10 +92,10 @@ void GameLoop::receiveTCP()
     
     while(true)
     {
-        char inData[100] = "None";
+        char inData[1024] = "None";
         std::size_t received;
         // TCP socket:
-        if (socketTCP.receive(inData, 100, received) != sf::Socket::Done)
+        if (socketTCP.receive(inData, 1024, received) != sf::Socket::Done)
         {
             std::cout << "Failed to receive (TCP)"<< std::endl;
         }
@@ -145,7 +145,7 @@ void GameLoop::receiveTCP()
 
 void GameLoop::receiveTCPOnce()
 {
-    char inData[100] = "None";
+    char inData[1024] = "None";
     std::size_t received;
     // TCP socket:
     if (socketTCP.receive(inData, 100, received) != sf::Socket::Done)
@@ -163,7 +163,7 @@ void GameLoop::receiveTCPOnce()
         std::string sub;
         int i=0;
         
-        while(i<100)
+        while(i<1024)
         {
             char nextChar = inData[i];
             

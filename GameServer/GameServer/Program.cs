@@ -199,7 +199,7 @@ namespace GameServer
 			foreach (string entry in clientDictionary.Keys)
 			{
 				if(clientDictionary[entry].raceId !=-1)
-					SendTCPToRegistered("JOI " + clientDictionary[entry].raceId.ToString() + entry);
+					SendTCP("JOI " + clientDictionary[entry].raceId.ToString() + entry);
 			}
 		}
 
@@ -422,24 +422,7 @@ namespace GameServer
 			msg.endPoint = stateUdp.endPoint;
 			producerConsumerUDP.produce(msg);
 
-			//----------------RECEIVED-----------------
-			//SEND BACK
-			//if (receiveString.IndexOf("\n") > -1)
-			//{
-			//	string sub = receiveString.Substring(0, 3);
 
-			//	//Registartion check
-			//	if (sub == "REG")
-			//	{
-			//		string charName = receiveString.Substring(0, receiveString.Length - 1);
-			//		RegisterUdp(stateUdp.endPoint, sock, charName);
-			//	}
-
-			//	//ECHO
-			//	SendUDP(sock, receiveString, stateUdp);
-			//	stateUdp.buffer = new byte[1024];
-			//}
-			//----------------RECEIVED-----------------
 
 			// The message then needs to be handleed
 			//messageReceived = true;
