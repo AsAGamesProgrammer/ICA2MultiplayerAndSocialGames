@@ -18,6 +18,7 @@
 //  NETWORKING CODES:
 //  REG: - register with a server
 //  JOI: - join a networking game
+//  STR: - start game
 //-------------------------------------------------------
 
 
@@ -142,6 +143,11 @@ void GameLoop::interpretTCP(char bytes[1024])
         std::string raceId = sub.substr(4,5);
         int raceIdInt = atoi(raceId.c_str());
         addNewPlayer(sub.substr(5, sub.length()), raceIdInt);
+    }
+    else
+    if(code =="STR")
+    {
+        networkingGameOn=true;
     }
 }
 
@@ -343,7 +349,9 @@ void GameLoop::StartNetworkGame()
                 window.close();
         }
         
-        
+        //Update the game if it officially started
+        if(networkingGameOn)
+            gameUpdate();
 
         //Draw other stuff
         GeneralRender();
@@ -362,7 +370,10 @@ void GameLoop::StartNetworkGame()
     }
 }
 
-
+void GameLoop::gameUpdate()
+{
+    player.moveRelated();
+}
 
 void GameLoop::addNewPlayer(std::string name, int id)
 {
