@@ -9,10 +9,7 @@
 //-------------------------------------------------------
 //TODO:
 
-//Make "Network player" class
-//Make a message class and somewhat a game?
-//Database
-//Security
+// Reinterpret ID and PosX and PosY
 
 //-------------------------------------------------------
 //  NETWORKING CODES:
@@ -251,45 +248,60 @@ void GameLoop::interpretUDP(char bytes[1024])
     {
         //ID
         std::string racerIDString;
-        racerIDString +=sub[sub.length()-1];
 
+        //Two flags
+        bool posXFound=false;
+        bool posYFound=false;
+        
+        //Two strings which will become positions
+        std::string posXString;
+        std::string posYString;
+        
+        for(int i=3; i<sub.length()-1; i++)
+        {
+            char nextChar = sub[i];
+            
+            //Space between x and y found
+            if(nextChar == ' ')
+            {
+                if(!posXFound)
+                    posXFound=true;
+                else
+                    posYFound=true;
+                continue;
+            }
+            
+            if(!posXFound)
+            {
+                posXString +=nextChar;
+            }
+            else if(!posYFound)
+            {
+                posYString +=nextChar;
+            }
+            else
+            {
+                racerIDString +=sub[i];
+            }
+        }
+        
+        //Results
         //Ints
         int racerId = atoi(racerIDString.c_str());
         std::cout<<"Received position from id "<<racerId<<" where my ID is "<<myID<<std::endl;
+        
         if(racerId!=myID)
         {
-            bool posXFound=false;
-            std::string posXString;
-            std::string posYString;
-        
-            for(int i=3; i<sub.length()-1; i++)
-            {
-                char nextChar = sub[i];
-            
-                //Space between x and y found
-                if(nextChar == ' ')
-                    posXFound=true;
-            
-                if(!posXFound)
-                {
-                    posXString +=nextChar;
-                }
-                else
-                {
-                    posYString +=nextChar;
-                }
-            }
-        
             int newPosX = atoi(posXString.c_str());
             int newPosY = atoi(posYString.c_str());
         
             networkPlayers[racerId].setStartingPos(newPosX, newPosY);
-            
             std::cout<<"Interpreted as: id "<<racerId<<" posX "<<newPosX<<" posY "<<newPosX<<std::endl;
         }
     }
-
 }
+
+
 
 void GameLoop::receiveUDP()
 {
@@ -512,6 +524,8 @@ void GameLoop::addNewPlayer(std::string name, int id)
         player.setStartingPos(500, 180 + id*50);
         myID = id;
     }
+    
+    std::cout<<"MyID is "<<myID<<std::endl;
 
 }
 
