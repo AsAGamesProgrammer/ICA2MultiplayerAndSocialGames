@@ -517,7 +517,7 @@ namespace GameServer
 						string[] elements = newMsg.body.Split(' ');
 
 						string name = elements[3];
-						string newString = elements[0] + elements[1] + elements[2] + clientDictionary[name].raceId;
+						string newString = elements[0] + elements[1] + " " + elements[2] + clientDictionary[name].raceId;
 
 
                         SendUDP(newString);

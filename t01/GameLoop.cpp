@@ -223,6 +223,71 @@ void GameLoop::sendUDPUpdata(std::string msg)
     }
 }
 
+void GameLoop::interpretUDP(char bytes[1024])
+{
+    //Convert bytes to a string
+    std::string sub;
+    int i=0;
+    
+    while(i<1024)
+    {
+        char nextChar = bytes[i];
+        
+        if(nextChar !='\n')
+        {
+            sub +=nextChar;
+            i++;
+        }
+        else
+        {
+            i=1025;
+        }
+    }
+    
+    std::string code = sub.substr(0, 3);
+    
+    //RECEIVED: JOI
+    if(code == "POS")
+    {
+        //ID
+        std::string racerIDString;
+        racerIDString +=sub[sub.length()-1];
+
+        //Ints
+        int racerId = atoi(racerIDString.c_str());
+        if(racerId!=myID)
+        {
+            bool posXFound=false;
+            std::string posXString;
+            std::string posYString;
+        
+            for(int i=3; i<sub.length()-1; i++)
+            {
+                char nextChar = sub[i];
+            
+                //Space between x and y found
+                if(nextChar == ' ')
+                    posXFound=true;
+            
+                if(!posXFound)
+                {
+                    posXString +=nextChar;
+                }
+                else
+                {
+                    posYString +=nextChar;
+                }
+            }
+        
+            int newPosX = atoi(posXString.c_str());
+            int newPosY = atoi(posYString.c_str());
+        
+            networkPlayers[racerId].setStartingPos(newPosX, newPosY);
+        }
+    }
+
+}
+
 void GameLoop::receiveUDP()
 {
     while(true)
@@ -239,7 +304,12 @@ void GameLoop::receiveUDP()
         //Print only if received text
         char firstLit = data[0];
         if(firstLit != '\0')
-        std::cout << "Received "<<data<< " which is " << received << " bytes from " << sender << " on port " << port << std::endl;
+        {
+            std::cout << "Received "<<data<< " which is " << received << " bytes from " << sender << " on port " << port << std::endl;
+            
+            interpretUDP(data);
+            
+        }
     }
 }
 
@@ -258,7 +328,7 @@ void GameLoop::receiveUDPOnce()
     char firstLit = data[0];
     if(firstLit != '\0')
         std::cout << "Received "<<data<< " which is " << received << " bytes from " << sender << " on port " << port << std::endl;
-    
+
 }
 
 
@@ -437,6 +507,7 @@ void GameLoop::addNewPlayer(std::string name, int id)
     {
         player.createPlayer(textureAd);
         player.setStartingPos(500, 180 + id*50);
+        myID = id;
     }
     
     std::cout<<myName + " but received " + name<<std::endl;

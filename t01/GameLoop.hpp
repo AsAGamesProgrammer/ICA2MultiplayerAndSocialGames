@@ -61,6 +61,7 @@ private:
     void checkBulletCollision();
     
     void interpretTCP(char bytes[1024]);
+    void interpretUDP(char bytes[1024]);
     
     //Update networking game
     bool gameUpdate();
@@ -86,6 +87,8 @@ private:
     
     //Loop condition
     bool runThreads=true;
+    
+    int myID=-1;
     
 };
 
