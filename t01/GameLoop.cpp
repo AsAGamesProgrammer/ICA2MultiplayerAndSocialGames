@@ -9,7 +9,7 @@
 //-------------------------------------------------------
 //TODO:
 
-// UDP adds received characters if the previous msg was longer than the current one
+// ROTATE cars inside the clients
 
 //-------------------------------------------------------
 //  NETWORKING CODES:
