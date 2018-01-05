@@ -6,6 +6,7 @@ using System.Net;
 using System.Collections.Generic;
 
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace GameServer
 {
@@ -61,6 +62,11 @@ namespace GameServer
 
 		//Race information
 		static int highestID = -1;
+
+		//Thread for time
+		static Thread thTimer = new Thread(countDown);
+		static bool timerIsActive = false;
+		static Stopwatch myStopwatch = new Stopwatch();
 
 		//--------------------------------------
 		//			LISTENING LOOP
@@ -127,6 +133,26 @@ namespace GameServer
 			}
 		}
 
+		///---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		///																						UTILITIES
+		///---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		//---------------------------------------
+		//				TIMER
+		//---------------------------------------
+		public static void countDown()
+		{
+			Console.WriteLine("Timer started");
+
+			myStopwatch.Start();
+
+			for (int i = 0; i< 10000; i++)
+        	{
+            	Thread.Sleep(1);
+        	}
+
+			myStopwatch.Stop();
+			Console.WriteLine("Time off");
+		}
 
 		///---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		///																						TCP
@@ -200,6 +226,12 @@ namespace GameServer
 			{
 				if(clientDictionary[entry].raceId !=-1)
 					SendTCP("JOI " + clientDictionary[entry].raceId.ToString() + entry);
+			}
+
+			if (!timerIsActive)
+			{
+				timerIsActive = true;
+				thTimer.Start();
 			}
 		}
 

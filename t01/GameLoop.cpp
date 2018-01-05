@@ -343,10 +343,12 @@ void GameLoop::StartNetworkGame()
                 window.close();
         }
         
+        
 
+        //Draw other stuff
         GeneralRender();
         
-        //Player
+        //Draw player
         window.draw(player.getPlayer());
         
         //Draw all the opponents
@@ -359,6 +361,8 @@ void GameLoop::StartNetworkGame()
         window.display();
     }
 }
+
+
 
 void GameLoop::addNewPlayer(std::string name, int id)
 {
