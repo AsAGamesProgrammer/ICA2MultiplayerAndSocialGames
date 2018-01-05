@@ -60,7 +60,7 @@ private:
     void checkPointPassed(int index);
     void checkBulletCollision();
     
-    
+    void interpretTCP(char bytes[1024]);
     
     //Lobby
     Lobby lobby;

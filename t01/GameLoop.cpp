@@ -106,38 +106,42 @@ void GameLoop::receiveTCP()
         {
             std::cout << "Received " << inData <<" with "<<received<<" bytes" << std::endl;
             
-            //Convert bytes to a string
-            std::string sub;
-            int i=0;
-            
-            while(i<100)
-            {
-                char nextChar = inData[i];
-                
-                if(nextChar !='\n')
-                {
-                    sub +=nextChar;
-                    i++;
-                }
-                else
-                {
-                    i=110;
-                }
-            }
-            
-            std::string code = sub.substr(0, 3);
-            
-            //RECEIVED: JOI
-            if(code == "JOI")
-            {
-                std::string raceId = sub.substr(4,5);
-                int raceIdInt = atoi(raceId.c_str());
-                addNewPlayer(sub.substr(5, sub.length()), raceIdInt);
-            }
-            
+            interpretTCP(inData);
 
         }
         
+    }
+}
+
+void GameLoop::interpretTCP(char bytes[1024])
+{
+    //Convert bytes to a string
+    std::string sub;
+    int i=0;
+    
+    while(i<1024)
+    {
+        char nextChar = bytes[i];
+        
+        if(nextChar !='\n')
+        {
+            sub +=nextChar;
+            i++;
+        }
+        else
+        {
+            i=1025;
+        }
+    }
+    
+    std::string code = sub.substr(0, 3);
+    
+    //RECEIVED: JOI
+    if(code == "JOI")
+    {
+        std::string raceId = sub.substr(4,5);
+        int raceIdInt = atoi(raceId.c_str());
+        addNewPlayer(sub.substr(5, sub.length()), raceIdInt);
     }
 }
 
