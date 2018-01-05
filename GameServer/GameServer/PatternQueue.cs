@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Threading;
 
+
+//----------------------------
+//			TCP
+//----------------------------
+
 namespace GameServer
 {
 	public class PatternQueue
@@ -20,6 +25,7 @@ namespace GameServer
 		//PRODUCE
 		public void produce(MessageTCP message)
 		{
+			Console.WriteLine("PRODUCER TCP: " + message);
 			lock (_lockObject)
 			{
 				Monitor.Wait(_lockObject);

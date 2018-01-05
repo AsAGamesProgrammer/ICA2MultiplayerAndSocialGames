@@ -411,6 +411,9 @@ namespace GameServer
 			string receiveString = Encoding.ASCII.GetString(((UdpState)ar.AsyncState).buffer);
 			Console.WriteLine("UDP received: {0}", receiveString);
 
+			//TEST
+			((UdpState)ar.AsyncState).buffer = new byte[1024];
+
 			//TEMP
 			//Produce content and handle?
 			MessageUDP msg = new MessageUDP();
