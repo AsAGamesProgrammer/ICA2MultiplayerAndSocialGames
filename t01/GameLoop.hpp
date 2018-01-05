@@ -60,6 +60,8 @@ private:
     void checkPointPassed(int index);
     void checkBulletCollision();
     
+    
+    
     //Lobby
     Lobby lobby;
     

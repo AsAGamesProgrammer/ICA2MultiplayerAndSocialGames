@@ -138,8 +138,6 @@ void GameLoop::receiveTCP()
 
         }
         
-        
-        //If received REG: add player
     }
 }
 
