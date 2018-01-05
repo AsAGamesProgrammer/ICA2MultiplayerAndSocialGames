@@ -283,6 +283,8 @@ void GameLoop::interpretUDP(char bytes[1024])
             int newPosY = atoi(posYString.c_str());
         
             networkPlayers[racerId].setStartingPos(newPosX, newPosY);
+            
+            std::cout<<"Interpreted as: id "<<racerId<<" posX "<<newPosX<<" posY "<<newPosX<<std::endl;
         }
     }
 
