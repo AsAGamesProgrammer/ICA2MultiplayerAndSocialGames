@@ -44,11 +44,28 @@ void UIManager::loadConstText()
     sf::Text chckPointD = uiUtilities.writeString("Check point D: ");
     chckPointD.move(500, 800);
     
+    //LAP INFORMATION
+    sf::Text LapA = uiUtilities.writeString("Player 1: ");
+    LapA.move(1600, 500);
+    //Point B
+    sf::Text LapB = uiUtilities.writeString("Player 2: ");
+    LapB.move(1600, 600);
+    //Point C
+    sf::Text LapC = uiUtilities.writeString("Player 3: ");
+    LapC.move(1600, 700);
+    //Point D
+    sf::Text LapD = uiUtilities.writeString("Player 4: ");
+    LapD.move(1600, 800);
+    
     constantText[0]=speedLabel;
     constantText[1] = chckPointA;
     constantText[2]=chckPointB;
     constantText[3]=chckPointC;
     constantText[4]=chckPointD;
+    constantText[5]=LapA;
+    constantText[6]=LapB;
+    constantText[7]=LapC;
+    constantText[8]=LapD;
 }
 
 //----INTERFACE----
@@ -65,16 +82,16 @@ void UIManager::displaySpeed(float number)
 void UIManager::displayBanner(std::string title)
 {
     sf::Text bannerText = uiUtilities.writeString(title);
-    bannerText.move(900, 10);
+    bannerText.move(1150, 10);
     
     gameLabels.push_back(bannerText);
     
 }
 
-void UIManager::displayLap(int lapNumber)
+void UIManager::displayLap(float lapNumber)
 {
     sf::Text speedText = uiUtilities.writeFloat(lapNumber);
-    speedText.move(1000, 650);
+    speedText.move(1800, 500);
     
     gameLabels.push_back(speedText);
 }
@@ -106,47 +123,4 @@ void UIManager::displayCheckPoints()
 
 }
 
-//----HELPING FUNCTIONS----
-//sf::Text UIManager::writeFloat(float writing)
-//{
-//    sf::Text text;
-//    
-//    // select the font
-//    text.setFont(font1);
-//    
-//    //Convert float to string
-//    std::stringstream ss;
-//    ss << std::fixed << std::setprecision(1) << writing;
-//    
-//    // set the string to display
-//    text.setString(ss.str());
-//    
-//    
-//    // set the character size
-//    text.setCharacterSize(24); // in pixels, not points!
-//    
-//    // set the color
-//    text.setFillColor(sf::Color::White);
-//    
-//    return text;
-//}
-//
-//sf::Text UIManager::writeString(std::string writing)
-//{
-//    sf::Text text;
-//    
-//    // select the font
-//    text.setFont(font1);
-//    
-//    // set the string to display
-//    text.setString(writing);
-//    
-//    // set the character size
-//    text.setCharacterSize(24); // in pixels, not points!
-//    
-//    // set the color
-//    text.setFillColor(sf::Color::White);
-//    
-//    return text;
-//}
 

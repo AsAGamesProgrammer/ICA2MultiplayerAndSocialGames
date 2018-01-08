@@ -22,7 +22,7 @@ public:
     void displaySpeed(float number);
     
     void displayBanner(std::string title);
-    void displayLap(int lapNumber);
+    void displayLap(float lapNumber);
     
     void displayCheckPoints();
     

@@ -7,6 +7,7 @@
 //
 
 #include "Checkpoint.hpp"
+#include <iostream>
 
 Checkpoint::Checkpoint()
 {
@@ -44,20 +45,25 @@ bool Checkpoint::checkpointPassed(int number)
     
     bool allChecked=true;
     
+    lap=lapBase;
+    
     //See if everything is checked
     for (int i=0; i<4; i++)
     {
         if(checkedPoints[i]==false)
         {
             allChecked=false;
-            break;
         }
+        else
+            lap +=0.25;
     }
+
     
     //Reset
     if(allChecked)
     {
-        lap++;
+        lapBase +=1.0;
+        
         for (int i=0; i<4; i++)
         {
             checkedPoints[i]=false;
@@ -69,7 +75,7 @@ bool Checkpoint::checkpointPassed(int number)
     return false;
 }
 
-int Checkpoint::getLap()
+float Checkpoint::getLap()
 {
     return lap;
 }

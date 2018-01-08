@@ -28,7 +28,7 @@ public:
     
     bool checkedPoints[4];
     
-    int getLap();
+    float getLap();
     
     bool checkpointPassed(int number);
     
@@ -39,7 +39,8 @@ private:
     
     void createCheckPointSprite(int index, int posX, int posY);
     
-    int lap = 0;
+    float lap = 0;
+    float lapBase=0.0;
     
 };
 
