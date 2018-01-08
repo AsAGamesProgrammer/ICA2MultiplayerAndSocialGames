@@ -21,6 +21,9 @@ public:
     UIManager();
     void displaySpeed(float number);
     
+    void displayBanner(std::string title);
+    void displayLap(int lapNumber);
+    
     void displayCheckPoints();
     
     //List of UI elements to render

@@ -58,9 +58,6 @@ GameLoop::GameLoop()
     std::string userName;
     std::cin>>userName;
     
-    bool flag=false;
-    int i=0;
-    
     myName=userName;
     
     //Register TCP
@@ -457,6 +454,12 @@ void GameLoop::StartNetworkGame()
                 std::string movementInfo = "POS "+std::to_string(x) +" "+ std::to_string(y)+" "+myName + " ";
                 sendUDPUpdata(movementInfo);
             }
+            
+            uiManager.displayBanner("Race STARTED!");
+        }
+        else
+        {
+            uiManager.displayBanner("Waiting for other players");
         }
 
         //Draw other stuff

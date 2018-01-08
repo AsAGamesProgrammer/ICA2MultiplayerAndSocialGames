@@ -61,6 +61,24 @@ void UIManager::displaySpeed(float number)
 
 }
 
+//BANNER
+void UIManager::displayBanner(std::string title)
+{
+    sf::Text bannerText = uiUtilities.writeString(title);
+    bannerText.move(900, 10);
+    
+    gameLabels.push_back(bannerText);
+    
+}
+
+void UIManager::displayLap(int lapNumber)
+{
+    sf::Text speedText = uiUtilities.writeFloat(lapNumber);
+    speedText.move(80, 10);
+    
+    gameLabels.push_back(speedText);
+}
+
 //Information of wether check points were checked
 void UIManager::displayCheckPoints()
 {

@@ -145,7 +145,7 @@ namespace GameServer
 
 			myStopwatch.Start();
 
-			for (int i = 0; i< 20000; i++)
+			for (int i = 0; i< 10000; i++)
         	{
             	Thread.Sleep(1);
         	}
