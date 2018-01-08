@@ -94,7 +94,7 @@ namespace GameServer
 			m_dbConnection = new SqliteConnection("Data Source=MyDatabase.sqlite;");
 			m_dbConnection.Open();
 
-			string sql = "CREATE TABLE highscores (name VARCHAR(20), score INT)";
+			string sql = "CREATE TABLE laps (name VARCHAR(40), score FLOAT)";
 			SqliteCommand command = new SqliteCommand(sql, m_dbConnection);
 			command.ExecuteNonQuery();
 
@@ -239,7 +239,18 @@ namespace GameServer
 		//				JOIN REQUEST
 		//---------------------------------------
 		public static void Join(string name)
-		{ 
+		{
+			//DATABASE PART
+			m_dbConnection.Open();
+
+			string sql = "insert into laps (name, score) values ('"+ name + "', 0.0)";
+			SqliteCommand command = new SqliteCommand(sql, m_dbConnection);
+			command.ExecuteNonQuery();
+
+			m_dbConnection.Close();
+
+
+			//GAMEPLAY PART
 			//Increase id as the new player joined
 			highestID++;
 
