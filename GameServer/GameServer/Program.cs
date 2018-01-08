@@ -7,6 +7,10 @@ using System.Collections.Generic;
 
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Data;
+using System.IO;
+using Mono.Data.Sqlite;
+
 
 namespace GameServer
 {
@@ -76,7 +80,12 @@ namespace GameServer
 		public static void Main(string[] args)
 		{
 			//Test message
-			Console.WriteLine("Hello, I am server!");
+			Console.WriteLine("Hello, I am server! Give me a second to create a database!");
+
+			//DATABASE
+			string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+			SqliteConnection connection = new SqliteConnection();
+			//DATABASE
 
 			//Initializig a queue of messages which will be past to the producer/consumer manager
 			//TCP
