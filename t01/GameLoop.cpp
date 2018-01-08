@@ -18,6 +18,7 @@
 //  JOI - join a networking game
 //  STR - start game
 //  REP - repeat joining proccess
+//  SCR - score
 //
 //          UDP
 //  POS - change position of a player
@@ -721,7 +722,6 @@ void GameLoop::checkPointPassed(int index)
        player.getPlayer().getPosition().y - player.height/2 <= chpManager.checkPSprites[index].getPosition().y + chpManager.sizeH/2) //bot
         
     {
-        //Handle collision
         
         bool allChecked = chpManager.checkpointPassed(index);
         
@@ -732,8 +732,10 @@ void GameLoop::checkPointPassed(int index)
                 uiManager.checkedPoints[i]="Do it!";
             }
         }
-        else
+        else if (uiManager.checkedPoints[index] !="Checked!")
+        {
             uiManager.checkedPoints[index]="Checked!";
+        }
         
         return;
     }
