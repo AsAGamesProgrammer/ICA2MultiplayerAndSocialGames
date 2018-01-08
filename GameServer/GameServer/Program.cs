@@ -321,6 +321,17 @@ namespace GameServer
 						//SendTCP("JOI " + highestID.ToString() + charName);
 					}
 
+					//REPEAT the joining proccess
+					if (sub == "REP")
+					{ 
+						//Send information of all players to all players
+						foreach (string entry in clientDictionary.Keys)
+						{
+							if(clientDictionary[entry].raceId !=-1)
+							SendTCP("JOI " + clientDictionary[entry].raceId.ToString() + entry);
+						}
+					}
+
 					//Console.WriteLine("Server consumed content of " + newMsg.body);
 					//SendTCP(newMsg.body);
 				}

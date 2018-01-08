@@ -17,6 +17,7 @@
 //  REG - register with a server
 //  JOI - join a networking game
 //  STR - start game
+//  REP - repeat joining proccess
 //
 //          UDP
 //  POS - change position of a player
@@ -431,6 +432,8 @@ void GameLoop::StartNetworkGame()
     sendTCPData("JOI " + myName + " ");
     mapManager.loadTiles();
     
+
+    
     while (window.isOpen())
     {
         sf::Event event;
@@ -459,22 +462,22 @@ void GameLoop::StartNetworkGame()
         }
         else
         {
+            //Display banner
             uiManager.displayBanner("Waiting for other players");
+            
+            //Rejoin option
+            
+            //Press left shift to rejoin
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+            {
+                //Repeat joining in proccess
+                sendTCPData("REP");
+            }
         }
 
-        //Draw other stuff
-        GeneralRender();
-        
-        //Draw player
-        window.draw(player.getPlayer());
-        
-        //Draw all the opponents
-        for (int i=0; i<4; i++)
-        {
-            window.draw(networkPlayers[i].getPlayer());
-        }
+        //Render
+        networkedGameRender();
 
-        
         window.display();
     }
 }
@@ -625,6 +628,21 @@ void GameLoop::GeneralRender()
     //UI - constant labels
     for(int i=0; i<uiManager.numberOfConstText; i++)
         window.draw(uiManager.constantText[i]);
+}
+
+void GameLoop::networkedGameRender()
+{
+    //Draw other stuff
+    GeneralRender();
+    
+    //Draw player
+    window.draw(player.getPlayer());
+    
+    //Draw all the opponents
+    for (int i=0; i<4; i++)
+    {
+        window.draw(networkPlayers[i].getPlayer());
+    }
 }
 
 void GameLoop::Render()

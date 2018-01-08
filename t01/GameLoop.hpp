@@ -55,6 +55,7 @@ private:
     void Update();
     void Render();
     void GeneralRender();
+    void networkedGameRender();
     
     //Collision
     void checkPointPassed(int index);
