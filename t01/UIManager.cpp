@@ -45,16 +45,16 @@ void UIManager::loadConstText()
     chckPointD.move(500, 800);
     
     //LAP INFORMATION
-    sf::Text LapA = uiUtilities.writeString("Player 1: ");
+    sf::Text LapA = uiUtilities.writeString("YELLOW laps: ");
     LapA.move(1600, 500);
     //Point B
-    sf::Text LapB = uiUtilities.writeString("Player 2: ");
+    sf::Text LapB = uiUtilities.writeString("PINK laps: ");
     LapB.move(1600, 600);
     //Point C
-    sf::Text LapC = uiUtilities.writeString("Player 3: ");
+    sf::Text LapC = uiUtilities.writeString("BLUE laps: ");
     LapC.move(1600, 700);
     //Point D
-    sf::Text LapD = uiUtilities.writeString("Player 4: ");
+    sf::Text LapD = uiUtilities.writeString("ORANGE laps: ");
     LapD.move(1600, 800);
     
     constantText[0]=speedLabel;
@@ -88,12 +88,30 @@ void UIManager::displayBanner(std::string title)
     
 }
 
-void UIManager::displayLap(float lapNumber)
+//Infrmation about all the laps
+void UIManager::displayLaps()
 {
-    sf::Text speedText = uiUtilities.writeFloat(lapNumber);
-    speedText.move(1800, 500);
+    //Point A
+    sf::Text YellowLaps = uiUtilities.writeString(laps[0]);
+    YellowLaps.move(1900, 500);
     
-    gameLabels.push_back(speedText);
+    //Point B
+    sf::Text PinkLaps = uiUtilities.writeString(laps[1]);
+    PinkLaps.move(1900, 600);
+    
+    //Point C
+    sf::Text BlueLaps = uiUtilities.writeString(laps[2]);
+    BlueLaps.move(1900, 700);
+    
+    //Point D
+    sf::Text OrangeLaps = uiUtilities.writeString(laps[3]);
+    OrangeLaps.move(1900, 800);
+    
+    //Push all the UI elements in a pool
+    gameLabels.push_back(YellowLaps);
+    gameLabels.push_back(PinkLaps);
+    gameLabels.push_back(BlueLaps);
+    gameLabels.push_back(OrangeLaps);
 }
 
 //Information of wether check points were checked

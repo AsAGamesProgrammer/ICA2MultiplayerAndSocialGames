@@ -28,6 +28,8 @@
 #include <stdio.h>
 #include <thread>
 #include <chrono>
+#include <sstream> // stringstream
+#include <iomanip> // setprecision
 
 //GLOBAL VARIABLES
 sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height),
@@ -475,7 +477,13 @@ void GameLoop::StartNetworkGame()
             }
         }
 
-        uiManager.displayLap(chpManager.getLap());
+        //uiManager.displayLap(chpManager.getLap());
+        std::stringstream ss;
+        ss << std::fixed << std::setprecision(1) << chpManager.getLap();
+        
+        // set the string to display
+        //text.setString(ss.str());
+        uiManager.laps[0] = ss.str();
         
         //Render
         networkedGameRender();
@@ -592,6 +600,10 @@ void GameLoop::StartGame()
 
 }
 
+//----------------------------------------
+//             UPDATE
+//----------------------------------------
+
 void GameLoop::Update()
 {
     //Movement
@@ -611,6 +623,9 @@ void GameLoop::Update()
     
 }
 
+//----------------------------------------
+//              RENDER
+//----------------------------------------
 void GameLoop::GeneralRender()
 {
     //Update Interface
@@ -652,6 +667,8 @@ void GameLoop::networkedGameRender()
     {
         window.draw(networkPlayers[i].getPlayer());
     }
+    
+    uiManager.displayLaps();
 }
 
 void GameLoop::Render()

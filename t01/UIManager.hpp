@@ -22,7 +22,7 @@ public:
     void displaySpeed(float number);
     
     void displayBanner(std::string title);
-    void displayLap(float lapNumber);
+    void displayLaps();
     
     void displayCheckPoints();
     
@@ -33,6 +33,7 @@ public:
     int numberOfConstText = 20;
     
     std::string checkedPoints[4] = {"Do it!", "Do it!", "Do it!", "Do it!"};
+    std::string laps[4] = {"0.0", "0.0", "0.0", "0.0"};
     
     sf::Text lobbieText;
     
