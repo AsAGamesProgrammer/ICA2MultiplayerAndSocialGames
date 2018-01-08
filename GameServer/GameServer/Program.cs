@@ -43,6 +43,8 @@ namespace GameServer
 		
 	*/
 
+	//TODO: add password to a database
+
 
 	/// <summary>
 	/// Main body of the server
@@ -72,6 +74,9 @@ namespace GameServer
 		static bool timerIsActive = false;
 		static Stopwatch myStopwatch = new Stopwatch();
 
+		//Connections
+		static SqliteConnection m_dbConnection;
+
 		//--------------------------------------
 		//			LISTENING LOOP
 		//--------------------------------------
@@ -83,8 +88,18 @@ namespace GameServer
 			Console.WriteLine("Hello, I am server! Give me a second to create a database!");
 
 			//DATABASE
+
 			string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-			SqliteConnection connection = new SqliteConnection();
+			SqliteConnection.CreateFile("MyDatabase.sqlite");
+			m_dbConnection = new SqliteConnection("Data Source=MyDatabase.sqlite;");
+			m_dbConnection.Open();
+
+			string sql = "CREATE TABLE highscores (name VARCHAR(20), score INT)";
+			SqliteCommand command = new SqliteCommand(sql, m_dbConnection);
+			command.ExecuteNonQuery();
+
+			m_dbConnection.Close();
+
 			//DATABASE
 
 			//Initializig a queue of messages which will be past to the producer/consumer manager
