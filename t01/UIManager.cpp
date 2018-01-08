@@ -74,7 +74,7 @@ void UIManager::displayBanner(std::string title)
 void UIManager::displayLap(int lapNumber)
 {
     sf::Text speedText = uiUtilities.writeFloat(lapNumber);
-    speedText.move(80, 10);
+    speedText.move(1000, 650);
     
     gameLabels.push_back(speedText);
 }

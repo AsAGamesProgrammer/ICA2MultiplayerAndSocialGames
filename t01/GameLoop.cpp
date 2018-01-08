@@ -475,6 +475,8 @@ void GameLoop::StartNetworkGame()
             }
         }
 
+        uiManager.displayLap(chpManager.getLap());
+        
         //Render
         networkedGameRender();
 
@@ -484,6 +486,13 @@ void GameLoop::StartNetworkGame()
 
 bool GameLoop::gameUpdate()
 {
+    //Check all the checkpoints
+    for (int i=0; i<chpManager.cpNumber; i++)
+    {
+        //Collision with a checkpoint
+        checkPointPassed(i);
+    }
+    
     return player.moveRelated();
 }
 
@@ -686,7 +695,6 @@ void GameLoop::checkBulletCollision()
 
 }
 
-//TODO: do this for each player
 
 void GameLoop::checkPointPassed(int index)
 {
@@ -697,8 +705,18 @@ void GameLoop::checkPointPassed(int index)
         
     {
         //Handle collision
-        chpManager.checkedPoints[index]=true;
-        uiManager.checkedPoints[index]="Checked!";
+        
+        bool allChecked = chpManager.checkpointPassed(index);
+        
+        if(allChecked)
+        {
+            for(int i=0; i<4; i++)
+            {
+                uiManager.checkedPoints[i]="Do it!";
+            }
+        }
+        else
+            uiManager.checkedPoints[index]="Checked!";
         
         return;
     }

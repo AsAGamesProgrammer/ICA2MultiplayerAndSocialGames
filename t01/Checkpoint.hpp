@@ -28,12 +28,18 @@ public:
     
     bool checkedPoints[4];
     
+    int getLap();
+    
+    bool checkpointPassed(int number);
+    
 private:
     Utilities utilityManager;
     
     sf::Texture checkPTexture;
     
     void createCheckPointSprite(int index, int posX, int posY);
+    
+    int lap = 0;
     
 };
 

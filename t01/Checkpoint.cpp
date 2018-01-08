@@ -37,3 +37,39 @@ void Checkpoint::createCheckPointSprite(int index, int posX, int posY)
     checkPSprites[index] = chSprite;
 
 }
+
+bool Checkpoint::checkpointPassed(int number)
+{
+    checkedPoints[number] = true;
+    
+    bool allChecked=true;
+    
+    //See if everything is checked
+    for (int i=0; i<4; i++)
+    {
+        if(checkedPoints[i]==false)
+        {
+            allChecked=false;
+            break;
+        }
+    }
+    
+    //Reset
+    if(allChecked)
+    {
+        lap++;
+        for (int i=0; i<4; i++)
+        {
+            checkedPoints[i]=false;
+        }
+        
+        return true;
+    }
+    
+    return false;
+}
+
+int Checkpoint::getLap()
+{
+    return lap;
+}
