@@ -738,7 +738,11 @@ void GameLoop::checkPointPassed(int index)
         }
         
         //Send a code, a name and a score
-        sendTCPData("SCR "+myName + " " + std::to_string(chpManager.getLap()) + " ");
+        if(chpManager.getLap() !=lastSentNumberOfLaps)
+        {
+            lastSentNumberOfLaps = chpManager.getLap();
+            sendTCPData("SCR "+myName + " " + std::to_string(chpManager.getLap()) + " ");
+        }
         
         return;
     }
@@ -747,3 +751,5 @@ void GameLoop::checkPointPassed(int index)
     return;
 
 }
+
+

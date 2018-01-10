@@ -91,6 +91,9 @@ private:
     
     int myID=-1;
     
+    //Laps
+    float lastSentNumberOfLaps = 0.0;
+    
 };
 
 #endif /* GameLoop_hpp */
