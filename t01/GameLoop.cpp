@@ -167,7 +167,10 @@ void GameLoop::interpretTCP(char bytes[1024])
         
         //Score
         std::string stringScore = sub.substr(6, 8);
-        uiManager.laps[raceIdInt] = stringScore;
+        std::stringstream ss;
+        ss << std::fixed << std::setprecision(2) << stringScore;
+        
+        uiManager.laps[raceIdInt] = ss.str();
         
         std::cout<<"SCORE!!!!!"<<std::endl;
         std::cout<<"Race id is "<<raceIdInt<<" and score is "<<stringScore<<std::endl;
@@ -500,7 +503,7 @@ void GameLoop::StartNetworkGame()
 
         //uiManager.displayLap(chpManager.getLap());
         std::stringstream ss;
-        ss << std::fixed << std::setprecision(1) << chpManager.getLap();
+        ss << std::fixed << std::setprecision(2) << chpManager.getLap();
         
         // set the string to display
         //text.setString(ss.str());
