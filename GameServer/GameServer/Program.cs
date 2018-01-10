@@ -379,8 +379,14 @@ namespace GameServer
 						//DATABASE PART
 						m_dbConnection.Open();
 
-						string sql = "insert into laps (name, score) values ('" + charName + "'," + scoreFloat + ")";
-						SqliteCommand command = new SqliteCommand(sql, m_dbConnection);
+						string sql = "UPDATE laps SET score = '" + scoreFloat + "' WHERE name =" + charName + ";";
+
+						SqliteCommand command = new SqliteCommand(m_dbConnection);
+
+						command.CommandText ="update laps set score = :Score where name = :Name";
+
+						command.Parameters.Add("Name", DbType.String).Value = charName;
+						command.Parameters.Add("Score", DbType.Decimal).Value = score;
 						command.ExecuteNonQuery();
 
 						m_dbConnection.Close();
