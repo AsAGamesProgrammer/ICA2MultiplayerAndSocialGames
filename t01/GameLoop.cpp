@@ -737,6 +737,9 @@ void GameLoop::checkPointPassed(int index)
             uiManager.checkedPoints[index]="Checked!";
         }
         
+        //Send a code, a name and a score
+        sendTCPData("SCR "+myName + " " + std::to_string(chpManager.getLap()) + " ");
+        
         return;
     }
     

@@ -367,6 +367,26 @@ namespace GameServer
 						}
 					}
 
+					if (sub == "SCR")
+					{ 
+						//insert to database
+						string[] elements = newMsg.body.Split(' ');
+						string charName = elements[1];
+						string score = elements[2];
+						float scoreFloat = (float)Convert.ToDouble(score);
+
+
+						//DATABASE PART
+						m_dbConnection.Open();
+
+						string sql = "insert into laps (name, score) values ('" + charName + "'," + scoreFloat + ")";
+						SqliteCommand command = new SqliteCommand(sql, m_dbConnection);
+						command.ExecuteNonQuery();
+
+						m_dbConnection.Close();
+
+					}
+
 					//Console.WriteLine("Server consumed content of " + newMsg.body);
 					//SendTCP(newMsg.body);
 				}
