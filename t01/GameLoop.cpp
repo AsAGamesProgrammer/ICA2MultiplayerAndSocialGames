@@ -161,6 +161,13 @@ void GameLoop::interpretTCP(char bytes[1024])
     else
     if(code =="SCR")
     {
+        //Player id
+        std::string raceId = sub.substr(4,5);
+        int raceIdInt = atoi(raceId.c_str());
+        
+        //Score
+        std::string stringScore = sub.substr(5, 8);
+        uiManager.laps[raceIdInt] = stringScore;
         
     }
 }
