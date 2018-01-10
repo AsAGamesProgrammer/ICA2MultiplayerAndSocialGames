@@ -272,6 +272,28 @@ namespace GameServer
 		}
 
 		//---------------------------------------
+		//				SCORE
+		//---------------------------------------
+		public static void ScoreHandle (string name, float score)
+		{
+			//UPDATE DATABASE
+			m_dbConnection.Open();
+
+			SqliteCommand command = new SqliteCommand(m_dbConnection);
+
+			command.CommandText ="update laps set score = :Score where name = :Name";
+
+			command.Parameters.Add("Name", DbType.String).Value = name;
+			command.Parameters.Add("Score", DbType.Decimal).Value = score;
+			command.ExecuteNonQuery();
+
+			m_dbConnection.Close();
+
+			//UPDATE PLAYERS
+			SendTCP("SCR " + clientDictionary[name].raceId.ToString() + score);
+		}
+
+		//---------------------------------------
 		//				RECEIVE
 		//---------------------------------------
 		//Reading data
@@ -375,21 +397,8 @@ namespace GameServer
 						string score = elements[2];
 						float scoreFloat = (float)Convert.ToDouble(score);
 
-
-						//DATABASE PART
-						m_dbConnection.Open();
-
-						string sql = "UPDATE laps SET score = '" + scoreFloat + "' WHERE name =" + charName + ";";
-
-						SqliteCommand command = new SqliteCommand(m_dbConnection);
-
-						command.CommandText ="update laps set score = :Score where name = :Name";
-
-						command.Parameters.Add("Name", DbType.String).Value = charName;
-						command.Parameters.Add("Score", DbType.Decimal).Value = score;
-						command.ExecuteNonQuery();
-
-						m_dbConnection.Close();
+						//Handle score, update database and players
+						ScoreHandle(charName, scoreFloat);
 
 					}
 

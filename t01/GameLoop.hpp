@@ -71,6 +71,8 @@ private:
     //Lobby
     Lobby lobby;
     
+    //SCORE
+    void updateScore();
     
     //-----------------------
     //      NETWORKING

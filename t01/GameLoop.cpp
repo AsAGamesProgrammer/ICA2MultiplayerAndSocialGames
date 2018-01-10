@@ -71,10 +71,13 @@ GameLoop::GameLoop()
 
 }
 
-//----------------------------------------
-//              NETWORKING
-//----------------------------------------
+//--------------------------------------------------------------------------------
+//                                  NETWORKING
+//--------------------------------------------------------------------------------
 
+//--------------------------------------------------------
+//                      TCP
+//--------------------------------------------------------
 //Send TCP
 void GameLoop::sendTCPData(std::string msg)
 {
@@ -155,6 +158,11 @@ void GameLoop::interpretTCP(char bytes[1024])
     {
         networkingGameOn=true;
     }
+    else
+    if(code =="SCR")
+    {
+        
+    }
 }
 
 void GameLoop::receiveTCPOnce()
@@ -204,7 +212,9 @@ void GameLoop::receiveTCPOnce()
     }
 }
 
-//Send UDP
+//--------------------------------------------------------
+//                      UDP
+//--------------------------------------------------------
 void GameLoop::sendUDPUpdata(std::string msg)
 {
     std::string combinedString = msg + "\n";
@@ -484,7 +494,7 @@ void GameLoop::StartNetworkGame()
         
         // set the string to display
         //text.setString(ss.str());
-        uiManager.laps[0] = ss.str();
+        uiManager.laps[myID] = ss.str();
         
         //Render
         networkedGameRender();
@@ -750,6 +760,11 @@ void GameLoop::checkPointPassed(int index)
     //No collision
     return;
 
+}
+
+void GameLoop::updateScore()
+{
+    
 }
 
 
