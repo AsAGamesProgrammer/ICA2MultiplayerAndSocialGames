@@ -33,7 +33,7 @@ public:
     int numberOfConstText = 20;
     
     std::string checkedPoints[4] = {"Do it!", "Do it!", "Do it!", "Do it!"};
-    std::string laps[4] = {"0.0", "0.0", "0.0", "0.0"};
+    std::string laps[4] = {"0.00", "0.00", "0.00", "0.00"};
     
     sf::Text lobbieText;
     

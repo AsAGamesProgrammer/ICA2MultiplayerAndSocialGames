@@ -290,8 +290,8 @@ namespace GameServer
 			m_dbConnection.Close();
 
 			//UPDATE PLAYERS
-			SendTCP("SCR " + clientDictionary[name].raceId.ToString() + " " + score);
-		}
+			SendTCP("SCR " + clientDictionary[name].raceId.ToString() + " " + score + " ");
+		} 
 
 		//---------------------------------------
 		//				RECEIVE

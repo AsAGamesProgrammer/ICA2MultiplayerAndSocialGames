@@ -167,8 +167,11 @@ void GameLoop::interpretTCP(char bytes[1024])
         
         //Score
         std::string stringScore = sub.substr(6, 8);
+        std::string::size_type sz;     // alias of size_t
+        
+        float scoreInFloat = std::stof (stringScore,&sz);
         std::stringstream ss;
-        ss << std::fixed << std::setprecision(2) << stringScore;
+        ss << std::fixed << std::setprecision(2) << scoreInFloat;
         
         uiManager.laps[raceIdInt] = ss.str();
         
