@@ -170,6 +170,7 @@ void GameLoop::interpretTCP(char bytes[1024])
         uiManager.laps[raceIdInt] = stringScore;
         
         std::cout<<"SCORE!!!!!"<<std::endl;
+        std::cout<<"Race id is "<<raceIdInt<<" and score is "<<stringScore<<std::endl;
         
     }
 }
