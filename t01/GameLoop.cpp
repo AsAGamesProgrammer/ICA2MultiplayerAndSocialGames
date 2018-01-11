@@ -488,6 +488,7 @@ void GameLoop::StartNetworkGame()
             }
             
             uiManager.displayBanner("Race STARTED!");
+            
         }
         else
         {
@@ -514,6 +515,8 @@ void GameLoop::StartNetworkGame()
         
         //Render
         networkedGameRender();
+        //TEST
+        window.draw(player.getBullet());
 
         window.display();
     }
