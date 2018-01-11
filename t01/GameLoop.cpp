@@ -188,6 +188,10 @@ void GameLoop::interpretTCP(char bytes[1024])
         //Player id
         std::string raceId = sub.substr(4,5);
         int raceIdInt = atoi(raceId.c_str());
+        
+        //ID
+        std::cout<<"(" + raceId + ") Shoot";
+        
         if(raceIdInt == myID)
             return;
         

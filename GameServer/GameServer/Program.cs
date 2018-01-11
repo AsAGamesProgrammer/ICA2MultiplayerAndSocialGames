@@ -408,7 +408,7 @@ namespace GameServer
 						string charName = elements[1];
 						string angle = elements[2];
 
-						SendTCP("BLT " + clientDictionary[charName].raceId + angle + " ");
+						SendTCP("BLT " + clientDictionary[charName].raceId + " " + angle + " ");
 					}
 
 					//Console.WriteLine("Server consumed content of " + newMsg.body);
