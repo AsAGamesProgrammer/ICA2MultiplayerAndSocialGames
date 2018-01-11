@@ -71,7 +71,7 @@ namespace GameServer
 		static int currentSessionID = 0;
 
 		//Thread for time
-		static Thread thTimer = new Thread(countDown);
+		//static Thread thTimer = new Thread(countDown);
 		static bool timerIsActive = false;
 		static bool raceStarted = false;
 		static Stopwatch myStopwatch = new Stopwatch();
@@ -197,6 +197,9 @@ namespace GameServer
 
 			raceStarted = true;
 			currentSessionID++;
+			timerIsActive = false;
+			highestID = -1;
+			Console.WriteLine("New session entry: " + currentSessionID);
 		}
 
 		///---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -316,18 +319,25 @@ namespace GameServer
 			clientDictionary[name].raceId = highestID;
 			clientDictionary[name].sessionID = currentSessionID;
 
+			Console.WriteLine(name + " joined session " + currentSessionID);
+
 			//Update everyone that this player is registered
 			foreach (string entry in clientDictionary.Keys)
 			{
-				if(clientDictionary[entry].raceId !=-1 && clientDictionary[entry].sessionID == clientDictionary[name].sessionID)
-					SendTCP("JOI " + clientDictionary[entry].raceId.ToString() + entry);
+				if (clientDictionary[entry].raceId != -1 && clientDictionary[entry].sessionID == currentSessionID)
+				{
+					Console.WriteLine("Sendinginformation about " + entry);
+					SendTCPToRegistered("JOI " + clientDictionary[entry].raceId.ToString() + entry, currentSessionID);
+				}
 			}
 
 			if (!timerIsActive)
 			{
 				timerIsActive = true;
+				Thread thTimer = new Thread(countDown);
 				thTimer.Start();
 			}
+
 		}
 
 		//---------------------------------------
@@ -515,8 +525,13 @@ namespace GameServer
 
 			foreach (Client entry in clientDictionary.Values)
 			{
-				if(entry.raceId !=-1 && entry.sessionID == session)
+				Console.WriteLine(entry + " is at session " + entry.sessionID + ", requested session is " + session);
+
+				if (entry.raceId != -1 && entry.sessionID == session)
+				{
+					Console.WriteLine("Msg sent");
 					entry.tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), entry.tcpSock);
+				}
 			}
 		}
 
