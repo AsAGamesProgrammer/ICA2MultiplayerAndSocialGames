@@ -19,36 +19,11 @@ namespace GameServer
 	// UDP: 7576
 	//
 
-	/// <summary>
-	/// TODO: 
-	/// 	  Have multicast and unicast as two different options
-	/// 	  Receive different types of msgs and react to them
-	/// 	  
-	/// </summary>
 
-	/*
-		PRODUCER-CONSUMER
-		Queues separate for udp and tcp
-		OR
-		One shared
-		
-		Main loop is consumer, receives are producers. Read data in one place, dequeue in another
-		Extra points for broadcasting and detecting  a server
-		Database 
-		Security: xor -> AES key -> TLS/SSL
-		Alias key is simple
-
-		Game logic on server: win/lose etc
-		
-		
-	*/
-
-	//TODO: add password to a database
+	//	PRODUCER-CONSUMER
+	//	Queues separate for udp and tcp
 
 
-	/// <summary>
-	/// Main body of the server
-	/// </summary>
 	class MainClass
 	{
 		//--------------------------------------
@@ -89,9 +64,7 @@ namespace GameServer
 			Console.WriteLine("Hello, I am server! Give me a second to create a database!");
 
 			//DATABASE
-
 			prepareDatabase();
-
 
 			//Initializig a queue of messages which will be past to the producer/consumer manager
 			//TCP
@@ -108,27 +81,22 @@ namespace GameServer
 		}
 
 
+		//Prepare database and connections
 		public static void prepareDatabase()
 		{ 
+			//Connection
 			string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 			//SqliteConnection.CreateFile("MyDatabase.sqlite");
 			m_dbConnection = new SqliteConnection("Data Source=MyDatabase.sqlite;");
 			m_dbConnection.Open();
 
-
-			//LAPS
+			//Lap table
 			//Clear laps table
 			string sql = "DELETE from laps";
-
-			//string sql = "CREATE TABLE laps (name VARCHAR(40), score FLOAT)";
 			SqliteCommand command = new SqliteCommand(sql, m_dbConnection);
 			command.ExecuteNonQuery();
 
-			//REGISTRATION
-			//string sql2 = "CREATE TABLE users (name VARCHAR(40), password Varchar(100))";
-			//SqliteCommand command2 = new SqliteCommand(sql2, m_dbConnection);
-			//command2.ExecuteNonQuery();
-
+			//Close connection
 			m_dbConnection.Close();
 		}
 
@@ -179,21 +147,29 @@ namespace GameServer
 		//---------------------------------------
 		//				TIMER
 		//---------------------------------------
+		//Timer runs on a separate thread
+		//When timer finished the game start on the current session and enties for the next session are open
 		public static void countDown()
 		{
 			Console.WriteLine("Timer started");
 
+			//Start a stopwatch
 			myStopwatch.Start();
 
+			//Sleep for 20 seconds
 			for (int i = 0; i< 20000; i++)
         	{
             	Thread.Sleep(1);
         	}
 
+			//Stop a stopwatch
 			myStopwatch.Stop();
+
+			//provide support information
 			Console.WriteLine("Time off");
 			SendTCPToRegistered("STR", currentSessionID);
 
+			//open entry for the next session
 			currentSessionID++;
 			timerIsActive = false;
 			highestID = -1;
@@ -210,14 +186,17 @@ namespace GameServer
 		//---------------------------------------
 		//				REGISTER
 		//---------------------------------------
-		//TODO: send a client a confirmation that registration is complete
-		// In the client wait until a confirmation is received before starting on anyting new
+		//Registers a client on the server
+		//Adds client information to a local dictionary and its name to a database
 		public static void RegisterClient(Socket sock, String name)
 		{
-
+			//Debug information
 			Console.WriteLine("TCP registartion started");
+
+			//If this client exxists in the dictionary
 			if (clientDictionary.ContainsKey(name))
 			{
+				//Udate clients info
 				Client existingInfo = clientDictionary[name];
 				if (existingInfo.tcpSock != sock)
 				{
@@ -228,19 +207,24 @@ namespace GameServer
 			}
 			else
 			{
+				//Create a new client and oput in a dictionary
 				Client newClient = new Client();
 				newClient.tcpSock = sock;
 
 				clientDictionary.Add(name, newClient);
 			}
 
+			//Send client a confirmation about successful registration
             SendTCP("REG " + "TCP registered");
 
 			//---------------------------------------
 			//				DATABASE
 			//---------------------------------------
+			//If client played the game before then greet a client
+
 			m_dbConnection.Open();
 
+			//Make a secue commad to query the database
 			SqliteCommand command = new SqliteCommand(m_dbConnection);
 
 			command.CommandText ="SELECT * FROM users WHERE name = :Name";
@@ -248,9 +232,13 @@ namespace GameServer
 			command.Parameters.Add("Name", DbType.String).Value = name;
 			command.ExecuteNonQuery();
 
+			//Start a reader to interpret results
 			SqliteDataReader reader = command.ExecuteReader();
 
+			//Flag
 			bool userExists = false;
+
+			//If at least one enty was found - then the client exists an should receive a personal tcp msg
 			while (reader.Read())
 			{
 				userExists = true;
@@ -259,6 +247,7 @@ namespace GameServer
 
 			}
 
+			//If client doesn't exist then add him to a database
 			if (!userExists)
 			{
 				SqliteCommand commandUpdate = new SqliteCommand(m_dbConnection);
@@ -270,11 +259,9 @@ namespace GameServer
 				commandUpdate.ExecuteNonQuery();
 			}
 
+			//Close connection
 			m_dbConnection.Close();
 
-			//Change this to sendTo
-			//SendTCP("TCP registartion complete");
-			//Console.WriteLine("Client is registered with TCP");
 		}
 
 		//Accept function
@@ -380,14 +367,13 @@ namespace GameServer
 			if (readBytes > 0)
 			{
 
-				//state.stringB.Append(Encoding.ASCII.GetString(state.buffer, 0, state.bufferSize));
+				//Get content and print a debug msg
 				content = Encoding.ASCII.GetString(state.buffer, 0, state.bufferSize);
 				Console.WriteLine("Server received: '{0}', {1} bytes", content, readBytes);
 				state.buffer = new byte[1024];
 
-				//interpretTCP(state, readBytes, content);
 
-				//Produce content and handle?
+				//Produce content and handle
 				MessageTCP msg = new MessageTCP();
 				msg.sock = state.workSocket;
 				msg.body = content;
@@ -397,9 +383,6 @@ namespace GameServer
 				handle.BeginReceive(state.buffer, 0, state.bufferSize, 0, new AsyncCallback(ReadCallbackTCP), state);
 
 
-				//TEST PRODUCE
-				//producerConsumer.produce(content);
-
 			}
 			else if (readBytes == 0)
 			{
@@ -408,6 +391,10 @@ namespace GameServer
 
 		}
 
+		//---------------------------------------
+		//				INTERPRET
+		//---------------------------------------
+		//This runs on a separate thread
 
 		public static void interpretTCP()
 		{
@@ -425,7 +412,6 @@ namespace GameServer
 					//REGISTER to a server
 					if (sub == "REG")
 					{
-						//string charName = (newMsg.body.Substring(4, newMsg.body.Length - 5));
 
 						string[] elements = newMsg.body.Split(' ');
 						string charName = elements[1];
@@ -442,8 +428,6 @@ namespace GameServer
 						string charName = elements[1];
                         Join(charName);
 
-
-						//SendTCP("JOI " + highestID.ToString() + charName);
 					}
 
 					//REPEAT the joining proccess
@@ -489,6 +473,8 @@ namespace GameServer
 		//---------------------------------------
 		//				   SEND
 		//---------------------------------------
+
+		//SEND TCP TO a user by name
 		public static void SendTCPTo(String name, String msg)
 		{
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
@@ -500,7 +486,7 @@ namespace GameServer
 			clientDictionary[name].tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), clientDictionary[name].tcpSock);
 		}
 
-		//Sending data to all
+		//SEND TCP TO ALL
 		public static void SendTCP(String msg)
 		{
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
@@ -515,7 +501,7 @@ namespace GameServer
 			}
 		}
 
-		//Sending data to registered
+		//SEND TCP TO SESSION MATES
 		public static void SendTCPToRegistered(string msg, int session)
 		{ 
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
@@ -534,7 +520,7 @@ namespace GameServer
 		}
 
 
-		//Preparing to send data
+		//PREPARE TO SEND DATA
 		public static void SendCallbackTCP(IAsyncResult ar)
 		{
 			Socket handle = (Socket)ar.AsyncState;
@@ -558,6 +544,8 @@ namespace GameServer
 		public static void RegisterUdp(IPEndPoint endP, Socket sock, String name)
 		{
 			Console.WriteLine("UDP registration started");
+
+			//If name exists then update the entry
 			if (clientDictionary.ContainsKey(name))
 			{
 
@@ -567,7 +555,7 @@ namespace GameServer
 
 				clientDictionary[name] = existingInfo;
 			}
-			else
+			else //otherwise create a new entry
 			{
 				Client newClient = new Client();
 				newClient.udpSocket = sock;
@@ -608,11 +596,10 @@ namespace GameServer
 			string receiveString = Encoding.ASCII.GetString(((UdpState)ar.AsyncState).buffer);
 			Console.WriteLine("UDP received: {0}", receiveString);
 
-			//TEST
+			//Clear buffer
 			((UdpState)ar.AsyncState).buffer = new byte[1024];
 
-			//TEMP
-			//Produce content and handle?
+			//Produce content and handle
 			MessageUDP msg = new MessageUDP();
 			msg.sock = sock;
 			msg.body = receiveString;
@@ -620,9 +607,7 @@ namespace GameServer
 			producerConsumerUDP.produce(msg);
 
 
-
-			// The message then needs to be handleed
-			//messageReceived = true;
+			// Begin receive
 			sock.BeginReceiveFrom(stateUdp.buffer, 0, stateUdp.bufferSize, 0, ref ePoint, new AsyncCallback(ReceiveCallbackUDP), stateUdp);
 
 		}
@@ -645,14 +630,15 @@ namespace GameServer
 			udpSocket.BeginReceiveFrom(stateUdp.buffer, 0, stateUdp.bufferSize, 0, ref ePoint, new AsyncCallback(ReceiveCallbackUDP), stateUdp);
 		}
 
-		//---------------------------------------
-		//				   SEND
-		//---------------------------------------
 
+		//---------------------------------------
+		//				  INERPRET
+		//---------------------------------------
 		public static void interpretUDP()
 		{ 
 			while (true)
 			{
+				//Consume msg
 				MessageUDP newMsg = producerConsumerUDP.consume();
 
 				if (newMsg !=null)
@@ -661,10 +647,9 @@ namespace GameServer
 
 					string sub = newMsg.body.Substring(0, 3);
 
+					//RECEIVED REG for registration
 					if (sub == "REG")
 					{
-						//string charName = (newMsg.body.Substring(4, newMsg.body.Length - 5));
-
 						string[] elements = newMsg.body.Split(' ');
 						string charName = elements[1];
 
@@ -672,6 +657,7 @@ namespace GameServer
 						SendUDP(newMsg.body, clientDictionary[charName].sessionID);
 					}
 
+					//RECEIVED POS for position update
 					if (sub == "POS")
 					{
 						string[] elements = newMsg.body.Split(' ');
@@ -688,6 +674,10 @@ namespace GameServer
 			}
 		}
 
+		//---------------------------------------
+		//				   SEND
+		//---------------------------------------
+
 		public static void SendCallbackUDP(IAsyncResult ar)
 		{
 
@@ -699,7 +689,7 @@ namespace GameServer
 
 		}
 
-		//Sending data
+		//SEND TO SESSION MATES
 		public static void SendUDP(String msg, int session)
 		{
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
