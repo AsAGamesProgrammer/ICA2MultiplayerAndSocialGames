@@ -758,7 +758,6 @@ void GameLoop::checkBulletCollision()
            player.getPlayer().getPosition().y - player.height/2 <= otherPlayer.getBullet().getPosition().y + 28) //bot
             
         {
-            std::cout<<"Hit"<<std::endl;
             player.onTakingHit();
             otherPlayer.setCheckBulletColision(false);
             
@@ -791,8 +790,9 @@ void GameLoop::checkNetworkBulletCollisions(int id)
            player.getPlayer().getPosition().y - player.height/2 <= networkPlayers[id].getBullet().getPosition().y + 28) //bot
             
         {
-            std::cout<<"Hit"<<std::endl;
+            //std::cout<<"Hit"<<std::endl;
             
+            chpManager.reduceScore();
             player.onTakingHit();
             networkPlayers[id].setCheckBulletColision(false);
             

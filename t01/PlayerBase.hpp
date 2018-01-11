@@ -19,6 +19,7 @@
 class PlayerBase
 {
 public:
+    bool wasHit=false;
     
 protected:
     

@@ -142,7 +142,6 @@ void PlayerC::shoot()
         //Check for collision
         checkBulletCollision=true;
         
-        std::cout<<"Player shoot"<<std::endl;
         didShoot=true;
     }
 }
