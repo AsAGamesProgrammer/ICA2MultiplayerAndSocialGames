@@ -18,8 +18,12 @@ class PlayerNetwork:PlayerBase
 {
 public:
     sf::Sprite getPlayer();     //Return the shape of a player
+    sf::Sprite getBullet() {return bullet.getSprite();};
+    
     void createPlayer(std::string textureStr);                //Player creation function
     void setStartingPos(float posX, float posY);
+    
+    void instantiateBlt(float angle);
     
 private:
     float width;

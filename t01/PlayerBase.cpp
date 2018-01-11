@@ -7,6 +7,7 @@
 //
 
 #include "PlayerBase.hpp"
+#include <iostream>
 
 
 //---PROTECTED---
@@ -97,5 +98,5 @@ bool PlayerBase::isWithinRoad(int textureY, int posX, int posY)
 //Reduces speed on hit
 void PlayerBase::onHit()
 {
-    currentSpeed=0;
+    std::cout<<"Hit"<<std::endl;
 }

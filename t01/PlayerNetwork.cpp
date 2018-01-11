@@ -36,3 +36,9 @@ void PlayerNetwork::setStartingPos(float posX, float posY)
 {
     playerS.setPosition(posX, posY);
 }
+
+void PlayerNetwork::instantiateBlt(float angle)
+{
+    //Instantiate a bullet
+    bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y, angle);
+}

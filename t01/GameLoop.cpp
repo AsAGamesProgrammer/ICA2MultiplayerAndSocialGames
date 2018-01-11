@@ -165,6 +165,8 @@ void GameLoop::interpretTCP(char bytes[1024])
         //Player id
         std::string raceId = sub.substr(4,5);
         int raceIdInt = atoi(raceId.c_str());
+        if(raceIdInt == myID)
+            return;
         
         //Score
         std::string stringScore = sub.substr(6, 8);
@@ -179,6 +181,18 @@ void GameLoop::interpretTCP(char bytes[1024])
         std::cout<<"SCORE!!!!!"<<std::endl;
         std::cout<<"Race id is "<<raceIdInt<<" and score is "<<stringScore<<std::endl;
         
+    }
+    else
+    if(code == "BLT")
+    {
+        //Player id
+        std::string raceId = sub.substr(4,5);
+        int raceIdInt = atoi(raceId.c_str());
+        if(raceIdInt == myID)
+            return;
+        
+        //GET ANGLE
+        networkPlayers[raceIdInt].instantiateBlt(10);
     }
 }
 
@@ -385,11 +399,6 @@ int GameLoop::OpenLobbie()
     window.clear();
     int selectedMode=0;
     
-    //THREADS
-    //Listens to TCP
-    //std::thread tcpRecThread (&GameLoop::receiveTCP, this);
-    //std::thread udpRecThread (&GameLoop::receiveUDP, this);
-    
     //GAME LOOP
     while (window.isOpen())
     {
@@ -419,30 +428,23 @@ int GameLoop::OpenLobbie()
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
         {
             lobby.setActiveButton(0);
-            //sendTCPData("0 pressed");
             selectedMode=0;
         }
         
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
         {
             lobby.setActiveButton(1);
-            //sendUDPUpdata("1 pressed");
             selectedMode=1;
         }
         
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
         {
             lobby.setActiveButton(2);
-            //sendUDPUpdata("2 pressed");
             selectedMode=2;
         }
            
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
-            //tcpRecThread.join();
-            //udpRecThread.join();
-            
-            //std::terminate();
             return selectedMode;
         }
         
@@ -702,6 +704,7 @@ void GameLoop::networkedGameRender()
     for (int i=0; i<4; i++)
     {
         window.draw(networkPlayers[i].getPlayer());
+        window.draw(networkPlayers[i].getBullet());
     }
     
     uiManager.displayLaps();
