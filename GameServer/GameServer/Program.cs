@@ -89,18 +89,8 @@ namespace GameServer
 
 			//DATABASE
 
-			string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-			SqliteConnection.CreateFile("MyDatabase.sqlite");
-			m_dbConnection = new SqliteConnection("Data Source=MyDatabase.sqlite;");
-			m_dbConnection.Open();
+			prepareDatabase();
 
-			string sql = "CREATE TABLE laps (name VARCHAR(40), score FLOAT)";
-			SqliteCommand command = new SqliteCommand(sql, m_dbConnection);
-			command.ExecuteNonQuery();
-
-			m_dbConnection.Close();
-
-			//DATABASE
 
 			//Initializig a queue of messages which will be past to the producer/consumer manager
 			//TCP
@@ -114,6 +104,31 @@ namespace GameServer
 
 			//Entry point to the networking part
 			StartListening();
+		}
+
+
+		public static void prepareDatabase()
+		{ 
+			string folder = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+			//SqliteConnection.CreateFile("MyDatabase.sqlite");
+			m_dbConnection = new SqliteConnection("Data Source=MyDatabase.sqlite;");
+			m_dbConnection.Open();
+
+
+			//LAPS
+			//Clear laps table
+			string sql = "DELETE from laps";
+
+			//string sql = "CREATE TABLE laps (name VARCHAR(40), score FLOAT)";
+			SqliteCommand command = new SqliteCommand(sql, m_dbConnection);
+			command.ExecuteNonQuery();
+
+			//REGISTRATION
+			//string sql2 = "CREATE TABLE users (name VARCHAR(40), password Varchar(100))";
+			//SqliteCommand command2 = new SqliteCommand(sql2, m_dbConnection);
+			//command2.ExecuteNonQuery();
+
+			m_dbConnection.Close();
 		}
 
 		//NETWORKING ENTRY POINT
