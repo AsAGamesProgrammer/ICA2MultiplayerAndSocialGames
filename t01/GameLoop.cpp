@@ -189,9 +189,6 @@ void GameLoop::interpretTCP(char bytes[1024])
         std::string raceId = sub.substr(4,5);
         int raceIdInt = atoi(raceId.c_str());
         
-        //ID
-        std::cout<<"(" + raceId + ") Shoot";
-        
         if(raceIdInt == myID)
             return;
         
@@ -201,6 +198,9 @@ void GameLoop::interpretTCP(char bytes[1024])
         float angleFloat = std::stof (angleString,&sz);
         //GET ANGLE
         networkPlayers[raceIdInt].instantiateBlt(angleFloat);
+        
+        //Start collision checks
+        networkPlayers[raceIdInt].setCheckBulletColision(true);
     }
 }
 
@@ -783,6 +783,8 @@ void GameLoop::checkNetworkBulletCollisions(int id)
 {
     if(networkPlayers[id].getCheckBulletColision())
     {
+        //std::cout<<"CheckingCollisions"<<std::endl;
+        
         if(player.getPlayer().getPosition().x + player.width/2 >networkPlayers[id].getBullet().getPosition().x - 28 && //left
            player.getPlayer().getPosition().x - player.width/2 <=networkPlayers[id].getBullet().getPosition().x + 28 &&  //right
            player.getPlayer().getPosition().y + player.height/2 > networkPlayers[id].getBullet().getPosition().y - 28 && //top
