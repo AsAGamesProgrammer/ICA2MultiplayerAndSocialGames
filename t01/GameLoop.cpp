@@ -195,8 +195,12 @@ void GameLoop::interpretTCP(char bytes[1024])
         if(raceIdInt == myID)
             return;
         
+        std::string angleString = sub.substr(6, 8);
+        std::string::size_type sz;     // alias of size_t
+        
+        float angleFloat = std::stof (angleString,&sz);
         //GET ANGLE
-        networkPlayers[raceIdInt].instantiateBlt(10);
+        networkPlayers[raceIdInt].instantiateBlt(angleFloat);
     }
 }
 
