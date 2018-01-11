@@ -247,6 +247,8 @@ namespace GameServer
 			{
 				userExists = true;
 				Console.WriteLine("Reader read: " + reader.GetString(0) + " " + reader.GetString(1));
+				SendTCPTo(reader.GetString(0), "Welcome back " + reader.GetString(0));
+
 			}
 
 			if (!userExists)
@@ -471,19 +473,16 @@ namespace GameServer
 		//---------------------------------------
 		//				   SEND
 		//---------------------------------------
-		//public static void SendTCPTo(Socket sock, String msg)
-		//{
-		//	byte[] byteData = Encoding.ASCII.GetBytes(msg);
-		//	Console.WriteLine("Server sending: {0},", msg);
+		public static void SendTCPTo(String name, String msg)
+		{
+			byte[] byteData = Encoding.ASCII.GetBytes(msg);
+			Console.WriteLine("Server sending: {0},", msg);
 
-		//	foreach (Client entry in clientDictionary.Values)
-		//	{
-		//		//Standard 
-		//		//socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), socket);
+				//Standard 
+				//socket.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), socket);
 
-		//		entry.tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), entry.tcpSock);
-		//	}
-		//		}
+			clientDictionary[name].tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), clientDictionary[name].tcpSock);
+		}
 
 		//Sending data to all
 		public static void SendTCP(String msg)
