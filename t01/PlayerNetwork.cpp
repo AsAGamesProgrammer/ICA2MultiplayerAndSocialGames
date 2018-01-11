@@ -42,3 +42,9 @@ void PlayerNetwork::instantiateBlt(float angle)
     //Instantiate a bullet
     bullet.instantiateBullet(playerS.getPosition().x, playerS.getPosition().y, angle);
 }
+
+void PlayerNetwork::moveBullet()
+{
+    if(bullet.isEnabled)
+        bullet.moveBullet();
+}

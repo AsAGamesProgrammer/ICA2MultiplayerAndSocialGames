@@ -24,6 +24,7 @@ public:
     void setStartingPos(float posX, float posY);
     
     void instantiateBlt(float angle);
+    void moveBullet();
     
 private:
     float width;

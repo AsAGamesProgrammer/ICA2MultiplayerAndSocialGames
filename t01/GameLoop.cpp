@@ -543,6 +543,12 @@ bool GameLoop::gameUpdate()
         checkPointPassed(i);
     }
     
+    //Bullet
+    for (int i=0; i<4; i++)
+    {
+        networkPlayers[i].moveBullet();
+    }
+    
     return player.moveRelated();
 }
 
