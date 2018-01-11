@@ -43,6 +43,8 @@ class PlayerC : PlayerBase
     
     void onTakingHit();
     
+    bool didShoot=false;
+    
     //-----PRIVATE-----
     private:
 

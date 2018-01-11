@@ -19,6 +19,7 @@
 //  STR - start game
 //  REP - repeat joining proccess
 //  SCR - score
+//  BLT - bullet
 //
 //          UDP
 //  POS - change position of a player
@@ -448,9 +449,6 @@ int GameLoop::OpenLobbie()
     }
     
     return selectedMode;
-    
-    //tcpRecThread.join();
-    //udpRecThread.join();
 }
 
 //----------------------------------------
@@ -472,9 +470,6 @@ void GameLoop::StartNetworkGame()
                 window.close();
         }
         
-        //Update();
-        //gameUpdate();
-        
         //Update the game if it officially started
         if(networkingGameOn)
         {
@@ -489,6 +484,17 @@ void GameLoop::StartNetworkGame()
             
             uiManager.displayBanner("Race STARTED!");
             
+            
+            //BULLET
+            if(player.didShoot)
+            {
+                //Send notification to a server
+                sendTCPData("BLT " + std::to_string(myID) + " " + std::to_string (player.getPlayer().getRotation()) + " ");
+                
+                player.didShoot=false;
+                
+                std::cout<<"Bullet info sent"<<std::endl;
+            }
         }
         else
         {
