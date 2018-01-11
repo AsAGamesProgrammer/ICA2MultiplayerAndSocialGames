@@ -7,9 +7,6 @@
 //
 //
 //-------------------------------------------------------
-//TODO:
-
-// ROTATE cars inside the clients
 
 //-------------------------------------------------------
 //  NETWORKING CODES:
@@ -38,13 +35,13 @@ sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf:
                         "P4076882 - Kristina Blinova - The Racing Game!");
 
 
+//--------------------------------------------------------------------------------
+//                                  CONSTRUCTOR
+//--------------------------------------------------------------------------------
 GameLoop::GameLoop()
 {
-    
-    //--------------------------------------
-    //CONNECTIONS
 
-    //TCP
+    //COONNECT TCP
     //Create a socket
     sf::Socket::Status status = socketTCP.connect("152.105.5.139", 7578);
     
@@ -58,18 +55,17 @@ GameLoop::GameLoop()
     
     
     //REGISTER
-    std::cout<<"Hi driver! What is your name? "<<std::endl;
     
-    std::string userName;
+    //Player information
+    std::cout<<"Hi driver! What is your name? "<<std::endl;     //Ask for log in
+    std::string userName;                                       //Take input
     std::cin>>userName;
-    
-    myName=userName;
+    myName=userName;                                            //Save name to a variable
     
     //Register TCP
     sendTCPData("REG " + myName + " ");
-    receiveTCPOnce();
+    receiveTCPOnce();                                           //Wait for a response
     
-
 }
 
 //--------------------------------------------------------------------------------
@@ -79,7 +75,9 @@ GameLoop::GameLoop()
 //--------------------------------------------------------
 //                      TCP
 //--------------------------------------------------------
-//Send TCP
+
+//SEND TCP
+//Send a tcp message - string - to a server
 void GameLoop::sendTCPData(std::string msg)
 {
     std::string combinedString = msg + "\n";
@@ -91,20 +89,21 @@ void GameLoop::sendTCPData(std::string msg)
     {
         std::cout<<"Failed to send a msg (TCP)"<<std::endl;
     }
-
-    //send worked
-    
-
 }
 
+//RECEIVE TCP
+//This function is called in a thread ONLY and has a forever while loop
 void GameLoop::receiveTCP()
 {
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+    //Sleep for one second before before starting listening
+    std::this_thread::sleep_for(std::chrono::seconds(1));
     
+    //Forever loop
     while(true)
     {
         char inData[1024] = "None";
         std::size_t received;
+        
         // TCP socket:
         if (socketTCP.receive(inData, 1024, received) != sf::Socket::Done)
         {
@@ -117,34 +116,55 @@ void GameLoop::receiveTCP()
         {
             std::cout << "Received " << inData <<" with "<<received<<" bytes" << std::endl;
             
+            //Interpret data
             interpretTCP(inData);
+        }
+    }
+}
 
+//RECEIVE TCP ONCE
+// This function is used only once and only for a registration
+// An idea is that client will wait for a ssuccessful registartion and won't enter a game illegly
+void GameLoop::receiveTCPOnce()
+{
+    char inData[1024] = "None";
+    std::size_t received;
+    // TCP socket:
+    if (socketTCP.receive(inData, 100, received) != sf::Socket::Done)
+    {
+        std::cout << "Failed to receive (TCP)"<< std::endl;
+    }
+    
+    //Print only if received text
+    char firstLit = inData[0];
+    if(firstLit != '\0')
+    {
+        std::cout << "Received " << inData <<" with "<<received<<" bytes" << std::endl;
+        
+        //Convert bytes to a string
+        std::string sub = getStringFromBytes(inData);
+        
+        //Get the first three characters which represent a code
+        std::string code = sub.substr(0, 3);
+        
+        //RECEIVED REG
+        if(code =="REG")
+        {
+            //Register UDP if TCP registration is complete
+            sendUDPUpdata("REG " + myName + " ");
         }
         
     }
 }
 
+//INTERPRET TCP
+//This function substracts a code fro the message and calls respected functions
 void GameLoop::interpretTCP(char bytes[1024])
 {
     //Convert bytes to a string
-    std::string sub;
-    int i=0;
-    
-    while(i<1024)
-    {
-        char nextChar = bytes[i];
-        
-        if(nextChar !='\n')
-        {
-            sub +=nextChar;
-            i++;
-        }
-        else
-        {
-            i=1025;
-        }
-    }
-    
+    std::string sub = getStringFromBytes(bytes);
+
+    //Get a 3 character code
     std::string code = sub.substr(0, 3);
     
     //RECEIVED: JOI
@@ -201,53 +221,6 @@ void GameLoop::interpretTCP(char bytes[1024])
         
         //Start collision checks
         networkPlayers[raceIdInt].setCheckBulletColision(true);
-    }
-}
-
-void GameLoop::receiveTCPOnce()
-{
-    char inData[1024] = "None";
-    std::size_t received;
-    // TCP socket:
-    if (socketTCP.receive(inData, 100, received) != sf::Socket::Done)
-    {
-        std::cout << "Failed to receive (TCP)"<< std::endl;
-    }
-    
-    //Print only if received text
-    char firstLit = inData[0];
-    if(firstLit != '\0')
-    {
-        std::cout << "Received " << inData <<" with "<<received<<" bytes" << std::endl;
-        
-        //Convert bytes to a string
-        std::string sub;
-        int i=0;
-        
-        while(i<1024)
-        {
-            char nextChar = inData[i];
-            
-            if(nextChar !='\n')
-            {
-                sub +=nextChar;
-                i++;
-            }
-            else
-            {
-                i=110;
-            }
-        }
-        
-        std::string code = sub.substr(0, 3);
-        
-        //RECEIVED REG
-        if(code =="REG")
-        {
-            //Register UDP if TCP registration is complete
-            sendUDPUpdata("REG " + myName + " ");
-        }
-        
     }
 }
 
@@ -397,6 +370,33 @@ void GameLoop::receiveUDPOnce()
 
 }
 
+//----------------------------------------
+//             HELPERS
+//----------------------------------------
+
+std::string GameLoop::getStringFromBytes(char data[1024])
+{
+    //Convert bytes to a string
+    std::string sub;
+    int i=0;
+    
+    while(i<1024)
+    {
+        char nextChar = data[i];
+        
+        if(nextChar !='\n')
+        {
+            sub +=nextChar;
+            i++;
+        }
+        else
+        {
+            i=1025;
+        }
+    }
+    
+    return sub;
+}
 
 //----------------------------------------
 //              LOBBY

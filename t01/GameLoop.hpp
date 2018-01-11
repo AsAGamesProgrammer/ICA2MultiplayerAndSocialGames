@@ -100,6 +100,11 @@ private:
     //Laps
     float lastSentNumberOfLaps = 0.0;
     
+    //-----------------------
+    //       HELPERS
+    //-----------------------
+    std::string getStringFromBytes(char data[1024]);
+    
 };
 
 #endif /* GameLoop_hpp */
