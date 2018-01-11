@@ -793,7 +793,8 @@ void GameLoop::checkNetworkBulletCollisions(int id)
             //std::cout<<"Hit"<<std::endl;
             
             chpManager.reduceScore();
-            player.onTakingHit();
+            sendTCPData("SCR "+myName + " " + std::to_string(chpManager.getLap()) + " ");
+            //player.onTakingHit();
             networkPlayers[id].setCheckBulletColision(false);
             
             return;
