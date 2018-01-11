@@ -228,6 +228,8 @@ namespace GameServer
 				clientDictionary.Add(name, newClient);
 			}
 
+            SendTCP("REG " + "TCP registered");
+
 			//---------------------------------------
 			//				DATABASE
 			//---------------------------------------
@@ -415,7 +417,7 @@ namespace GameServer
 						string charName = elements[1];
 						RegisterClient(newMsg.sock, charName);
 
-                        SendTCP(newMsg.body);
+                        //SendTCP(newMsg.body);
 					}
 
 					//JOIN the race
