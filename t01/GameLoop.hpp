@@ -74,6 +74,10 @@ private:
     //SCORE
     void updateScore();
     
+    //Collisions
+    void checkNetworkBulletCollisions(int id);
+    void checkAllCollsiisons();
+    
     //-----------------------
     //      NETWORKING
     //-----------------------

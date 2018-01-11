@@ -547,13 +547,17 @@ bool GameLoop::gameUpdate()
         checkPointPassed(i);
     }
     
+    bool didMove = player.moveRelated();
+    
     //Bullet
     for (int i=0; i<4; i++)
     {
         networkPlayers[i].moveBullet();
     }
     
-    return player.moveRelated();
+    checkAllCollsiisons();
+    
+    return didMove;
 }
 
 void GameLoop::addNewPlayer(std::string name, int id)
@@ -740,8 +744,10 @@ void GameLoop::Render()
 }
 
 
+//----------------------------------------
+//            BULLET COLLISIONS
+//----------------------------------------
 
-//TODO: bullet collision for otherPlayer
 void GameLoop::checkBulletCollision()
 {
     if(otherPlayer.getCheckBulletColision())
@@ -763,6 +769,37 @@ void GameLoop::checkBulletCollision()
     //No collision
     return;
 
+}
+
+void GameLoop::checkAllCollsiisons()
+{
+    for (int i=0; i<4; i++)
+    {
+        checkNetworkBulletCollisions(i);
+    }
+}
+
+void GameLoop::checkNetworkBulletCollisions(int id)
+{
+    if(networkPlayers[id].getCheckBulletColision())
+    {
+        if(player.getPlayer().getPosition().x + player.width/2 >networkPlayers[id].getBullet().getPosition().x - 28 && //left
+           player.getPlayer().getPosition().x - player.width/2 <=networkPlayers[id].getBullet().getPosition().x + 28 &&  //right
+           player.getPlayer().getPosition().y + player.height/2 > networkPlayers[id].getBullet().getPosition().y - 28 && //top
+           player.getPlayer().getPosition().y - player.height/2 <= networkPlayers[id].getBullet().getPosition().y + 28) //bot
+            
+        {
+            std::cout<<"Hit"<<std::endl;
+            
+            player.onTakingHit();
+            networkPlayers[id].setCheckBulletColision(false);
+            
+            return;
+        }
+    }
+    
+    //No collision
+    return;
 }
 
 

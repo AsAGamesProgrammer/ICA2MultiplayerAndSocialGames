@@ -26,6 +26,9 @@ public:
     void instantiateBlt(float angle);
     void moveBullet();
     
+    bool getCheckBulletColision(){return checkBulletCollision;}
+    void setCheckBulletColision(bool toCheck){checkBulletCollision = toCheck;}
+    
 private:
     float width;
     float height;
