@@ -29,30 +29,52 @@
 class GameLoop
 {
 
+//PUBLIC
 public:
+    
+    //Constructor
     GameLoop();
+    
+    //Start different game modes
     void StartGame();
     void StartCoopGame();
     void StartNetworkGame();
+    
+    //Opens lobbie, returns a selected mode
     int OpenLobbie();
     
+    //Thread functions for receiving server msgs
     void receiveTCP();
     void receiveUDP();
     
-    void addNewPlayer(std::string name, int id);
     
+//PRIVATE
 private:
-    std::string myName;
-    PlayerC player;
-    PlayerCoop otherPlayer;
     
-    PlayerNetwork networkPlayers[4];
+    //My player information
+    std::string myName;                         //name
+    int myID=-1;                                //race id
     
-    UIManager uiManager;
-    mapCreator mapManager;
-    Checkpoint chpManager;
+    //Player classes
+    PlayerC player;                             //local player
+    PlayerCoop otherPlayer;                     //coop game player
+    PlayerNetwork networkPlayers[4];            //array of networking players
+    void addNewPlayer(std::string name, int id);//adds a new networking player to a session
     
+    //UI reated
+    UIManager uiManager;                        //UI manager
+    mapCreator mapManager;                      //Map generator class
+    
+    //Checkpoints and score
+    Checkpoint chpManager;                      //Manager class
+    float lastSentNumberOfLaps = 0.0;           //Lap information
+    
+    //Update functions
     void Update();
+    bool gameUpdate();
+    bool networkingGameOn=false;
+    
+    //Render functions
     void Render();
     void GeneralRender();
     void networkedGameRender();
@@ -60,13 +82,6 @@ private:
     //Collision
     void checkPointPassed(int index);
     void checkBulletCollision();
-    
-    void interpretTCP(char bytes[1024]);
-    void interpretUDP(char bytes[1024]);
-    
-    //Update networking game
-    bool gameUpdate();
-    bool networkingGameOn=false;
     
     //Lobby
     Lobby lobby;
@@ -89,13 +104,8 @@ private:
     void receiveTCPOnce();
     void receiveUDPOnce();
     
-    //Loop condition
-    bool runThreads=true;
-    
-    int myID=-1;
-    
-    //Laps
-    float lastSentNumberOfLaps = 0.0;
+    void interpretTCP(char bytes[1024]);
+    void interpretUDP(char bytes[1024]);
     
     //-----------------------
     //       HELPERS
