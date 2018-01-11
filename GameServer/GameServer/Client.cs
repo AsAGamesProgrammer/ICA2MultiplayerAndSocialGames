@@ -15,6 +15,7 @@ namespace GameServer
 		public Socket udpSocket;
 
 		//Race id
+		public int sessionID = -1;
 		public int raceId = -1;
 	}
 }

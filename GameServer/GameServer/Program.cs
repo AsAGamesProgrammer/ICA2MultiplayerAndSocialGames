@@ -68,10 +68,12 @@ namespace GameServer
 
 		//Race information
 		static int highestID = -1;
+		static int currentSessionID = 0;
 
 		//Thread for time
 		static Thread thTimer = new Thread(countDown);
 		static bool timerIsActive = false;
+		static bool raceStarted = false;
 		static Stopwatch myStopwatch = new Stopwatch();
 
 		//Connections
@@ -192,6 +194,9 @@ namespace GameServer
 			myStopwatch.Stop();
 			Console.WriteLine("Time off");
 			SendTCP("STR");
+
+			raceStarted = true;
+			currentSessionID++;
 		}
 
 		///---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -309,6 +314,7 @@ namespace GameServer
 
 			//Update player's status
 			clientDictionary[name].raceId = highestID;
+			clientDictionary[name].sessionID = currentSessionID;
 
 			//Update everyone that this player is registered
 			foreach (string entry in clientDictionary.Keys)
@@ -502,14 +508,14 @@ namespace GameServer
 		}
 
 		//Sending data to registered
-		public static void SendTCPToRegistered(string msg)
+		public static void SendTCPToRegistered(string msg, int session)
 		{ 
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
 			Console.WriteLine("Server sending: {0},", msg);
 
 			foreach (Client entry in clientDictionary.Values)
 			{
-				if(entry.raceId !=-1)
+				if(entry.raceId !=-1 && entry.sessionID == session)
 					entry.tcpSock.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallbackTCP), entry.tcpSock);
 			}
 		}
@@ -650,7 +656,7 @@ namespace GameServer
 						string charName = elements[1];
 
 						RegisterUdp(newMsg.endPoint, newMsg.sock, charName);
-                        SendUDP(newMsg.body);
+						SendUDP(newMsg.body, clientDictionary[charName].sessionID);
 					}
 
 					if (sub == "POS")
@@ -661,7 +667,7 @@ namespace GameServer
 						string newString = elements[0] + elements[1] + " " + elements[2] + " " + clientDictionary[name].raceId;
 
 						Console.WriteLine(newString);
-                        SendUDP(newString);
+                        SendUDP(newString, clientDictionary[name].sessionID);
 					}
 
 					//SendUDP(newMsg.body);
@@ -681,21 +687,25 @@ namespace GameServer
 		}
 
 		//Sending data
-		public static void SendUDP(String msg)
+		public static void SendUDP(String msg, int session)
 		{
 			byte[] byteData = Encoding.ASCII.GetBytes(msg);
 
 			//Test
 			foreach (Client entry in clientDictionary.Values)
 			{
-				UdpState stateUdp = new UdpState();
-				stateUdp.workingSocket = entry.udpSocket;
-				stateUdp.endPoint = entry.endPoint;
+				if (entry.raceId != -1 && entry.sessionID == session )
+				{
 
-				Console.WriteLine("Sending UDP to "+ entry.raceId);
+					UdpState stateUdp = new UdpState();
+					stateUdp.workingSocket = entry.udpSocket;
+					stateUdp.endPoint = entry.endPoint;
 
-				if(stateUdp !=null)
-					entry.udpSocket.BeginSendTo(byteData, 0, byteData.Length, 0, entry.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
+					Console.WriteLine("Sending UDP to " + entry.raceId);
+
+					if (stateUdp != null)
+						entry.udpSocket.BeginSendTo(byteData, 0, byteData.Length, 0, entry.endPoint, new AsyncCallback(SendCallbackUDP), stateUdp);
+				}
 
 			}
 
