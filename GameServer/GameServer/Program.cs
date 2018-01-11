@@ -193,7 +193,7 @@ namespace GameServer
 
 			myStopwatch.Stop();
 			Console.WriteLine("Time off");
-			SendTCP("STR");
+			SendTCPToRegistered("STR", currentSessionID);
 
 			raceStarted = true;
 			currentSessionID++;
@@ -319,7 +319,7 @@ namespace GameServer
 			//Update everyone that this player is registered
 			foreach (string entry in clientDictionary.Keys)
 			{
-				if(clientDictionary[entry].raceId !=-1)
+				if(clientDictionary[entry].raceId !=-1 && clientDictionary[entry].sessionID == clientDictionary[name].sessionID)
 					SendTCP("JOI " + clientDictionary[entry].raceId.ToString() + entry);
 			}
 
@@ -349,7 +349,7 @@ namespace GameServer
 			m_dbConnection.Close();
 
 			//UPDATE PLAYERS
-			SendTCP("SCR " + clientDictionary[name].raceId.ToString() + " " + score + " ");
+			SendTCPToRegistered("SCR " + clientDictionary[name].raceId.ToString() + " " + score + " ", clientDictionary[name].sessionID);
 		} 
 
 		//---------------------------------------
@@ -445,7 +445,7 @@ namespace GameServer
 						foreach (string entry in clientDictionary.Keys)
 						{
 							if(clientDictionary[entry].raceId !=-1)
-							SendTCP("JOI " + clientDictionary[entry].raceId.ToString() + entry);
+							SendTCPToRegistered("JOI " + clientDictionary[entry].raceId.ToString() + entry, clientDictionary[entry].sessionID);
 						}
 					}
 
@@ -468,7 +468,7 @@ namespace GameServer
 						string charName = elements[1];
 						string angle = elements[2];
 
-						SendTCP("BLT " + clientDictionary[charName].raceId + " " + angle + " ");
+						SendTCPToRegistered("BLT " + clientDictionary[charName].raceId + " " + angle + " ", clientDictionary[charName].sessionID);
 					}
 
 					//Console.WriteLine("Server consumed content of " + newMsg.body);
