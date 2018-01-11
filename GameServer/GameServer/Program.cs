@@ -228,6 +228,40 @@ namespace GameServer
 				clientDictionary.Add(name, newClient);
 			}
 
+			//---------------------------------------
+			//				DATABASE
+			//---------------------------------------
+			m_dbConnection.Open();
+
+			SqliteCommand command = new SqliteCommand(m_dbConnection);
+
+			command.CommandText ="SELECT * FROM users WHERE name = :Name";
+
+			command.Parameters.Add("Name", DbType.String).Value = name;
+			command.ExecuteNonQuery();
+
+			SqliteDataReader reader = command.ExecuteReader();
+
+			bool userExists = false;
+			while (reader.Read())
+			{
+				userExists = true;
+				Console.WriteLine("Reader read: " + reader.GetString(0) + " " + reader.GetString(1));
+			}
+
+			if (!userExists)
+			{
+				SqliteCommand commandUpdate = new SqliteCommand(m_dbConnection);
+
+				commandUpdate.CommandText = "INSERT into users (name, password) values (:Name, :Password)";
+
+				commandUpdate.Parameters.Add("Name", DbType.String).Value = name;
+				commandUpdate.Parameters.Add("Password", DbType.String).Value = "test";
+				commandUpdate.ExecuteNonQuery();
+			}
+
+			m_dbConnection.Close();
+
 			//Change this to sendTo
 			//SendTCP("TCP registartion complete");
 			//Console.WriteLine("Client is registered with TCP");
@@ -378,6 +412,7 @@ namespace GameServer
 						string[] elements = newMsg.body.Split(' ');
 						string charName = elements[1];
 						RegisterClient(newMsg.sock, charName);
+
                         SendTCP(newMsg.body);
 					}
 
