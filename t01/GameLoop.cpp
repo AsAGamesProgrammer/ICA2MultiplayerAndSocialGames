@@ -489,7 +489,7 @@ void GameLoop::StartNetworkGame()
             if(player.didShoot)
             {
                 //Send notification to a server
-                sendTCPData("BLT " + std::to_string(myID) + " " + std::to_string (player.getPlayer().getRotation()) + " ");
+                sendTCPData("BLT " + myName + " " + std::to_string (player.getPlayer().getRotation()) + " ");
                 
                 player.didShoot=false;
                 
