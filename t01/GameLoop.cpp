@@ -167,19 +167,19 @@ void GameLoop::interpretTCP(char bytes[1024])
     //Get a 3 character code
     std::string code = sub.substr(0, 3);
     
-    //RECEIVED: JOI
+        //RECEIVED: JOI for join
     if(code == "JOI")
     {
         std::string raceId = sub.substr(4,5);
         int raceIdInt = atoi(raceId.c_str());
         addNewPlayer(sub.substr(5, sub.length()), raceIdInt);
     }
-    else
+    else //RECEIVED STR for Start game
     if(code =="STR")
     {
         networkingGameOn=true;
     }
-    else
+    else //RECEIVED SCR for Score
     if(code =="SCR")
     {
         //Player id
@@ -190,33 +190,40 @@ void GameLoop::interpretTCP(char bytes[1024])
         
         //Score
         std::string stringScore = sub.substr(6, 8);
-        std::string::size_type sz;     // alias of size_t
+
+        //Transfer string to a float and then float to a string
+        //This is required for the corrct sf:Text display
         
+        std::string::size_type sz;     // alias of size_t
         float scoreInFloat = std::stof (stringScore,&sz);
         std::stringstream ss;
         ss << std::fixed << std::setprecision(2) << scoreInFloat;
-        
         uiManager.laps[raceIdInt] = ss.str();
         
+        //Provide feedback to the user
         std::cout<<"SCORE!!!!!"<<std::endl;
         std::cout<<"Race id is "<<raceIdInt<<" and score is "<<stringScore<<std::endl;
         
     }
-    else
+    else //RECEIVED BLT for Bullet launched
     if(code == "BLT")
     {
         //Player id
         std::string raceId = sub.substr(4,5);
         int raceIdInt = atoi(raceId.c_str());
         
+        //Return if it is my id
         if(raceIdInt == myID)
             return;
         
+        //Extract bullet angle from the msg
         std::string angleString = sub.substr(6, 8);
         std::string::size_type sz;     // alias of size_t
         
+        //Transfer angle to a float
         float angleFloat = std::stof (angleString,&sz);
-        //GET ANGLE
+
+        //Instantiate a bullet and start moving it
         networkPlayers[raceIdInt].instantiateBlt(angleFloat);
         
         //Start collision checks
@@ -227,8 +234,11 @@ void GameLoop::interpretTCP(char bytes[1024])
 //--------------------------------------------------------
 //                      UDP
 //--------------------------------------------------------
+//SEND UDP
+//Send a udp msg - string - to a server
 void GameLoop::sendUDPUpdata(std::string msg)
 {
+    //Add an end of line character to the end of the msg
     std::string combinedString = msg + "\n";
     char data[1024];
     strcpy(data, combinedString.c_str());
@@ -243,36 +253,23 @@ void GameLoop::sendUDPUpdata(std::string msg)
     }
 }
 
+//INTERPRET UDP
+//Interprets a udp message and calls respected functions
 void GameLoop::interpretUDP(char bytes[1024])
 {
     //Convert bytes to a string
-    std::string sub;
-    int i=0;
+    std::string sub = getStringFromBytes(bytes);
     
-    while(i<1024)
-    {
-        char nextChar = bytes[i];
-        
-        if(nextChar !='\n')
-        {
-            sub +=nextChar;
-            i++;
-        }
-        else
-        {
-            i=1025;
-        }
-    }
-    
+    //Extract a three character code
     std::string code = sub.substr(0, 3);
     
-    //RECEIVED: JOI
+    //RECEIVED: POS for position
     if(code == "POS")
     {
-        //ID
+        //ID string
         std::string racerIDString;
 
-        //Two flags
+        //Two flags used for interpriting a string
         bool posXFound=false;
         bool posYFound=false;
         
@@ -280,6 +277,7 @@ void GameLoop::interpretUDP(char bytes[1024])
         std::string posXString;
         std::string posYString;
         
+        //Iterate a string starting at the third character
         for(int i=3; i<sub.length()-1; i++)
         {
             char nextChar = sub[i];
@@ -294,6 +292,7 @@ void GameLoop::interpretUDP(char bytes[1024])
                 continue;
             }
             
+            //Interpret a result if a space character was not found
             if(!posXFound)
             {
                 posXString +=nextChar;
@@ -314,6 +313,7 @@ void GameLoop::interpretUDP(char bytes[1024])
         int racerId = atoi(racerIDString.c_str());
         std::cout<<"Received position from id "<<racerId<<" where my ID is "<<myID<<std::endl;
         
+        //If id is not mine
         if(racerId!=myID)
         {
             int newPosX = atoi(posXString.c_str());
@@ -325,10 +325,11 @@ void GameLoop::interpretUDP(char bytes[1024])
     }
 }
 
-
-
+//RECEIVE UDP
+//This function is called in a thread ONLY and has a forever while loop
 void GameLoop::receiveUDP()
 {
+    //Infinite loop
     while(true)
     {
         char data[1024];
@@ -346,28 +347,11 @@ void GameLoop::receiveUDP()
         {
             std::cout << "Received "<<data<< " which is " << received << " bytes from " << sender << " on port " << port << std::endl;
             
+            //Interpret received udp data
             interpretUDP(data);
             
         }
     }
-}
-
-void GameLoop::receiveUDPOnce()
-{
-    char data[1024];
-    std::size_t received;
-    sf::IpAddress sender;
-    unsigned short port;
-    if (socketUDP.receive(data, 1024, received, sender, port) != sf::Socket::Done)
-    {
-        std::cout<<"Failed to receive UDP"<<std::endl;
-    }
-    
-    //Print only if received text
-    char firstLit = data[0];
-    if(firstLit != '\0')
-        std::cout << "Received "<<data<< " which is " << received << " bytes from " << sender << " on port " << port << std::endl;
-
 }
 
 //----------------------------------------

@@ -73,7 +73,6 @@ namespace GameServer
 		//Thread for time
 		//static Thread thTimer = new Thread(countDown);
 		static bool timerIsActive = false;
-		static bool raceStarted = false;
 		static Stopwatch myStopwatch = new Stopwatch();
 
 		//Connections
