@@ -358,6 +358,7 @@ void GameLoop::receiveUDP()
 //             HELPERS
 //----------------------------------------
 
+//Make a string from an array of bytes
 std::string GameLoop::getStringFromBytes(char data[1024])
 {
     //Convert bytes to a string
@@ -382,16 +383,22 @@ std::string GameLoop::getStringFromBytes(char data[1024])
     return sub;
 }
 
-//----------------------------------------
-//              LOBBY
-//----------------------------------------
+//--------------------------------------------------------------------------------
+//                                  LOBBY
+//--------------------------------------------------------------------------------
 
+//Lobby is a menu system which allows choosing one o three game modes
+
+//OPEN LOBBIE
 int GameLoop::OpenLobbie()
 {
+    //Clear the window
     window.clear();
+    
+    //Initially selected mode is Training because it is the higest button
     int selectedMode=0;
     
-    //GAME LOOP
+    //Game loop
     while (window.isOpen())
     {
         sf::Event event;
@@ -401,17 +408,21 @@ int GameLoop::OpenLobbie()
                 window.close();
         }
         
-        //Lobby
-        window.draw(lobby.lobbieText);
+        //RENDER
+        //Draw lobby UI elements
+        window.draw(lobby.lobbieText);                  //Draw text
         
-        for (int i=0; i<lobby.numberOfBtns; i++)
+        for (int i=0; i<lobby.numberOfBtns; i++)        //Draw buttons
         {
             window.draw(lobby.btnArray[i].shape);
             window.draw(lobby.btnArray[i].label);
         }
         
+        //Display drawn elements
         window.display();
         
+        
+        //MECHANICS
         //if pressed up - choose option 1
         //if pressed 2 - choose option 2
         //if return - return
@@ -445,16 +456,23 @@ int GameLoop::OpenLobbie()
     return selectedMode;
 }
 
+//--------------------------------------------------------------------------------
+//                                 GAMEPLAY
+//--------------------------------------------------------------------------------
 //----------------------------------------
 //              NETWROK MODE
 //----------------------------------------
+//This function starts and controls a netowrking game
+
 void GameLoop::StartNetworkGame()
 {
+    //Send a TCP message with a code for JOIN
     sendTCPData("JOI " + myName + " ");
+    
+    //Load map tiles
     mapManager.loadTiles();
     
-
-    
+    //GameLoop
     while (window.isOpen())
     {
         sf::Event event;
@@ -464,40 +482,49 @@ void GameLoop::StartNetworkGame()
                 window.close();
         }
         
-        //Update the game if it officially started
+        //GAME STARTED-----------------------------------------------------------------------------------------------
+        
+        //Update the game only if it officially started
         if(networkingGameOn)
         {
+            //PLAYER MOVEMENT
+            //Allow player to move or shoot. Function returns true if a movement key was pressed
             if(gameUpdate())
             {
+                //Get postion of the player to local variables
                 int x = player.getPlayer().getPosition().x;
                 int y = player.getPlayer().getPosition().y;
 
+                //Have a composite position string and send it to a server using UDP
                 std::string movementInfo = "POS "+std::to_string(x) +" "+ std::to_string(y)+" "+myName + " ";
                 sendUDPUpdata(movementInfo);
             }
             
+            //Display a "Race Started" label at the top of the screen
             uiManager.displayBanner("Race STARTED!");
             
             
             //BULLET
+            //Check if player did shoot
             if(player.didShoot)
             {
                 //Send notification to a server
                 sendTCPData("BLT " + myName + " " + std::to_string (player.getPlayer().getRotation()) + " ");
                 
+                //Set flag to false to avoid sending the message twice
                 player.didShoot=false;
                 
+                //Debug log
                 std::cout<<"Bullet info sent"<<std::endl;
             }
         }
-        else
+        else ///GAME DID NOT START ----------------------------------------------------------------------------------------
         {
             //Display banner
             uiManager.displayBanner("Waiting for other players");
             
-            //Rejoin option
-            
             //Press left shift to rejoin
+            //This is used to compensate for some descrepencies
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
             {
                 //Repeat joining in proccess
@@ -505,23 +532,25 @@ void GameLoop::StartNetworkGame()
             }
         }
 
-        //uiManager.displayLap(chpManager.getLap());
+        //get information about score
         std::stringstream ss;
         ss << std::fixed << std::setprecision(2) << chpManager.getLap();
         
-        // set the string to display
-        //text.setString(ss.str());
+        //Display score
         uiManager.laps[myID] = ss.str();
         
         //Render
         networkedGameRender();
-        //TEST
+        
+        //Draw bullet on top of all the other rendering
         window.draw(player.getBullet());
 
+        //Display window
         window.display();
     }
 }
 
+//NETWORKING GAME UPDATE
 bool GameLoop::gameUpdate()
 {
     //Check all the checkpoints
@@ -531,21 +560,26 @@ bool GameLoop::gameUpdate()
         checkPointPassed(i);
     }
     
+    //Check if player moved
     bool didMove = player.moveRelated();
     
-    //Bullet
+    //Check other player bullets
     for (int i=0; i<4; i++)
     {
         networkPlayers[i].moveBullet();
     }
     
+    //Check all the bullet collisions
     checkAllCollsiisons();
     
     return didMove;
 }
 
+//ADD NEW PLAYER
+//Adds a new player to a game
 void GameLoop::addNewPlayer(std::string name, int id)
 {
+    //Decid which texture to use for a car depending on passed id
     std::string textureAd;
     std::cout<<"ID is "<<id<<std::endl;
     
@@ -561,10 +595,10 @@ void GameLoop::addNewPlayer(std::string name, int id)
     else if(id==3)
         textureAd ="../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carOS5 copy.png";
     
-    
+    //Flag to see if the passed name is ours
     bool nameIsMine=false;
     
-    //If NAME is nt longer than MYNAME
+    //If NAME is not longer than MYNAME
     if(name[myName.length()]=='\0')
        {
            nameIsMine=true;
@@ -576,49 +610,51 @@ void GameLoop::addNewPlayer(std::string name, int id)
            }
        }
 
+    //If name is not mine
     if(!nameIsMine)
     {
+        //Create a networking player
         networkPlayers[id].createPlayer(textureAd);
         std::cout<<"("<<id<<")"<<"NEW PLAYER "<< name <<" ADDED"<<std::endl;
         networkPlayers[id].setStartingPos(500, 180 + id*50);
     }
     else
     {
+        //Create a player
         player.createPlayer(textureAd);
         player.setStartingPos(500, 180 + id*50);
         myID = id;
     }
     
+    //Cout my id
     std::cout<<"MyID is "<<myID<<std::endl;
 
 }
 
 //----------------------------------------
-//              GAME MODES
+//          OTHER GAME MODES
 //----------------------------------------
 
+//START COOP GAME
 void GameLoop::StartCoopGame()
 {
     //Prepare everything for the other player
     otherPlayer.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png"); //Player 2
-    //TEMP
+    
+    //Other player starts at a different position
     otherPlayer.setStartingPos(500, 200);
     
     
     StartGame();
 }
 
+//START GAME
 void GameLoop::StartGame()
 {
     
     //PRE-PROCESSING
     mapManager.loadTiles();
     player.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames//carYS3.png");      //Player 1
-    //otherPlayer.createPlayer("../../../../Users/p4076882/Desktop/ICA2MultiplayerAndSocialGames/carBS5.png"); //Player 2
-    
-    
-    //TEMP
-    //otherPlayer.setStartingPos(500, 200);
     
     //GAME LOOP
     while (window.isOpen())
@@ -666,6 +702,8 @@ void GameLoop::Update()
 //----------------------------------------
 //              RENDER
 //----------------------------------------
+
+//GENRAL RENDER
 void GameLoop::GeneralRender()
 {
     //Update Interface
@@ -694,6 +732,7 @@ void GameLoop::GeneralRender()
         window.draw(uiManager.constantText[i]);
 }
 
+//NETWORK GAME RENDER
 void GameLoop::networkedGameRender()
 {
     //Draw other stuff
@@ -712,6 +751,7 @@ void GameLoop::networkedGameRender()
     uiManager.displayLaps();
 }
 
+//RENDER
 void GameLoop::Render()
 {
     GeneralRender();
@@ -732,6 +772,7 @@ void GameLoop::Render()
 //            BULLET COLLISIONS
 //----------------------------------------
 
+//CHECK FOR BULLET COLLISION
 void GameLoop::checkBulletCollision()
 {
     if(otherPlayer.getCheckBulletColision())
@@ -754,6 +795,8 @@ void GameLoop::checkBulletCollision()
 
 }
 
+//CHECK FOR ALL THE BULLET COLLISIONS
+//This function checks if player's bullet hit any networked player
 void GameLoop::checkAllCollsiisons()
 {
     for (int i=0; i<4; i++)
@@ -762,6 +805,7 @@ void GameLoop::checkAllCollsiisons()
     }
 }
 
+//CHECK FOR NETWORK BULLET COLLISION
 void GameLoop::checkNetworkBulletCollisions(int id)
 {
     if(networkPlayers[id].getCheckBulletColision())
@@ -789,7 +833,8 @@ void GameLoop::checkNetworkBulletCollisions(int id)
     return;
 }
 
-
+//CECKPOINT PASSED
+//Checks if a checkpoint was passed and adds score
 void GameLoop::checkPointPassed(int index)
 {
     if(player.getPlayer().getPosition().x + player.width/2 >chpManager.checkPSprites[index].getPosition().x - chpManager.sizeW/2 && //left
@@ -828,9 +873,5 @@ void GameLoop::checkPointPassed(int index)
 
 }
 
-void GameLoop::updateScore()
-{
-    
-}
 
 

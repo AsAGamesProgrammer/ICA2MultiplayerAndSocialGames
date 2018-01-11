@@ -71,9 +71,6 @@ private:
     //Lobby
     Lobby lobby;
     
-    //SCORE
-    void updateScore();
-    
     //Collisions
     void checkNetworkBulletCollisions(int id);
     void checkAllCollsiisons();

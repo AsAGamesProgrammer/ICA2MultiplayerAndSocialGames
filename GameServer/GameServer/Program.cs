@@ -194,7 +194,6 @@ namespace GameServer
 			Console.WriteLine("Time off");
 			SendTCPToRegistered("STR", currentSessionID);
 
-			raceStarted = true;
 			currentSessionID++;
 			timerIsActive = false;
 			highestID = -1;
