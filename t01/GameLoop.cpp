@@ -790,7 +790,7 @@ void GameLoop::checkNetworkBulletCollisions(int id)
            player.getPlayer().getPosition().y - player.height/2 <= networkPlayers[id].getBullet().getPosition().y + 28) //bot
             
         {
-            //std::cout<<"Hit"<<std::endl;
+            std::cout<<"Hit"<<std::endl;
             
             chpManager.reduceScore();
             sendTCPData("SCR "+myName + " " + std::to_string(chpManager.getLap()) + " ");

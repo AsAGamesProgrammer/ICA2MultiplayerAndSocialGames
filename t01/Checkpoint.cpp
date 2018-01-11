@@ -45,7 +45,7 @@ bool Checkpoint::checkpointPassed(int number)
     
     bool allChecked=true;
     
-    lap=lapBase;
+    lap=0;
     
     //See if everything is checked
     for (int i=0; i<4; i++)
@@ -75,7 +75,12 @@ bool Checkpoint::checkpointPassed(int number)
     return false;
 }
 
+void Checkpoint::reduceScore()
+{
+    lapBase -=0.5;
+}
+
 float Checkpoint::getLap()
 {
-    return lap;
+    return lap + lapBase;
 }

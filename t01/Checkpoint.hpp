@@ -29,7 +29,7 @@ public:
     bool checkedPoints[4];
     
     float getLap();
-    void reduceScore() {lap -=0.5;};
+    void reduceScore();
     
     bool checkpointPassed(int number);
     
